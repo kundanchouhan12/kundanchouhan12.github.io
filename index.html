@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ToolKit Pro — Free Online Tools</title>
+  <meta name="description" content="Free online tools: PDF merger, image compressor, QR generator, password generator, JSON formatter, and more — all client-side, no upload needed." />
+  <link rel="stylesheet" href="css/style.css" />
+  <script src="js/common.js"></script>
+  <style>
+    .no-results {
+      text-align: center;
+      padding: 3rem;
+      color: var(--text-muted);
+      display: none;
+    }
+    .no-results.visible { display: block; }
+    .nav-links { display:flex; gap:1.5rem; align-items:center; }
+    .nav-links a { color:var(--text); font-size:.9rem; font-weight:500; text-decoration:none; transition:color .2s; }
+    .nav-links a:hover { color:var(--primary); }
+    @media(max-width:768px){ .nav-links { display:none; } }
+  </style>
+</head>
+<body>
+
+<!-- Navbar -->
+<nav class="navbar">
+  <a href="index.html" class="nav-brand"><div class="logo-icon">🛠</div>ToolKit Pro</a>
+  <div class="nav-links">
+    <a href="index.html">Home</a>
+    <a href="index.html#tools">Tools</a>
+    <a href="blog/index.html">Blog</a>
+    <a href="about.html">About</a>
+    <a href="contact.html">Contact</a>
+  </div>
+  <div class="nav-actions"><button class="theme-toggle" id="themeToggle" title="Toggle dark mode">🌙</button></div>
+</nav>
+
+<!-- Hero -->
+<section class="hero">
+  <h1>🛠 Free Online Tools</h1>
+  <p>Powerful browser-based tools — no upload, no server, completely private. Everything runs on your device.</p>
+  <div class="hero-stats">
+    <div class="stat-item"><strong>16+</strong><span>Tools</span></div>
+    <div class="stat-item"><strong>100%</strong><span>Free</span></div>
+    <div class="stat-item"><strong>0</strong><span>Uploads</span></div>
+    <div class="stat-item"><strong>⚡</strong><span>Instant</span></div>
+  </div>
+</section>
+
+<!-- Search -->
+<div class="search-section">
+  <div class="search-wrapper">
+    <span class="search-icon">🔍</span>
+    <input type="text" class="search-input" id="searchInput" placeholder="Search tools... e.g. PDF, image, password" />
+  </div>
+</div>
+
+<!-- Category Filter -->
+<div class="category-section">
+  <div class="category-pills">
+    <button class="category-pill active" data-cat="all">All Tools</button>
+    <button class="category-pill" data-cat="pdf">PDF</button>
+    <button class="category-pill" data-cat="image">Image</button>
+    <button class="category-pill" data-cat="text">Text</button>
+    <button class="category-pill" data-cat="developer">Developer</button>
+    <button class="category-pill" data-cat="generator">Generator</button>
+  </div>
+</div>
+
+<!-- Tools Grid -->
+<div class="tools-section">
+  <h2 class="section-title">All Tools</h2>
+  <div class="tools-grid" id="toolsGrid">
+
+    <!-- PDF Tools -->
+    <a href="tools/pdf-merger.html" class="tool-card" data-cat="pdf" data-name="pdf merger merge combine">
+      <div class="tool-icon purple">📄</div>
+      <h3>PDF Merger</h3>
+      <p>Combine multiple PDF files into one document instantly.</p>
+      <span class="tool-badge">PDF</span>
+    </a>
+
+    <a href="tools/pdf-to-text.html" class="tool-card" data-cat="pdf" data-name="pdf to text extract converter">
+      <div class="tool-icon purple">📝</div>
+      <h3>PDF to Text Extractor</h3>
+      <p>Extract text content from any PDF file quickly.</p>
+      <span class="tool-badge">PDF</span>
+    </a>
+
+    <a href="tools/pdf-to-word.html" class="tool-card" data-cat="pdf" data-name="pdf to word docx convert editable">
+      <div class="tool-icon purple">📄</div>
+      <h3>PDF to Word</h3>
+      <p>Convert PDF files to editable Word (.docx) documents instantly.</p>
+      <span class="tool-badge">PDF</span>
+    </a>
+
+    <a href="tools/word-to-pdf.html" class="tool-card" data-cat="pdf" data-name="word docx to pdf converter">
+      <div class="tool-icon purple">📋</div>
+      <h3>Word / DOCX to PDF</h3>
+      <p>Convert Word documents to PDF using print-to-PDF.</p>
+      <span class="tool-badge">PDF</span>
+    </a>
+
+    <a href="tools/image-to-pdf.html" class="tool-card" data-cat="pdf" data-name="image to pdf converter jpg png">
+      <div class="tool-icon purple">🖼</div>
+      <h3>Image to PDF</h3>
+      <p>Convert JPG, PNG or other images into a PDF file.</p>
+      <span class="tool-badge">PDF</span>
+    </a>
+
+    <a href="tools/text-to-pdf.html" class="tool-card" data-cat="pdf" data-name="text to pdf converter">
+      <div class="tool-icon purple">🗒</div>
+      <h3>Text to PDF</h3>
+      <p>Convert plain text or HTML content to a PDF document.</p>
+      <span class="tool-badge">PDF</span>
+    </a>
+
+    <a href="tools/pdf-compressor.html" class="tool-card" data-cat="pdf" data-name="pdf compressor reduce size optimize compress">
+      <div class="tool-icon purple">🗜</div>
+      <h3>PDF Compressor</h3>
+      <p>Reduce PDF file size by re-rendering pages at lower quality.</p>
+      <span class="tool-badge">PDF</span>
+    </a>
+
+    <!-- Image Tools -->
+    <a href="tools/image-compressor.html" class="tool-card" data-cat="image" data-name="image compressor reduce size optimize">
+      <div class="tool-icon green">🗜</div>
+      <h3>Image Compressor</h3>
+      <p>Reduce image file size while preserving quality.</p>
+      <span class="tool-badge">Image</span>
+    </a>
+
+    <a href="tools/image-converter.html" class="tool-card" data-cat="image" data-name="image converter png jpg webp bmp format">
+      <div class="tool-icon green">🔄</div>
+      <h3>Image Converter</h3>
+      <p>Convert between PNG, JPG, WebP, and BMP formats.</p>
+      <span class="tool-badge">Image</span>
+    </a>
+
+    <!-- Text Tools -->
+    <a href="tools/word-counter.html" class="tool-card" data-cat="text" data-name="word counter character count sentences paragraphs reading time">
+      <div class="tool-icon blue">📊</div>
+      <h3>Word &amp; Character Counter</h3>
+      <p>Count words, characters, sentences, paragraphs &amp; reading time.</p>
+      <span class="tool-badge">Text</span>
+    </a>
+
+    <a href="tools/case-converter.html" class="tool-card" data-cat="text" data-name="case converter uppercase lowercase title camel snake kebab pascal">
+      <div class="tool-icon blue">🔤</div>
+      <h3>Case Converter</h3>
+      <p>Convert text to UPPER, lower, Title, camelCase, snake_case &amp; more.</p>
+      <span class="tool-badge">Text</span>
+    </a>
+
+    <!-- Developer Tools -->
+    <a href="tools/base64.html" class="tool-card" data-cat="developer" data-name="base64 encode decode converter">
+      <div class="tool-icon orange">🔐</div>
+      <h3>Base64 Encoder / Decoder</h3>
+      <p>Encode text or files to Base64 and decode Base64 strings.</p>
+      <span class="tool-badge">Developer</span>
+    </a>
+
+    <a href="tools/json-formatter.html" class="tool-card" data-cat="developer" data-name="json formatter validator minify prettify">
+      <div class="tool-icon orange">{ }</div>
+      <h3>JSON Formatter</h3>
+      <p>Format, validate and minify JSON data with error highlighting.</p>
+      <span class="tool-badge">Developer</span>
+    </a>
+
+    <a href="tools/color-picker.html" class="tool-card" data-cat="developer" data-name="color picker hex rgb hsl converter">
+      <div class="tool-icon teal">🎨</div>
+      <h3>Color Picker</h3>
+      <p>Pick colors and convert between HEX, RGB, and HSL formats.</p>
+      <span class="tool-badge">Developer</span>
+    </a>
+
+    <!-- Generators -->
+    <a href="tools/password-generator.html" class="tool-card" data-cat="generator" data-name="password generator strong secure random">
+      <div class="tool-icon pink">🔑</div>
+      <h3>Password Generator</h3>
+      <p>Generate strong, random passwords with custom options.</p>
+      <span class="tool-badge">Generator</span>
+    </a>
+
+    <a href="tools/qr-generator.html" class="tool-card" data-cat="generator" data-name="qr code generator qrcode url link">
+      <div class="tool-icon pink">📱</div>
+      <h3>QR Code Generator</h3>
+      <p>Generate QR codes for URLs, text, WiFi and more. Download as PNG.</p>
+      <span class="tool-badge">Generator</span>
+    </a>
+
+  </div>
+  <div class="no-results" id="noResults">
+    <p style="font-size:2.5rem;margin-bottom:0.5rem">🔍</p>
+    <p>No tools found. Try a different search term.</p>
+  </div>
+</div>
+
+<!-- Blog Preview Section -->
+<div class="tools-section" style="background:var(--bg-secondary);padding:3rem 1rem;max-width:100%">
+  <h2 class="section-title" style="text-align:center;max-width:1100px;margin-left:auto;margin-right:auto">📰 From Our Blog</h2>
+  <p style="text-align:center;color:var(--text-muted);margin-bottom:2rem">Tips, guides, and best practices for working with digital files</p>
+  <div class="tools-grid" style="max-width:1100px;margin:0 auto">
+
+    <a href="blog/best-free-pdf-tools-2026.html" class="tool-card" style="text-decoration:none">
+      <div class="tool-icon purple">📝</div>
+      <span style="font-size:.75rem;background:var(--primary);color:#fff;padding:.2rem .6rem;border-radius:12px;margin-bottom:.5rem;display:inline-block">PDF</span>
+      <h3>Best Free PDF Tools in 2026</h3>
+      <p>A comprehensive roundup of the best free PDF tools available today — no watermarks, no uploads, no limits.</p>
+      <span style="font-size:.8rem;color:var(--text-muted)">April 2025 · 5 min read</span>
+    </a>
+
+    <a href="blog/how-to-compress-images-without-losing-quality.html" class="tool-card" style="text-decoration:none">
+      <div class="tool-icon green">📝</div>
+      <span style="font-size:.75rem;background:var(--primary);color:#fff;padding:.2rem .6rem;border-radius:12px;margin-bottom:.5rem;display:inline-block">Images</span>
+      <h3>How to Compress Images Without Losing Quality</h3>
+      <p>Learn the techniques and tools professionals use to shrink image file sizes while keeping them sharp and crisp.</p>
+      <span style="font-size:.8rem;color:var(--text-muted)">April 2025 · 4 min read</span>
+    </a>
+
+    <a href="blog/strong-password-guide.html" class="tool-card" style="text-decoration:none">
+      <div class="tool-icon pink">📝</div>
+      <span style="font-size:.75rem;background:var(--primary);color:#fff;padding:.2rem .6rem;border-radius:12px;margin-bottom:.5rem;display:inline-block">Security</span>
+      <h3>How to Create Strong Passwords That Are Actually Secure</h3>
+      <p>What makes a password truly uncrackable? We break down the science of strong passwords and best practices.</p>
+      <span style="font-size:.8rem;color:var(--text-muted)">April 2025 · 4 min read</span>
+    </a>
+
+    <a href="blog/top-tools-for-students-developers.html" class="tool-card" style="text-decoration:none">
+      <div class="tool-icon blue">📝</div>
+      <span style="font-size:.75rem;background:var(--primary);color:#fff;padding:.2rem .6rem;border-radius:12px;margin-bottom:.5rem;display:inline-block">Productivity</span>
+      <h3>Top 10 Online Tools for Students and Developers</h3>
+      <p>The must-have free browser tools every student and developer should have bookmarked for daily use.</p>
+      <span style="font-size:.8rem;color:var(--text-muted)">April 2025 · 5 min read</span>
+    </a>
+
+    <a href="blog/image-formats-explained.html" class="tool-card" style="text-decoration:none">
+      <div class="tool-icon green">📝</div>
+      <span style="font-size:.75rem;background:var(--primary);color:#fff;padding:.2rem .6rem;border-radius:12px;margin-bottom:.5rem;display:inline-block">Images</span>
+      <h3>PNG vs JPG vs WebP: Which Format Should You Use?</h3>
+      <p>A clear, practical guide to choosing the right image format for web, print, and everyday use.</p>
+      <span style="font-size:.8rem;color:var(--text-muted)">April 2025 · 4 min read</span>
+    </a>
+
+    <a href="blog/json-for-beginners.html" class="tool-card" style="text-decoration:none">
+      <div class="tool-icon orange">📝</div>
+      <span style="font-size:.75rem;background:var(--primary);color:#fff;padding:.2rem .6rem;border-radius:12px;margin-bottom:.5rem;display:inline-block">Developer</span>
+      <h3>JSON Explained: A Beginner's Guide for Developers</h3>
+      <p>Everything you need to know about JSON — syntax, structure, common errors, and how to format it like a pro.</p>
+      <span style="font-size:.8rem;color:var(--text-muted)">April 2025 · 4 min read</span>
+    </a>
+
+  </div>
+  <div style="text-align:center;margin-top:2rem">
+    <a href="blog/index.html" style="display:inline-flex;align-items:center;gap:.5rem;background:var(--primary);color:#fff;padding:.75rem 2rem;border-radius:var(--radius-sm);font-weight:600;text-decoration:none">View All Articles →</a>
+  </div>
+</div>
+
+<!-- Footer -->
+<footer>
+  <p>ToolKit Pro &mdash; All tools run entirely in your browser. No data is ever uploaded.</p>
+  <p style="margin-top:.5rem">
+    <a href="index.html">Home</a> &middot;
+    <a href="blog/index.html">Blog</a> &middot;
+    <a href="about.html">About</a> &middot;
+    <a href="contact.html">Contact</a> &middot;
+    <a href="privacy-policy.html">Privacy Policy</a> &middot;
+    <a href="terms.html">Terms</a> &middot;
+    <a href="disclaimer.html">Disclaimer</a>
+  </p>
+</footer>
+
+<script>
+  // Search
+  const searchInput = document.getElementById('searchInput');
+  const cards = document.querySelectorAll('.tool-card');
+  const noResults = document.getElementById('noResults');
+  const sectionTitle = document.querySelector('.section-title');
+  let activeCat = 'all';
+
+  function filterTools() {
+    const q = searchInput.value.toLowerCase().trim();
+    let visible = 0;
+    cards.forEach(card => {
+      const name = (card.dataset.name || '').toLowerCase();
+      const cat = card.dataset.cat || '';
+      const matchSearch = !q || name.includes(q);
+      const matchCat = activeCat === 'all' || cat === activeCat;
+      if (matchSearch && matchCat) {
+        card.style.display = '';
+        visible++;
+      } else {
+        card.style.display = 'none';
+      }
+    });
+    noResults.classList.toggle('visible', visible === 0);
+    sectionTitle.textContent = q ? `Results for "${q}"` : (activeCat === 'all' ? 'All Tools' : activeCat.charAt(0).toUpperCase() + activeCat.slice(1) + ' Tools');
+  }
+
+  searchInput.addEventListener('input', filterTools);
+
+  document.querySelectorAll('.category-pill').forEach(pill => {
+    pill.addEventListener('click', () => {
+      document.querySelectorAll('.category-pill').forEach(p => p.classList.remove('active'));
+      pill.classList.add('active');
+      activeCat = pill.dataset.cat;
+      filterTools();
+    });
+  });
+</script>
+</body>
+</html>

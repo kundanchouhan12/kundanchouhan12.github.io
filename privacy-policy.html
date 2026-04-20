@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Privacy Policy — ToolKit Pro</title>
+  <meta name="description" content="Privacy Policy for ToolKit Pro. Learn how we handle your data, cookies, and third-party advertising." />
+  <link rel="stylesheet" href="css/style.css" />
+  <script src="js/common.js"></script>
+  <style>
+    .nav-links { display:flex; gap:1.5rem; align-items:center; }
+    .nav-links a { color:var(--text); font-size:.9rem; font-weight:500; text-decoration:none; transition:color .2s; }
+    .nav-links a:hover { color:var(--primary); }
+    @media(max-width:768px){ .nav-links { display:none; } }
+    .pp-container { max-width: 800px; margin: 2rem auto; padding: 0 1.25rem 5rem; }
+    .pp-header { text-align: center; margin-bottom: 2.5rem; padding: 2rem; background: linear-gradient(135deg, var(--primary) 0%, #9c91ff 100%); border-radius: var(--radius); color: #fff; }
+    .pp-header h1 { font-size: 2rem; margin-bottom: .5rem; }
+    .pp-header p { opacity: .85; font-size: .95rem; }
+    .pp-meta { display: flex; gap: 1.5rem; justify-content: center; margin-top: 1rem; font-size: .85rem; opacity: .9; flex-wrap: wrap; }
+    .pp-meta span { background: rgba(255,255,255,.2); padding: .3rem .8rem; border-radius: 20px; }
+    .toc-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.5rem; margin-bottom: 2rem; box-shadow: var(--shadow); }
+    .toc-card h3 { margin-bottom: 1rem; font-size: 1rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: .05em; }
+    .toc-list { list-style: none; display: grid; grid-template-columns: 1fr 1fr; gap: .4rem; }
+    .toc-list li a { font-size: .9rem; color: var(--primary); display: flex; align-items: center; gap: .4rem; }
+    .toc-list li a:hover { text-decoration: underline; }
+    .section-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 2rem; margin-bottom: 1.5rem; box-shadow: var(--shadow); scroll-margin-top: 80px; }
+    .section-card h2 { font-size: 1.3rem; margin-bottom: 1.25rem; padding-bottom: .75rem; border-bottom: 2px solid var(--primary); display: flex; align-items: center; gap: .6rem; }
+    .section-card p { color: var(--text); line-height: 1.8; margin-bottom: 1rem; font-size: .95rem; }
+    .section-card p:last-child { margin-bottom: 0; }
+    .section-card ul, .section-card ol { padding-left: 1.5rem; margin-bottom: 1rem; }
+    .section-card li { margin-bottom: .5rem; font-size: .95rem; line-height: 1.7; }
+    .highlight-box { background: var(--bg-secondary); border-left: 4px solid var(--primary); padding: 1rem 1.25rem; border-radius: 0 var(--radius-sm) var(--radius-sm) 0; margin: 1rem 0; }
+    .highlight-box p { margin: 0; font-size: .9rem; }
+    .key-point { display: flex; gap: .75rem; align-items: flex-start; padding: .75rem 0; border-bottom: 1px solid var(--border); }
+    .key-point:last-child { border-bottom: none; padding-bottom: 0; }
+    .key-point .kp-icon { font-size: 1.25rem; flex-shrink: 0; margin-top: .1rem; }
+    .key-point .kp-text strong { display: block; margin-bottom: .15rem; }
+    .key-point .kp-text span { font-size: .9rem; color: var(--text-muted); }
+    .contact-box { background: linear-gradient(135deg, rgba(108,99,255,.1), rgba(255,101,132,.1)); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 1.5rem; margin-top: 1rem; }
+    .contact-box a { color: var(--primary); font-weight: 600; }
+    table { width: 100%; border-collapse: collapse; margin: 1rem 0; font-size: .9rem; }
+    table th { background: var(--bg-secondary); padding: .75rem 1rem; text-align: left; font-weight: 600; border: 1px solid var(--border); }
+    table td { padding: .65rem 1rem; border: 1px solid var(--border); vertical-align: top; }
+    .badge { display: inline-block; padding: .2rem .6rem; border-radius: 12px; font-size: .75rem; font-weight: 600; }
+    .badge-green { background: #d1fae5; color: #065f46; }
+    .badge-blue { background: #dbeafe; color: #1e40af; }
+    .badge-yellow { background: #fef3c7; color: #92400e; }
+    [data-theme="dark"] .badge-green { background: #064e3b; color: #6ee7b7; }
+    [data-theme="dark"] .badge-blue { background: #1e3a8a; color: #93c5fd; }
+    [data-theme="dark"] .badge-yellow { background: #78350f; color: #fcd34d; }
+    @media(max-width:600px){
+      .toc-list { grid-template-columns: 1fr; }
+      .pp-meta { gap: .75rem; }
+    }
+  </style>
+</head>
+<body>
+
+<nav class="navbar">
+  <a href="index.html" class="nav-brand"><div class="logo-icon">🛠</div>ToolKit Pro</a>
+  <div class="nav-links">
+    <a href="index.html">Home</a>
+    <a href="index.html#tools">Tools</a>
+    <a href="blog/index.html">Blog</a>
+    <a href="about.html">About</a>
+    <a href="contact.html">Contact</a>
+  </div>
+  <div class="nav-actions"><button class="theme-toggle" id="themeToggle" title="Toggle dark mode">🌙</button></div>
+</nav>
+
+<div class="pp-container">
+
+  <!-- Header -->
+  <div class="pp-header">
+    <h1>🔒 Privacy Policy</h1>
+    <p>We are committed to protecting your privacy. Please read this policy carefully.</p>
+    <div class="pp-meta">
+      <span>📅 Effective: January 1, 2025</span>
+      <span>🔄 Last Updated: April 20, 2025</span>
+      <span>🌐 Applies to: toolkitpro.blogspot.com</span>
+    </div>
+  </div>
+
+  <!-- Table of Contents -->
+  <div class="toc-card">
+    <h3>📋 Table of Contents</h3>
+    <ul class="toc-list">
+      <li><a href="#overview">1. Overview</a></li>
+      <li><a href="#information-collected">2. Information We Collect</a></li>
+      <li><a href="#how-we-use">3. How We Use Information</a></li>
+      <li><a href="#cookies">4. Cookies &amp; Tracking</a></li>
+      <li><a href="#google-adsense">5. Google AdSense &amp; Ads</a></li>
+      <li><a href="#third-party">6. Third-Party Services</a></li>
+      <li><a href="#data-security">7. Data Security</a></li>
+      <li><a href="#childrens-privacy">8. Children's Privacy</a></li>
+      <li><a href="#your-rights">9. Your Rights &amp; Choices</a></li>
+      <li><a href="#gdpr">10. GDPR &amp; CCPA</a></li>
+      <li><a href="#changes">11. Changes to This Policy</a></li>
+      <li><a href="#contact">12. Contact Us</a></li>
+    </ul>
+  </div>
+
+  <!-- Section 1: Overview -->
+  <div class="section-card" id="overview">
+    <h2>📌 1. Overview</h2>
+    <div class="highlight-box">
+      <p>🛡️ <strong>Key Fact:</strong> All tools on ToolKit Pro run <strong>entirely in your browser</strong>. Files you process (PDFs, images, documents) are <strong>never uploaded to any server</strong>. We do not store, transmit, or access your files.</p>
+    </div>
+    <p>ToolKit Pro ("we," "us," or "our") operates the website accessible at <strong>toolkitpro.blogspot.com</strong> (the "Service"). This Privacy Policy explains what information we collect, how we use it, and your rights regarding that information.</p>
+    <p>By using our Service, you agree to the collection and use of information in accordance with this policy. If you do not agree, please discontinue use of the Service.</p>
+
+    <div class="key-point">
+      <span class="kp-icon">✅</span>
+      <div class="kp-text"><strong>Files stay on your device</strong><span>PDF, image, and document processing happens locally in your browser — zero server contact.</span></div>
+    </div>
+    <div class="key-point">
+      <span class="kp-icon">✅</span>
+      <div class="kp-text"><strong>No account required</strong><span>We do not require registration, login, or any personal information to use our tools.</span></div>
+    </div>
+    <div class="key-point">
+      <span class="kp-icon">⚠️</span>
+      <div class="kp-text"><strong>Ads &amp; analytics</strong><span>We display Google AdSense ads and may use analytics. These third-party services have their own data practices described below.</span></div>
+    </div>
+  </div>
+
+  <!-- Section 2: Information Collected -->
+  <div class="section-card" id="information-collected">
+    <h2>📊 2. Information We Collect</h2>
+
+    <p><strong>A. Information You Provide Directly</strong></p>
+    <p>We do not require you to provide personal information to use our tools. However, if you contact us (e.g., via email), we may collect your name and email address to respond to your inquiry.</p>
+
+    <p><strong>B. Information Collected Automatically</strong></p>
+    <p>When you visit our website, certain information is collected automatically through browser technology and third-party services:</p>
+    <ul>
+      <li><strong>Log Data:</strong> Your browser may send information such as your IP address, browser type and version, pages visited, time and date of visit, and time spent on pages. This is standard server log data managed by Blogger/Google's infrastructure.</li>
+      <li><strong>Device Information:</strong> General information about the device used to access the site (screen size, operating system, browser) may be collected by analytics and advertising services.</li>
+      <li><strong>Usage Data:</strong> Aggregated, anonymous data about which tools are used most frequently, to help us improve the Service.</li>
+      <li><strong>Cookies:</strong> Small data files placed on your device. See Section 4 for details.</li>
+    </ul>
+
+    <p><strong>C. What We Do NOT Collect</strong></p>
+    <ul>
+      <li>The contents of files you process with our tools (PDFs, images, documents)</li>
+      <li>Passwords you generate using our password tool</li>
+      <li>Text you enter into our text tools</li>
+      <li>Any output produced by our tools</li>
+    </ul>
+  </div>
+
+  <!-- Section 3: How We Use -->
+  <div class="section-card" id="how-we-use">
+    <h2>⚙️ 3. How We Use Information</h2>
+    <p>We use the information we collect to:</p>
+    <ul>
+      <li>Operate and maintain the Service</li>
+      <li>Understand how users interact with our tools (aggregate analytics only)</li>
+      <li>Improve the website's performance, features, and user experience</li>
+      <li>Display relevant advertisements through Google AdSense</li>
+      <li>Detect, prevent, and address technical issues or abuse</li>
+      <li>Comply with legal obligations</li>
+      <li>Respond to your communications if you contact us</li>
+    </ul>
+    <p>We do <strong>not</strong> sell, rent, or trade your personal information to third parties for their marketing purposes.</p>
+  </div>
+
+  <!-- Section 4: Cookies -->
+  <div class="section-card" id="cookies">
+    <h2>🍪 4. Cookies &amp; Tracking Technologies</h2>
+    <p>Cookies are small text files stored on your device. We and our third-party partners use the following types of cookies:</p>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Cookie Type</th>
+          <th>Purpose</th>
+          <th>Set By</th>
+          <th>Duration</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Essential</strong><br><span class="badge badge-green">Required</span></td>
+          <td>Store your theme preference (dark/light mode). No personal data.</td>
+          <td>ToolKit Pro (localStorage)</td>
+          <td>Persistent (local only)</td>
+        </tr>
+        <tr>
+          <td><strong>Analytics</strong><br><span class="badge badge-blue">Optional</span></td>
+          <td>Understand site traffic, popular tools, and performance via Google Analytics.</td>
+          <td>Google</td>
+          <td>Up to 2 years</td>
+        </tr>
+        <tr>
+          <td><strong>Advertising</strong><br><span class="badge badge-yellow">Third-Party</span></td>
+          <td>Serve personalized or contextual ads based on browsing behavior.</td>
+          <td>Google AdSense</td>
+          <td>Up to 13 months</td>
+        </tr>
+        <tr>
+          <td><strong>Platform</strong><br><span class="badge badge-blue">Optional</span></td>
+          <td>Standard Blogger/Google platform cookies for site operation and security.</td>
+          <td>Google/Blogger</td>
+          <td>Session / Persistent</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p><strong>Managing Cookies:</strong> You can control or delete cookies through your browser settings. Note that disabling certain cookies may affect the functionality of the website or the relevance of ads. Visit <a href="https://www.allaboutcookies.org" target="_blank" rel="noopener">allaboutcookies.org</a> for guidance on managing cookies in your browser.</p>
+
+    <p><strong>Do Not Track:</strong> Some browsers include a "Do Not Track" feature. Our website currently does not respond to Do Not Track signals, but third-party services like Google have their own DNT policies.</p>
+  </div>
+
+  <!-- Section 5: Google AdSense -->
+  <div class="section-card" id="google-adsense">
+    <h2>📢 5. Google AdSense &amp; Advertising</h2>
+    <div class="highlight-box">
+      <p>ℹ️ We use <strong>Google AdSense</strong> to display advertisements on our website. AdSense uses cookies and web beacons to serve ads based on your prior visits to our site and other websites on the internet.</p>
+    </div>
+
+    <p><strong>How Google AdSense Works:</strong></p>
+    <ul>
+      <li>Google uses cookies (such as the DoubleClick cookie) to serve ads based on your visit to our site and/or other sites on the Internet.</li>
+      <li>Google may use information about your visits to this and other websites to provide targeted advertisements about goods and services of interest to you.</li>
+      <li>Third-party vendors, including Google, use cookies to serve ads based on your prior visits to our website or other websites.</li>
+    </ul>
+
+    <p><strong>Opting Out of Personalized Ads:</strong> You may opt out of personalized advertising by:</p>
+    <ul>
+      <li>Visiting <a href="https://www.google.com/settings/ads" target="_blank" rel="noopener">Google Ads Settings</a></li>
+      <li>Visiting <a href="https://optout.aboutads.info/" target="_blank" rel="noopener">aboutads.info</a> (NAI opt-out)</li>
+      <li>Visiting <a href="https://optout.networkadvertising.org/" target="_blank" rel="noopener">networkadvertising.org</a></li>
+    </ul>
+
+    <p>For more information about how Google uses data from sites that use Google services, please visit: <a href="https://policies.google.com/technologies/partner-sites" target="_blank" rel="noopener">google.com/policies/privacy/partners</a></p>
+
+    <p>Google AdSense's use of advertising cookies enables it and its partners to serve ads to users based on their visit to our site and/or other sites on the Internet. We comply with <a href="https://support.google.com/adsense/answer/48182" target="_blank" rel="noopener">Google AdSense Program Policies</a>.</p>
+  </div>
+
+  <!-- Section 6: Third-Party Services -->
+  <div class="section-card" id="third-party">
+    <h2>🔗 6. Third-Party Services</h2>
+    <p>Our website integrates with the following third-party services. Each has its own privacy policy governing how they process data:</p>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Service</th>
+          <th>Purpose</th>
+          <th>Privacy Policy</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Google AdSense</strong></td>
+          <td>Display advertisements</td>
+          <td><a href="https://policies.google.com/privacy" target="_blank" rel="noopener">policies.google.com/privacy</a></td>
+        </tr>
+        <tr>
+          <td><strong>Google Analytics</strong></td>
+          <td>Website usage analytics</td>
+          <td><a href="https://policies.google.com/privacy" target="_blank" rel="noopener">policies.google.com/privacy</a></td>
+        </tr>
+        <tr>
+          <td><strong>Blogger (Google)</strong></td>
+          <td>Website hosting platform</td>
+          <td><a href="https://policies.google.com/privacy" target="_blank" rel="noopener">policies.google.com/privacy</a></td>
+        </tr>
+        <tr>
+          <td><strong>CDN Libraries</strong></td>
+          <td>JavaScript libraries (pdf.js, JSZip, etc.) loaded from cdnjs.cloudflare.com and unpkg.com</td>
+          <td>Cloudflare &amp; npm Inc. privacy policies</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p>We are not responsible for the privacy practices of these third-party services. We encourage you to review their respective privacy policies.</p>
+  </div>
+
+  <!-- Section 7: Data Security -->
+  <div class="section-card" id="data-security">
+    <h2>🛡️ 7. Data Security</h2>
+    <p>The security of your data is important to us. We implement the following measures:</p>
+    <ul>
+      <li><strong>Client-Side Processing:</strong> All file conversions and tool operations occur locally in your browser, meaning your documents, images, and files are never transmitted over the internet to our servers.</li>
+      <li><strong>HTTPS:</strong> Our website is served over HTTPS, encrypting data in transit between your browser and our hosting platform.</li>
+      <li><strong>No Data Storage:</strong> We do not maintain databases of user files, outputs, or personal information.</li>
+    </ul>
+    <p>While we strive to use commercially acceptable means to protect any information, no method of transmission over the Internet or electronic storage is 100% secure. We cannot guarantee absolute security.</p>
+  </div>
+
+  <!-- Section 8: Children's Privacy -->
+  <div class="section-card" id="childrens-privacy">
+    <h2>👶 8. Children's Privacy</h2>
+    <p>Our Service is not directed to individuals under the age of <strong>13 years old</strong> (or 16 in some jurisdictions under GDPR). We do not knowingly collect personal information from children.</p>
+    <p>If you are a parent or guardian and believe your child has provided us with personal information, please contact us immediately at the email address listed in Section 12. If we become aware that we have collected personal information from a child without verification of parental consent, we will take steps to remove that information.</p>
+    <p>We comply with the <strong>Children's Online Privacy Protection Act (COPPA)</strong> in the United States and equivalent regulations in other jurisdictions.</p>
+  </div>
+
+  <!-- Section 9: Your Rights -->
+  <div class="section-card" id="your-rights">
+    <h2>⚖️ 9. Your Rights &amp; Choices</h2>
+    <p>Depending on your location, you may have the following rights regarding your personal information:</p>
+    <ul>
+      <li><strong>Access:</strong> Request a copy of personal information we hold about you.</li>
+      <li><strong>Correction:</strong> Request correction of inaccurate personal information.</li>
+      <li><strong>Deletion:</strong> Request deletion of your personal information ("right to be forgotten").</li>
+      <li><strong>Opt-Out of Ads:</strong> Opt out of personalized advertising (see Section 5 for links).</li>
+      <li><strong>Cookie Control:</strong> Manage cookies through your browser settings.</li>
+      <li><strong>Data Portability:</strong> Request a copy of your data in a portable format (where applicable).</li>
+      <li><strong>Withdraw Consent:</strong> Where processing is based on consent, you may withdraw it at any time.</li>
+    </ul>
+    <p>To exercise any of these rights, please contact us using the details in Section 12. We will respond within 30 days.</p>
+  </div>
+
+  <!-- Section 10: GDPR & CCPA -->
+  <div class="section-card" id="gdpr">
+    <h2>🌍 10. GDPR (EU/UK) &amp; CCPA (California)</h2>
+
+    <p><strong>For EU/UK Residents — General Data Protection Regulation (GDPR):</strong></p>
+    <p>If you are located in the European Union or United Kingdom, you have specific rights under the GDPR, including rights to access, rectification, erasure, restriction, portability, and objection. Our legal bases for processing data include:</p>
+    <ul>
+      <li><strong>Legitimate Interests:</strong> Analytics and service improvement.</li>
+      <li><strong>Consent:</strong> Personalized advertising (you can withdraw consent at any time).</li>
+      <li><strong>Legal Obligation:</strong> Where required by law.</li>
+    </ul>
+    <p>You also have the right to lodge a complaint with your local supervisory authority (e.g., the ICO in the UK, or your country's Data Protection Authority).</p>
+
+    <p><strong>For California Residents — California Consumer Privacy Act (CCPA) / CPRA:</strong></p>
+    <p>California residents have the right to:</p>
+    <ul>
+      <li>Know what personal information is collected and how it is used and shared.</li>
+      <li>Delete personal information we have collected (subject to certain exceptions).</li>
+      <li>Opt-out of the sale or sharing of personal information. <strong>We do not sell personal information.</strong></li>
+      <li>Non-discrimination for exercising CCPA rights.</li>
+    </ul>
+    <p>To submit a request, contact us at the email in Section 12 with the subject "CCPA/Privacy Request."</p>
+  </div>
+
+  <!-- Section 11: Changes -->
+  <div class="section-card" id="changes">
+    <h2>📝 11. Changes to This Privacy Policy</h2>
+    <p>We may update this Privacy Policy from time to time to reflect changes in our practices, technology, legal requirements, or other factors. When we make changes, we will:</p>
+    <ul>
+      <li>Update the "Last Updated" date at the top of this page.</li>
+      <li>Post a notice on the homepage for significant changes.</li>
+    </ul>
+    <p>We encourage you to review this Privacy Policy periodically to stay informed about how we are protecting your information. Your continued use of the Service after any changes constitutes your acceptance of the revised policy.</p>
+    <p>If we make material changes to how we treat personal information, we will provide prominent notice on the website before the changes take effect.</p>
+  </div>
+
+  <!-- Section 12: Contact -->
+  <div class="section-card" id="contact">
+    <h2>📬 12. Contact Us</h2>
+    <p>If you have questions, concerns, or requests regarding this Privacy Policy or our data practices, please contact us:</p>
+    <div class="contact-box">
+      <p><strong>ToolKit Pro</strong></p>
+      <p>📧 Email: <a href="mailto:your-email@gmail.com">your-email@gmail.com</a></p>
+      <p>🌐 Website: <a href="index.html">toolkitpro.blogspot.com</a></p>
+      <p>⏱️ Response Time: We aim to respond to all privacy-related requests within <strong>30 business days</strong>.</p>
+    </div>
+    <p style="margin-top:1rem;font-size:.9rem;color:var(--text-muted)">For the fastest response, include "Privacy Request" in the subject line of your email. Please specify your location (EU, US, etc.) so we can apply the correct legal framework to your request.</p>
+  </div>
+
+  <!-- Disclaimer Box -->
+  <div class="section-card" style="background:linear-gradient(135deg,rgba(108,99,255,.05),rgba(255,101,132,.05))">
+    <h2>📋 Quick Summary</h2>
+    <div class="key-point">
+      <span class="kp-icon">🔒</span>
+      <div class="kp-text"><strong>Your files are private</strong><span>PDFs, images, and documents are processed 100% in your browser. We never see them.</span></div>
+    </div>
+    <div class="key-point">
+      <span class="kp-icon">🍪</span>
+      <div class="kp-text"><strong>We use cookies</strong><span>For your theme preference, Google Analytics, and Google AdSense ads.</span></div>
+    </div>
+    <div class="key-point">
+      <span class="kp-icon">📢</span>
+      <div class="kp-text"><strong>We show ads</strong><span>Google AdSense displays ads. Google may use cookies to personalize them. You can opt out.</span></div>
+    </div>
+    <div class="key-point">
+      <span class="kp-icon">🚫</span>
+      <div class="kp-text"><strong>We don't sell data</strong><span>We never sell, rent, or trade your personal information to third parties.</span></div>
+    </div>
+    <div class="key-point">
+      <span class="kp-icon">👶</span>
+      <div class="kp-text"><strong>Not for children under 13</strong><span>We do not knowingly collect data from children.</span></div>
+    </div>
+  </div>
+
+</div>
+
+<footer style="text-align:center;padding:2rem;color:var(--text-muted);font-size:.85rem;border-top:1px solid var(--border)">
+  <p>© 2025 ToolKit Pro — <a href="privacy-policy.html">Privacy Policy</a> · <a href="terms.html">Terms &amp; Conditions</a> · <a href="disclaimer.html">Disclaimer</a> · <a href="contact.html">Contact</a> · <a href="index.html">All Tools</a></p>
+</footer>
+
+<script>
+  (function(){
+    const t=localStorage.getItem('theme')||(window.matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light');
+    document.documentElement.setAttribute('data-theme',t);
+    document.getElementById('themeToggle').textContent=t==='dark'?'☀️':'🌙';
+  })();
+  document.getElementById('themeToggle').addEventListener('click',function(){
+    const d=document.documentElement;
+    const t=d.getAttribute('data-theme')==='dark'?'light':'dark';
+    d.setAttribute('data-theme',t);
+    localStorage.setItem('theme',t);
+    this.textContent=t==='dark'?'☀️':'🌙';
+  });
+</script>
+</body>
+</html>

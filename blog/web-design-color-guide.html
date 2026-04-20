@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Color Theory for Web Designers: HEX, RGB, HSL Explained | ToolKit Pro</title>
+  <meta name="description" content="A complete guide to HEX, RGB, and HSL color formats for web designers — what each means, when to use each in CSS, alpha transparency, and accessibility contrast ratios.">
+  <link rel="stylesheet" href="../css/style.css">
+  <script src="../js/common.js"></script>
+  <style>
+    .blog-container { max-width: 780px; margin: 2rem auto; padding: 0 1.25rem 5rem; }
+    .blog-hero { background: linear-gradient(135deg, var(--primary), #9c91ff); color: #fff; padding: 3rem 2rem; border-radius: var(--radius); margin-bottom: 2rem; }
+    .blog-hero .category-tag { background: rgba(255,255,255,.2); padding: .3rem .8rem; border-radius: 20px; font-size: .8rem; display: inline-block; margin-bottom: 1rem; }
+    .blog-hero h1 { font-size: 1.9rem; line-height: 1.3; margin-bottom: 1rem; }
+    .blog-meta { display: flex; gap: 1.5rem; font-size: .85rem; opacity: .85; flex-wrap: wrap; }
+    .blog-body { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 2.5rem; box-shadow: var(--shadow); }
+    .blog-body h2 { font-size: 1.3rem; margin: 2rem 0 .75rem; color: var(--primary); border-left: 3px solid var(--primary); padding-left: .75rem; }
+    .blog-body h3 { font-size: 1.1rem; margin: 1.5rem 0 .5rem; font-weight: 600; }
+    .blog-body p { line-height: 1.9; margin-bottom: 1.1rem; color: var(--text); }
+    .blog-body ul, .blog-body ol { padding-left: 1.5rem; margin-bottom: 1.1rem; }
+    .blog-body li { margin-bottom: .5rem; line-height: 1.8; }
+    .blog-body strong { color: var(--text); }
+    .highlight-box { background: var(--bg-secondary); border-left: 4px solid var(--secondary); padding: 1rem 1.25rem; border-radius: 0 8px 8px 0; margin: 1.5rem 0; }
+    .code-example { background:var(--bg-secondary); border:1px solid var(--border); border-radius:var(--radius-sm); padding:1.1rem 1.25rem; font-family:'Consolas','Monaco','Courier New',monospace; font-size:.875rem; line-height:1.7; overflow-x:auto; margin:1rem 0; color:var(--text); }
+    .color-demo { display:flex; gap:1rem; flex-wrap:wrap; margin:1rem 0; }
+    .color-swatch-demo { width:80px; height:60px; border-radius:8px; border:1px solid var(--border); display:flex; align-items:flex-end; justify-content:center; padding-bottom:4px; font-size:.7rem; font-weight:600; color:#fff; text-shadow:0 1px 2px rgba(0,0,0,.6); }
+    .related-tools { background: var(--bg-secondary); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.5rem; margin-top: 2rem; }
+    .related-tools h3 { margin-bottom: 1rem; font-size: 1rem; }
+    .related-links { display: flex; flex-wrap: wrap; gap: .75rem; }
+    .related-links a { background: var(--primary); color: #fff; padding: .4rem 1rem; border-radius: 20px; font-size: .85rem; text-decoration: none; transition: opacity .2s; }
+    .related-links a:hover { opacity: .85; }
+    .nav-links { display:flex; gap:1.5rem; align-items:center; }
+    .nav-links a { color:var(--text); font-size:.9rem; font-weight:500; text-decoration:none; transition:color .2s; }
+    .nav-links a:hover { color:var(--primary); }
+    @media(max-width:768px) { .nav-links { display:none; } .blog-hero h1 { font-size:1.5rem; } .blog-body { padding:1.5rem; } }
+  </style>
+</head>
+<body>
+<nav class="navbar">
+  <a href="../index.html" class="nav-brand"><div class="logo-icon">🛠</div>ToolKit Pro</a>
+  <div class="nav-links">
+    <a href="../index.html">Home</a>
+    <a href="../index.html#tools">Tools</a>
+    <a href="index.html">Blog</a>
+    <a href="../about.html">About</a>
+    <a href="../contact.html">Contact</a>
+  </div>
+  <div class="nav-actions"><button class="theme-toggle" id="themeToggle">🌙</button></div>
+</nav>
+
+<div class="blog-container">
+  <a href="index.html" style="display:inline-flex;align-items:center;gap:.4rem;color:var(--text-muted);font-size:.9rem;margin-bottom:1.5rem;text-decoration:none;">← Back to Blog</a>
+
+  <div class="blog-hero">
+    <span class="category-tag">Developer</span>
+    <h1>Color Theory for Web Designers: HEX, RGB, and HSL Explained</h1>
+    <div class="blog-meta">
+      <span>✍️ ToolKit Pro Team</span>
+      <span>📅 April 2025</span>
+      <span>⏱️ 4 min read</span>
+    </div>
+  </div>
+
+  <article class="blog-body">
+    <p>Every color on your screen is represented by a number — but depending on who needs to work with that number, different notations make more or less sense. A brand designer hands you a hex code. A developer reads an RGB value from a design specification. An accessibility checker outputs a contrast ratio. Understanding HEX, RGB, and HSL — and when to use each — is a foundational skill for anyone building or designing for the web.</p>
+
+    <h2>How Screens Produce Color</h2>
+    <p>Every pixel on an LCD or OLED screen contains three sub-pixels: one red, one green, one blue. By varying the brightness of each sub-pixel independently, any of roughly 16.7 million colors can be produced. This is the additive color model — different from subtractive color (ink on paper) where mixing colors together creates darker results. All three color formats covered in this guide — HEX, RGB, and HSL — ultimately describe how much red, green, and blue to activate, just in different ways.</p>
+
+    <h2>HEX: The Web Standard</h2>
+    <p>Hexadecimal color codes are the dominant format in web design. A hex color like <code>#6C63FF</code> is read as three pairs of hexadecimal digits: <code>6C</code> (red), <code>63</code> (green), <code>FF</code> (blue). Hexadecimal uses base 16, so digits run 0–9 then A–F, giving 16 possible values per digit. Two hex digits together give 16 × 16 = 256 possible values (0–255) — the same range as each RGB channel.</p>
+    <div class="code-example">/* Purple brand color */
+color: #6C63FF;
+
+/* Red: FF = 255, Green: 00 = 0, Blue: 00 = 0 */
+color: #FF0000;
+
+/* Shorthand (when both digits match) */
+color: #F00; /* same as #FF0000 */</div>
+    <p>HEX is compact and universally supported. It's the format you'll most often see in design tools like Figma and Sketch, in brand guidelines, and in CSS. Its weakness: it's not intuitive. It's not easy to look at <code>#6C63FF</code> and mentally visualize the color or adjust it by feel — you need a color picker or a formula.</p>
+
+    <h2>RGB: The Explicit Channel Model</h2>
+    <p>RGB writes the red, green, and blue channel values as integers from 0 to 255, or as percentages. The syntax in CSS is <code>rgb(R, G, B)</code> or the newer space-separated syntax <code>rgb(R G B)</code>:</p>
+    <div class="code-example">/* Same purple as #6C63FF */
+color: rgb(108, 99, 255);
+
+/* Pure red */
+color: rgb(255, 0, 0);
+
+/* A medium gray */
+color: rgb(128, 128, 128);</div>
+    <p>RGB is more readable than HEX in the sense that you can understand the relative contribution of each channel — <code>rgb(108, 99, 255)</code> clearly has a dominant blue channel. It's the format used in many design specifications, canvas and WebGL contexts, and when doing color math programmatically.</p>
+
+    <h2>RGBA: Adding Transparency</h2>
+    <p>The fourth channel in RGBA is alpha — opacity, ranging from 0 (fully transparent) to 1 (fully opaque). This is how you create translucent overlays, semi-transparent shadows, and glass-effect UI components:</p>
+    <div class="code-example">/* 15% opacity purple overlay */
+background: rgba(108, 99, 255, 0.15);
+
+/* Semi-transparent black scrim */
+background: rgba(0, 0, 0, 0.5);</div>
+
+    <h2>HSL: The Designer's Format</h2>
+    <p>HSL stands for Hue, Saturation, and Lightness. It was designed to be intuitive for human perception rather than for hardware: instead of describing how much of each light channel to activate, you describe the color in terms humans naturally think about.</p>
+    <ul>
+      <li><strong>Hue</strong> is the color itself, expressed as a degree on the color wheel: 0° = red, 120° = green, 240° = blue, and all the blends in between.</li>
+      <li><strong>Saturation</strong> is how vivid the color is, from 0% (pure gray) to 100% (full color).</li>
+      <li><strong>Lightness</strong> is how light or dark, from 0% (black) to 100% (white), with 50% being the pure color.</li>
+    </ul>
+    <div class="code-example">/* Purple: 244 degrees hue, 100% saturated, 70% lightness */
+color: hsl(244, 100%, 70%);
+
+/* Same color, 20% darker */
+color: hsl(244, 100%, 50%);
+
+/* Desaturated version (muted) */
+color: hsl(244, 30%, 60%);</div>
+    <p>HSL is enormously useful when building design systems. If your primary brand color is <code>hsl(244, 100%, 63%)</code>, you can generate hover states, disabled states, and background tints by simply adjusting the lightness value — keeping hue and saturation constant. This is far more intuitive than doing the same manipulation in hex or RGB.</p>
+
+    <h2>HSLA: HSL with Transparency</h2>
+    <p>Just as RGBA adds an alpha channel to RGB, HSLA adds one to HSL. The syntax is <code>hsla(H, S%, L%, A)</code>. This is particularly useful when creating consistent translucent tints of a brand color:</p>
+    <div class="code-example">/* 15% opacity primary color — consistent with the brand hue */
+background: hsla(244, 100%, 63%, 0.15);</div>
+
+    <h2>CSS Color Usage: Modern Best Practices</h2>
+    <p>Modern CSS allows all three formats freely. Using CSS custom properties (variables) for your color palette is the cleanest approach — define your colors once in <code>:root</code> and reference them throughout:</p>
+    <div class="code-example">:root {
+  --primary: #6C63FF;
+  --primary-rgb: 108, 99, 255;
+}
+
+/* Use the variable directly */
+color: var(--primary);
+
+/* Use the RGB values for rgba() without redefining */
+background: rgba(var(--primary-rgb), 0.15);</div>
+
+    <h2>Accessibility: Contrast Ratios</h2>
+    <p>Color choice isn't just aesthetic — it's a legal and ethical requirement for accessible design. The Web Content Accessibility Guidelines (WCAG) specify minimum contrast ratios between text and its background. For normal text, WCAG 2.1 Level AA requires a ratio of at least 4.5:1. For large text (18pt+ or 14pt+ bold), the minimum is 3:1. The strictest level, AAA, requires 7:1 for normal text.</p>
+    <p>White text on a medium-blue button might look fine to you but fail the contrast requirement for users with low vision or color vision deficiency. Always verify your color combinations with a contrast checker before shipping. A good color picker tool shows you the contrast ratio in real-time as you adjust colors, making it easy to find accessible combinations without guesswork.</p>
+
+    <div class="highlight-box">
+      <strong>Quick summary:</strong> Use HEX for storing and sharing color values (brand guidelines, design handoff). Use HSL for programmatic manipulation in design systems (generating tints, shades, states). Use RGBA/HSLA when you need transparency. Always check contrast ratios for text accessibility.
+    </div>
+
+    <h2>Conclusion</h2>
+    <p>HEX, RGB, and HSL all describe the same color space — they're just different lenses for the same information. HEX is compact and universally expected in CSS and design tools. RGB makes channel values explicit and is natural for mathematical color operations. HSL maps to human perception, making it the most intuitive format for systematically varying colors in a design system. Mastering all three and knowing when to reach for each is a skill that separates designers who fight with colors from those who control them deliberately.</p>
+
+    <div class="related-tools">
+      <h3>🛠 Try These Related Tools</h3>
+      <div class="related-links">
+        <a href="../tools/color-picker.html">Color Picker</a>
+        <a href="../tools/image-converter.html">Image Converter</a>
+        <a href="../tools/json-formatter.html">JSON Formatter</a>
+      </div>
+    </div>
+  </article>
+</div>
+
+<footer style="text-align:center;padding:2rem;color:var(--text-muted);font-size:.85rem;border-top:1px solid var(--border)">
+  <p>© 2025 ToolKit Pro — <a href="../privacy-policy.html">Privacy Policy</a> · <a href="../terms.html">Terms</a> · <a href="../contact.html">Contact</a> · <a href="../index.html">All Tools</a></p>
+</footer>
+<script>
+(function(){const t=localStorage.getItem('theme')||(window.matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t);document.getElementById('themeToggle').textContent=t==='dark'?'☀️':'🌙';})();
+document.getElementById('themeToggle').addEventListener('click',function(){const d=document.documentElement;const t=d.getAttribute('data-theme')==='dark'?'light':'dark';d.setAttribute('data-theme',t);localStorage.setItem('theme',t);this.textContent=t==='dark'?'☀️':'🌙';});
+</script>
+</body>
+</html>

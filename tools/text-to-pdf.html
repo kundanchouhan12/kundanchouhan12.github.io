@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Text to PDF Converter — Free Online Tool | ToolKit Pro</title>
+  <meta name="description" content="Convert plain text or HTML to PDF documents free online. Browser-based text to PDF generator — create professional documents instantly, no upload needed." />
+  <link rel="stylesheet" href="../css/style.css" />
+  <script src="../js/common.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+  <style>
+    .nav-links { display:flex; gap:1.5rem; align-items:center; }
+    .nav-links a { color:var(--text); font-size:.9rem; font-weight:500; text-decoration:none; transition:color .2s; }
+    .nav-links a:hover { color:var(--primary); }
+    @media(max-width:768px){ .nav-links { display:none; } }
+  </style>
+</head>
+<body>
+
+<nav class="navbar">
+  <a href="../index.html" class="nav-brand">
+    <div class="logo-icon">🛠</div>
+    ToolKit Pro
+  </a>
+  <div class="nav-links">
+    <a href="../index.html">Home</a>
+    <a href="../index.html#tools">Tools</a>
+    <a href="../blog/index.html">Blog</a>
+    <a href="../about.html">About</a>
+    <a href="../contact.html">Contact</a>
+  </div>
+  <div class="nav-actions">
+    <button class="theme-toggle" id="themeToggle" title="Toggle dark mode">🌙</button>
+  </div>
+</nav>
+
+<div class="tool-page-hero">
+  <h1>🗒 Text to PDF</h1>
+  <p>Convert plain text or styled HTML content to a PDF document. Runs in your browser.</p>
+</div>
+
+<div class="tool-container">
+
+  <div class="panel">
+    <div class="panel-title">✏️ Enter Your Content</div>
+
+    <div class="tabs">
+      <button class="tab-btn active" data-tab="text">Plain Text</button>
+      <button class="tab-btn" data-tab="html">HTML</button>
+    </div>
+
+    <div class="tab-content active" id="tab-text">
+      <div class="form-group">
+        <label class="form-label">Content</label>
+        <textarea class="form-control" id="textInput" style="min-height:300px" placeholder="Type or paste your text here..."></textarea>
+      </div>
+    </div>
+
+    <div class="tab-content" id="tab-html">
+      <div class="form-group">
+        <label class="form-label">HTML Content</label>
+        <textarea class="form-control" id="htmlInput" style="min-height:300px;font-family:monospace" placeholder="<h1>Title</h1>&#10;<p>Your content here...</p>"></textarea>
+      </div>
+      <div class="form-group">
+        <label class="form-label" style="display:flex;align-items:center;justify-content:space-between">
+          HTML Preview
+          <button class="copy-btn" onclick="updatePreview()">🔄 Refresh</button>
+        </label>
+        <div id="htmlPreview" style="min-height:150px;padding:1rem;background:white;color:#000;border:2px solid var(--border);border-radius:8px;overflow:auto"></div>
+      </div>
+    </div>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-top:0.5rem">
+      <div class="form-group">
+        <label class="form-label">Font Size</label>
+        <select class="form-control" id="fontSize">
+          <option value="10pt">10pt — Small</option>
+          <option value="12pt" selected>12pt — Normal</option>
+          <option value="14pt">14pt — Large</option>
+          <option value="16pt">16pt — Larger</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Page Size</label>
+        <select class="form-control" id="pageFormat">
+          <option value="a4" selected>A4</option>
+          <option value="letter">Letter</option>
+          <option value="a3">A3</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label class="form-label">Document Title (optional)</label>
+      <input type="text" class="form-control" id="docTitle" placeholder="My Document" />
+    </div>
+
+    <div id="alertBox" class="alert hidden"></div>
+
+    <div class="progress-bar" id="progressWrap" style="display:none">
+      <div class="progress-fill" id="progressFill"></div>
+    </div>
+
+    <div class="btn-group">
+      <button class="btn btn-primary" id="generateBtn">⚙️ Generate PDF</button>
+      <button class="btn btn-secondary" id="clearBtn">🗑 Clear</button>
+    </div>
+  </div>
+
+  <div class="panel" style="margin-top:1.5rem">
+    <div class="panel-title">💡 Tips</div>
+    <ul style="padding-left:1.2rem;color:var(--text-muted);font-size:0.9rem;line-height:2">
+      <li>Use the <strong>HTML tab</strong> for rich formatting with headings, bold, lists, etc.</li>
+      <li>Plain text preserves line breaks and whitespace.</li>
+      <li>Use <code style="background:var(--bg-secondary);padding:0.1rem 0.4rem;border-radius:4px">&lt;h1&gt;, &lt;h2&gt;, &lt;p&gt;, &lt;ul&gt;, &lt;table&gt;</code> tags in HTML mode.</li>
+      <li>The PDF is generated using your browser's rendering engine — what you see is what you get.</li>
+    </ul>
+  </div>
+</div>
+
+<!-- ===== CONTENT SECTIONS ===== -->
+<div style="max-width:860px;margin:0 auto;padding:0 1rem 2rem">
+
+  <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:2rem;margin-bottom:1.5rem;box-shadow:var(--shadow)">
+    <h2 style="font-size:1.4rem;margin-bottom:1rem;color:var(--primary)">What is the Text to PDF Converter?</h2>
+    <p style="line-height:1.9;color:var(--text);margin-bottom:1rem">The Text to PDF Converter is a free, browser-based tool that turns any plain text or HTML content into a properly formatted, downloadable PDF document. Whether you need to quickly create a professional report from typed notes, convert an HTML snippet into a shareable document, or generate a formatted memo with a title and body text, this tool handles it in your browser without sending any content to a server. It supports plain text mode, which preserves line breaks and whitespace, and an HTML mode for rich formatting with headings, lists, and tables.</p>
+    <p style="line-height:1.9;color:var(--text)">Use this tool to create quick documents for sharing when you do not have Word or Google Docs available, to convert study notes into printable PDFs, to generate invoices or letters from template text, or to produce branded documents using custom HTML with inline styles. Outputs are in A4 or Letter format with clean typography and proper margins.</p>
+  </div>
+
+  <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:2rem;margin-bottom:1.5rem;box-shadow:var(--shadow)">
+    <h2 style="font-size:1.4rem;margin-bottom:1rem;color:var(--primary)">How to Use — Step-by-Step</h2>
+    <ol style="padding-left:1.5rem;line-height:2;color:var(--text)">
+      <li>Choose between <strong>Plain Text</strong> mode (for simple notes) or <strong>HTML</strong> mode (for formatted content).</li>
+      <li>Type or paste your content into the text area.</li>
+      <li>Optionally add a document title — it will appear as a prominent heading at the top of the PDF.</li>
+      <li>Select font size (10–16pt) and page size (A4, Letter, or A3) from the options.</li>
+      <li>Click <strong>Generate PDF</strong> — the PDF is rendered in your browser using html2pdf.js.</li>
+      <li>The PDF downloads automatically to your device, named after your document title.</li>
+    </ol>
+  </div>
+
+  <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:2rem;margin-bottom:1.5rem;box-shadow:var(--shadow)">
+    <h2 style="font-size:1.4rem;margin-bottom:1rem;color:var(--primary)">Key Features &amp; Benefits</h2>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1rem">
+      <div style="padding:1rem;background:var(--bg-secondary);border-radius:8px">
+        <div style="font-size:1.5rem;margin-bottom:.5rem">📝</div>
+        <strong>Plain Text &amp; HTML Modes</strong>
+        <p style="font-size:.85rem;color:var(--text-muted);margin-top:.3rem">Switch between plain text for simple content and HTML mode for rich formatted documents with headers, lists, and tables.</p>
+      </div>
+      <div style="padding:1rem;background:var(--bg-secondary);border-radius:8px">
+        <div style="font-size:1.5rem;margin-bottom:.5rem">👁</div>
+        <strong>Live HTML Preview</strong>
+        <p style="font-size:.85rem;color:var(--text-muted);margin-top:.3rem">HTML mode shows a real-time preview of your formatted content as you type, so you can see exactly what the PDF will look like.</p>
+      </div>
+      <div style="padding:1rem;background:var(--bg-secondary);border-radius:8px">
+        <div style="font-size:1.5rem;margin-bottom:.5rem">📄</div>
+        <strong>Multiple Page Sizes</strong>
+        <p style="font-size:.85rem;color:var(--text-muted);margin-top:.3rem">Generate PDFs in A4, Letter, or A3 format to match the requirements of your intended audience or print setup.</p>
+      </div>
+      <div style="padding:1rem;background:var(--bg-secondary);border-radius:8px">
+        <div style="font-size:1.5rem;margin-bottom:.5rem">🔤</div>
+        <strong>Font Size Control</strong>
+        <p style="font-size:.85rem;color:var(--text-muted);margin-top:.3rem">Choose from four font sizes (10–16pt) to control text density and readability in your generated document.</p>
+      </div>
+      <div style="padding:1rem;background:var(--bg-secondary);border-radius:8px">
+        <div style="font-size:1.5rem;margin-bottom:.5rem">🔒</div>
+        <strong>100% Private</strong>
+        <p style="font-size:.85rem;color:var(--text-muted);margin-top:.3rem">Your text content never leaves your browser. PDF generation is fully client-side using html2pdf.js.</p>
+      </div>
+      <div style="padding:1rem;background:var(--bg-secondary);border-radius:8px">
+        <div style="font-size:1.5rem;margin-bottom:.5rem">🆓</div>
+        <strong>Always Free</strong>
+        <p style="font-size:.85rem;color:var(--text-muted);margin-top:.3rem">No registration, no limits, no watermarks. Create and download as many PDFs as you need for free.</p>
+      </div>
+    </div>
+  </div>
+
+  <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:2rem;margin-bottom:1.5rem;box-shadow:var(--shadow)">
+    <h2 style="font-size:1.4rem;margin-bottom:1.25rem;color:var(--primary)">Frequently Asked Questions</h2>
+
+    <details style="border:1px solid var(--border);border-radius:8px;margin-bottom:.75rem;overflow:hidden">
+      <summary style="padding:1rem 1.25rem;cursor:pointer;font-weight:600;background:var(--bg-secondary);user-select:none">❓ Is the Text to PDF tool free to use?</summary>
+      <div style="padding:1rem 1.25rem;line-height:1.8;color:var(--text-muted)">Yes, completely free. There are no sign-up requirements, usage caps, or watermarks. Generate as many PDFs from text as you need at no cost.</div>
+    </details>
+
+    <details style="border:1px solid var(--border);border-radius:8px;margin-bottom:.75rem;overflow:hidden">
+      <summary style="padding:1rem 1.25rem;cursor:pointer;font-weight:600;background:var(--bg-secondary);user-select:none">❓ Is my data secure? Does it upload my text?</summary>
+      <div style="padding:1rem 1.25rem;line-height:1.8;color:var(--text-muted)">Your text content never leaves your browser. PDF generation uses html2pdf.js entirely client-side. Confidential notes, private reports, and sensitive content stay completely on your device.</div>
+    </details>
+
+    <details style="border:1px solid var(--border);border-radius:8px;margin-bottom:.75rem;overflow:hidden">
+      <summary style="padding:1rem 1.25rem;cursor:pointer;font-weight:600;background:var(--bg-secondary);user-select:none">❓ What HTML tags can I use in HTML mode?</summary>
+      <div style="padding:1rem 1.25rem;line-height:1.8;color:var(--text-muted)">You can use any standard HTML including h1–h6 headings, p paragraphs, ul/ol lists, table elements, strong, em, br, hr, and inline styles. The preview updates in real-time as you type, so you can see exactly what will be rendered in the PDF before generating it.</div>
+    </details>
+
+    <details style="border:1px solid var(--border);border-radius:8px;margin-bottom:.75rem;overflow:hidden">
+      <summary style="padding:1rem 1.25rem;cursor:pointer;font-weight:600;background:var(--bg-secondary);user-select:none">❓ Can I create a professional-looking document with this tool?</summary>
+      <div style="padding:1rem 1.25rem;line-height:1.8;color:var(--text-muted)">Yes. By using HTML mode with proper heading tags and a document title, you can create clean, professional-looking PDFs suitable for reports, memos, meeting notes, and proposals. The tool applies clean Arial typography with proper line spacing and margins by default.</div>
+    </details>
+
+    <details style="border:1px solid var(--border);border-radius:8px;margin-bottom:.75rem;overflow:hidden">
+      <summary style="padding:1rem 1.25rem;cursor:pointer;font-weight:600;background:var(--bg-secondary);user-select:none">❓ What page formats are supported?</summary>
+      <div style="padding:1rem 1.25rem;line-height:1.8;color:var(--text-muted)">You can generate PDFs in A4 (standard international), Letter (US standard), or A3 (larger presentation format). All output PDFs use portrait orientation and are compatible with all standard PDF viewers.</div>
+    </details>
+  </div>
+
+</div>
+
+<footer style="text-align:center;padding:2rem;color:var(--text-muted);font-size:.85rem;border-top:1px solid var(--border)">
+  <p>© 2025 ToolKit Pro — <a href="../privacy-policy.html">Privacy Policy</a> · <a href="../terms.html">Terms</a> · <a href="../contact.html">Contact</a> · <a href="../index.html">All Tools</a></p>
+</footer>
+
+<script>
+  let activeTab = 'text';
+
+  // Tab switching
+  document.querySelectorAll('.tab-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+      document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+      btn.classList.add('active');
+      activeTab = btn.dataset.tab;
+      document.getElementById('tab-' + activeTab).classList.add('active');
+    });
+  });
+
+  window.updatePreview = function () {
+    const html = document.getElementById('htmlInput').value;
+    document.getElementById('htmlPreview').innerHTML = html;
+  };
+
+  document.getElementById('htmlInput').addEventListener('input', updatePreview);
+
+  document.getElementById('clearBtn').addEventListener('click', () => {
+    document.getElementById('textInput').value = '';
+    document.getElementById('htmlInput').value = '';
+    document.getElementById('docTitle').value = '';
+    document.getElementById('htmlPreview').innerHTML = '';
+    document.getElementById('alertBox').classList.add('hidden');
+  });
+
+  function showAlert(msg, type) {
+    const alertBox = document.getElementById('alertBox');
+    alertBox.className = 'alert alert-' + type;
+    alertBox.innerHTML = (type === 'error' ? '❌ ' : '✅ ') + msg;
+    alertBox.classList.remove('hidden');
+  }
+
+  document.getElementById('generateBtn').addEventListener('click', async () => {
+    const fontSize = document.getElementById('fontSize').value;
+    const pageFormat = document.getElementById('pageFormat').value;
+    const docTitle = document.getElementById('docTitle').value.trim() || 'document';
+    const generateBtn = document.getElementById('generateBtn');
+    const progressWrap = document.getElementById('progressWrap');
+
+    let content = '';
+
+    if (activeTab === 'text') {
+      const text = document.getElementById('textInput').value.trim();
+      if (!text) { showAlert('Please enter some text.', 'error'); return; }
+      // Escape HTML and preserve line breaks
+      const escaped = text
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/\n/g, '<br>');
+      content = `<p style="font-family:Arial,sans-serif;font-size:${fontSize};line-height:1.8;color:#000;white-space:pre-wrap">${escaped}</p>`;
+    } else {
+      const html = document.getElementById('htmlInput').value.trim();
+      if (!html) { showAlert('Please enter some HTML content.', 'error'); return; }
+      content = html;
+    }
+
+    generateBtn.disabled = true;
+    generateBtn.textContent = '⏳ Generating…';
+    progressWrap.style.display = 'block';
+    setProgress('progressFill', 20);
+
+    try {
+      const wrapper = document.createElement('div');
+      wrapper.style.cssText = `font-family:Arial,sans-serif;font-size:${fontSize};line-height:1.8;color:#000;padding:1rem;max-width:750px;margin:0 auto`;
+      if (docTitle) {
+        wrapper.innerHTML = `<h1 style="font-size:1.6em;margin-bottom:1rem;border-bottom:2px solid #6C63FF;padding-bottom:0.5rem">${docTitle}</h1>${content}`;
+      } else {
+        wrapper.innerHTML = content;
+      }
+      document.body.appendChild(wrapper);
+
+      setProgress('progressFill', 50);
+
+      await html2pdf().set({
+        margin: [15, 15],
+        filename: docTitle.replace(/[^a-z0-9]/gi, '_') + '.pdf',
+        html2canvas: { scale: 2, useCORS: true },
+        jsPDF: { unit: 'mm', format: pageFormat, orientation: 'portrait' }
+      }).from(wrapper).save();
+
+      document.body.removeChild(wrapper);
+      setProgress('progressFill', 100);
+      showAlert('PDF generated and downloaded!', 'success');
+    } catch (err) {
+      showAlert('Failed to generate PDF: ' + err.message, 'error');
+      console.error(err);
+    } finally {
+      generateBtn.disabled = false;
+      generateBtn.textContent = '⚙️ Generate PDF';
+      setTimeout(() => progressWrap.style.display = 'none', 800);
+    }
+  });
+</script>
+</body>
+</html>

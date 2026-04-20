@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PDF to Text Extractor — Free Online Tool | ToolKit Pro</title>
+  <meta name="description" content="Extract text from any PDF file instantly. Free browser-based PDF text extractor — no upload required, preserves all content from every page." />
+  <link rel="stylesheet" href="../css/style.css" />
+  <script src="../js/common.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.4.120/pdf.min.js"></script>
+  <style>
+    .nav-links { display:flex; gap:1.5rem; align-items:center; }
+    .nav-links a { color:var(--text); font-size:.9rem; font-weight:500; text-decoration:none; transition:color .2s; }
+    .nav-links a:hover { color:var(--primary); }
+    @media(max-width:768px){ .nav-links { display:none; } }
+  </style>
+</head>
+<body>
+
+<nav class="navbar">
+  <a href="../index.html" class="nav-brand">
+    <div class="logo-icon">🛠</div>
+    ToolKit Pro
+  </a>
+  <div class="nav-links">
+    <a href="../index.html">Home</a>
+    <a href="../index.html#tools">Tools</a>
+    <a href="../blog/index.html">Blog</a>
+    <a href="../about.html">About</a>
+    <a href="../contact.html">Contact</a>
+  </div>
+  <div class="nav-actions">
+    <button class="theme-toggle" id="themeToggle" title="Toggle dark mode">🌙</button>
+  </div>
+</nav>
+
+<div class="tool-page-hero">
+  <h1>📝 PDF to Text Extractor</h1>
+  <p>Extract text content from any PDF file. Runs entirely in your browser — no upload required.</p>
+</div>
+
+<div class="tool-container">
+
+  <div class="panel">
+    <div class="panel-title">📂 Select PDF File</div>
+
+    <div class="drop-zone" id="dropZone">
+      <input type="file" id="fileInput" accept=".pdf" />
+      <span class="drop-icon">📄</span>
+      <h3>Drop PDF file here</h3>
+      <p>or click to browse</p>
+    </div>
+
+    <div id="fileInfo" class="hidden" style="margin-top:0.75rem;padding:0.65rem 1rem;background:var(--bg-secondary);border:1px solid var(--border);border-radius:8px;font-size:0.875rem;display:flex;align-items:center;gap:0.5rem">
+      <span>📄</span>
+      <span id="fileName"></span>
+      <span id="fileSize" style="color:var(--text-muted)"></span>
+    </div>
+
+    <div id="alertBox" class="alert hidden"></div>
+
+    <div class="progress-bar" id="progressWrap" style="display:none">
+      <div class="progress-fill" id="progressFill"></div>
+    </div>
+
+    <div class="btn-group">
+      <button class="btn btn-primary" id="extractBtn" disabled>📄 Extract Text</button>
+    </div>
+  </div>
+
+  <div class="panel hidden" id="resultPanel">
+    <div class="panel-title" style="display:flex;align-items:center;justify-content:space-between">
+      <span>📋 Extracted Text</span>
+      <div style="display:flex;gap:0.5rem">
+        <button class="copy-btn" id="copyBtn">📋 Copy All</button>
+        <button class="btn btn-success btn" style="padding:0.3rem 0.75rem;font-size:0.8rem" id="downloadTxtBtn">⬇️ Download .txt</button>
+      </div>
+    </div>
+    <div id="pageCount" class="text-muted" style="font-size:0.8rem;margin-bottom:0.75rem"></div>
+    <textarea class="form-control" id="outputText" style="min-height:400px;font-family:'Consolas',monospace;font-size:0.875rem" readonly></textarea>
+  </div>
+
+</div>
+
+<!-- ===== CONTENT SECTIONS ===== -->
+<div style="max-width:860px;margin:0 auto;padding:0 1rem 2rem">
+
+  <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:2rem;margin-bottom:1.5rem;box-shadow:var(--shadow)">
+    <h2 style="font-size:1.4rem;margin-bottom:1rem;color:var(--primary)">What is the PDF to Text Extractor?</h2>
+    <p style="line-height:1.9;color:var(--text);margin-bottom:1rem">The PDF to Text Extractor is a free, browser-based tool that reads the text content from any PDF document and converts it into plain, copyable text. Built on the industry-standard PDF.js library, it processes each page of your PDF individually, labeling each section clearly so you can navigate large documents with ease. Whether you need to copy a paragraph from a report, harvest data from a research paper, or pull content from a scanned business card, this tool delivers clean, readable text output instantly.</p>
+    <p style="line-height:1.9;color:var(--text)">This tool is particularly valuable for researchers who need to quote academic papers, professionals who need to repurpose content from locked PDFs, students extracting study notes, and developers who need to test text extraction workflows. The output is both copyable and downloadable as a .txt file, making it easy to import into Word, Notepad, or any text editor.</p>
+  </div>
+
+  <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:2rem;margin-bottom:1.5rem;box-shadow:var(--shadow)">
+    <h2 style="font-size:1.4rem;margin-bottom:1rem;color:var(--primary)">How to Use — Step-by-Step</h2>
+    <ol style="padding-left:1.5rem;line-height:2;color:var(--text)">
+      <li>Click the drop zone or drag and drop your PDF file onto the page.</li>
+      <li>The file name and size will be confirmed once the file is loaded.</li>
+      <li>Click <strong>Extract Text</strong> to begin processing — a progress bar shows each page being read.</li>
+      <li>The extracted text appears in the output panel, divided by page numbers for easy reference.</li>
+      <li>Click <strong>Copy All</strong> to copy the entire text to your clipboard, or use <strong>Download .txt</strong> to save it.</li>
+    </ol>
+  </div>
+
+  <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:2rem;margin-bottom:1.5rem;box-shadow:var(--shadow)">
+    <h2 style="font-size:1.4rem;margin-bottom:1rem;color:var(--primary)">Key Features &amp; Benefits</h2>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1rem">
+      <div style="padding:1rem;background:var(--bg-secondary);border-radius:8px">
+        <div style="font-size:1.5rem;margin-bottom:.5rem">📄</div>
+        <strong>Page-by-Page Extraction</strong>
+        <p style="font-size:.85rem;color:var(--text-muted);margin-top:.3rem">Text is extracted from every page and labeled with page numbers for easy navigation of long documents.</p>
+      </div>
+      <div style="padding:1rem;background:var(--bg-secondary);border-radius:8px">
+        <div style="font-size:1.5rem;margin-bottom:.5rem">🔒</div>
+        <strong>100% Private</strong>
+        <p style="font-size:.85rem;color:var(--text-muted);margin-top:.3rem">Your document is read locally in your browser. No files are transmitted to any external server.</p>
+      </div>
+      <div style="padding:1rem;background:var(--bg-secondary);border-radius:8px">
+        <div style="font-size:1.5rem;margin-bottom:.5rem">📋</div>
+        <strong>One-Click Copy</strong>
+        <p style="font-size:.85rem;color:var(--text-muted);margin-top:.3rem">Copy the full extracted text to your clipboard with a single button, ready to paste anywhere.</p>
+      </div>
+      <div style="padding:1rem;background:var(--bg-secondary);border-radius:8px">
+        <div style="font-size:1.5rem;margin-bottom:.5rem">💾</div>
+        <strong>Download as .txt</strong>
+        <p style="font-size:.85rem;color:var(--text-muted);margin-top:.3rem">Save the extracted text as a plain text file named after your original PDF for easy organisation.</p>
+      </div>
+      <div style="padding:1rem;background:var(--bg-secondary);border-radius:8px">
+        <div style="font-size:1.5rem;margin-bottom:.5rem">📊</div>
+        <strong>Word Count Display</strong>
+        <p style="font-size:.85rem;color:var(--text-muted);margin-top:.3rem">Shows the number of pages processed and total word count so you can immediately assess document scope.</p>
+      </div>
+      <div style="padding:1rem;background:var(--bg-secondary);border-radius:8px">
+        <div style="font-size:1.5rem;margin-bottom:.5rem">🆓</div>
+        <strong>Always Free</strong>
+        <p style="font-size:.85rem;color:var(--text-muted);margin-top:.3rem">No account, no watermarks, no usage caps. Extract text from as many PDFs as you need.</p>
+      </div>
+    </div>
+  </div>
+
+  <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:2rem;margin-bottom:1.5rem;box-shadow:var(--shadow)">
+    <h2 style="font-size:1.4rem;margin-bottom:1.25rem;color:var(--primary)">Frequently Asked Questions</h2>
+
+    <details style="border:1px solid var(--border);border-radius:8px;margin-bottom:.75rem;overflow:hidden">
+      <summary style="padding:1rem 1.25rem;cursor:pointer;font-weight:600;background:var(--bg-secondary);user-select:none">❓ Is the PDF to Text tool free to use?</summary>
+      <div style="padding:1rem 1.25rem;line-height:1.8;color:var(--text-muted)">Yes, completely free. There are no subscription fees, usage limits, or registration requirements. You can extract text from as many PDF files as you need without any cost.</div>
+    </details>
+
+    <details style="border:1px solid var(--border);border-radius:8px;margin-bottom:.75rem;overflow:hidden">
+      <summary style="padding:1rem 1.25rem;cursor:pointer;font-weight:600;background:var(--bg-secondary);user-select:none">❓ Is my data secure? Does it upload my files?</summary>
+      <div style="padding:1rem 1.25rem;line-height:1.8;color:var(--text-muted)">Your files are never uploaded anywhere. All text extraction is performed in your browser using PDF.js. Once you close or refresh the page, no trace of your document remains. It is completely safe to use with confidential or sensitive documents.</div>
+    </details>
+
+    <details style="border:1px solid var(--border);border-radius:8px;margin-bottom:.75rem;overflow:hidden">
+      <summary style="padding:1rem 1.25rem;cursor:pointer;font-weight:600;background:var(--bg-secondary);user-select:none">❓ Why is the extracted text garbled or incomplete?</summary>
+      <div style="padding:1rem 1.25rem;line-height:1.8;color:var(--text-muted)">PDF text extraction depends on the document having embedded, selectable text. Scanned PDFs that are essentially images of text do not contain extractable text data — they require OCR (Optical Character Recognition) software. If your PDF was created by scanning a physical document, the text layer may be absent entirely.</div>
+    </details>
+
+    <details style="border:1px solid var(--border);border-radius:8px;margin-bottom:.75rem;overflow:hidden">
+      <summary style="padding:1rem 1.25rem;cursor:pointer;font-weight:600;background:var(--bg-secondary);user-select:none">❓ Can I extract text from a multi-page PDF?</summary>
+      <div style="padding:1rem 1.25rem;line-height:1.8;color:var(--text-muted)">Yes. The tool processes every single page automatically, labeling each one clearly in the output. Documents of any length — from a single page to hundreds — are fully supported, limited only by your device's available memory.</div>
+    </details>
+
+    <details style="border:1px solid var(--border);border-radius:8px;margin-bottom:.75rem;overflow:hidden">
+      <summary style="padding:1rem 1.25rem;cursor:pointer;font-weight:600;background:var(--bg-secondary);user-select:none">❓ What file formats are supported?</summary>
+      <div style="padding:1rem 1.25rem;line-height:1.8;color:var(--text-muted)">Only PDF files (.pdf) are supported as input. The extracted text can be copied to your clipboard or downloaded as a plain text (.txt) file, which can be opened in any text editor, word processor, or code editor.</div>
+    </details>
+  </div>
+
+</div>
+
+<footer style="text-align:center;padding:2rem;color:var(--text-muted);font-size:.85rem;border-top:1px solid var(--border)">
+  <p>© 2025 ToolKit Pro — <a href="../privacy-policy.html">Privacy Policy</a> · <a href="../terms.html">Terms</a> · <a href="../contact.html">Contact</a> · <a href="../index.html">All Tools</a></p>
+</footer>
+
+<script>
+  // Configure PDF.js worker
+  pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.4.120/pdf.worker.min.js';
+
+  const dropZone = document.getElementById('dropZone');
+  const fileInput = document.getElementById('fileInput');
+  const fileInfo = document.getElementById('fileInfo');
+  const fileName = document.getElementById('fileName');
+  const fileSize = document.getElementById('fileSize');
+  const extractBtn = document.getElementById('extractBtn');
+  const alertBox = document.getElementById('alertBox');
+  const resultPanel = document.getElementById('resultPanel');
+  const outputText = document.getElementById('outputText');
+  const pageCount = document.getElementById('pageCount');
+  const copyBtn = document.getElementById('copyBtn');
+  const downloadTxtBtn = document.getElementById('downloadTxtBtn');
+  const progressWrap = document.getElementById('progressWrap');
+
+  let selectedFile = null;
+
+  function showAlert(msg, type) {
+    alertBox.className = 'alert alert-' + type;
+    alertBox.innerHTML = (type === 'error' ? '❌ ' : '✅ ') + msg;
+    alertBox.classList.remove('hidden');
+  }
+
+  function setFile(file) {
+    if (!file) return;
+    if (file.type !== 'application/pdf' && !file.name.toLowerCase().endsWith('.pdf')) {
+      showAlert('Please select a valid PDF file.', 'error');
+      return;
+    }
+    selectedFile = file;
+    fileName.textContent = file.name;
+    fileSize.textContent = '(' + formatSize(file.size) + ')';
+    fileInfo.classList.remove('hidden');
+    extractBtn.disabled = false;
+    alertBox.classList.add('hidden');
+    resultPanel.classList.add('hidden');
+  }
+
+  dropZone.addEventListener('dragover', e => { e.preventDefault(); dropZone.classList.add('drag-over'); });
+  dropZone.addEventListener('dragleave', () => dropZone.classList.remove('drag-over'));
+  dropZone.addEventListener('drop', e => { e.preventDefault(); dropZone.classList.remove('drag-over'); setFile(e.dataTransfer.files[0]); });
+  fileInput.addEventListener('change', () => setFile(fileInput.files[0]));
+
+  extractBtn.addEventListener('click', async () => {
+    if (!selectedFile) return;
+
+    extractBtn.disabled = true;
+    extractBtn.textContent = '⏳ Extracting…';
+    progressWrap.style.display = 'block';
+    setProgress('progressFill', 5);
+    alertBox.classList.add('hidden');
+
+    try {
+      const arrayBuffer = await selectedFile.arrayBuffer();
+      const pdf = await pdfjsLib.getDocument({ data: arrayBuffer }).promise;
+      const numPages = pdf.numPages;
+      let fullText = '';
+
+      for (let i = 1; i <= numPages; i++) {
+        setProgress('progressFill', (i / numPages) * 90);
+        const page = await pdf.getPage(i);
+        const content = await page.getTextContent();
+        const pageText = content.items.map(item => item.str).join(' ');
+        fullText += `--- Page ${i} ---\n${pageText}\n\n`;
+      }
+
+      setProgress('progressFill', 100);
+      outputText.value = fullText.trim();
+      pageCount.textContent = `${numPages} page${numPages !== 1 ? 's' : ''} extracted — ${fullText.trim().split(/\s+/).length} words`;
+      resultPanel.classList.remove('hidden');
+      showAlert(`Extracted text from ${numPages} pages successfully!`, 'success');
+
+    } catch (err) {
+      showAlert('Failed to extract text: ' + err.message, 'error');
+      console.error(err);
+    } finally {
+      extractBtn.disabled = false;
+      extractBtn.textContent = '📄 Extract Text';
+      setTimeout(() => progressWrap.style.display = 'none', 800);
+    }
+  });
+
+  copyBtn.addEventListener('click', () => {
+    copyToClipboard(outputText.value, copyBtn);
+  });
+
+  downloadTxtBtn.addEventListener('click', () => {
+    const blob = new Blob([outputText.value], { type: 'text/plain' });
+    const name = selectedFile ? selectedFile.name.replace(/\.pdf$/i, '') + '.txt' : 'extracted.txt';
+    downloadBlob(blob, name);
+  });
+</script>
+</body>
+</html>

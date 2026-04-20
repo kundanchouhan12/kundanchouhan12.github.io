@@ -1,0 +1,753 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Color Picker & Converter — Free Online Tool | ToolKit Pro</title>
+  <meta name="description" content="Pick colors and convert between HEX, RGB, HSL, RGBA formats. Free browser-based color picker with harmony palettes, gradient preview, and WCAG contrast checker." />
+  <link rel="stylesheet" href="../css/style.css" />
+  <script src="../js/common.js"></script>
+  <style>
+    .color-input-wrap {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+    #mainColorPicker {
+      width: 60px;
+      height: 60px;
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+      padding: 0;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      flex-shrink: 0;
+    }
+    .color-code-row {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.6rem 0.9rem;
+      background: var(--bg-secondary);
+      border: 2px solid var(--border);
+      border-radius: var(--radius-sm);
+      font-family: 'Consolas', monospace;
+      font-size: 1rem;
+      font-weight: 600;
+    }
+    .color-code-row span { flex: 1; color: var(--text); }
+    .swatch-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(56px, 1fr));
+      gap: 0.5rem;
+    }
+    .swatch {
+      width: 100%;
+      padding-top: 100%;
+      border-radius: 8px;
+      cursor: pointer;
+      position: relative;
+      border: 2px solid transparent;
+      transition: all 0.2s;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+    .swatch:hover { transform: scale(1.12); border-color: white; box-shadow: 0 4px 12px rgba(0,0,0,0.2); }
+    .swatch.active { border-color: var(--primary); transform: scale(1.1); }
+    .big-swatch {
+      width: 100%;
+      height: 180px;
+      border-radius: var(--radius);
+      border: 2px solid var(--border);
+      display: flex;
+      align-items: flex-end;
+      padding: 1rem;
+      transition: background 0.3s;
+      position: relative;
+      overflow: hidden;
+    }
+    .big-swatch::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(0,0,0,0.4), transparent);
+      border-radius: calc(var(--radius) - 2px);
+    }
+    .big-swatch-label {
+      position: relative;
+      z-index: 1;
+      color: white;
+      font-weight: 700;
+      font-size: 1.1rem;
+      text-shadow: 0 1px 3px rgba(0,0,0,0.5);
+    }
+    .channel-row {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      margin-bottom: 0.75rem;
+    }
+    .channel-label { width: 20px; font-weight: 700; color: var(--text-muted); font-size: 0.875rem; text-align: center; }
+    .channel-range { flex: 1; }
+    .channel-input { width: 60px; text-align: center; }
+    .harmony-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 0.5rem;
+    }
+    .harmony-swatch {
+      height: 60px;
+      border-radius: 8px;
+      cursor: pointer;
+      border: 2px solid transparent;
+      transition: all 0.2s;
+      position: relative;
+    }
+    .harmony-swatch:hover { transform: scale(1.05); border-color: var(--primary); }
+    .harmony-swatch span {
+      position: absolute;
+      bottom: 4px;
+      left: 0;
+      right: 0;
+      text-align: center;
+      font-size: 0.65rem;
+      font-weight: 600;
+      color: rgba(0,0,0,0.6);
+      text-shadow: 0 0 3px rgba(255,255,255,0.8);
+    }
+    .gradient-preview {
+      height: 50px;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--border);
+      margin-top: 0.5rem;
+    }
+    .recent-grid {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+    }
+    .recent-dot {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      border: 2px solid transparent;
+      cursor: pointer;
+      transition: all 0.2s;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.15);
+    }
+    .recent-dot:hover { transform: scale(1.2); border-color: var(--primary); }
+    .nav-links { display:flex; gap:1.5rem; align-items:center; }
+    .nav-links a { color:var(--text); font-size:.9rem; font-weight:500; text-decoration:none; transition:color .2s; }
+    .nav-links a:hover { color:var(--primary); }
+    @media(max-width:768px){ .nav-links { display:none; } }
+  </style>
+</head>
+<body>
+
+<nav class="navbar">
+  <a href="../index.html" class="nav-brand">
+    <div class="logo-icon">🛠</div>
+    ToolKit Pro
+  </a>
+  <div class="nav-links">
+    <a href="../index.html">Home</a>
+    <a href="../index.html#tools">Tools</a>
+    <a href="../blog/index.html">Blog</a>
+    <a href="../about.html">About</a>
+    <a href="../contact.html">Contact</a>
+  </div>
+  <div class="nav-actions">
+    <button class="theme-toggle" id="themeToggle" title="Toggle dark mode">🌙</button>
+  </div>
+</nav>
+
+<div class="tool-page-hero">
+  <h1>🎨 Color Picker</h1>
+  <p>Pick colors and instantly convert between HEX, RGB, HSL, RGBA. Copy color codes with one click.</p>
+</div>
+
+<div class="tool-container">
+
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:1.5rem" id="mainGrid">
+
+    <!-- Left column: picker & codes -->
+    <div>
+      <div class="panel" style="margin-top:0">
+        <div class="panel-title">🎨 Color Picker</div>
+
+        <div class="color-input-wrap" style="margin-bottom:1.25rem">
+          <input type="color" id="mainColorPicker" value="#6C63FF" title="Pick a color" />
+          <div style="flex:1">
+            <div style="font-size:0.75rem;color:var(--text-muted);margin-bottom:0.3rem">Click the swatch to open the native color picker</div>
+            <div style="font-size:1.2rem;font-weight:800;color:var(--text);font-family:'Consolas',monospace" id="mainHexLabel">#6C63FF</div>
+          </div>
+        </div>
+
+        <div class="big-swatch" id="bigSwatch" style="background:#6C63FF">
+          <div class="big-swatch-label" id="bigSwatchLabel">#6C63FF</div>
+        </div>
+
+        <div style="margin-top:1.25rem">
+          <div class="form-group">
+            <label class="form-label">Enter Color Value (HEX, RGB, HSL)</label>
+            <input type="text" class="form-control" id="colorTextInput" placeholder="#6C63FF or rgb(108,99,255) or hsl(244,100%,70%)" />
+          </div>
+        </div>
+      </div>
+
+      <!-- RGB channels -->
+      <div class="panel">
+        <div class="panel-title">🔧 RGB Sliders</div>
+        <div class="channel-row">
+          <span class="channel-label" style="color:#e74c3c">R</span>
+          <input type="range" class="form-control-range channel-range" id="rSlider" min="0" max="255" value="108" style="accent-color:#e74c3c" />
+          <input type="number" class="form-control channel-input" id="rInput" min="0" max="255" value="108" />
+        </div>
+        <div class="channel-row">
+          <span class="channel-label" style="color:#27ae60">G</span>
+          <input type="range" class="form-control-range channel-range" id="gSlider" min="0" max="255" value="99" style="accent-color:#27ae60" />
+          <input type="number" class="form-control channel-input" id="gInput" min="0" max="255" value="99" />
+        </div>
+        <div class="channel-row">
+          <span class="channel-label" style="color:#2980b9">B</span>
+          <input type="range" class="form-control-range channel-range" id="bSlider" min="0" max="255" value="255" style="accent-color:#2980b9" />
+          <input type="number" class="form-control channel-input" id="bInput" min="0" max="255" value="255" />
+        </div>
+        <div class="channel-row">
+          <span class="channel-label">A</span>
+          <input type="range" class="form-control-range channel-range" id="aSlider" min="0" max="100" value="100" />
+          <input type="number" class="form-control channel-input" id="aInput" min="0" max="100" value="100" />
+        </div>
+      </div>
+
+      <!-- HSL channels -->
+      <div class="panel">
+        <div class="panel-title">🔧 HSL Sliders</div>
+        <div class="channel-row">
+          <span class="channel-label">H</span>
+          <input type="range" class="form-control-range channel-range" id="hSlider" min="0" max="360" value="244" />
+          <input type="number" class="form-control channel-input" id="hInput" min="0" max="360" value="244" />
+        </div>
+        <div class="channel-row">
+          <span class="channel-label">S</span>
+          <input type="range" class="form-control-range channel-range" id="sSlider" min="0" max="100" value="100" />
+          <input type="number" class="form-control channel-input" id="sInput" min="0" max="100" value="100" />
+        </div>
+        <div class="channel-row">
+          <span class="channel-label">L</span>
+          <input type="range" class="form-control-range channel-range" id="lSlider" min="0" max="100" value="70" />
+          <input type="number" class="form-control channel-input" id="lInput" min="0" max="100" value="70" />
+        </div>
+      </div>
+    </div>
+
+    <!-- Right column: codes, palette, harmony -->
+    <div>
+      <div class="panel" style="margin-top:0">
+        <div class="panel-title">📋 Color Codes</div>
+
+        <div style="display:flex;flex-direction:column;gap:0.6rem">
+          <div>
+            <div style="font-size:0.75rem;color:var(--text-muted);margin-bottom:0.3rem;font-weight:600">HEX</div>
+            <div class="color-code-row">
+              <span id="hexCode">#6C63FF</span>
+              <button class="copy-btn" onclick="copyCode('hexCode', this)">📋</button>
+            </div>
+          </div>
+          <div>
+            <div style="font-size:0.75rem;color:var(--text-muted);margin-bottom:0.3rem;font-weight:600">RGB</div>
+            <div class="color-code-row">
+              <span id="rgbCode">rgb(108, 99, 255)</span>
+              <button class="copy-btn" onclick="copyCode('rgbCode', this)">📋</button>
+            </div>
+          </div>
+          <div>
+            <div style="font-size:0.75rem;color:var(--text-muted);margin-bottom:0.3rem;font-weight:600">RGBA</div>
+            <div class="color-code-row">
+              <span id="rgbaCode">rgba(108, 99, 255, 1.00)</span>
+              <button class="copy-btn" onclick="copyCode('rgbaCode', this)">📋</button>
+            </div>
+          </div>
+          <div>
+            <div style="font-size:0.75rem;color:var(--text-muted);margin-bottom:0.3rem;font-weight:600">HSL</div>
+            <div class="color-code-row">
+              <span id="hslCode">hsl(244, 100%, 70%)</span>
+              <button class="copy-btn" onclick="copyCode('hslCode', this)">📋</button>
+            </div>
+          </div>
+          <div>
+            <div style="font-size:0.75rem;color:var(--text-muted);margin-bottom:0.3rem;font-weight:600">HSLA</div>
+            <div class="color-code-row">
+              <span id="hslaCode">hsla(244, 100%, 70%, 1.00)</span>
+              <button class="copy-btn" onclick="copyCode('hslaCode', this)">📋</button>
+            </div>
+          </div>
+          <div>
+            <div style="font-size:0.75rem;color:var(--text-muted);margin-bottom:0.3rem;font-weight:600">CSS Variable</div>
+            <div class="color-code-row" style="font-size:0.85rem">
+              <span id="cssVar">--color: #6C63FF;</span>
+              <button class="copy-btn" onclick="copyCode('cssVar', this)">📋</button>
+            </div>
+          </div>
+        </div>
+
+        <div style="margin-top:1rem;padding:0.75rem;background:var(--bg-secondary);border-radius:8px;font-size:0.875rem">
+          <span id="contrastInfo"></span>
+        </div>
+      </div>
+
+      <div class="panel">
+        <div class="panel-title">🎵 Color Harmony</div>
+        <div style="font-size:0.8rem;color:var(--text-muted);margin-bottom:0.75rem">Click a color to use it</div>
+        <div class="harmony-grid" id="harmonyGrid"></div>
+      </div>
+
+      <div class="panel">
+        <div class="panel-title">🕒 Recent Colors</div>
+        <div class="recent-grid" id="recentGrid">
+          <span style="color:var(--text-muted);font-size:0.8rem">Pick some colors to see history</span>
+        </div>
+      </div>
+
+      <div class="panel">
+        <div class="panel-title">🌈 Gradient Preview</div>
+        <div style="display:flex;gap:0.75rem;margin-bottom:0.5rem">
+          <button class="copy-btn" id="gradToWhiteBtn">→ White</button>
+          <button class="copy-btn" id="gradToBlackBtn">→ Black</button>
+          <button class="copy-btn" id="gradToTransBtn">→ Transparent</button>
+        </div>
+        <div class="gradient-preview" id="gradientPreview"></div>
+        <div style="display:flex;gap:0.5rem;margin-top:0.5rem">
+          <button class="copy-btn" id="copyGradBtn" style="font-size:0.75rem">📋 Copy CSS</button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Palette -->
+  <div class="panel">
+    <div class="panel-title">🎨 Color Palettes</div>
+    <div style="display:flex;gap:0.5rem;flex-wrap:wrap;margin-bottom:1rem">
+      <button class="copy-btn active" data-palette="material" onclick="switchPalette(this,'material')">Material</button>
+      <button class="copy-btn" data-palette="tailwind" onclick="switchPalette(this,'tailwind')">Tailwind</button>
+      <button class="copy-btn" data-palette="flat" onclick="switchPalette(this,'flat')">Flat UI</button>
+      <button class="copy-btn" data-palette="pastel" onclick="switchPalette(this,'pastel')">Pastel</button>
+    </div>
+    <div class="swatch-grid" id="paletteGrid"></div>
+  </div>
+
+</div>
+
+<style>
+  @media(max-width:700px) { #mainGrid { grid-template-columns: 1fr !important; } }
+</style>
+
+<!-- ===== CONTENT SECTIONS ===== -->
+<div style="max-width:860px;margin:0 auto;padding:0 1rem 2rem">
+
+  <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:2rem;margin-bottom:1.5rem;box-shadow:var(--shadow)">
+    <h2 style="font-size:1.4rem;margin-bottom:1rem;color:var(--primary)">What is the Color Picker & Converter?</h2>
+    <p style="line-height:1.9;color:var(--text);margin-bottom:1rem">The Color Picker is a free, browser-based tool for selecting colors and instantly converting them between all major color formats used in web development and design: HEX, RGB, RGBA, HSL, and HSLA. It features a native color picker swatch, individual RGB and HSL channel sliders for precise control, a text input that parses any color format you type, curated color palettes (Material Design, Tailwind CSS, Flat UI, and Pastel), and a color harmony generator that calculates complementary, triadic, analogous, and split-complementary colors.</p>
+    <p style="line-height:1.9;color:var(--text)">The tool also includes a WCAG accessibility contrast checker that calculates the contrast ratio of your selected color against white and black backgrounds, giving you an instant pass/fail result against the 4.5:1 WCAG AA standard. This is essential for web designers and developers who need to ensure text and UI elements meet accessibility requirements. A gradient preview and CSS copy feature make it easy to use any gradient directly in your stylesheets.</p>
+  </div>
+
+  <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:2rem;margin-bottom:1.5rem;box-shadow:var(--shadow)">
+    <h2 style="font-size:1.4rem;margin-bottom:1rem;color:var(--primary)">How to Use — Step-by-Step</h2>
+    <ol style="padding-left:1.5rem;line-height:2;color:var(--text)">
+      <li>Click the large color swatch to open the native browser color picker and select any color visually.</li>
+      <li>Alternatively, type a color value in any format — HEX (#FF5733), RGB (rgb(255, 87, 51)), or HSL (hsl(14, 100%, 60%)) — into the text input.</li>
+      <li>Use the RGB or HSL channel sliders to fine-tune each color component individually.</li>
+      <li>Copy any color code format (HEX, RGB, RGBA, HSL, HSLA, or CSS variable) with the clipboard buttons.</li>
+      <li>Explore the Color Harmony panel to find complementary and triadic colors for your palette.</li>
+      <li>Check the WCAG contrast score and choose a color that meets accessibility standards for your design.</li>
+    </ol>
+  </div>
+
+  <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:2rem;margin-bottom:1.5rem;box-shadow:var(--shadow)">
+    <h2 style="font-size:1.4rem;margin-bottom:1rem;color:var(--primary)">Key Features &amp; Benefits</h2>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1rem">
+      <div style="padding:1rem;background:var(--bg-secondary);border-radius:8px">
+        <div style="font-size:1.5rem;margin-bottom:.5rem">🎨</div>
+        <strong>5 Color Format Codes</strong>
+        <p style="font-size:.85rem;color:var(--text-muted);margin-top:.3rem">Instantly generates HEX, RGB, RGBA, HSL, HSLA, and CSS custom property formats — all copyable with one click.</p>
+      </div>
+      <div style="padding:1rem;background:var(--bg-secondary);border-radius:8px">
+        <div style="font-size:1.5rem;margin-bottom:.5rem">♿</div>
+        <strong>WCAG Contrast Checker</strong>
+        <p style="font-size:.85rem;color:var(--text-muted);margin-top:.3rem">Shows contrast ratios vs white and black with WCAG AA pass/fail indicators to ensure your colors meet accessibility standards.</p>
+      </div>
+      <div style="padding:1rem;background:var(--bg-secondary);border-radius:8px">
+        <div style="font-size:1.5rem;margin-bottom:.5rem">🎵</div>
+        <strong>Color Harmony Generator</strong>
+        <p style="font-size:.85rem;color:var(--text-muted);margin-top:.3rem">Automatically calculates 10 harmony colors: complement, triadic, analogous, split-complementary, and tetrad variants.</p>
+      </div>
+      <div style="padding:1rem;background:var(--bg-secondary);border-radius:8px">
+        <div style="font-size:1.5rem;margin-bottom:.5rem">🌈</div>
+        <strong>4 Color Palettes</strong>
+        <p style="font-size:.85rem;color:var(--text-muted);margin-top:.3rem">Browse Material Design, Tailwind CSS, Flat UI, and Pastel color palettes — click any swatch to select it instantly.</p>
+      </div>
+      <div style="padding:1rem;background:var(--bg-secondary);border-radius:8px">
+        <div style="font-size:1.5rem;margin-bottom:.5rem">🕒</div>
+        <strong>Color History</strong>
+        <p style="font-size:.85rem;color:var(--text-muted);margin-top:.3rem">Stores the last 20 colors you picked in a recent colors panel for quick re-access without re-selecting.</p>
+      </div>
+      <div style="padding:1rem;background:var(--bg-secondary);border-radius:8px">
+        <div style="font-size:1.5rem;margin-bottom:.5rem">🆓</div>
+        <strong>Always Free</strong>
+        <p style="font-size:.85rem;color:var(--text-muted);margin-top:.3rem">No account, no limits, no watermarks. Use the full feature set of this color tool for free.</p>
+      </div>
+    </div>
+  </div>
+
+  <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:2rem;margin-bottom:1.5rem;box-shadow:var(--shadow)">
+    <h2 style="font-size:1.4rem;margin-bottom:1.25rem;color:var(--primary)">Frequently Asked Questions</h2>
+
+    <details style="border:1px solid var(--border);border-radius:8px;margin-bottom:.75rem;overflow:hidden">
+      <summary style="padding:1rem 1.25rem;cursor:pointer;font-weight:600;background:var(--bg-secondary);user-select:none">❓ Is the Color Picker free to use?</summary>
+      <div style="padding:1rem 1.25rem;line-height:1.8;color:var(--text-muted)">Yes, completely free with no account requirements, usage limits, or hidden fees. Use all features including the color palettes, harmony generator, and accessibility checker at no cost.</div>
+    </details>
+
+    <details style="border:1px solid var(--border);border-radius:8px;margin-bottom:.75rem;overflow:hidden">
+      <summary style="padding:1rem 1.25rem;cursor:pointer;font-weight:600;background:var(--bg-secondary);user-select:none">❓ Is my data secure? Does it send anything to a server?</summary>
+      <div style="padding:1rem 1.25rem;line-height:1.8;color:var(--text-muted)">All color conversions, calculations, and rendering happen entirely in your browser using JavaScript. No color values, palette selections, or any other data are transmitted to any server.</div>
+    </details>
+
+    <details style="border:1px solid var(--border);border-radius:8px;margin-bottom:.75rem;overflow:hidden">
+      <summary style="padding:1rem 1.25rem;cursor:pointer;font-weight:600;background:var(--bg-secondary);user-select:none">❓ What is WCAG contrast and why does it matter?</summary>
+      <div style="padding:1rem 1.25rem;line-height:1.8;color:var(--text-muted)">WCAG (Web Content Accessibility Guidelines) defines minimum contrast ratios to ensure text is readable by people with visual impairments. The AA standard requires a 4.5:1 ratio for normal text and 3:1 for large text. Failing contrast checks can also impact SEO and legal compliance in some jurisdictions. This tool instantly shows whether your color passes or fails against white and black text.</div>
+    </details>
+
+    <details style="border:1px solid var(--border);border-radius:8px;margin-bottom:.75rem;overflow:hidden">
+      <summary style="padding:1rem 1.25rem;cursor:pointer;font-weight:600;background:var(--bg-secondary);user-select:none">❓ How do I find the perfect brand color palette?</summary>
+      <div style="padding:1rem 1.25rem;line-height:1.8;color:var(--text-muted)">Start by picking your primary brand color with the color picker. Then use the Color Harmony panel to explore complementary colors (directly opposite on the color wheel), analogous colors (adjacent hues for a harmonious feel), or triadic colors (three evenly spaced hues for vibrant contrast). Click any harmony swatch to use it as your new active color.</div>
+    </details>
+
+    <details style="border:1px solid var(--border);border-radius:8px;margin-bottom:.75rem;overflow:hidden">
+      <summary style="padding:1rem 1.25rem;cursor:pointer;font-weight:600;background:var(--bg-secondary);user-select:none">❓ What color formats can I input and output?</summary>
+      <div style="padding:1rem 1.25rem;line-height:1.8;color:var(--text-muted)">You can input colors in HEX (e.g., #3B82F6), RGB (e.g., rgb(59, 130, 246)), RGBA (e.g., rgba(59, 130, 246, 0.8)), HSL (e.g., hsl(217, 91%, 60%)), and HSLA formats. Output codes are generated for all five formats plus a CSS custom property declaration, all copyable with individual copy buttons.</div>
+    </details>
+  </div>
+
+</div>
+
+<footer style="text-align:center;padding:2rem;color:var(--text-muted);font-size:.85rem;border-top:1px solid var(--border)">
+  <p>© 2025 ToolKit Pro — <a href="../privacy-policy.html">Privacy Policy</a> · <a href="../terms.html">Terms</a> · <a href="../contact.html">Contact</a> · <a href="../index.html">All Tools</a></p>
+</footer>
+
+<script>
+  // ---- Color conversion helpers ----
+  function hexToRgb(hex) {
+    hex = hex.replace(/^#/, '');
+    if (hex.length === 3) hex = hex.split('').map(c => c + c).join('');
+    const n = parseInt(hex, 16);
+    return { r: (n >> 16) & 255, g: (n >> 8) & 255, b: n & 255 };
+  }
+
+  function rgbToHex(r, g, b) {
+    return '#' + [r, g, b].map(v => Math.round(Math.max(0, Math.min(255, v))).toString(16).padStart(2, '0')).join('').toUpperCase();
+  }
+
+  function rgbToHsl(r, g, b) {
+    r /= 255; g /= 255; b /= 255;
+    const max = Math.max(r, g, b), min = Math.min(r, g, b);
+    let h, s, l = (max + min) / 2;
+    if (max === min) { h = s = 0; }
+    else {
+      const d = max - min;
+      s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
+      switch (max) {
+        case r: h = ((g - b) / d + (g < b ? 6 : 0)) / 6; break;
+        case g: h = ((b - r) / d + 2) / 6; break;
+        case b: h = ((r - g) / d + 4) / 6; break;
+      }
+    }
+    return { h: Math.round(h * 360), s: Math.round(s * 100), l: Math.round(l * 100) };
+  }
+
+  function hslToRgb(h, s, l) {
+    h /= 360; s /= 100; l /= 100;
+    let r, g, b;
+    if (s === 0) { r = g = b = l; }
+    else {
+      const hue2rgb = (p, q, t) => {
+        if (t < 0) t += 1; if (t > 1) t -= 1;
+        if (t < 1/6) return p + (q - p) * 6 * t;
+        if (t < 1/2) return q;
+        if (t < 2/3) return p + (q - p) * (2/3 - t) * 6;
+        return p;
+      };
+      const q = l < 0.5 ? l * (1 + s) : l + s - l * s;
+      const p = 2 * l - q;
+      r = hue2rgb(p, q, h + 1/3);
+      g = hue2rgb(p, q, h);
+      b = hue2rgb(p, q, h - 1/3);
+    }
+    return { r: Math.round(r * 255), g: Math.round(g * 255), b: Math.round(b * 255) };
+  }
+
+  function getLuminance(r, g, b) {
+    const [rs, gs, bs] = [r, g, b].map(c => {
+      c /= 255;
+      return c <= 0.03928 ? c / 12.92 : Math.pow((c + 0.055) / 1.055, 2.4);
+    });
+    return 0.2126 * rs + 0.7152 * gs + 0.0722 * bs;
+  }
+
+  function getContrastRatio(l1, l2) {
+    const lighter = Math.max(l1, l2), darker = Math.min(l1, l2);
+    return (lighter + 0.05) / (darker + 0.05);
+  }
+
+  // ---- State ----
+  let currentHex = '#6C63FF';
+  let currentAlpha = 1.0;
+  const recentColors = [];
+
+  // ---- Elements ----
+  const picker = document.getElementById('mainColorPicker');
+  const textInput = document.getElementById('colorTextInput');
+
+  function updateFromHex(hex, alpha) {
+    hex = hex.toUpperCase();
+    currentHex = hex;
+    if (alpha !== undefined) currentAlpha = alpha;
+
+    const { r, g, b } = hexToRgb(hex);
+    const { h, s, l } = rgbToHsl(r, g, b);
+    const a = Math.round(currentAlpha * 100);
+
+    // Update picker
+    picker.value = hex;
+    textInput.value = hex;
+
+    // Update big swatch
+    document.getElementById('bigSwatch').style.background = hex;
+    document.getElementById('bigSwatchLabel').textContent = hex;
+    document.getElementById('mainHexLabel').textContent = hex;
+
+    // RGB sliders
+    setSliderInput('r', r); setSliderInput('g', g); setSliderInput('b', b); setSliderInput('a', a);
+    setSliderInput('h', h); setSliderInput('s', s); setSliderInput('l', l);
+
+    // Codes
+    document.getElementById('hexCode').textContent = hex;
+    document.getElementById('rgbCode').textContent = `rgb(${r}, ${g}, ${b})`;
+    document.getElementById('rgbaCode').textContent = `rgba(${r}, ${g}, ${b}, ${currentAlpha.toFixed(2)})`;
+    document.getElementById('hslCode').textContent = `hsl(${h}, ${s}%, ${l}%)`;
+    document.getElementById('hslaCode').textContent = `hsla(${h}, ${s}%, ${l}%, ${currentAlpha.toFixed(2)})`;
+    document.getElementById('cssVar').textContent = `--color: ${hex};`;
+
+    // Contrast info
+    const lum = getLuminance(r, g, b);
+    const whiteContrast = getContrastRatio(lum, 1).toFixed(2);
+    const blackContrast = getContrastRatio(lum, 0).toFixed(2);
+    const wcagWhite = parseFloat(whiteContrast) >= 4.5 ? '✅' : '❌';
+    const wcagBlack = parseFloat(blackContrast) >= 4.5 ? '✅' : '❌';
+    document.getElementById('contrastInfo').innerHTML = `
+      <strong>WCAG Contrast:</strong><br>
+      vs White: ${wcagWhite} ${whiteContrast}:1 &nbsp;|&nbsp; vs Black: ${wcagBlack} ${blackContrast}:1`;
+
+    // Harmony
+    buildHarmony(h, s, l);
+
+    // Gradient
+    updateGradient(hex);
+
+    // Recent
+    addRecent(hex);
+  }
+
+  function setSliderInput(id, val) {
+    const slider = document.getElementById(id + 'Slider');
+    const input = document.getElementById(id + 'Input');
+    if (slider) slider.value = val;
+    if (input) input.value = val;
+  }
+
+  // ---- Event listeners ----
+  picker.addEventListener('input', () => updateFromHex(picker.value));
+
+  textInput.addEventListener('keydown', e => {
+    if (e.key === 'Enter') parseColorInput(textInput.value.trim());
+  });
+  textInput.addEventListener('blur', () => parseColorInput(textInput.value.trim()));
+
+  function parseColorInput(str) {
+    if (!str) return;
+    // HEX
+    if (/^#?[0-9a-fA-F]{3,8}$/.test(str)) {
+      const hex = str.startsWith('#') ? str : '#' + str;
+      if (hex.length === 4 || hex.length === 7) { updateFromHex(hex); return; }
+    }
+    // RGB
+    let m = str.match(/rgba?\((\d+),\s*(\d+),\s*(\d+)(?:,\s*([\d.]+))?\)/);
+    if (m) {
+      const hex = rgbToHex(+m[1], +m[2], +m[3]);
+      updateFromHex(hex, m[4] !== undefined ? parseFloat(m[4]) : 1);
+      return;
+    }
+    // HSL
+    m = str.match(/hsla?\(([\d.]+),\s*([\d.]+)%?,\s*([\d.]+)%?(?:,\s*([\d.]+))?\)/);
+    if (m) {
+      const { r, g, b } = hslToRgb(+m[1], +m[2], +m[3]);
+      updateFromHex(rgbToHex(r, g, b), m[4] !== undefined ? parseFloat(m[4]) : 1);
+    }
+  }
+
+  // RGB sliders
+  ['r', 'g', 'b'].forEach(ch => {
+    document.getElementById(ch + 'Slider').addEventListener('input', function () {
+      document.getElementById(ch + 'Input').value = this.value;
+      updateFromRGB();
+    });
+    document.getElementById(ch + 'Input').addEventListener('input', function () {
+      document.getElementById(ch + 'Slider').value = this.value;
+      updateFromRGB();
+    });
+  });
+  function updateFromRGB() {
+    const r = +document.getElementById('rInput').value;
+    const g = +document.getElementById('gInput').value;
+    const b = +document.getElementById('bInput').value;
+    updateFromHex(rgbToHex(r, g, b));
+  }
+
+  document.getElementById('aSlider').addEventListener('input', function () {
+    document.getElementById('aInput').value = this.value;
+    currentAlpha = this.value / 100;
+    updateFromHex(currentHex, currentAlpha);
+  });
+  document.getElementById('aInput').addEventListener('input', function () {
+    document.getElementById('aSlider').value = this.value;
+    currentAlpha = this.value / 100;
+    updateFromHex(currentHex, currentAlpha);
+  });
+
+  // HSL sliders
+  ['h', 's', 'l'].forEach(ch => {
+    document.getElementById(ch + 'Slider').addEventListener('input', function () {
+      document.getElementById(ch + 'Input').value = this.value;
+      updateFromHSL();
+    });
+    document.getElementById(ch + 'Input').addEventListener('input', function () {
+      document.getElementById(ch + 'Slider').value = this.value;
+      updateFromHSL();
+    });
+  });
+  function updateFromHSL() {
+    const h = +document.getElementById('hInput').value;
+    const s = +document.getElementById('sInput').value;
+    const l = +document.getElementById('lInput').value;
+    const { r, g, b } = hslToRgb(h, s, l);
+    updateFromHex(rgbToHex(r, g, b));
+  }
+
+  window.copyCode = function (elId, btn) {
+    copyToClipboard(document.getElementById(elId).textContent, btn);
+  };
+
+  // ---- Harmony ----
+  function buildHarmony(h, s, l) {
+    const harmonies = [
+      { label: 'Base', h },
+      { label: 'Compl.', h: (h + 180) % 360 },
+      { label: 'Triad 1', h: (h + 120) % 360 },
+      { label: 'Triad 2', h: (h + 240) % 360 },
+      { label: 'Analog 1', h: (h + 30) % 360 },
+      { label: 'Analog 2', h: (h - 30 + 360) % 360 },
+      { label: 'Split 1', h: (h + 150) % 360 },
+      { label: 'Split 2', h: (h + 210) % 360 },
+      { label: 'Tetra 1', h: (h + 90) % 360 },
+      { label: 'Tetra 2', h: (h + 270) % 360 },
+    ];
+    const grid = document.getElementById('harmonyGrid');
+    grid.innerHTML = '';
+    harmonies.forEach(({ label, h: hh }) => {
+      const { r, g, b } = hslToRgb(hh, s, l);
+      const hex = rgbToHex(r, g, b);
+      const sw = document.createElement('div');
+      sw.className = 'harmony-swatch';
+      sw.style.background = hex;
+      sw.title = label + ': ' + hex;
+      sw.innerHTML = `<span>${label}</span>`;
+      sw.addEventListener('click', () => updateFromHex(hex));
+      grid.appendChild(sw);
+    });
+  }
+
+  // ---- Gradient ----
+  let gradientMode = 'white';
+  function updateGradient(hex) {
+    const preview = document.getElementById('gradientPreview');
+    let css;
+    if (gradientMode === 'white') css = `linear-gradient(to right, ${hex}, #ffffff)`;
+    else if (gradientMode === 'black') css = `linear-gradient(to right, ${hex}, #000000)`;
+    else css = `linear-gradient(to right, ${hex}, transparent)`;
+    preview.style.background = css;
+    preview.dataset.css = `background: ${css};`;
+  }
+
+  document.getElementById('gradToWhiteBtn').addEventListener('click', () => { gradientMode = 'white'; updateGradient(currentHex); });
+  document.getElementById('gradToBlackBtn').addEventListener('click', () => { gradientMode = 'black'; updateGradient(currentHex); });
+  document.getElementById('gradToTransBtn').addEventListener('click', () => { gradientMode = 'transparent'; updateGradient(currentHex); });
+  document.getElementById('copyGradBtn').addEventListener('click', function () {
+    copyToClipboard(document.getElementById('gradientPreview').dataset.css, this);
+  });
+
+  // ---- Recent colors ----
+  function addRecent(hex) {
+    if (!recentColors.includes(hex)) {
+      recentColors.unshift(hex);
+      if (recentColors.length > 20) recentColors.pop();
+      renderRecent();
+    }
+  }
+
+  function renderRecent() {
+    const grid = document.getElementById('recentGrid');
+    grid.innerHTML = '';
+    recentColors.forEach(hex => {
+      const dot = document.createElement('div');
+      dot.className = 'recent-dot';
+      dot.style.background = hex;
+      dot.title = hex;
+      dot.addEventListener('click', () => updateFromHex(hex));
+      grid.appendChild(dot);
+    });
+  }
+
+  // ---- Palettes ----
+  const PALETTES = {
+    material: ['#F44336','#E91E63','#9C27B0','#673AB7','#3F51B5','#2196F3','#03A9F4','#00BCD4','#009688','#4CAF50','#8BC34A','#CDDC39','#FFEB3B','#FFC107','#FF9800','#FF5722','#795548','#9E9E9E','#607D8B','#000000','#FFFFFF','#F5F5F5'],
+    tailwind: ['#EF4444','#F97316','#EAB308','#22C55E','#14B8A6','#3B82F6','#8B5CF6','#EC4899','#06B6D4','#10B981','#6366F1','#F59E0B','#84CC16','#0EA5E9','#A855F7','#F43F5E','#64748B','#1E293B','#F8FAFC','#0F172A'],
+    flat: ['#1ABC9C','#2ECC71','#3498DB','#9B59B6','#34495E','#16A085','#27AE60','#2980B9','#8E44AD','#2C3E50','#F1C40F','#E67E22','#E74C3C','#ECF0F1','#95A5A6','#F39C12','#D35400','#C0392B','#BDC3C7','#7F8C8D'],
+    pastel: ['#FFB3BA','#FFDFBA','#FFFFBA','#BAFFC9','#BAE1FF','#E8BAFF','#FFB3DE','#B3F0FF','#FFD9B3','#D4EDDA','#CCE5FF','#F8D7DA','#FFF3CD','#D1ECF1','#D6D8D9','#C8F5C5','#FFC8CC','#C8D5F5','#F5C8E3','#E3F5C8'],
+  };
+
+  function switchPalette(btn, name) {
+    document.querySelectorAll('[data-palette]').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    renderPalette(PALETTES[name] || PALETTES.material);
+  }
+  window.switchPalette = switchPalette;
+
+  function renderPalette(colors) {
+    const grid = document.getElementById('paletteGrid');
+    grid.innerHTML = '';
+    colors.forEach(hex => {
+      const sw = document.createElement('div');
+      sw.className = 'swatch';
+      sw.style.background = hex;
+      sw.title = hex;
+      sw.addEventListener('click', () => updateFromHex(hex));
+      grid.appendChild(sw);
+    });
+  }
+
+  // Init
+  renderPalette(PALETTES.material);
+  updateFromHex('#6C63FF');
+</script>
+</body>
+</html>

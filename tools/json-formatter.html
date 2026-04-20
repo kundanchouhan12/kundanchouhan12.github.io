@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>JSON Formatter & Validator — Free Online Tool | ToolKit Pro</title>
+  <meta name="description" content="Format, validate, and minify JSON data with syntax highlighting and tree view. Free browser-based JSON formatter — debug APIs, pretty-print, sort keys." />
+  <link rel="stylesheet" href="../css/style.css" />
+  <script src="../js/common.js"></script>
+  <style>
+    .json-editor-wrap {
+      position: relative;
+    }
+    #jsonOutput {
+      font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+      font-size: 0.875rem;
+      line-height: 1.7;
+      tab-size: 2;
+      min-height: 300px;
+    }
+    .json-key { color: #6C63FF; }
+    .json-string { color: #e67e22; }
+    .json-number { color: #27ae60; }
+    .json-bool { color: #e74c3c; }
+    .json-null { color: #95a5a6; }
+    .highlighted-json span { /* apply via innerHTML */ }
+    .stats-row {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      padding: 0.5rem 0;
+    }
+    .stats-row span strong { color: var(--text); }
+    .toolbar {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+      margin-bottom: 0.75rem;
+    }
+    .nav-links { display:flex; gap:1.5rem; align-items:center; }
+    .nav-links a { color:var(--text); font-size:.9rem; font-weight:500; text-decoration:none; transition:color .2s; }
+    .nav-links a:hover { color:var(--primary); }
+    @media(max-width:768px){ .nav-links { display:none; } }
+  </style>
+</head>
+<body>
+
+<nav class="navbar">
+  <a href="../index.html" class="nav-brand">
+    <div class="logo-icon">🛠</div>
+    ToolKit Pro
+  </a>
+  <div class="nav-links">
+    <a href="../index.html">Home</a>
+    <a href="../index.html#tools">Tools</a>
+    <a href="../blog/index.html">Blog</a>
+    <a href="../about.html">About</a>
+    <a href="../contact.html">Contact</a>
+  </div>
+  <div class="nav-actions">
+    <button class="theme-toggle" id="themeToggle" title="Toggle dark mode">🌙</button>
+  </div>
+</nav>
+
+<div class="tool-page-hero">
+  <h1>{ } JSON Formatter</h1>
+  <p>Validate, format, and minify JSON data with instant error highlighting.</p>
+</div>
+
+<div class="tool-container">
+
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:1.5rem" id="editorGrid">
+
+    <!-- Input -->
+    <div>
+      <div class="panel" style="margin-top:0">
+        <div class="panel-title" style="display:flex;align-items:center;justify-content:space-between">
+          <span>📝 Input JSON</span>
+          <div style="display:flex;gap:0.5rem">
+            <button class="copy-btn" id="clearInputBtn">🗑 Clear</button>
+            <button class="copy-btn" id="loadSampleBtn">📎 Sample</button>
+          </div>
+        </div>
+        <textarea class="form-control" id="jsonInput" style="min-height:350px;font-family:'Consolas',monospace;font-size:0.85rem;resize:vertical" placeholder='Paste your JSON here...&#10;&#10;Example:&#10;{"name":"Alice","age":30,"active":true}'></textarea>
+
+        <div id="errorBox" class="alert alert-error hidden" style="margin-top:0.75rem"></div>
+        <div id="successBox" class="alert alert-success hidden" style="margin-top:0.75rem"></div>
+
+        <div class="toolbar" style="margin-top:0.75rem">
+          <button class="btn btn-primary" id="formatBtn">✨ Format</button>
+          <button class="btn btn-secondary" id="minifyBtn">🗜 Minify</button>
+          <button class="btn btn-secondary" id="validateBtn">✅ Validate</button>
+          <button class="btn btn-secondary" id="sortKeysBtn">🔤 Sort Keys</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Output -->
+    <div>
+      <div class="panel" style="margin-top:0">
+        <div class="panel-title" style="display:flex;align-items:center;justify-content:space-between">
+          <span>📤 Output</span>
+          <div style="display:flex;gap:0.5rem">
+            <button class="copy-btn" id="copyOutputBtn">📋 Copy</button>
+            <button class="copy-btn" id="downloadOutputBtn">⬇️ Download</button>
+          </div>
+        </div>
+
+        <div class="form-group" style="margin-bottom:0.5rem">
+          <label class="form-label" style="display:flex;gap:0.75rem;align-items:center">
+            Indent
+            <select id="indentSize" style="padding:0.2rem 0.5rem;border:1px solid var(--border);border-radius:4px;background:var(--surface);color:var(--text);font-family:var(--font)">
+              <option value="2" selected>2 spaces</option>
+              <option value="4">4 spaces</option>
+              <option value="tab">Tab</option>
+            </select>
+          </label>
+        </div>
+
+        <textarea class="form-control" id="jsonOutput" style="min-height:350px;font-family:'Consolas',monospace;font-size:0.85rem;resize:vertical" readonly placeholder="Formatted JSON will appear here..."></textarea>
+
+        <div class="stats-row" id="statsRow"></div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Tree View -->
+  <div class="panel" id="treePanel" style="display:none">
+    <div class="panel-title" style="display:flex;align-items:center;justify-content:space-between">
+      <span>🌲 Tree View</span>
+      <button class="copy-btn" id="toggleTreeBtn">🔽 Collapse All</button>
+    </div>
+    <div id="treeView" style="font-family:'Consolas',monospace;font-size:0.875rem;line-height:1.8;max-height:400px;overflow:auto"></div>
+  </div>
+
+  <!-- Tools -->
+  <div class="panel">
+    <div class="panel-title">🔍 JSON Path Query</div>
+    <div style="display:flex;gap:0.75rem;align-items:flex-end">
+      <div class="form-group" style="flex:1;margin-bottom:0">
+        <label class="form-label">Path (dot notation, e.g. user.name, items[0])</label>
+        <input type="text" class="form-control" id="pathInput" placeholder="e.g. user.address.city" />
+      </div>
+      <button class="btn btn-secondary" id="queryBtn" style="margin-bottom:0">🔍 Query</button>
+    </div>
+    <div id="queryResult" class="code-block hidden" style="margin-top:0.75rem"></div>
+  </div>
+
+</div>
+
+<style>
+  @media(max-width:700px) { #editorGrid { grid-template-columns: 1fr !important; } }
+  .tree-item { padding-left: 1.2rem; position: relative; }
+  .tree-toggle { cursor: pointer; user-select: none; color: var(--primary); }
+  .tree-key { color: var(--primary); }
+  .tree-string { color: #e67e22; }
+  .tree-number { color: #27ae60; }
+  .tree-bool { color: #e74c3c; }
+  .tree-null { color: #95a5a6; }
+</style>
+
+<!-- ===== CONTENT SECTIONS ===== -->
+<div style="max-width:860px;margin:0 auto;padding:0 1rem 2rem">
+
+  <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:2rem;margin-bottom:1.5rem;box-shadow:var(--shadow)">
+    <h2 style="font-size:1.4rem;margin-bottom:1rem;color:var(--primary)">What is the JSON Formatter & Validator?</h2>
+    <p style="line-height:1.9;color:var(--text);margin-bottom:1rem">The JSON Formatter is a free, browser-based developer tool that takes raw, compact, or malformed JSON and instantly transforms it into beautifully indented, readable output. It also validates your JSON structure and reports exact error locations when your JSON is invalid, making it invaluable for debugging API responses, config files, and data payloads. The interactive tree view lets you expand and collapse nested objects and arrays to navigate complex data structures with ease.</p>
+    <p style="line-height:1.9;color:var(--text)">Developers working with REST APIs, GraphQL responses, webhook payloads, or configuration files constantly need to inspect and transform JSON. This tool supports formatting with configurable indentation (2 spaces, 4 spaces, or tabs), key sorting for consistent output, minification for removing whitespace from production payloads, and JSON Path querying to extract specific values from deeply nested structures using dot notation.</p>
+  </div>
+
+  <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:2rem;margin-bottom:1.5rem;box-shadow:var(--shadow)">
+    <h2 style="font-size:1.4rem;margin-bottom:1rem;color:var(--primary)">How to Use — Step-by-Step</h2>
+    <ol style="padding-left:1.5rem;line-height:2;color:var(--text)">
+      <li>Paste your raw JSON into the Input panel on the left, or click <strong>Sample</strong> to load example data.</li>
+      <li>The JSON is automatically formatted and validated as you type — errors are highlighted immediately.</li>
+      <li>Click <strong>Format</strong> to pretty-print with your chosen indentation (2 spaces, 4 spaces, or tabs).</li>
+      <li>Click <strong>Minify</strong> to strip all whitespace for compact production use.</li>
+      <li>Click <strong>Sort Keys</strong> to sort all object keys alphabetically for consistent output.</li>
+      <li>Use the <strong>JSON Path Query</strong> panel to extract values using dot notation (e.g., <code>user.address.city</code>).</li>
+    </ol>
+  </div>
+
+  <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:2rem;margin-bottom:1.5rem;box-shadow:var(--shadow)">
+    <h2 style="font-size:1.4rem;margin-bottom:1rem;color:var(--primary)">Key Features &amp; Benefits</h2>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1rem">
+      <div style="padding:1rem;background:var(--bg-secondary);border-radius:8px">
+        <div style="font-size:1.5rem;margin-bottom:.5rem">✅</div>
+        <strong>Instant Validation</strong>
+        <p style="font-size:.85rem;color:var(--text-muted);margin-top:.3rem">Validates JSON in real-time and shows the exact error message and position when your JSON contains syntax errors.</p>
+      </div>
+      <div style="padding:1rem;background:var(--bg-secondary);border-radius:8px">
+        <div style="font-size:1.5rem;margin-bottom:.5rem">🌲</div>
+        <strong>Interactive Tree View</strong>
+        <p style="font-size:.85rem;color:var(--text-muted);margin-top:.3rem">Navigate deeply nested JSON in a collapsible tree view, making it easy to explore complex API responses and config files.</p>
+      </div>
+      <div style="padding:1rem;background:var(--bg-secondary);border-radius:8px">
+        <div style="font-size:1.5rem;margin-bottom:.5rem">🔤</div>
+        <strong>Sort Keys</strong>
+        <p style="font-size:.85rem;color:var(--text-muted);margin-top:.3rem">Alphabetically sort all object keys at every nesting level for consistent, reproducible JSON output in diff tools.</p>
+      </div>
+      <div style="padding:1rem;background:var(--bg-secondary);border-radius:8px">
+        <div style="font-size:1.5rem;margin-bottom:.5rem">🔍</div>
+        <strong>JSON Path Queries</strong>
+        <p style="font-size:.85rem;color:var(--text-muted);margin-top:.3rem">Extract specific values using dot notation and array indexing (e.g., items[0].name) without writing any code.</p>
+      </div>
+      <div style="padding:1rem;background:var(--bg-secondary);border-radius:8px">
+        <div style="font-size:1.5rem;margin-bottom:.5rem">📊</div>
+        <strong>Document Statistics</strong>
+        <p style="font-size:.85rem;color:var(--text-muted);margin-top:.3rem">Shows key count, array count, nesting depth, and file size for quick understanding of JSON structure complexity.</p>
+      </div>
+      <div style="padding:1rem;background:var(--bg-secondary);border-radius:8px">
+        <div style="font-size:1.5rem;margin-bottom:.5rem">🆓</div>
+        <strong>Always Free</strong>
+        <p style="font-size:.85rem;color:var(--text-muted);margin-top:.3rem">No account, no API key, no usage limits. Format and validate JSON freely without any cost or registration.</p>
+      </div>
+    </div>
+  </div>
+
+  <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:2rem;margin-bottom:1.5rem;box-shadow:var(--shadow)">
+    <h2 style="font-size:1.4rem;margin-bottom:1.25rem;color:var(--primary)">Frequently Asked Questions</h2>
+
+    <details style="border:1px solid var(--border);border-radius:8px;margin-bottom:.75rem;overflow:hidden">
+      <summary style="padding:1rem 1.25rem;cursor:pointer;font-weight:600;background:var(--bg-secondary);user-select:none">❓ Is the JSON Formatter free to use?</summary>
+      <div style="padding:1rem 1.25rem;line-height:1.8;color:var(--text-muted)">Yes, completely free. There are no usage limits, no API keys required, and no registration. Format, validate, and minify JSON as often as you need at no cost.</div>
+    </details>
+
+    <details style="border:1px solid var(--border);border-radius:8px;margin-bottom:.75rem;overflow:hidden">
+      <summary style="padding:1rem 1.25rem;cursor:pointer;font-weight:600;background:var(--bg-secondary);user-select:none">❓ Is my data secure? Does it upload my JSON?</summary>
+      <div style="padding:1rem 1.25rem;line-height:1.8;color:var(--text-muted)">Your JSON data is never sent to any server. All formatting, validation, and querying happens in your browser using JavaScript's built-in JSON.parse and JSON.stringify functions. API keys, credentials, or sensitive data in your JSON stay completely private.</div>
+    </details>
+
+    <details style="border:1px solid var(--border);border-radius:8px;margin-bottom:.75rem;overflow:hidden">
+      <summary style="padding:1rem 1.25rem;cursor:pointer;font-weight:600;background:var(--bg-secondary);user-select:none">❓ Why should I minify JSON?</summary>
+      <div style="padding:1rem 1.25rem;line-height:1.8;color:var(--text-muted)">Minified JSON removes all whitespace characters (spaces, tabs, newlines) and reduces file size significantly. For API payloads sent over the network, smaller JSON reduces bandwidth usage and latency. For config files embedded in code, minified JSON is more compact. Use minification for production and formatted JSON for development and debugging.</div>
+    </details>
+
+    <details style="border:1px solid var(--border);border-radius:8px;margin-bottom:.75rem;overflow:hidden">
+      <summary style="padding:1rem 1.25rem;cursor:pointer;font-weight:600;background:var(--bg-secondary);user-select:none">❓ How does the JSON Path query feature work?</summary>
+      <div style="padding:1rem 1.25rem;line-height:1.8;color:var(--text-muted)">The JSON Path feature lets you navigate nested JSON using dot notation. Type a path like user.address.city to extract the city value, or items[0] to get the first element of an array. Array indices use bracket notation (e.g., results[2].name). The extracted value is displayed in the query result panel below the tool.</div>
+    </details>
+
+    <details style="border:1px solid var(--border);border-radius:8px;margin-bottom:.75rem;overflow:hidden">
+      <summary style="padding:1rem 1.25rem;cursor:pointer;font-weight:600;background:var(--bg-secondary);user-select:none">❓ What indentation options are available?</summary>
+      <div style="padding:1rem 1.25rem;line-height:1.8;color:var(--text-muted)">You can choose from 2 spaces (most common, used by JavaScript style guides), 4 spaces (Python PEP 8 style), or tab characters (used in some editors and configs). The choice affects only the visual formatting — the underlying JSON data is identical regardless of indentation style.</div>
+    </details>
+  </div>
+
+</div>
+
+<footer style="text-align:center;padding:2rem;color:var(--text-muted);font-size:.85rem;border-top:1px solid var(--border)">
+  <p>© 2025 ToolKit Pro — <a href="../privacy-policy.html">Privacy Policy</a> · <a href="../terms.html">Terms</a> · <a href="../contact.html">Contact</a> · <a href="../index.html">All Tools</a></p>
+</footer>
+
+<script>
+  const jsonInput = document.getElementById('jsonInput');
+  const jsonOutput = document.getElementById('jsonOutput');
+  const errorBox = document.getElementById('errorBox');
+  const successBox = document.getElementById('successBox');
+  const statsRow = document.getElementById('statsRow');
+  const indentSize = document.getElementById('indentSize');
+
+  const SAMPLE_JSON = `{
+  "name": "ToolKit Pro",
+  "version": "1.0.0",
+  "tools": [
+    {
+      "id": 1,
+      "name": "PDF Merger",
+      "category": "pdf",
+      "active": true,
+      "rating": 4.9
+    },
+    {
+      "id": 2,
+      "name": "Image Compressor",
+      "category": "image",
+      "active": true,
+      "rating": 4.8
+    }
+  ],
+  "config": {
+    "darkMode": false,
+    "language": "en",
+    "maxFileSize": null
+  }
+}`;
+
+  document.getElementById('loadSampleBtn').addEventListener('click', () => {
+    jsonInput.value = SAMPLE_JSON;
+    format();
+  });
+
+  document.getElementById('clearInputBtn').addEventListener('click', () => {
+    jsonInput.value = '';
+    jsonOutput.value = '';
+    errorBox.classList.add('hidden');
+    successBox.classList.add('hidden');
+    statsRow.innerHTML = '';
+    document.getElementById('treePanel').style.display = 'none';
+  });
+
+  function getIndent() {
+    const v = indentSize.value;
+    return v === 'tab' ? '\t' : parseInt(v);
+  }
+
+  function parseJSON() {
+    const raw = jsonInput.value.trim();
+    if (!raw) return { ok: false, error: 'No input', data: null };
+    try {
+      return { ok: true, data: JSON.parse(raw), error: null };
+    } catch (err) {
+      return { ok: false, error: err.message, data: null };
+    }
+  }
+
+  function showError(msg) {
+    errorBox.innerHTML = '❌ ' + msg;
+    errorBox.classList.remove('hidden');
+    successBox.classList.add('hidden');
+  }
+  function showSuccess(msg) {
+    successBox.innerHTML = '✅ ' + msg;
+    successBox.classList.remove('hidden');
+    errorBox.classList.add('hidden');
+  }
+
+  function countItems(obj) {
+    if (Array.isArray(obj)) return { keys: 0, arrays: 1, items: obj.length };
+    if (obj && typeof obj === 'object') return { keys: Object.keys(obj).length, arrays: 0, items: 0 };
+    return { keys: 0, arrays: 0, items: 0 };
+  }
+
+  function getStats(data, raw, formatted) {
+    function countAll(obj, depth = 0) {
+      let keys = 0, arrays = 0, maxDepth = depth;
+      if (Array.isArray(obj)) {
+        arrays++; obj.forEach(v => { const r = countAll(v, depth + 1); keys += r.keys; arrays += r.arrays; maxDepth = Math.max(maxDepth, r.maxDepth); });
+      } else if (obj && typeof obj === 'object') {
+        const k = Object.keys(obj); keys += k.length;
+        k.forEach(key => { const r = countAll(obj[key], depth + 1); keys += r.keys; arrays += r.arrays; maxDepth = Math.max(maxDepth, r.maxDepth); });
+      }
+      return { keys, arrays, maxDepth };
+    }
+    const s = countAll(data);
+    return `<span>Keys: <strong>${s.keys}</strong></span><span>Arrays: <strong>${s.arrays}</strong></span><span>Depth: <strong>${s.maxDepth}</strong></span><span>Size: <strong>${formatSize(new Blob([formatted]).size)}</strong></span>`;
+  }
+
+  function format() {
+    const r = parseJSON();
+    if (!r.ok) { showError(r.error); return; }
+    const indent = getIndent();
+    const formatted = JSON.stringify(r.data, null, indent);
+    jsonOutput.value = formatted;
+    showSuccess(`Valid JSON — ${formatted.split('\n').length} lines`);
+    statsRow.innerHTML = getStats(r.data, jsonInput.value, formatted);
+    buildTree(r.data);
+  }
+
+  function minify() {
+    const r = parseJSON();
+    if (!r.ok) { showError(r.error); return; }
+    const minified = JSON.stringify(r.data);
+    jsonOutput.value = minified;
+    showSuccess('Minified: ' + formatSize(new Blob([minified]).size));
+    statsRow.innerHTML = '';
+  }
+
+  function validate() {
+    const r = parseJSON();
+    if (!r.ok) { showError(r.error); return; }
+    showSuccess('Valid JSON! Structure looks good.');
+    if (!jsonOutput.value) format();
+  }
+
+  function sortKeys() {
+    const r = parseJSON();
+    if (!r.ok) { showError(r.error); return; }
+    function sortObj(obj) {
+      if (Array.isArray(obj)) return obj.map(sortObj);
+      if (obj && typeof obj === 'object') {
+        return Object.keys(obj).sort().reduce((acc, k) => { acc[k] = sortObj(obj[k]); return acc; }, {});
+      }
+      return obj;
+    }
+    const indent = getIndent();
+    jsonOutput.value = JSON.stringify(sortObj(r.data), null, indent);
+    showSuccess('Keys sorted alphabetically!');
+  }
+
+  document.getElementById('formatBtn').addEventListener('click', format);
+  document.getElementById('minifyBtn').addEventListener('click', minify);
+  document.getElementById('validateBtn').addEventListener('click', validate);
+  document.getElementById('sortKeysBtn').addEventListener('click', sortKeys);
+
+  document.getElementById('copyOutputBtn').addEventListener('click', function () {
+    copyToClipboard(jsonOutput.value, this);
+  });
+  document.getElementById('downloadOutputBtn').addEventListener('click', () => {
+    const blob = new Blob([jsonOutput.value], { type: 'application/json' });
+    downloadBlob(blob, 'formatted.json');
+  });
+
+  // Live format on input
+  let liveTimer;
+  jsonInput.addEventListener('input', () => {
+    clearTimeout(liveTimer);
+    liveTimer = setTimeout(() => {
+      if (jsonInput.value.trim()) format();
+    }, 600);
+  });
+
+  indentSize.addEventListener('change', () => { if (jsonOutput.value) format(); });
+
+  // ---- Tree View ----
+  function buildTree(data) {
+    const panel = document.getElementById('treePanel');
+    const view = document.getElementById('treeView');
+    panel.style.display = 'block';
+    view.innerHTML = renderTree(data, '');
+    addTreeListeners(view);
+  }
+
+  function escapeHtml(v) {
+    return String(v).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+  }
+
+  function renderTree(val, key) {
+    const keyHtml = key !== '' ? `<span class="tree-key">"${escapeHtml(key)}"</span>: ` : '';
+    if (val === null) return `<div>${keyHtml}<span class="tree-null">null</span></div>`;
+    if (typeof val === 'boolean') return `<div>${keyHtml}<span class="tree-bool">${val}</span></div>`;
+    if (typeof val === 'number') return `<div>${keyHtml}<span class="tree-number">${val}</span></div>`;
+    if (typeof val === 'string') return `<div>${keyHtml}<span class="tree-string">"${escapeHtml(val)}"</span></div>`;
+    if (Array.isArray(val)) {
+      if (val.length === 0) return `<div>${keyHtml}<span>[]</span></div>`;
+      const children = val.map((v, i) => `<div class="tree-item">${renderTree(v, i)}</div>`).join('');
+      return `<div><span class="tree-toggle" data-open="true">${keyHtml}▼ [${val.length}]</span><div class="tree-children">${children}</div></div>`;
+    }
+    if (typeof val === 'object') {
+      const keys = Object.keys(val);
+      if (keys.length === 0) return `<div>${keyHtml}<span>{}</span></div>`;
+      const children = keys.map(k => `<div class="tree-item">${renderTree(val[k], k)}</div>`).join('');
+      return `<div><span class="tree-toggle" data-open="true">${keyHtml}▼ {${keys.length}}</span><div class="tree-children">${children}</div></div>`;
+    }
+    return `<div>${keyHtml}${escapeHtml(val)}</div>`;
+  }
+
+  function addTreeListeners(el) {
+    el.querySelectorAll('.tree-toggle').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const isOpen = btn.dataset.open === 'true';
+        const children = btn.nextElementSibling;
+        if (!children) return;
+        if (isOpen) {
+          children.style.display = 'none';
+          btn.textContent = btn.textContent.replace('▼', '▶');
+          btn.dataset.open = 'false';
+        } else {
+          children.style.display = '';
+          btn.textContent = btn.textContent.replace('▶', '▼');
+          btn.dataset.open = 'true';
+        }
+      });
+    });
+  }
+
+  document.getElementById('toggleTreeBtn').addEventListener('click', function () {
+    const allOpen = this.textContent.includes('Collapse');
+    document.querySelectorAll('.tree-toggle').forEach(btn => {
+      const children = btn.nextElementSibling;
+      if (!children) return;
+      if (allOpen) { children.style.display = 'none'; btn.textContent = btn.textContent.replace('▼', '▶'); btn.dataset.open = 'false'; }
+      else { children.style.display = ''; btn.textContent = btn.textContent.replace('▶', '▼'); btn.dataset.open = 'true'; }
+    });
+    this.textContent = allOpen ? '▶ Expand All' : '🔽 Collapse All';
+  });
+
+  // ---- JSON Path Query ----
+  document.getElementById('queryBtn').addEventListener('click', () => {
+    const r = parseJSON();
+    if (!r.ok) { showError('Fix JSON errors first'); return; }
+    const path = document.getElementById('pathInput').value.trim();
+    const resultEl = document.getElementById('queryResult');
+    if (!path) { resultEl.classList.add('hidden'); return; }
+    try {
+      const keys = path.replace(/\[(\d+)\]/g, '.$1').split('.').filter(Boolean);
+      let cur = r.data;
+      for (const k of keys) {
+        if (cur === null || cur === undefined) throw new Error(`${k} not found`);
+        cur = cur[k];
+      }
+      resultEl.textContent = JSON.stringify(cur, null, 2);
+      resultEl.classList.remove('hidden');
+    } catch (err) {
+      resultEl.textContent = '⚠️ Path not found: ' + err.message;
+      resultEl.classList.remove('hidden');
+    }
+  });
+</script>
+</body>
+</html>

@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>What is Base64 Encoding and When Should You Use It? | ToolKit Pro</title>
+  <meta name="description" content="Learn what Base64 encoding is, how it works (6-bit groups, character set), where it's used (JWT, data URLs, APIs), and the critical difference between encoding and encryption.">
+  <link rel="stylesheet" href="../css/style.css">
+  <script src="../js/common.js"></script>
+  <style>
+    .blog-container { max-width: 780px; margin: 2rem auto; padding: 0 1.25rem 5rem; }
+    .blog-hero { background: linear-gradient(135deg, var(--primary), #9c91ff); color: #fff; padding: 3rem 2rem; border-radius: var(--radius); margin-bottom: 2rem; }
+    .blog-hero .category-tag { background: rgba(255,255,255,.2); padding: .3rem .8rem; border-radius: 20px; font-size: .8rem; display: inline-block; margin-bottom: 1rem; }
+    .blog-hero h1 { font-size: 1.9rem; line-height: 1.3; margin-bottom: 1rem; }
+    .blog-meta { display: flex; gap: 1.5rem; font-size: .85rem; opacity: .85; flex-wrap: wrap; }
+    .blog-body { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 2.5rem; box-shadow: var(--shadow); }
+    .blog-body h2 { font-size: 1.3rem; margin: 2rem 0 .75rem; color: var(--primary); border-left: 3px solid var(--primary); padding-left: .75rem; }
+    .blog-body h3 { font-size: 1.1rem; margin: 1.5rem 0 .5rem; font-weight: 600; }
+    .blog-body p { line-height: 1.9; margin-bottom: 1.1rem; color: var(--text); }
+    .blog-body ul, .blog-body ol { padding-left: 1.5rem; margin-bottom: 1.1rem; }
+    .blog-body li { margin-bottom: .5rem; line-height: 1.8; }
+    .blog-body strong { color: var(--text); }
+    .highlight-box { background: var(--bg-secondary); border-left: 4px solid var(--secondary); padding: 1rem 1.25rem; border-radius: 0 8px 8px 0; margin: 1.5rem 0; }
+    .code-example { background:var(--bg-secondary); border:1px solid var(--border); border-radius:var(--radius-sm); padding:1.1rem 1.25rem; font-family:'Consolas','Monaco','Courier New',monospace; font-size:.875rem; line-height:1.7; overflow-x:auto; margin:1rem 0; color:var(--text); word-break:break-all; }
+    .related-tools { background: var(--bg-secondary); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.5rem; margin-top: 2rem; }
+    .related-tools h3 { margin-bottom: 1rem; font-size: 1rem; }
+    .related-links { display: flex; flex-wrap: wrap; gap: .75rem; }
+    .related-links a { background: var(--primary); color: #fff; padding: .4rem 1rem; border-radius: 20px; font-size: .85rem; text-decoration: none; transition: opacity .2s; }
+    .related-links a:hover { opacity: .85; }
+    .nav-links { display:flex; gap:1.5rem; align-items:center; }
+    .nav-links a { color:var(--text); font-size:.9rem; font-weight:500; text-decoration:none; transition:color .2s; }
+    .nav-links a:hover { color:var(--primary); }
+    @media(max-width:768px) { .nav-links { display:none; } .blog-hero h1 { font-size:1.5rem; } .blog-body { padding:1.5rem; } }
+  </style>
+</head>
+<body>
+<nav class="navbar">
+  <a href="../index.html" class="nav-brand"><div class="logo-icon">🛠</div>ToolKit Pro</a>
+  <div class="nav-links">
+    <a href="../index.html">Home</a>
+    <a href="../index.html#tools">Tools</a>
+    <a href="index.html">Blog</a>
+    <a href="../about.html">About</a>
+    <a href="../contact.html">Contact</a>
+  </div>
+  <div class="nav-actions"><button class="theme-toggle" id="themeToggle">🌙</button></div>
+</nav>
+
+<div class="blog-container">
+  <a href="index.html" style="display:inline-flex;align-items:center;gap:.4rem;color:var(--text-muted);font-size:.9rem;margin-bottom:1.5rem;text-decoration:none;">← Back to Blog</a>
+
+  <div class="blog-hero">
+    <span class="category-tag">Developer</span>
+    <h1>What is Base64 Encoding and When Should You Use It?</h1>
+    <div class="blog-meta">
+      <span>✍️ ToolKit Pro Team</span>
+      <span>📅 April 2025</span>
+      <span>⏱️ 4 min read</span>
+    </div>
+  </div>
+
+  <article class="blog-body">
+    <p>If you've looked at any JWT token, inspected an email with an attachment, or embedded an image directly in a CSS file, you've encountered Base64 encoding. It looks like encrypted data — a long string of seemingly random letters, numbers, and symbols — but it's not encrypted at all. It's completely reversible by anyone who sees it. Understanding what Base64 actually does, and why it exists, is essential for any developer working with APIs, authentication, or web performance.</p>
+
+    <h2>Why Base64 Exists: The Problem It Solves</h2>
+    <p>Computers store all data as binary — sequences of zeros and ones. Text-based systems (email protocols, HTTP headers, HTML attributes, JSON) were originally designed to handle printable ASCII characters — the 128 characters in the basic ASCII set. When binary data (like a JPEG image, a PDF, or an audio file) needs to travel through a channel that was designed for text, there's a fundamental problem: binary data contains byte values that correspond to control characters (like null bytes, line feeds, and carriage returns) that text systems treat as special instructions rather than data.</p>
+    <p>Base64 solves this by converting binary data into a sequence that uses only safe, printable ASCII characters — specifically A–Z, a–z, 0–9, plus (+) and slash (/), with equals signs (=) for padding. The result is a text string that can safely travel through any text-based system without corruption or misinterpretation.</p>
+
+    <h2>How Base64 Encoding Works</h2>
+    <p>The mechanics are elegant. Base64 takes binary data and groups it into blocks of 6 bits. Each 6-bit group represents a number from 0 to 63, and a lookup table maps each number to one of 64 characters in the Base64 alphabet. Since 6 bits fit into 64 values (2⁶ = 64), the format name "Base64" refers to the 64-character alphabet, not the bit count.</p>
+    <p>Since standard bytes are 8 bits and Base64 characters represent 6 bits, every 3 bytes (24 bits) of input becomes 4 Base64 characters (4 × 6 = 24 bits). This means Base64-encoded data is always approximately 33% larger than the original binary — a trade-off you need to be aware of when using it.</p>
+    <p>For example, the word "Man" in ASCII is three bytes (77, 97, 110 in decimal). Their binary representation, split into four 6-bit groups, maps to the Base64 characters "TWFu." That's the encoding in action.</p>
+
+    <div class="code-example">/* Original string */
+"Hello, World!"
+
+/* Base64 encoded */
+"SGVsbG8sIFdvcmxkIQ=="
+
+/* The trailing == signs are padding, used when the
+   input length isn't divisible by 3 */</div>
+
+    <h2>Where Base64 Is Actually Used</h2>
+
+    <h3>Email Attachments (MIME)</h3>
+    <p>SMTP — the protocol for sending email — was originally designed for 7-bit ASCII text. Binary attachments (images, PDFs, spreadsheets) are Base64-encoded before transmission and decoded by the recipient's email client. This is completely transparent to the user but explains why "sending" an email attachment is slightly slower than the raw file size would suggest — the attachment is 33% larger in transit.</p>
+
+    <h3>Data URLs for Images in CSS and HTML</h3>
+    <p>Instead of linking to an external image file, you can embed the image data directly in your HTML or CSS as a Base64-encoded data URL:</p>
+    <div class="code-example">/* Small icon embedded directly in CSS */
+background-image: url('data:image/png;base64,iVBORw0KGgoAAAANS...');</div>
+    <p>This eliminates an HTTP request for small icons, which can improve page load performance. The trade-off: the HTML or CSS file becomes larger, and browsers can't cache the image separately from the stylesheet. For small icons (under 1 KB), data URLs are often beneficial. For larger images, external files with proper caching are better.</p>
+
+    <h3>JWT Tokens</h3>
+    <p>JSON Web Tokens (JWTs) are a standard for transmitting authentication information between a client and server. A JWT consists of three Base64URL-encoded sections (Base64URL is a URL-safe variant that replaces + with - and / with _): a header, a payload, and a signature. When you see a long token like <code>eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIn0.abc...</code>, the first two sections can be decoded by anyone — they contain readable JSON. The third section is the cryptographic signature that verifies the token's authenticity.</p>
+
+    <h3>HTTP Basic Authentication</h3>
+    <p>HTTP Basic Auth encodes the username and password as a Base64 string in the Authorization header: <code>Authorization: Basic dXNlcm5hbWU6cGFzc3dvcmQ=</code>. Decoding that Base64 string gives you <code>username:password</code> in plain text. This is why HTTP Basic Auth should only ever be used over HTTPS — the Base64 encoding provides absolutely no security, it just converts the credentials to a format that fits in an HTTP header.</p>
+
+    <h3>API Authentication Keys</h3>
+    <p>Many APIs use Base64 to encode API keys, client IDs, or secrets in request headers. Stripe, for example, uses HTTP Basic Auth with the API key as the username, which means the key is Base64-encoded in every API request header. This isn't for security — it's purely for format compatibility with the HTTP Basic Auth standard.</p>
+
+    <h2>The Critical Distinction: Encoding Is NOT Encryption</h2>
+    <p>This is the most important thing to understand about Base64. <strong>Base64 encoding is not encryption.</strong> It is not a security measure. Anyone who sees a Base64 string can decode it instantly — the process is completely deterministic and reversible with no key required. A Base64-encoded password is not a hashed or encrypted password; it's a plaintext password that happens to look scrambled.</p>
+    <p>Developers who treat Base64 as a form of obfuscation for sensitive data create real security vulnerabilities. The attacker doesn't need to "crack" anything — they paste the string into any Base64 decoder (or run <code>atob()</code> in a browser console) and the original data is immediately visible.</p>
+
+    <div class="highlight-box">
+      <strong>Security rule:</strong> Use Base64 for format compatibility — to move binary data through text channels. Never use it to "protect" or "hide" sensitive information. For actual security, use proper encryption (AES, RSA) or hashing (bcrypt, SHA-256 with salt).
+    </div>
+
+    <h2>When NOT to Use Base64</h2>
+    <ul>
+      <li><strong>Don't use it for large files:</strong> The 33% size overhead matters. Storing a 1 MB image as Base64 in a database means storing 1.33 MB. For large media, use file storage with URLs instead.</li>
+      <li><strong>Don't use it as a password storage mechanism:</strong> A Base64-encoded password in a database is functionally the same as storing the plain-text password.</li>
+      <li><strong>Don't use it to "compress" data:</strong> Base64 makes data larger, not smaller. It has nothing to do with compression.</li>
+      <li><strong>Don't confuse it with URL encoding:</strong> URL encoding (percent-encoding) encodes special characters for URLs. Base64 is a completely different mechanism for binary-to-text conversion.</li>
+    </ul>
+
+    <h2>Conclusion</h2>
+    <p>Base64 exists to solve a specific, practical problem: safely representing binary data in text-based systems. It appears throughout web development in email attachments, embedded images, JWT tokens, and API authentication headers. It's useful, standardized, and supported in every programming language. The key insight to carry forward is that encoding is a format transformation, not a security transformation — and confusing the two is a common source of real vulnerabilities in web applications.</p>
+
+    <div class="related-tools">
+      <h3>🛠 Try These Related Tools</h3>
+      <div class="related-links">
+        <a href="../tools/base64.html">Base64 Encoder / Decoder</a>
+        <a href="../tools/json-formatter.html">JSON Formatter</a>
+        <a href="../tools/password-generator.html">Password Generator</a>
+      </div>
+    </div>
+  </article>
+</div>
+
+<footer style="text-align:center;padding:2rem;color:var(--text-muted);font-size:.85rem;border-top:1px solid var(--border)">
+  <p>© 2025 ToolKit Pro — <a href="../privacy-policy.html">Privacy Policy</a> · <a href="../terms.html">Terms</a> · <a href="../contact.html">Contact</a> · <a href="../index.html">All Tools</a></p>
+</footer>
+<script>
+(function(){const t=localStorage.getItem('theme')||(window.matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t);document.getElementById('themeToggle').textContent=t==='dark'?'☀️':'🌙';})();
+document.getElementById('themeToggle').addEventListener('click',function(){const d=document.documentElement;const t=d.getAttribute('data-theme')==='dark'?'light':'dark';d.setAttribute('data-theme',t);localStorage.setItem('theme',t);this.textContent=t==='dark'?'☀️':'🌙';});
+</script>
+</body>
+</html>

@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Image Format Converter — Free Online Tool | ToolKit Pro</title>
+  <meta name="description" content="Convert images between PNG, JPG, WebP, BMP formats free online. Browser-based image converter with batch support — no upload, instant download." />
+  <link rel="stylesheet" href="../css/style.css" />
+  <script src="../js/common.js"></script>
+  <style>
+    .nav-links { display:flex; gap:1.5rem; align-items:center; }
+    .nav-links a { color:var(--text); font-size:.9rem; font-weight:500; text-decoration:none; transition:color .2s; }
+    .nav-links a:hover { color:var(--primary); }
+    @media(max-width:768px){ .nav-links { display:none; } }
+  </style>
+</head>
+<body>
+
+<nav class="navbar">
+  <a href="../index.html" class="nav-brand">
+    <div class="logo-icon">🛠</div>
+    ToolKit Pro
+  </a>
+  <div class="nav-links">
+    <a href="../index.html">Home</a>
+    <a href="../index.html#tools">Tools</a>
+    <a href="../blog/index.html">Blog</a>
+    <a href="../about.html">About</a>
+    <a href="../contact.html">Contact</a>
+  </div>
+  <div class="nav-actions">
+    <button class="theme-toggle" id="themeToggle" title="Toggle dark mode">🌙</button>
+  </div>
+</nav>
+
+<div class="tool-page-hero">
+  <h1>🔄 Image Converter</h1>
+  <p>Convert images between PNG, JPG, WebP, and BMP formats instantly in your browser.</p>
+</div>
+
+<div class="tool-container">
+
+  <div class="panel">
+    <div class="panel-title">📂 Select Image</div>
+
+    <div class="drop-zone" id="dropZone">
+      <input type="file" id="fileInput" accept="image/*" multiple />
+      <span class="drop-icon">🖼</span>
+      <h3>Drop image(s) here</h3>
+      <p>or click to browse — supports JPG, PNG, WebP, BMP, GIF, TIFF</p>
+    </div>
+
+    <div id="alertBox" class="alert hidden"></div>
+  </div>
+
+  <div class="panel hidden" id="settingsPanel">
+    <div class="panel-title">⚙️ Conversion Settings</div>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem">
+      <div class="form-group" style="margin-bottom:0">
+        <label class="form-label">Convert To</label>
+        <select class="form-control" id="targetFormat">
+          <option value="image/png">PNG</option>
+          <option value="image/jpeg" selected>JPG / JPEG</option>
+          <option value="image/webp">WebP</option>
+          <option value="image/bmp">BMP</option>
+        </select>
+      </div>
+      <div class="form-group" style="margin-bottom:0" id="qualityGroup">
+        <label class="form-label" style="display:flex;justify-content:space-between">
+          <span>Quality</span>
+          <strong id="qualityVal">92%</strong>
+        </label>
+        <input type="range" class="form-control-range" id="qualitySlider" min="1" max="100" value="92" />
+      </div>
+    </div>
+
+    <div class="btn-group" style="margin-top:1.5rem">
+      <button class="btn btn-primary" id="convertBtn">🔄 Convert All</button>
+    </div>
+  </div>
+
+  <div class="panel hidden" id="resultPanel">
+    <div class="panel-title">✅ Converted Images</div>
+    <div id="resultList"></div>
+    <div class="btn-group" style="margin-top:1rem">
+      <button class="btn btn-success" id="downloadAllBtn">⬇️ Download All as ZIP</button>
+    </div>
+  </div>
+
+</div>
+
+<!-- ===== CONTENT SECTIONS ===== -->
+<div style="max-width:860px;margin:0 auto;padding:0 1rem 2rem">
+
+  <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:2rem;margin-bottom:1.5rem;box-shadow:var(--shadow)">
+    <h2 style="font-size:1.4rem;margin-bottom:1rem;color:var(--primary)">What is the Image Format Converter?</h2>
+    <p style="line-height:1.9;color:var(--text);margin-bottom:1rem">The Image Format Converter is a free, browser-based tool that converts images from one format to another instantly. You can convert JPG to PNG, PNG to WebP, WebP to JPG, BMP to PNG, or any other combination of the supported formats. The tool supports batch conversion, so you can upload multiple images at once and convert them all to your chosen target format in a single operation, then download them individually or as a ZIP archive.</p>
+    <p style="line-height:1.9;color:var(--text)">Different image formats serve different purposes. JPG is ideal for photographs due to its efficient lossy compression. PNG uses lossless compression and supports transparency, making it perfect for logos, icons, and graphics with sharp edges. WebP is a modern format developed by Google that offers superior compression compared to both JPG and PNG, making it the preferred format for web images. BMP is an uncompressed format used primarily in Windows environments and legacy applications.</p>
+  </div>
+
+  <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:2rem;margin-bottom:1.5rem;box-shadow:var(--shadow)">
+    <h2 style="font-size:1.4rem;margin-bottom:1rem;color:var(--primary)">How to Use — Step-by-Step</h2>
+    <ol style="padding-left:1.5rem;line-height:2;color:var(--text)">
+      <li>Click the drop zone or drag one or more image files onto the page.</li>
+      <li>Select your target format from the dropdown: PNG, JPG, WebP, or BMP.</li>
+      <li>Adjust the quality slider for JPEG or WebP output (not applicable to PNG or BMP).</li>
+      <li>Click <strong>Convert All</strong> to process every uploaded image in batch.</li>
+      <li>Each converted image appears in the results list with its new file size shown.</li>
+      <li>Download images individually with the arrow button, or click <strong>Download All as ZIP</strong> for batch download.</li>
+    </ol>
+  </div>
+
+  <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:2rem;margin-bottom:1.5rem;box-shadow:var(--shadow)">
+    <h2 style="font-size:1.4rem;margin-bottom:1rem;color:var(--primary)">Key Features &amp; Benefits</h2>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1rem">
+      <div style="padding:1rem;background:var(--bg-secondary);border-radius:8px">
+        <div style="font-size:1.5rem;margin-bottom:.5rem">🔄</div>
+        <strong>Batch Conversion</strong>
+        <p style="font-size:.85rem;color:var(--text-muted);margin-top:.3rem">Convert multiple images at once to the same target format and download them all in one ZIP file.</p>
+      </div>
+      <div style="padding:1rem;background:var(--bg-secondary);border-radius:8px">
+        <div style="font-size:1.5rem;margin-bottom:.5rem">🌐</div>
+        <strong>WebP Support</strong>
+        <p style="font-size:.85rem;color:var(--text-muted);margin-top:.3rem">Convert to and from WebP format — the modern web standard that achieves 25–34% smaller files than JPEG.</p>
+      </div>
+      <div style="padding:1rem;background:var(--bg-secondary);border-radius:8px">
+        <div style="font-size:1.5rem;margin-bottom:.5rem">🔲</div>
+        <strong>Transparency Handling</strong>
+        <p style="font-size:.85rem;color:var(--text-muted);margin-top:.3rem">PNG transparency is preserved when converting to WebP or PNG. A white background is applied when converting to JPG or BMP.</p>
+      </div>
+      <div style="padding:1rem;background:var(--bg-secondary);border-radius:8px">
+        <div style="font-size:1.5rem;margin-bottom:.5rem">🔒</div>
+        <strong>100% Private</strong>
+        <p style="font-size:.85rem;color:var(--text-muted);margin-top:.3rem">All conversions happen in your browser using the Canvas API. Your images never leave your device.</p>
+      </div>
+      <div style="padding:1rem;background:var(--bg-secondary);border-radius:8px">
+        <div style="font-size:1.5rem;margin-bottom:.5rem">📦</div>
+        <strong>ZIP Download</strong>
+        <p style="font-size:.85rem;color:var(--text-muted);margin-top:.3rem">Download all converted images in a single ZIP file for convenience when working with large batches.</p>
+      </div>
+      <div style="padding:1rem;background:var(--bg-secondary);border-radius:8px">
+        <div style="font-size:1.5rem;margin-bottom:.5rem">🆓</div>
+        <strong>Always Free</strong>
+        <p style="font-size:.85rem;color:var(--text-muted);margin-top:.3rem">No watermarks, no account, no file or batch size limits. Convert images freely at no cost.</p>
+      </div>
+    </div>
+  </div>
+
+  <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:2rem;margin-bottom:1.5rem;box-shadow:var(--shadow)">
+    <h2 style="font-size:1.4rem;margin-bottom:1.25rem;color:var(--primary)">Frequently Asked Questions</h2>
+
+    <details style="border:1px solid var(--border);border-radius:8px;margin-bottom:.75rem;overflow:hidden">
+      <summary style="padding:1rem 1.25rem;cursor:pointer;font-weight:600;background:var(--bg-secondary);user-select:none">❓ Is the Image Converter free to use?</summary>
+      <div style="padding:1rem 1.25rem;line-height:1.8;color:var(--text-muted)">Yes, completely free. There are no usage limits, watermarks, or account requirements. Convert images between formats as often as you need at no cost.</div>
+    </details>
+
+    <details style="border:1px solid var(--border);border-radius:8px;margin-bottom:.75rem;overflow:hidden">
+      <summary style="padding:1rem 1.25rem;cursor:pointer;font-weight:600;background:var(--bg-secondary);user-select:none">❓ Is my data secure? Does it upload my files?</summary>
+      <div style="padding:1rem 1.25rem;line-height:1.8;color:var(--text-muted)">Your images are never uploaded to any server. All format conversion happens locally in your browser using the HTML5 Canvas API. Personal photos and private images stay entirely on your device.</div>
+    </details>
+
+    <details style="border:1px solid var(--border);border-radius:8px;margin-bottom:.75rem;overflow:hidden">
+      <summary style="padding:1rem 1.25rem;cursor:pointer;font-weight:600;background:var(--bg-secondary);user-select:none">❓ Why should I convert JPG to WebP?</summary>
+      <div style="padding:1rem 1.25rem;line-height:1.8;color:var(--text-muted)">WebP typically produces files 25–34% smaller than equivalent JPEG images at the same visual quality level. Smaller images mean faster page loads, lower bandwidth usage, and better scores on Google PageSpeed Insights. Most modern browsers including Chrome, Firefox, Edge, and Safari now support WebP.</div>
+    </details>
+
+    <details style="border:1px solid var(--border);border-radius:8px;margin-bottom:.75rem;overflow:hidden">
+      <summary style="padding:1rem 1.25rem;cursor:pointer;font-weight:600;background:var(--bg-secondary);user-select:none">❓ Does converting PNG to JPG remove transparency?</summary>
+      <div style="padding:1rem 1.25rem;line-height:1.8;color:var(--text-muted)">Yes. JPG does not support transparent pixels. When converting from PNG to JPG, the tool composites all transparent areas over a white background before encoding. If you need to preserve transparency, convert to WebP or PNG instead.</div>
+    </details>
+
+    <details style="border:1px solid var(--border);border-radius:8px;margin-bottom:.75rem;overflow:hidden">
+      <summary style="padding:1rem 1.25rem;cursor:pointer;font-weight:600;background:var(--bg-secondary);user-select:none">❓ What file formats are supported?</summary>
+      <div style="padding:1rem 1.25rem;line-height:1.8;color:var(--text-muted)">Input formats: JPG/JPEG, PNG, WebP, BMP, GIF, and TIFF. Output formats: PNG, JPG, WebP, and BMP. You can convert any input format to any supported output format in one click.</div>
+    </details>
+  </div>
+
+</div>
+
+<footer style="text-align:center;padding:2rem;color:var(--text-muted);font-size:.85rem;border-top:1px solid var(--border)">
+  <p>© 2025 ToolKit Pro — <a href="../privacy-policy.html">Privacy Policy</a> · <a href="../terms.html">Terms</a> · <a href="../contact.html">Contact</a> · <a href="../index.html">All Tools</a></p>
+</footer>
+
+<script>
+  const selectedFiles = [];
+  const convertedItems = [];
+
+  const dropZone = document.getElementById('dropZone');
+  const fileInput = document.getElementById('fileInput');
+  const alertBox = document.getElementById('alertBox');
+  const settingsPanel = document.getElementById('settingsPanel');
+  const resultPanel = document.getElementById('resultPanel');
+  const qualitySlider = document.getElementById('qualitySlider');
+  const qualityVal = document.getElementById('qualityVal');
+  const targetFormat = document.getElementById('targetFormat');
+  const convertBtn = document.getElementById('convertBtn');
+  const downloadAllBtn = document.getElementById('downloadAllBtn');
+  const qualityGroup = document.getElementById('qualityGroup');
+
+  function showAlert(msg, type) {
+    alertBox.className = 'alert alert-' + type;
+    alertBox.innerHTML = (type === 'error' ? '❌ ' : '✅ ') + msg;
+    alertBox.classList.remove('hidden');
+  }
+
+  qualitySlider.addEventListener('input', () => { qualityVal.textContent = qualitySlider.value + '%'; });
+  targetFormat.addEventListener('change', () => {
+    const fmt = targetFormat.value;
+    qualityGroup.style.display = (fmt === 'image/png' || fmt === 'image/bmp') ? 'none' : 'block';
+  });
+
+  function addFiles(files) {
+    let added = 0;
+    Array.from(files).forEach(f => {
+      if (f.type.startsWith('image/')) { selectedFiles.push(f); added++; }
+    });
+    if (added > 0) {
+      settingsPanel.classList.remove('hidden');
+      alertBox.classList.add('hidden');
+      resultPanel.classList.add('hidden');
+    } else {
+      showAlert('Please select valid image files.', 'error');
+    }
+  }
+
+  dropZone.addEventListener('dragover', e => { e.preventDefault(); dropZone.classList.add('drag-over'); });
+  dropZone.addEventListener('dragleave', () => dropZone.classList.remove('drag-over'));
+  dropZone.addEventListener('drop', e => { e.preventDefault(); dropZone.classList.remove('drag-over'); addFiles(e.dataTransfer.files); });
+  fileInput.addEventListener('change', () => { addFiles(fileInput.files); fileInput.value = ''; });
+
+  function getExtension(mimeType) {
+    const map = { 'image/jpeg': 'jpg', 'image/png': 'png', 'image/webp': 'webp', 'image/bmp': 'bmp' };
+    return map[mimeType] || 'jpg';
+  }
+
+  function convertImage(file, mimeType, quality) {
+    return new Promise((resolve, reject) => {
+      const img = new Image();
+      const url = URL.createObjectURL(file);
+      img.onload = () => {
+        URL.revokeObjectURL(url);
+        const canvas = document.createElement('canvas');
+        canvas.width = img.naturalWidth;
+        canvas.height = img.naturalHeight;
+        const ctx = canvas.getContext('2d');
+        if (mimeType === 'image/jpeg') { ctx.fillStyle = '#fff'; ctx.fillRect(0, 0, canvas.width, canvas.height); }
+        ctx.drawImage(img, 0, 0);
+        canvas.toBlob(blob => {
+          if (blob) resolve(blob);
+          else reject(new Error('Conversion failed'));
+        }, mimeType, (mimeType === 'image/png' || mimeType === 'image/bmp') ? undefined : quality);
+      };
+      img.onerror = () => { URL.revokeObjectURL(url); reject(new Error('Cannot load ' + file.name)); };
+      img.src = url;
+    });
+  }
+
+  convertBtn.addEventListener('click', async () => {
+    if (selectedFiles.length === 0) return;
+
+    convertBtn.disabled = true;
+    convertBtn.textContent = '⏳ Converting…';
+    convertedItems.length = 0;
+
+    const fmt = targetFormat.value;
+    const quality = parseInt(qualitySlider.value) / 100;
+    const ext = getExtension(fmt);
+    const resultList = document.getElementById('resultList');
+    resultList.innerHTML = '';
+
+    let errors = 0;
+    for (let i = 0; i < selectedFiles.length; i++) {
+      const file = selectedFiles[i];
+      try {
+        const blob = await convertImage(file, fmt, quality);
+        const baseName = file.name.replace(/\.[^.]+$/, '');
+        const outName = baseName + '.' + ext;
+        const blobUrl = URL.createObjectURL(blob);
+        convertedItems.push({ blob, name: outName });
+
+        const item = document.createElement('div');
+        item.style.cssText = 'display:flex;align-items:center;gap:1rem;padding:0.75rem;background:var(--bg-secondary);border:1px solid var(--border);border-radius:8px;margin-bottom:0.5rem;font-size:0.875rem';
+        item.innerHTML = `
+          <img src="${blobUrl}" style="width:50px;height:50px;object-fit:contain;border-radius:4px;background:#fff" />
+          <div style="flex:1">
+            <div style="font-weight:600">${outName}</div>
+            <div style="color:var(--text-muted)">${file.name} → ${formatSize(blob.size)}</div>
+          </div>
+          <button class="btn btn-secondary" style="padding:0.3rem 0.75rem;font-size:0.8rem" onclick="downloadSingle(${convertedItems.length - 1})">⬇️</button>`;
+        resultList.appendChild(item);
+      } catch (err) {
+        errors++;
+        console.error(err);
+      }
+    }
+
+    resultPanel.classList.remove('hidden');
+    if (errors > 0) showAlert(`${errors} file(s) failed to convert.`, 'error');
+    else alertBox.classList.add('hidden');
+
+    convertBtn.disabled = false;
+    convertBtn.textContent = '🔄 Convert All';
+  });
+
+  window.downloadSingle = function (idx) {
+    const item = convertedItems[idx];
+    if (item) downloadBlob(item.blob, item.name);
+  };
+
+  downloadAllBtn.addEventListener('click', async () => {
+    if (convertedItems.length === 0) return;
+
+    // Use JSZip for multiple files, or direct download for single
+    if (convertedItems.length === 1) {
+      downloadBlob(convertedItems[0].blob, convertedItems[0].name);
+      return;
+    }
+
+    downloadAllBtn.disabled = true;
+    downloadAllBtn.textContent = '⏳ Creating ZIP…';
+    try {
+      // Dynamically load JSZip if needed
+      if (typeof JSZip === 'undefined') {
+        await new Promise((res, rej) => {
+          const s = document.createElement('script');
+          s.src = 'https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js';
+          s.onload = res; s.onerror = rej;
+          document.head.appendChild(s);
+        });
+      }
+      const zip = new JSZip();
+      convertedItems.forEach(item => zip.file(item.name, item.blob));
+      const zipBlob = await zip.generateAsync({ type: 'blob' });
+      downloadBlob(zipBlob, 'converted-images.zip');
+    } catch (err) {
+      showAlert('ZIP creation failed: ' + err.message, 'error');
+    } finally {
+      downloadAllBtn.disabled = false;
+      downloadAllBtn.textContent = '⬇️ Download All as ZIP';
+    }
+  });
+</script>
+</body>
+</html>

@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PDF Merger — Free Online Tool | ToolKit Pro</title>
+  <meta name="description" content="Merge multiple PDF files into one document instantly. Free, browser-based PDF combiner — no upload, no sign-up, no file size limits." />
+  <link rel="stylesheet" href="../css/style.css" />
+  <script src="../js/common.js"></script>
+  <script src="https://unpkg.com/pdf-lib@1.17.1/dist/pdf-lib.min.js"></script>
+  <style>
+    .nav-links { display:flex; gap:1.5rem; align-items:center; }
+    .nav-links a { color:var(--text); font-size:.9rem; font-weight:500; text-decoration:none; transition:color .2s; }
+    .nav-links a:hover { color:var(--primary); }
+    @media(max-width:768px){ .nav-links { display:none; } }
+  </style>
+</head>
+<body>
+
+<nav class="navbar">
+  <a href="../index.html" class="nav-brand">
+    <div class="logo-icon">🛠</div>
+    ToolKit Pro
+  </a>
+  <div class="nav-links">
+    <a href="../index.html">Home</a>
+    <a href="../index.html#tools">Tools</a>
+    <a href="../blog/index.html">Blog</a>
+    <a href="../about.html">About</a>
+    <a href="../contact.html">Contact</a>
+  </div>
+  <div class="nav-actions">
+    <button class="theme-toggle" id="themeToggle" title="Toggle dark mode">🌙</button>
+  </div>
+</nav>
+
+<div class="tool-page-hero">
+  <h1>📄 PDF Merger</h1>
+  <p>Combine multiple PDF files into a single document. Runs entirely in your browser.</p>
+</div>
+
+<div class="tool-container">
+
+  <div class="panel">
+    <div class="panel-title">📂 Add PDF Files</div>
+
+    <div class="drop-zone" id="dropZone">
+      <input type="file" id="fileInput" accept=".pdf" multiple />
+      <span class="drop-icon">📄</span>
+      <h3>Drop PDF files here</h3>
+      <p>or click to browse — you can add multiple files</p>
+    </div>
+
+    <ul class="file-list" id="fileList"></ul>
+
+    <div id="alertBox" class="alert hidden"></div>
+
+    <div class="progress-bar" id="progressWrap" style="display:none">
+      <div class="progress-fill" id="progressFill"></div>
+    </div>
+
+    <div class="btn-group">
+      <button class="btn btn-primary" id="mergeBtn" disabled>⚙️ Merge PDFs</button>
+      <button class="btn btn-secondary" id="clearBtn">🗑 Clear All</button>
+    </div>
+  </div>
+
+  <div class="panel hidden" id="resultPanel">
+    <div class="panel-title">✅ Merge Complete</div>
+    <p id="resultInfo" class="text-muted" style="margin-bottom:1rem;font-size:0.9rem"></p>
+    <button class="btn btn-success" id="downloadBtn">⬇️ Download Merged PDF</button>
+  </div>
+
+  <div class="panel" style="margin-top:1.5rem">
+    <div class="panel-title">ℹ️ How it works</div>
+    <ol style="padding-left:1.2rem;color:var(--text-muted);font-size:0.9rem;line-height:2">
+      <li>Select or drag &amp; drop multiple PDF files above.</li>
+      <li>Reorder files using the arrows if needed.</li>
+      <li>Click <strong>Merge PDFs</strong> — processing happens in your browser.</li>
+      <li>Download the merged PDF file.</li>
+    </ol>
+  </div>
+</div>
+
+<!-- ===== CONTENT SECTIONS ===== -->
+<div style="max-width:860px;margin:0 auto;padding:0 1rem 2rem">
+
+  <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:2rem;margin-bottom:1.5rem;box-shadow:var(--shadow)">
+    <h2 style="font-size:1.4rem;margin-bottom:1rem;color:var(--primary)">What is the PDF Merger?</h2>
+    <p style="line-height:1.9;color:var(--text);margin-bottom:1rem">The PDF Merger is a free, browser-based tool that lets you combine multiple PDF documents into a single, unified file in seconds. Whether you need to consolidate invoices, merge chapters of a report, combine scanned pages, or bundle contracts into one attachment, this tool handles it all without requiring any software installation or account registration. Every operation happens entirely within your browser using the powerful PDF-lib library, which means your documents never leave your device.</p>
+    <p style="line-height:1.9;color:var(--text)">Common use cases include assembling multi-part forms, combining monthly statements into a yearly archive, packaging portfolio samples, and merging presentation slides with supplementary materials. You can add as many files as needed, reorder them with the arrow buttons to set the exact page sequence, and remove any file that doesn't belong — all before generating the final merged PDF.</p>
+  </div>
+
+  <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:2rem;margin-bottom:1.5rem;box-shadow:var(--shadow)">
+    <h2 style="font-size:1.4rem;margin-bottom:1rem;color:var(--primary)">How to Use — Step-by-Step</h2>
+    <ol style="padding-left:1.5rem;line-height:2;color:var(--text)">
+      <li>Click the drop zone or drag and drop your PDF files directly onto the page.</li>
+      <li>Continue adding files — there is no limit to how many PDFs you can combine.</li>
+      <li>Use the up and down arrow buttons next to each file to arrange them in your desired order.</li>
+      <li>Click the red X button to remove any file you want to exclude from the merge.</li>
+      <li>Click <strong>Merge PDFs</strong> and wait a few moments while the pages are combined in your browser.</li>
+      <li>Once complete, click <strong>Download Merged PDF</strong> to save the combined file to your device.</li>
+    </ol>
+  </div>
+
+  <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:2rem;margin-bottom:1.5rem;box-shadow:var(--shadow)">
+    <h2 style="font-size:1.4rem;margin-bottom:1rem;color:var(--primary)">Key Features &amp; Benefits</h2>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1rem">
+      <div style="padding:1rem;background:var(--bg-secondary);border-radius:8px">
+        <div style="font-size:1.5rem;margin-bottom:.5rem">🔒</div>
+        <strong>100% Private</strong>
+        <p style="font-size:.85rem;color:var(--text-muted);margin-top:.3rem">Your PDFs are processed locally in your browser. Nothing is ever uploaded to a server.</p>
+      </div>
+      <div style="padding:1rem;background:var(--bg-secondary);border-radius:8px">
+        <div style="font-size:1.5rem;margin-bottom:.5rem">🔢</div>
+        <strong>Unlimited Files</strong>
+        <p style="font-size:.85rem;color:var(--text-muted);margin-top:.3rem">Merge two files or twenty — there is no cap on the number of PDFs you can combine.</p>
+      </div>
+      <div style="padding:1rem;background:var(--bg-secondary);border-radius:8px">
+        <div style="font-size:1.5rem;margin-bottom:.5rem">↕️</div>
+        <strong>Custom Page Order</strong>
+        <p style="font-size:.85rem;color:var(--text-muted);margin-top:.3rem">Reorder files with intuitive up/down arrows so pages appear exactly how you want them.</p>
+      </div>
+      <div style="padding:1rem;background:var(--bg-secondary);border-radius:8px">
+        <div style="font-size:1.5rem;margin-bottom:.5rem">⚡</div>
+        <strong>Lightning Fast</strong>
+        <p style="font-size:.85rem;color:var(--text-muted);margin-top:.3rem">PDF-lib runs at native speed in your browser, merging most documents in under a second.</p>
+      </div>
+      <div style="padding:1rem;background:var(--bg-secondary);border-radius:8px">
+        <div style="font-size:1.5rem;margin-bottom:.5rem">🆓</div>
+        <strong>Completely Free</strong>
+        <p style="font-size:.85rem;color:var(--text-muted);margin-top:.3rem">No subscription, no watermarks, no sign-up required. Just open and use.</p>
+      </div>
+      <div style="padding:1rem;background:var(--bg-secondary);border-radius:8px">
+        <div style="font-size:1.5rem;margin-bottom:.5rem">📱</div>
+        <strong>Works on Any Device</strong>
+        <p style="font-size:.85rem;color:var(--text-muted);margin-top:.3rem">Fully responsive design works on desktop, tablet, and mobile browsers without any app install.</p>
+      </div>
+    </div>
+  </div>
+
+  <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:2rem;margin-bottom:1.5rem;box-shadow:var(--shadow)">
+    <h2 style="font-size:1.4rem;margin-bottom:1.25rem;color:var(--primary)">Frequently Asked Questions</h2>
+
+    <details style="border:1px solid var(--border);border-radius:8px;margin-bottom:.75rem;overflow:hidden">
+      <summary style="padding:1rem 1.25rem;cursor:pointer;font-weight:600;background:var(--bg-secondary);user-select:none">❓ Is the PDF Merger free to use?</summary>
+      <div style="padding:1rem 1.25rem;line-height:1.8;color:var(--text-muted)">Yes, the PDF Merger is completely free with no hidden fees, subscription plans, or usage limits. You can merge as many PDFs as you need, as often as you like, without ever creating an account or providing payment information.</div>
+    </details>
+
+    <details style="border:1px solid var(--border);border-radius:8px;margin-bottom:.75rem;overflow:hidden">
+      <summary style="padding:1rem 1.25rem;cursor:pointer;font-weight:600;background:var(--bg-secondary);user-select:none">❓ Is my data secure? Does it upload my files?</summary>
+      <div style="padding:1rem 1.25rem;line-height:1.8;color:var(--text-muted)">Your files are never uploaded to any server. All merging happens locally in your browser using JavaScript. Once you close the tab, nothing is retained. This makes it safe even for sensitive or confidential documents.</div>
+    </details>
+
+    <details style="border:1px solid var(--border);border-radius:8px;margin-bottom:.75rem;overflow:hidden">
+      <summary style="padding:1rem 1.25rem;cursor:pointer;font-weight:600;background:var(--bg-secondary);user-select:none">❓ How many PDF files can I merge at once?</summary>
+      <div style="padding:1rem 1.25rem;line-height:1.8;color:var(--text-muted)">There is no hard limit enforced by the tool. You can add as many files as your browser memory allows. For very large batches of big PDFs, processing may take longer depending on your device's RAM and CPU speed.</div>
+    </details>
+
+    <details style="border:1px solid var(--border);border-radius:8px;margin-bottom:.75rem;overflow:hidden">
+      <summary style="padding:1rem 1.25rem;cursor:pointer;font-weight:600;background:var(--bg-secondary);user-select:none">❓ Will merging PDFs affect the quality of images or text?</summary>
+      <div style="padding:1rem 1.25rem;line-height:1.8;color:var(--text-muted)">No. The PDF Merger copies pages from source documents directly into the new file without re-encoding or compressing them. Image quality, vector graphics, fonts, and text layers are all preserved exactly as they appear in the original files.</div>
+    </details>
+
+    <details style="border:1px solid var(--border);border-radius:8px;margin-bottom:.75rem;overflow:hidden">
+      <summary style="padding:1rem 1.25rem;cursor:pointer;font-weight:600;background:var(--bg-secondary);user-select:none">❓ Can I merge password-protected PDFs?</summary>
+      <div style="padding:1rem 1.25rem;line-height:1.8;color:var(--text-muted)">Password-protected PDFs cannot be merged directly — you will need to remove the password first using a PDF decryption tool. Once the password protection is removed, you can upload and merge the files normally.</div>
+    </details>
+
+    <details style="border:1px solid var(--border);border-radius:8px;margin-bottom:.75rem;overflow:hidden">
+      <summary style="padding:1rem 1.25rem;cursor:pointer;font-weight:600;background:var(--bg-secondary);user-select:none">❓ What file formats are supported?</summary>
+      <div style="padding:1rem 1.25rem;line-height:1.8;color:var(--text-muted)">Only PDF files (.pdf) are supported as input. The output is always a standard PDF file compatible with Adobe Acrobat, Microsoft Edge, macOS Preview, and all major PDF viewers on any operating system.</div>
+    </details>
+  </div>
+
+</div>
+
+<footer style="text-align:center;padding:2rem;color:var(--text-muted);font-size:.85rem;border-top:1px solid var(--border)">
+  <p>© 2025 ToolKit Pro — <a href="../privacy-policy.html">Privacy Policy</a> · <a href="../terms.html">Terms</a> · <a href="../contact.html">Contact</a> · <a href="../index.html">All Tools</a></p>
+</footer>
+
+<script>
+  const pdfFiles = [];
+  let mergedBlob = null;
+
+  const dropZone = document.getElementById('dropZone');
+  const fileInput = document.getElementById('fileInput');
+  const fileList = document.getElementById('fileList');
+  const mergeBtn = document.getElementById('mergeBtn');
+  const clearBtn = document.getElementById('clearBtn');
+  const resultPanel = document.getElementById('resultPanel');
+  const downloadBtn = document.getElementById('downloadBtn');
+  const progressWrap = document.getElementById('progressWrap');
+  const progressFill = document.getElementById('progressFill');
+  const alertBox = document.getElementById('alertBox');
+  const resultInfo = document.getElementById('resultInfo');
+
+  function showAlert(msg, type) {
+    alertBox.className = 'alert alert-' + type;
+    alertBox.innerHTML = (type === 'error' ? '❌ ' : '✅ ') + msg;
+    alertBox.classList.remove('hidden');
+  }
+
+  function hideAlert() { alertBox.classList.add('hidden'); }
+
+  function updateUI() {
+    mergeBtn.disabled = pdfFiles.length < 2;
+    renderList();
+  }
+
+  function renderList() {
+    fileList.innerHTML = '';
+    pdfFiles.forEach((f, i) => {
+      const li = document.createElement('li');
+      li.className = 'file-item';
+      li.innerHTML = `
+        <span>📄</span>
+        <span class="file-name">${f.name}</span>
+        <span class="file-size">${formatSize(f.size)}</span>
+        <div style="display:flex;gap:4px">
+          <button class="remove-btn" title="Move up" onclick="moveFile(${i}, -1)">⬆️</button>
+          <button class="remove-btn" title="Move down" onclick="moveFile(${i}, 1)">⬇️</button>
+          <button class="remove-btn" title="Remove" onclick="removeFile(${i})">✕</button>
+        </div>`;
+      fileList.appendChild(li);
+    });
+  }
+
+  window.removeFile = function (idx) {
+    pdfFiles.splice(idx, 1);
+    updateUI();
+    resultPanel.classList.add('hidden');
+  };
+
+  window.moveFile = function (idx, dir) {
+    const newIdx = idx + dir;
+    if (newIdx < 0 || newIdx >= pdfFiles.length) return;
+    [pdfFiles[idx], pdfFiles[newIdx]] = [pdfFiles[newIdx], pdfFiles[idx]];
+    renderList();
+  };
+
+  function addFiles(files) {
+    hideAlert();
+    let added = 0;
+    Array.from(files).forEach(f => {
+      if (f.type === 'application/pdf' || f.name.toLowerCase().endsWith('.pdf')) {
+        pdfFiles.push(f);
+        added++;
+      }
+    });
+    if (added === 0) showAlert('Please select valid PDF files.', 'error');
+    updateUI();
+    resultPanel.classList.add('hidden');
+  }
+
+  // Drag & drop
+  dropZone.addEventListener('dragover', e => { e.preventDefault(); dropZone.classList.add('drag-over'); });
+  dropZone.addEventListener('dragleave', () => dropZone.classList.remove('drag-over'));
+  dropZone.addEventListener('drop', e => {
+    e.preventDefault();
+    dropZone.classList.remove('drag-over');
+    addFiles(e.dataTransfer.files);
+  });
+  fileInput.addEventListener('change', () => { addFiles(fileInput.files); fileInput.value = ''; });
+
+  clearBtn.addEventListener('click', () => {
+    pdfFiles.length = 0;
+    updateUI();
+    hideAlert();
+    resultPanel.classList.add('hidden');
+    progressWrap.style.display = 'none';
+  });
+
+  mergeBtn.addEventListener('click', async () => {
+    if (pdfFiles.length < 2) return;
+
+    mergeBtn.disabled = true;
+    mergeBtn.textContent = '⏳ Merging…';
+    progressWrap.style.display = 'block';
+    setProgress('progressFill', 10);
+    hideAlert();
+
+    try {
+      const { PDFDocument } = PDFLib;
+      const mergedDoc = await PDFDocument.create();
+
+      for (let i = 0; i < pdfFiles.length; i++) {
+        const pct = 10 + ((i / pdfFiles.length) * 80);
+        setProgress('progressFill', pct);
+
+        const arrayBuffer = await pdfFiles[i].arrayBuffer();
+        const doc = await PDFDocument.load(arrayBuffer);
+        const pages = await mergedDoc.copyPages(doc, doc.getPageIndices());
+        pages.forEach(page => mergedDoc.addPage(page));
+      }
+
+      setProgress('progressFill', 95);
+      const pdfBytes = await mergedDoc.save();
+      mergedBlob = new Blob([pdfBytes], { type: 'application/pdf' });
+
+      setProgress('progressFill', 100);
+
+      const totalPages = (await PDFLib.PDFDocument.load(pdfBytes)).getPageCount();
+      resultInfo.textContent = `Merged ${pdfFiles.length} files — ${totalPages} pages total — ${formatSize(mergedBlob.size)}`;
+      resultPanel.classList.remove('hidden');
+      showAlert('PDFs merged successfully!', 'success');
+
+    } catch (err) {
+      showAlert('Failed to merge PDFs: ' + err.message, 'error');
+      console.error(err);
+    } finally {
+      mergeBtn.disabled = false;
+      mergeBtn.textContent = '⚙️ Merge PDFs';
+    }
+  });
+
+  downloadBtn.addEventListener('click', () => {
+    if (mergedBlob) downloadBlob(mergedBlob, 'merged.pdf');
+  });
+</script>
+</body>
+</html>

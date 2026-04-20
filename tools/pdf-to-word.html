@@ -1,0 +1,661 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PDF to Word Converter — Free Online Tool | ToolKit Pro</title>
+  <meta name="description" content="Convert PDF to editable Word (.docx) documents free online. Browser-based PDF to Word converter — no upload, no software, instant results." />
+  <link rel="stylesheet" href="../css/style.css" />
+  <script src="../js/common.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.4.120/pdf.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+  <style>
+    .tool-container { max-width: 860px; margin: 2rem auto; padding: 0 1rem 4rem; }
+    .back-link { display:inline-flex; align-items:center; gap:.4rem; color:var(--text-muted); font-size:.9rem; margin-bottom:1.5rem; }
+    .back-link:hover { color:var(--primary); text-decoration:none; }
+    .tool-header { text-align:center; margin-bottom:2rem; }
+    .tool-header h1 { font-size:2rem; font-weight:700; margin-bottom:.5rem; }
+    .tool-header p { color:var(--text-muted); }
+    .card { background:var(--surface); border:1px solid var(--border); border-radius:var(--radius); padding:2rem; margin-bottom:1.5rem; box-shadow:var(--shadow); }
+    .drop-zone { border:2px dashed var(--border); border-radius:var(--radius); padding:3rem 2rem; text-align:center; cursor:pointer; transition:var(--transition); background:var(--bg-secondary); }
+    .drop-zone:hover, .drop-zone.drag-over { border-color:var(--primary); background:var(--surface-hover); }
+    .drop-zone .dz-icon { font-size:3rem; margin-bottom:1rem; }
+    .drop-zone h3 { margin-bottom:.5rem; font-size:1.1rem; }
+    .drop-zone p { color:var(--text-muted); font-size:.9rem; }
+    .file-input { display:none; }
+    .btn { display:inline-flex; align-items:center; gap:.5rem; padding:.75rem 1.5rem; border-radius:var(--radius-sm); border:none; font-size:1rem; font-weight:600; cursor:pointer; transition:var(--transition); }
+    .btn-primary { background:var(--primary); color:#fff; }
+    .btn-primary:hover { background:var(--primary-dark); transform:translateY(-1px); }
+    .btn-secondary { background:var(--bg-secondary); color:var(--text); border:1px solid var(--border); }
+    .btn-secondary:hover { background:var(--surface-hover); }
+    .btn:disabled { opacity:.5; cursor:not-allowed; transform:none !important; }
+    .btn-group { display:flex; gap:1rem; flex-wrap:wrap; justify-content:center; margin-top:1.5rem; }
+    .file-info { display:flex; align-items:center; gap:1rem; padding:1rem; background:var(--bg-secondary); border-radius:var(--radius-sm); margin-top:1rem; border:1px solid var(--border); }
+    .file-icon { font-size:2rem; }
+    .file-details { flex:1; }
+    .file-details strong { display:block; font-size:.95rem; word-break:break-all; }
+    .file-details span { font-size:.8rem; color:var(--text-muted); }
+    .progress-wrap { margin-top:1rem; display:none; }
+    .progress-wrap.visible { display:block; }
+    .progress-bar-track { height:8px; background:var(--border); border-radius:4px; overflow:hidden; margin-bottom:.5rem; }
+    .progress-bar-fill { height:100%; background:linear-gradient(90deg,var(--primary),var(--secondary)); border-radius:4px; width:0%; transition:width .3s ease; }
+    .progress-label { font-size:.85rem; color:var(--text-muted); text-align:center; }
+    .result-area { display:none; }
+    .result-area.visible { display:block; }
+    .preview-box { background:var(--bg-secondary); border:1px solid var(--border); border-radius:var(--radius-sm); padding:1.5rem; max-height:400px; overflow-y:auto; font-family:Georgia,'Times New Roman',serif; font-size:.95rem; line-height:1.8; white-space:pre-wrap; word-break:break-word; }
+    .stats-row { display:flex; gap:1rem; flex-wrap:wrap; margin-top:1rem; }
+    .stat-box { flex:1; min-width:120px; background:var(--bg-secondary); border:1px solid var(--border); border-radius:var(--radius-sm); padding:1rem; text-align:center; }
+    .stat-box strong { display:block; font-size:1.4rem; color:var(--primary); }
+    .stat-box span { font-size:.8rem; color:var(--text-muted); }
+    .options-row { display:flex; gap:1rem; flex-wrap:wrap; align-items:center; margin-top:1rem; }
+    .option-group { display:flex; align-items:center; gap:.5rem; }
+    .option-group label { font-size:.9rem; color:var(--text-muted); }
+    .toggle-switch { position:relative; width:42px; height:24px; }
+    .toggle-switch input { opacity:0; width:0; height:0; }
+    .toggle-slider { position:absolute; inset:0; background:var(--border); border-radius:12px; cursor:pointer; transition:.3s; }
+    .toggle-slider::before { content:''; position:absolute; width:18px; height:18px; left:3px; top:3px; background:#fff; border-radius:50%; transition:.3s; }
+    .toggle-switch input:checked + .toggle-slider { background:var(--primary); }
+    .toggle-switch input:checked + .toggle-slider::before { transform:translateX(18px); }
+    .alert { padding:1rem 1.25rem; border-radius:var(--radius-sm); font-size:.9rem; margin-top:1rem; display:none; }
+    .alert.visible { display:block; }
+    .alert-info { background:#e0f0ff; color:#1a5f9e; border:1px solid #b3d9ff; }
+    .alert-success { background:#e0faea; color:#1a6e43; border:1px solid #a3e0be; }
+    .alert-warn { background:#fff8e0; color:#7a5e00; border:1px solid #f0d96a; }
+    [data-theme="dark"] .alert-info { background:#1a3a5c; color:#7ec8f7; border-color:#2a5a8c; }
+    [data-theme="dark"] .alert-success { background:#1a3d2e; color:#6fcf97; border-color:#2a5e45; }
+    [data-theme="dark"] .alert-warn { background:#3d3200; color:#f0c040; border-color:#6a5600; }
+    .how-it-works { list-style:none; counter-reset:steps; }
+    .how-it-works li { counter-increment:steps; display:flex; align-items:flex-start; gap:1rem; padding:.75rem 0; border-bottom:1px solid var(--border); font-size:.95rem; }
+    .how-it-works li:last-child { border-bottom:none; }
+    .how-it-works li::before { content:counter(steps); min-width:28px; height:28px; background:var(--primary); color:#fff; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:.8rem; font-weight:700; flex-shrink:0; }
+    .nav-links { display:flex; gap:1.5rem; align-items:center; }
+    .nav-links a { color:var(--text); font-size:.9rem; font-weight:500; text-decoration:none; transition:color .2s; }
+    .nav-links a:hover { color:var(--primary); }
+    @media(max-width:768px){ .nav-links { display:none; } }
+  </style>
+</head>
+<body>
+
+<nav class="navbar">
+  <a href="../index.html" class="nav-brand">
+    <div class="logo-icon">🛠</div>
+    ToolKit Pro
+  </a>
+  <div class="nav-links">
+    <a href="../index.html">Home</a>
+    <a href="../index.html#tools">Tools</a>
+    <a href="../blog/index.html">Blog</a>
+    <a href="../about.html">About</a>
+    <a href="../contact.html">Contact</a>
+  </div>
+  <div class="nav-actions">
+    <button class="theme-toggle" id="themeToggle" title="Toggle dark mode">🌙</button>
+  </div>
+</nav>
+
+<div class="tool-container">
+  <a href="../index.html" class="back-link">← Back to All Tools</a>
+
+  <div class="tool-header">
+    <h1>📄 PDF to Word Converter</h1>
+    <p>Convert any PDF to an editable Word (.docx) document — free, instant, and 100% private. Your file never leaves your device.</p>
+  </div>
+
+  <!-- Upload -->
+  <div class="card">
+    <div class="drop-zone" id="dropZone">
+      <div class="dz-icon">📂</div>
+      <h3>Drop your PDF here</h3>
+      <p>or click to browse — supports any PDF up to 100 MB</p>
+      <input type="file" class="file-input" id="fileInput" accept=".pdf,application/pdf" />
+    </div>
+
+    <div id="fileInfo" style="display:none">
+      <div class="file-info">
+        <span class="file-icon">📄</span>
+        <div class="file-details">
+          <strong id="fileName">—</strong>
+          <span id="fileSize">—</span>
+        </div>
+        <button class="btn btn-secondary" id="clearBtn" style="padding:.4rem .9rem;font-size:.85rem">✕ Remove</button>
+      </div>
+
+      <div class="options-row">
+        <div class="option-group">
+          <label class="toggle-switch">
+            <input type="checkbox" id="preserveHeadings" checked />
+            <span class="toggle-slider"></span>
+          </label>
+          <label for="preserveHeadings">Detect Headings</label>
+        </div>
+        <div class="option-group">
+          <label class="toggle-switch">
+            <input type="checkbox" id="preserveLineBreaks" checked />
+            <span class="toggle-slider"></span>
+          </label>
+          <label for="preserveLineBreaks">Preserve Line Breaks</label>
+        </div>
+        <div class="option-group">
+          <label class="toggle-switch">
+            <input type="checkbox" id="addPageNumbers" />
+            <span class="toggle-slider"></span>
+          </label>
+          <label for="addPageNumbers">Add Page Labels</label>
+        </div>
+      </div>
+
+      <div class="btn-group">
+        <button class="btn btn-primary" id="convertBtn">⚡ Convert to Word</button>
+      </div>
+
+      <div class="progress-wrap" id="progressWrap">
+        <div class="progress-bar-track"><div class="progress-bar-fill" id="progressFill"></div></div>
+        <div class="progress-label" id="progressLabel">Reading PDF…</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Result -->
+  <div class="card result-area" id="resultArea">
+    <h3 style="margin-bottom:1rem">✅ Conversion Complete</h3>
+
+    <div class="stats-row">
+      <div class="stat-box"><strong id="statPages">0</strong><span>Pages</span></div>
+      <div class="stat-box"><strong id="statWords">0</strong><span>Words</span></div>
+      <div class="stat-box"><strong id="statChars">0</strong><span>Characters</span></div>
+      <div class="stat-box"><strong id="statParas">0</strong><span>Paragraphs</span></div>
+    </div>
+
+    <div style="margin:1.25rem 0">
+      <label style="font-weight:600;font-size:.9rem;display:block;margin-bottom:.5rem">Preview (extracted text):</label>
+      <div class="preview-box" id="previewBox"></div>
+    </div>
+
+    <div class="btn-group">
+      <button class="btn btn-primary" id="downloadDocxBtn">⬇ Download .docx</button>
+      <button class="btn btn-secondary" id="downloadTxtBtn">⬇ Download .txt</button>
+      <button class="btn btn-secondary" id="copyTextBtn">📋 Copy Text</button>
+    </div>
+
+    <div class="alert alert-info visible" style="margin-top:1.25rem">
+      ℹ️ <strong>Note:</strong> PDF to Word conversion preserves text content. Complex layouts (tables, columns, graphics) may not fully replicate — this is a browser limitation with no server processing.
+    </div>
+  </div>
+
+  <!-- How it works -->
+  <div class="card">
+    <h3 style="margin-bottom:1rem">How to Use</h3>
+    <ul class="how-it-works">
+      <li>Upload or drag-and-drop your PDF file into the box above.</li>
+      <li>Choose options: heading detection, line breaks, page labels.</li>
+      <li>Click <strong>Convert to Word</strong> — text is extracted instantly in your browser.</li>
+      <li>Preview the extracted content, then download your <strong>.docx</strong> or <strong>.txt</strong> file.</li>
+    </ul>
+  </div>
+
+  <!-- Features -->
+  <div class="card">
+    <h3 style="margin-bottom:1rem">Why Use This Tool?</h3>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1rem">
+      <div style="display:flex;gap:.75rem;align-items:flex-start">
+        <span style="font-size:1.5rem">🔒</span>
+        <div><strong>100% Private</strong><br><span style="font-size:.85rem;color:var(--text-muted)">Files never leave your device. No server upload.</span></div>
+      </div>
+      <div style="display:flex;gap:.75rem;align-items:flex-start">
+        <span style="font-size:1.5rem">⚡</span>
+        <div><strong>Instant Conversion</strong><br><span style="font-size:.85rem;color:var(--text-muted)">No waiting — conversion happens in real-time.</span></div>
+      </div>
+      <div style="display:flex;gap:.75rem;align-items:flex-start">
+        <span style="font-size:1.5rem">🆓</span>
+        <div><strong>Always Free</strong><br><span style="font-size:.85rem;color:var(--text-muted)">No registration, no watermarks, no limits.</span></div>
+      </div>
+      <div style="display:flex;gap:.75rem;align-items:flex-start">
+        <span style="font-size:1.5rem">📱</span>
+        <div><strong>Works Everywhere</strong><br><span style="font-size:.85rem;color:var(--text-muted)">Desktop, tablet, and mobile browsers supported.</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== CONTENT SECTIONS ===== -->
+<div style="max-width:860px;margin:0 auto;padding:0 1rem 2rem">
+
+  <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:2rem;margin-bottom:1.5rem;box-shadow:var(--shadow)">
+    <h2 style="font-size:1.4rem;margin-bottom:1rem;color:var(--primary)">What is the PDF to Word Converter?</h2>
+    <p style="line-height:1.9;color:var(--text);margin-bottom:1rem">The PDF to Word Converter is a free online tool that extracts text content from PDF documents and outputs a fully editable Microsoft Word (.docx) file — all without uploading your document anywhere. Using Mozilla's PDF.js for text parsing and JSZip for building the Word format, the tool runs entirely inside your browser and delivers your converted file in seconds. It is ideal for converting contracts, reports, academic papers, and business documents that you need to edit, annotate, or reformat in Word.</p>
+    <p style="line-height:1.9;color:var(--text)">The converter intelligently detects heading structure, preserves paragraph breaks, and optionally adds page labels to the output document. While complex layouts with tables, multi-column text, and embedded images are subject to browser-side limitations, the text content itself is faithfully reproduced, giving you a strong starting point for editing without retyping a single word.</p>
+  </div>
+
+  <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:2rem;margin-bottom:1.5rem;box-shadow:var(--shadow)">
+    <h2 style="font-size:1.4rem;margin-bottom:1rem;color:var(--primary)">How to Use — Step-by-Step</h2>
+    <ol style="padding-left:1.5rem;line-height:2;color:var(--text)">
+      <li>Drop your PDF file into the upload zone or click to browse and select it.</li>
+      <li>Choose your conversion options: enable heading detection, line break preservation, and page labels as needed.</li>
+      <li>Click <strong>Convert to Word</strong> and watch the progress bar as each page is processed.</li>
+      <li>Review the text preview to verify the extraction quality before downloading.</li>
+      <li>Click <strong>Download .docx</strong> to save the Word file, or <strong>Download .txt</strong> for plain text.</li>
+      <li>Open the downloaded .docx in Microsoft Word, Google Docs, or LibreOffice to begin editing.</li>
+    </ol>
+  </div>
+
+  <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:2rem;margin-bottom:1.5rem;box-shadow:var(--shadow)">
+    <h2 style="font-size:1.4rem;margin-bottom:1rem;color:var(--primary)">Key Features &amp; Benefits</h2>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1rem">
+      <div style="padding:1rem;background:var(--bg-secondary);border-radius:8px">
+        <div style="font-size:1.5rem;margin-bottom:.5rem">📝</div>
+        <strong>True .docx Output</strong>
+        <p style="font-size:.85rem;color:var(--text-muted);margin-top:.3rem">Generates a proper Open XML Word document compatible with Microsoft Word, Google Docs, and LibreOffice.</p>
+      </div>
+      <div style="padding:1rem;background:var(--bg-secondary);border-radius:8px">
+        <div style="font-size:1.5rem;margin-bottom:.5rem">🔠</div>
+        <strong>Heading Detection</strong>
+        <p style="font-size:.85rem;color:var(--text-muted);margin-top:.3rem">Automatically identifies large text blocks as headings and applies Word heading styles for proper document structure.</p>
+      </div>
+      <div style="padding:1rem;background:var(--bg-secondary);border-radius:8px">
+        <div style="font-size:1.5rem;margin-bottom:.5rem">🔒</div>
+        <strong>100% Private</strong>
+        <p style="font-size:.85rem;color:var(--text-muted);margin-top:.3rem">Everything runs in your browser. Your PDF is never sent to a server — even confidential documents stay on your device.</p>
+      </div>
+      <div style="padding:1rem;background:var(--bg-secondary);border-radius:8px">
+        <div style="font-size:1.5rem;margin-bottom:.5rem">📊</div>
+        <strong>Document Statistics</strong>
+        <p style="font-size:.85rem;color:var(--text-muted);margin-top:.3rem">See word count, character count, page count, and paragraph count after conversion to understand your document scope.</p>
+      </div>
+      <div style="padding:1rem;background:var(--bg-secondary);border-radius:8px">
+        <div style="font-size:1.5rem;margin-bottom:.5rem">👁</div>
+        <strong>Live Text Preview</strong>
+        <p style="font-size:.85rem;color:var(--text-muted);margin-top:.3rem">A scrollable preview lets you inspect the extracted content before downloading to make sure everything looks right.</p>
+      </div>
+      <div style="padding:1rem;background:var(--bg-secondary);border-radius:8px">
+        <div style="font-size:1.5rem;margin-bottom:.5rem">🆓</div>
+        <strong>Always Free</strong>
+        <p style="font-size:.85rem;color:var(--text-muted);margin-top:.3rem">No subscription, no watermarks, no page limits. Convert as many PDFs to Word as you need at zero cost.</p>
+      </div>
+    </div>
+  </div>
+
+  <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:2rem;margin-bottom:1.5rem;box-shadow:var(--shadow)">
+    <h2 style="font-size:1.4rem;margin-bottom:1.25rem;color:var(--primary)">Frequently Asked Questions</h2>
+
+    <details style="border:1px solid var(--border);border-radius:8px;margin-bottom:.75rem;overflow:hidden">
+      <summary style="padding:1rem 1.25rem;cursor:pointer;font-weight:600;background:var(--bg-secondary);user-select:none">❓ Is the PDF to Word Converter free to use?</summary>
+      <div style="padding:1rem 1.25rem;line-height:1.8;color:var(--text-muted)">Yes, entirely free. There are no subscription tiers, conversion limits, or account requirements. You can convert as many PDF documents to Word as you need at no cost.</div>
+    </details>
+
+    <details style="border:1px solid var(--border);border-radius:8px;margin-bottom:.75rem;overflow:hidden">
+      <summary style="padding:1rem 1.25rem;cursor:pointer;font-weight:600;background:var(--bg-secondary);user-select:none">❓ Is my data secure? Does it upload my files?</summary>
+      <div style="padding:1rem 1.25rem;line-height:1.8;color:var(--text-muted)">Your files are never uploaded to any server. PDF extraction and .docx generation happen entirely in your browser using PDF.js and JSZip. When you close the page, nothing persists.</div>
+    </details>
+
+    <details style="border:1px solid var(--border);border-radius:8px;margin-bottom:.75rem;overflow:hidden">
+      <summary style="padding:1rem 1.25rem;cursor:pointer;font-weight:600;background:var(--bg-secondary);user-select:none">❓ Will the formatting be preserved in the Word document?</summary>
+      <div style="padding:1rem 1.25rem;line-height:1.8;color:var(--text-muted)">Text content, paragraph structure, and detected headings are preserved. However, complex formatting like tables, multi-column layouts, text boxes, and embedded images are not carried over due to limitations in browser-side PDF rendering. The result is best described as a clean text-based Word document.</div>
+    </details>
+
+    <details style="border:1px solid var(--border);border-radius:8px;margin-bottom:.75rem;overflow:hidden">
+      <summary style="padding:1rem 1.25rem;cursor:pointer;font-weight:600;background:var(--bg-secondary);user-select:none">❓ Can I open the .docx file in Google Docs?</summary>
+      <div style="padding:1rem 1.25rem;line-height:1.8;color:var(--text-muted)">Yes. The output .docx file uses the standard Open XML format and can be opened in Microsoft Word, Google Docs, LibreOffice Writer, and WPS Office. Simply upload it to Google Drive and open with Google Docs for full editing.</div>
+    </details>
+
+    <details style="border:1px solid var(--border);border-radius:8px;margin-bottom:.75rem;overflow:hidden">
+      <summary style="padding:1rem 1.25rem;cursor:pointer;font-weight:600;background:var(--bg-secondary);user-select:none">❓ What file formats are supported as input?</summary>
+      <div style="padding:1rem 1.25rem;line-height:1.8;color:var(--text-muted)">Only PDF files (.pdf) can be converted. The output is a .docx Word document, or optionally a plain text .txt file if you only need the raw content without Word formatting.</div>
+    </details>
+  </div>
+
+</div>
+
+<footer style="text-align:center;padding:2rem;color:var(--text-muted);font-size:.85rem;border-top:1px solid var(--border)">
+  <p>© 2025 ToolKit Pro — <a href="../privacy-policy.html">Privacy Policy</a> · <a href="../terms.html">Terms</a> · <a href="../contact.html">Contact</a> · <a href="../index.html">All Tools</a></p>
+</footer>
+
+<script>
+  // Theme
+  (function(){
+    const t=localStorage.getItem('theme')||(window.matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light');
+    document.documentElement.setAttribute('data-theme',t);
+    document.getElementById('themeToggle').textContent=t==='dark'?'☀️':'🌙';
+  })();
+  document.getElementById('themeToggle').addEventListener('click',function(){
+    const d=document.documentElement;
+    const t=d.getAttribute('data-theme')==='dark'?'light':'dark';
+    d.setAttribute('data-theme',t);
+    localStorage.setItem('theme',t);
+    this.textContent=t==='dark'?'☀️':'🌙';
+  });
+
+  // PDF.js worker
+  pdfjsLib.GlobalWorkerOptions.workerSrc='https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.4.120/pdf.worker.min.js';
+
+  let extractedText='';
+  let pdfFileName='document';
+  let totalPages=0;
+
+  const dropZone=document.getElementById('dropZone');
+  const fileInput=document.getElementById('fileInput');
+  const fileInfoDiv=document.getElementById('fileInfo');
+  const convertBtn=document.getElementById('convertBtn');
+  const clearBtn=document.getElementById('clearBtn');
+  const progressWrap=document.getElementById('progressWrap');
+  const progressFill=document.getElementById('progressFill');
+  const progressLabel=document.getElementById('progressLabel');
+  const resultArea=document.getElementById('resultArea');
+
+  dropZone.addEventListener('click',()=>fileInput.click());
+  dropZone.addEventListener('dragover',e=>{e.preventDefault();dropZone.classList.add('drag-over');});
+  dropZone.addEventListener('dragleave',()=>dropZone.classList.remove('drag-over'));
+  dropZone.addEventListener('drop',e=>{
+    e.preventDefault();
+    dropZone.classList.remove('drag-over');
+    const f=e.dataTransfer.files[0];
+    if(f&&f.type==='application/pdf') loadFile(f);
+    else alert('Please drop a valid PDF file.');
+  });
+  fileInput.addEventListener('change',()=>{
+    if(fileInput.files[0]) loadFile(fileInput.files[0]);
+  });
+
+  function loadFile(file){
+    pdfFileName=file.name.replace(/\.pdf$/i,'');
+    document.getElementById('fileName').textContent=file.name;
+    document.getElementById('fileSize').textContent=formatFileSize(file.size);
+    fileInfoDiv.style.display='block';
+    resultArea.classList.remove('visible');
+    extractedText='';
+  }
+
+  function formatFileSize(bytes){
+    if(bytes<1024) return bytes+' B';
+    if(bytes<1048576) return (bytes/1024).toFixed(1)+' KB';
+    return (bytes/1048576).toFixed(1)+' MB';
+  }
+
+  clearBtn.addEventListener('click',()=>{
+    fileInput.value='';
+    fileInfoDiv.style.display='none';
+    resultArea.classList.remove('visible');
+    progressWrap.classList.remove('visible');
+    extractedText='';
+  });
+
+  convertBtn.addEventListener('click',()=>{
+    const file=fileInput.files[0];
+    if(!file){alert('Please select a PDF first.');return;}
+    convertPDF(file);
+  });
+
+  async function convertPDF(file){
+    convertBtn.disabled=true;
+    progressWrap.classList.add('visible');
+    setProgress(5,'Loading PDF…');
+
+    try{
+      const arrayBuffer=await file.arrayBuffer();
+      setProgress(15,'Parsing document…');
+
+      const pdf=await pdfjsLib.getDocument({data:arrayBuffer}).promise;
+      totalPages=pdf.numPages;
+      setProgress(20,'Extracting pages…');
+
+      const preserveHeadings=document.getElementById('preserveHeadings').checked;
+      const preserveLineBreaks=document.getElementById('preserveLineBreaks').checked;
+      const addPageNumbers=document.getElementById('addPageNumbers').checked;
+
+      const pages=[];
+      for(let i=1;i<=totalPages;i++){
+        const page=await pdf.getPage(i);
+        const content=await page.getTextContent();
+        let pageText=buildPageText(content,preserveHeadings,preserveLineBreaks);
+        if(addPageNumbers) pageText=`--- Page ${i} ---\n${pageText}`;
+        pages.push(pageText);
+        setProgress(20+Math.round((i/totalPages)*60),`Extracting page ${i} of ${totalPages}…`);
+      }
+
+      extractedText=pages.join('\n\n');
+      setProgress(85,'Building Word document…');
+
+      await new Promise(r=>setTimeout(r,300));
+      setProgress(95,'Finalizing…');
+      await new Promise(r=>setTimeout(r,200));
+
+      showResult();
+      setProgress(100,'Done!');
+      setTimeout(()=>progressWrap.classList.remove('visible'),1000);
+    }catch(err){
+      console.error(err);
+      alert('Error reading PDF: '+err.message+'\nTry a different PDF or check if it is password-protected.');
+      progressWrap.classList.remove('visible');
+    }finally{
+      convertBtn.disabled=false;
+    }
+  }
+
+  function buildPageText(content,preserveHeadings,preserveLineBreaks){
+    const items=content.items;
+    if(!items.length) return '';
+
+    // Group items by approximate Y position (line grouping)
+    const lines=[];
+    let currentLine=[];
+    let lastY=null;
+    const yThreshold=5;
+
+    for(const item of items){
+      const y=Math.round(item.transform[5]);
+      if(lastY===null||Math.abs(y-lastY)<=yThreshold){
+        currentLine.push(item);
+      }else{
+        if(currentLine.length) lines.push({y:lastY,items:[...currentLine]});
+        currentLine=[item];
+      }
+      lastY=y;
+    }
+    if(currentLine.length) lines.push({y:lastY,items:[...currentLine]});
+
+    // Sort lines by Y descending (PDF coords go bottom-up)
+    lines.sort((a,b)=>b.y-a.y);
+
+    const textLines=lines.map(line=>{
+      const sorted=[...line.items].sort((a,b)=>a.transform[4]-b.transform[4]);
+      const txt=sorted.map(i=>i.str).join(' ').trim();
+      return {text:txt,fontSize:line.items[0]?.transform[0]||12};
+    }).filter(l=>l.text.length>0);
+
+    let result='';
+    for(const line of textLines){
+      let txt=line.text;
+      if(preserveHeadings&&line.fontSize>16){
+        txt=`\n${txt.toUpperCase()}\n`;
+      }
+      result+=txt+(preserveLineBreaks?'\n':' ');
+    }
+    return result.trim();
+  }
+
+  function setProgress(pct,label){
+    progressFill.style.width=pct+'%';
+    progressLabel.textContent=label;
+  }
+
+  function showResult(){
+    const words=extractedText.trim().split(/\s+/).filter(w=>w.length>0);
+    const paras=extractedText.split(/\n{2,}/).filter(p=>p.trim().length>0);
+
+    document.getElementById('statPages').textContent=totalPages;
+    document.getElementById('statWords').textContent=words.length.toLocaleString();
+    document.getElementById('statChars').textContent=extractedText.length.toLocaleString();
+    document.getElementById('statParas').textContent=paras.length.toLocaleString();
+    document.getElementById('previewBox').textContent=extractedText.slice(0,3000)+(extractedText.length>3000?'\n\n[… preview truncated — full text in downloaded file …]':'');
+
+    resultArea.classList.add('visible');
+    resultArea.scrollIntoView({behavior:'smooth',block:'start'});
+  }
+
+  // Download DOCX
+  document.getElementById('downloadDocxBtn').addEventListener('click',async()=>{
+    if(!extractedText){return;}
+    const btn=document.getElementById('downloadDocxBtn');
+    btn.disabled=true;
+    btn.textContent='⏳ Building .docx…';
+    try{
+      const blob=await buildDocx(extractedText,pdfFileName);
+      const url=URL.createObjectURL(blob);
+      const a=document.createElement('a');
+      a.href=url;
+      a.download=pdfFileName+'.docx';
+      a.click();
+      setTimeout(()=>URL.revokeObjectURL(url),3000);
+    }catch(e){
+      alert('Could not build .docx: '+e.message);
+    }finally{
+      btn.disabled=false;
+      btn.textContent='⬇ Download .docx';
+    }
+  });
+
+  // Download TXT
+  document.getElementById('downloadTxtBtn').addEventListener('click',()=>{
+    if(!extractedText) return;
+    const blob=new Blob([extractedText],{type:'text/plain;charset=utf-8'});
+    const url=URL.createObjectURL(blob);
+    const a=document.createElement('a');
+    a.href=url;
+    a.download=pdfFileName+'.txt';
+    a.click();
+    setTimeout(()=>URL.revokeObjectURL(url),3000);
+  });
+
+  // Copy text
+  document.getElementById('copyTextBtn').addEventListener('click',()=>{
+    if(!extractedText) return;
+    navigator.clipboard.writeText(extractedText).then(()=>{
+      const btn=document.getElementById('copyTextBtn');
+      btn.textContent='✅ Copied!';
+      setTimeout(()=>btn.textContent='📋 Copy Text',2000);
+    });
+  });
+
+  // Build a proper .docx using JSZip
+  async function buildDocx(text,title){
+    const zip=new JSZip();
+
+    // Content types
+    zip.file('[Content_Types].xml',`<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types">
+  <Default Extension="rels" ContentType="application/vnd.openxmlformats-package.relationships+xml"/>
+  <Default Extension="xml" ContentType="application/xml"/>
+  <Override PartName="/word/document.xml" ContentType="application/vnd.openxmlformats-officedocument.wordprocessingml.document.main+xml"/>
+  <Override PartName="/word/styles.xml" ContentType="application/vnd.openxmlformats-officedocument.wordprocessingml.styles+xml"/>
+  <Override PartName="/word/settings.xml" ContentType="application/vnd.openxmlformats-officedocument.wordprocessingml.settings+xml"/>
+  <Override PartName="/word/fontTable.xml" ContentType="application/vnd.openxmlformats-officedocument.wordprocessingml.fontTable+xml"/>
+</Types>`);
+
+    // Relationships
+    const rels=zip.folder('_rels');
+    rels.file('.rels',`<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">
+  <Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/officeDocument" Target="word/document.xml"/>
+</Relationships>`);
+
+    // Word folder
+    const word=zip.folder('word');
+    const wordRels=word.folder('_rels');
+    wordRels.file('document.xml.rels',`<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">
+  <Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/styles" Target="styles.xml"/>
+  <Relationship Id="rId2" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/settings" Target="settings.xml"/>
+  <Relationship Id="rId3" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/fontTable" Target="fontTable.xml"/>
+</Relationships>`);
+
+    // Styles
+    word.file('styles.xml',`<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<w:styles xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main">
+  <w:docDefaults>
+    <w:rPrDefault><w:rPr>
+      <w:rFonts w:ascii="Calibri" w:hAnsi="Calibri"/>
+      <w:sz w:val="22"/><w:szCs w:val="22"/>
+      <w:lang w:val="en-US"/>
+    </w:rPr></w:rPrDefault>
+  </w:docDefaults>
+  <w:style w:type="paragraph" w:styleId="Normal" w:default="1">
+    <w:name w:val="Normal"/>
+    <w:pPr><w:spacing w:after="160"/></w:pPr>
+  </w:style>
+  <w:style w:type="paragraph" w:styleId="Heading1">
+    <w:name w:val="heading 1"/>
+    <w:basedOn w:val="Normal"/>
+    <w:rPr><w:b/><w:sz w:val="32"/><w:color w:val="2F5496"/></w:rPr>
+  </w:style>
+  <w:style w:type="paragraph" w:styleId="Heading2">
+    <w:name w:val="heading 2"/>
+    <w:basedOn w:val="Normal"/>
+    <w:rPr><w:b/><w:sz w:val="26"/><w:color w:val="2F5496"/></w:rPr>
+  </w:style>
+</w:styles>`);
+
+    // Settings
+    word.file('settings.xml',`<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<w:settings xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main">
+  <w:defaultTabStop w:val="720"/>
+  <w:compat><w:compatSetting w:name="compatibilityMode" w:uri="http://schemas.microsoft.com/office/word" w:val="15"/></w:compat>
+</w:settings>`);
+
+    // Font table
+    word.file('fontTable.xml',`<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<w:fonts xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main">
+  <w:font w:name="Calibri"/>
+  <w:font w:name="Times New Roman"/>
+</w:fonts>`);
+
+    // Build document body from text
+    const paragraphs=text.split('\n').map(line=>{
+      const escaped=escapeXml(line);
+      if(!escaped.trim()){
+        return `<w:p><w:pPr><w:spacing w:after="80"/></w:pPr></w:p>`;
+      }
+      // Detect headings (ALL CAPS short lines)
+      const isHeading=/^[A-Z0-9 .,\-–—:!?]{4,80}$/.test(line.trim())&&line.trim().length<80;
+      if(isHeading&&line.trim()===line.trim().toUpperCase()&&line.trim().split(' ').length<=10){
+        return `<w:p>
+          <w:pPr><w:pStyle w:val="Heading2"/><w:spacing w:before="200" w:after="100"/></w:pPr>
+          <w:r><w:t xml:space="preserve">${escaped}</w:t></w:r>
+        </w:p>`;
+      }
+      return `<w:p>
+        <w:pPr><w:spacing w:after="120"/></w:pPr>
+        <w:r><w:t xml:space="preserve">${escaped}</w:t></w:r>
+      </w:p>`;
+    }).join('\n');
+
+    word.file('document.xml',`<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<w:document xmlns:wpc="http://schemas.microsoft.com/office/word/2010/wordprocessingCanvas"
+  xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main"
+  xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships">
+  <w:body>
+    <w:p>
+      <w:pPr><w:pStyle w:val="Heading1"/><w:spacing w:after="200"/></w:pPr>
+      <w:r><w:t>${escapeXml(title)}</w:t></w:r>
+    </w:p>
+    ${paragraphs}
+    <w:sectPr>
+      <w:pgSz w:w="12240" w:h="15840"/>
+      <w:pgMar w:top="1440" w:right="1440" w:bottom="1440" w:left="1440"/>
+    </w:sectPr>
+  </w:body>
+</w:document>`);
+
+    const blob=await zip.generateAsync({type:'blob',mimeType:'application/vnd.openxmlformats-officedocument.wordprocessingml.document'});
+    return blob;
+  }
+
+  function escapeXml(str){
+    return String(str)
+      .replace(/&/g,'&amp;')
+      .replace(/</g,'&lt;')
+      .replace(/>/g,'&gt;')
+      .replace(/"/g,'&quot;')
+      .replace(/'/g,'&apos;');
+  }
+</script>
+</body>
+</html>

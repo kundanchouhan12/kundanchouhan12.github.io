@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Word & Character Counter — Free Online Tool | ToolKit Pro</title>
+  <meta name="description" content="Count words, characters, sentences, paragraphs and reading time instantly. Free browser-based word counter with keyword frequency analysis and text statistics." />
+  <link rel="stylesheet" href="../css/style.css" />
+  <script src="../js/common.js"></script>
+  <style>
+    .counter-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+    .counter-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 1.1rem;
+      text-align: center;
+      transition: var(--transition);
+    }
+    .counter-card:hover {
+      border-color: var(--primary);
+      transform: translateY(-2px);
+      box-shadow: var(--shadow);
+    }
+    .counter-card .value {
+      font-size: 2rem;
+      font-weight: 800;
+      color: var(--primary);
+      line-height: 1;
+    }
+    .counter-card .label {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      margin-top: 0.3rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .keyword-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-top: 0.75rem;
+    }
+    .keyword-tag {
+      padding: 0.25rem 0.65rem;
+      background: rgba(108,99,255,0.1);
+      border: 1px solid rgba(108,99,255,0.3);
+      border-radius: 50px;
+      font-size: 0.8rem;
+      color: var(--primary);
+    }
+    .highlight-wrap {
+      position: relative;
+    }
+    .toolbar {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+      margin-bottom: 0.75rem;
+      align-items: center;
+    }
+    .nav-links { display:flex; gap:1.5rem; align-items:center; }
+    .nav-links a { color:var(--text); font-size:.9rem; font-weight:500; text-decoration:none; transition:color .2s; }
+    .nav-links a:hover { color:var(--primary); }
+    @media(max-width:768px){ .nav-links { display:none; } }
+  </style>
+</head>
+<body>
+
+<nav class="navbar">
+  <a href="../index.html" class="nav-brand">
+    <div class="logo-icon">🛠</div>
+    ToolKit Pro
+  </a>
+  <div class="nav-links">
+    <a href="../index.html">Home</a>
+    <a href="../index.html#tools">Tools</a>
+    <a href="../blog/index.html">Blog</a>
+    <a href="../about.html">About</a>
+    <a href="../contact.html">Contact</a>
+  </div>
+  <div class="nav-actions">
+    <button class="theme-toggle" id="themeToggle" title="Toggle dark mode">🌙</button>
+  </div>
+</nav>
+
+<div class="tool-page-hero">
+  <h1>📊 Word &amp; Character Counter</h1>
+  <p>Real-time counting of words, characters, sentences, paragraphs, and estimated reading time.</p>
+</div>
+
+<div class="tool-container">
+
+  <div class="panel" style="margin-top:0">
+    <div class="panel-title">✏️ Enter Your Text</div>
+
+    <div class="toolbar">
+      <button class="copy-btn" id="loadSampleBtn">📎 Load Sample</button>
+      <button class="copy-btn" id="clearBtn">🗑 Clear</button>
+      <button class="copy-btn" id="copyTextBtn">📋 Copy</button>
+      <label style="margin-left:auto;font-size:0.85rem;display:flex;align-items:center;gap:0.5rem;cursor:pointer">
+        <input type="checkbox" id="liveCount" checked style="accent-color:var(--primary)" />
+        Live counting
+      </label>
+    </div>
+
+    <textarea class="form-control" id="textInput" style="min-height:250px;resize:vertical" placeholder="Start typing or paste your text here to count words, characters, and more..."></textarea>
+
+    <div class="counter-grid" id="countersGrid">
+      <div class="counter-card"><div class="value" id="cWords">0</div><div class="label">Words</div></div>
+      <div class="counter-card"><div class="value" id="cChars">0</div><div class="label">Characters</div></div>
+      <div class="counter-card"><div class="value" id="cCharsNoSpace">0</div><div class="label">Chars (no spaces)</div></div>
+      <div class="counter-card"><div class="value" id="cSentences">0</div><div class="label">Sentences</div></div>
+      <div class="counter-card"><div class="value" id="cParagraphs">0</div><div class="label">Paragraphs</div></div>
+      <div class="counter-card"><div class="value" id="cLines">0</div><div class="label">Lines</div></div>
+      <div class="counter-card"><div class="value" id="cUnique">0</div><div class="label">Unique Words</div></div>
+      <div class="counter-card"><div class="value" id="cReadTime">0</div><div class="label">Min. Read</div></div>
+    </div>
+  </div>
+
+  <div class="panel">
+    <div class="panel-title">📈 Detailed Analysis</div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:1.5rem">
+      <div>
+        <h4 style="font-size:0.9rem;margin-bottom:0.75rem;color:var(--text-muted)">📊 Text Statistics</h4>
+        <table style="width:100%;font-size:0.875rem;border-collapse:collapse">
+          <tr><td style="padding:0.35rem 0;color:var(--text-muted)">Avg. word length</td><td id="avgWordLen" style="text-align:right;font-weight:600">—</td></tr>
+          <tr><td style="padding:0.35rem 0;color:var(--text-muted)">Avg. sentence length</td><td id="avgSentLen" style="text-align:right;font-weight:600">—</td></tr>
+          <tr><td style="padding:0.35rem 0;color:var(--text-muted)">Longest word</td><td id="longestWord" style="text-align:right;font-weight:600;color:var(--primary)">—</td></tr>
+          <tr><td style="padding:0.35rem 0;color:var(--text-muted)">Most frequent word</td><td id="mostFreq" style="text-align:right;font-weight:600;color:var(--primary)">—</td></tr>
+          <tr><td style="padding:0.35rem 0;color:var(--text-muted)">Numbers</td><td id="cNumbers" style="text-align:right;font-weight:600">—</td></tr>
+          <tr><td style="padding:0.35rem 0;color:var(--text-muted)">Reading speed (200wpm)</td><td id="readTime200" style="text-align:right;font-weight:600">—</td></tr>
+          <tr><td style="padding:0.35rem 0;color:var(--text-muted)">Speaking time (130wpm)</td><td id="speakTime" style="text-align:right;font-weight:600">—</td></tr>
+        </table>
+      </div>
+      <div>
+        <h4 style="font-size:0.9rem;margin-bottom:0.75rem;color:var(--text-muted)">🔑 Top Keywords</h4>
+        <div class="keyword-list" id="keywordList"><span style="color:var(--text-muted);font-size:0.875rem">No text yet</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="panel">
+    <div class="panel-title" style="display:flex;align-items:center;justify-content:space-between">
+      <span>🔍 Find &amp; Highlight</span>
+    </div>
+    <div style="display:flex;gap:0.75rem;align-items:flex-end">
+      <div class="form-group" style="flex:1;margin-bottom:0">
+        <label class="form-label">Search word or phrase</label>
+        <input type="text" class="form-control" id="searchWord" placeholder="Enter word to find..." />
+      </div>
+      <button class="btn btn-secondary" id="findBtn" style="margin-bottom:0">🔍 Find</button>
+    </div>
+    <div id="findResult" style="margin-top:0.75rem;font-size:0.875rem;color:var(--text-muted)"></div>
+  </div>
+
+</div>
+
+<!-- ===== CONTENT SECTIONS ===== -->
+<div style="max-width:860px;margin:0 auto;padding:0 1rem 2rem">
+
+  <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:2rem;margin-bottom:1.5rem;box-shadow:var(--shadow)">
+    <h2 style="font-size:1.4rem;margin-bottom:1rem;color:var(--primary)">What is the Word & Character Counter?</h2>
+    <p style="line-height:1.9;color:var(--text);margin-bottom:1rem">The Word & Character Counter is a free, browser-based writing tool that provides instant, real-time analysis of your text. As you type or paste content, it counts words, characters (with and without spaces), sentences, paragraphs, lines, and unique words. It also estimates reading time at 200 words per minute and speaking time at 130 words per minute — two metrics that are invaluable for writers, bloggers, presenters, and content creators who need to hit specific length targets.</p>
+    <p style="line-height:1.9;color:var(--text)">The tool goes beyond simple counting with a detailed analysis panel that shows average word length, average sentence length, the longest word used, the most frequently occurring non-common word, and a keyword frequency chart showing the top 15 content words. This makes it useful not just for hitting word count targets but for analysing the vocabulary density and readability of your writing — critical for SEO content optimisation and academic writing.</p>
+  </div>
+
+  <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:2rem;margin-bottom:1.5rem;box-shadow:var(--shadow)">
+    <h2 style="font-size:1.4rem;margin-bottom:1rem;color:var(--primary)">How to Use — Step-by-Step</h2>
+    <ol style="padding-left:1.5rem;line-height:2;color:var(--text)">
+      <li>Type or paste your text directly into the text area — counting starts immediately in real-time.</li>
+      <li>The counter grid instantly shows words, characters, characters without spaces, sentences, paragraphs, lines, unique words, and reading time.</li>
+      <li>Scroll down to the Detailed Analysis panel for average word length, sentence length, longest word, and keyword frequency.</li>
+      <li>Use the <strong>Find &amp; Highlight</strong> panel to search for a specific word or phrase and see how many times it appears.</li>
+      <li>Click <strong>Load Sample</strong> to try the tool with example text, or <strong>Clear</strong> to reset everything.</li>
+    </ol>
+  </div>
+
+  <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:2rem;margin-bottom:1.5rem;box-shadow:var(--shadow)">
+    <h2 style="font-size:1.4rem;margin-bottom:1rem;color:var(--primary)">Key Features &amp; Benefits</h2>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1rem">
+      <div style="padding:1rem;background:var(--bg-secondary);border-radius:8px">
+        <div style="font-size:1.5rem;margin-bottom:.5rem">⚡</div>
+        <strong>Real-Time Counting</strong>
+        <p style="font-size:.85rem;color:var(--text-muted);margin-top:.3rem">Every metric updates instantly as you type with a 150ms debounce — no button clicks required for live feedback.</p>
+      </div>
+      <div style="padding:1rem;background:var(--bg-secondary);border-radius:8px">
+        <div style="font-size:1.5rem;margin-bottom:.5rem">📖</div>
+        <strong>Reading & Speaking Time</strong>
+        <p style="font-size:.85rem;color:var(--text-muted);margin-top:.3rem">Estimates both reading time (200 wpm) and speaking time (130 wpm) to help you plan presentations, podcasts, and articles.</p>
+      </div>
+      <div style="padding:1rem;background:var(--bg-secondary);border-radius:8px">
+        <div style="font-size:1.5rem;margin-bottom:.5rem">🔑</div>
+        <strong>Keyword Frequency</strong>
+        <p style="font-size:.85rem;color:var(--text-muted);margin-top:.3rem">Shows the top 15 content words with occurrence counts — useful for SEO keyword density analysis and vocabulary assessment.</p>
+      </div>
+      <div style="padding:1rem;background:var(--bg-secondary);border-radius:8px">
+        <div style="font-size:1.5rem;margin-bottom:.5rem">🔍</div>
+        <strong>Find & Count</strong>
+        <p style="font-size:.85rem;color:var(--text-muted);margin-top:.3rem">Search for any word or phrase and see exactly how many times it appears in your text — perfect for checking keyword repetition.</p>
+      </div>
+      <div style="padding:1rem;background:var(--bg-secondary);border-radius:8px">
+        <div style="font-size:1.5rem;margin-bottom:.5rem">📊</div>
+        <strong>8 Metrics at Once</strong>
+        <p style="font-size:.85rem;color:var(--text-muted);margin-top:.3rem">Words, characters, chars without spaces, sentences, paragraphs, lines, unique words, and reading time — all displayed simultaneously.</p>
+      </div>
+      <div style="padding:1rem;background:var(--bg-secondary);border-radius:8px">
+        <div style="font-size:1.5rem;margin-bottom:.5rem">🆓</div>
+        <strong>Always Free</strong>
+        <p style="font-size:.85rem;color:var(--text-muted);margin-top:.3rem">No account, no limits, no ads blocking the tool. Count words in essays, articles, and reports entirely for free.</p>
+      </div>
+    </div>
+  </div>
+
+  <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:2rem;margin-bottom:1.5rem;box-shadow:var(--shadow)">
+    <h2 style="font-size:1.4rem;margin-bottom:1.25rem;color:var(--primary)">Frequently Asked Questions</h2>
+
+    <details style="border:1px solid var(--border);border-radius:8px;margin-bottom:.75rem;overflow:hidden">
+      <summary style="padding:1rem 1.25rem;cursor:pointer;font-weight:600;background:var(--bg-secondary);user-select:none">❓ Is the Word Counter free to use?</summary>
+      <div style="padding:1rem 1.25rem;line-height:1.8;color:var(--text-muted)">Yes, completely free with no usage limits, account requirements, or hidden fees. Count words in any text — essays, articles, blog posts, or social media content — as often as you need.</div>
+    </details>
+
+    <details style="border:1px solid var(--border);border-radius:8px;margin-bottom:.75rem;overflow:hidden">
+      <summary style="padding:1rem 1.25rem;cursor:pointer;font-weight:600;background:var(--bg-secondary);user-select:none">❓ Is my data secure? Does it upload my text?</summary>
+      <div style="padding:1rem 1.25rem;line-height:1.8;color:var(--text-muted)">Your text is never transmitted to any server. All counting and analysis runs locally in your browser using JavaScript. Confidential drafts, private documents, and sensitive content stay entirely on your device.</div>
+    </details>
+
+    <details style="border:1px solid var(--border);border-radius:8px;margin-bottom:.75rem;overflow:hidden">
+      <summary style="padding:1rem 1.25rem;cursor:pointer;font-weight:600;background:var(--bg-secondary);user-select:none">❓ How is word count calculated?</summary>
+      <div style="padding:1rem 1.25rem;line-height:1.8;color:var(--text-muted)">Words are counted by matching all contiguous sequences of word characters including letters, digits, and apostrophes (contractions count as one word). This matches the counting methodology used by Microsoft Word and Google Docs. Hyphenated words like "well-being" count as one word.</div>
+    </details>
+
+    <details style="border:1px solid var(--border);border-radius:8px;margin-bottom:.75rem;overflow:hidden">
+      <summary style="padding:1rem 1.25rem;cursor:pointer;font-weight:600;background:var(--bg-secondary);user-select:none">❓ What are typical word count targets for different content types?</summary>
+      <div style="padding:1rem 1.25rem;line-height:1.8;color:var(--text-muted)">Typical targets: Twitter posts under 280 characters, Instagram captions under 2,200 characters, blog posts 1,500–2,500 words, short essays 500–800 words, long-form articles 3,000+ words, and academic papers vary by assignment. For SEO, Google favors comprehensive content — top-ranking pages average 1,400–1,900 words.</div>
+    </details>
+
+    <details style="border:1px solid var(--border);border-radius:8px;margin-bottom:.75rem;overflow:hidden">
+      <summary style="padding:1rem 1.25rem;cursor:pointer;font-weight:600;background:var(--bg-secondary);user-select:none">❓ Can I use this for SEO keyword density analysis?</summary>
+      <div style="padding:1rem 1.25rem;line-height:1.8;color:var(--text-muted)">Yes. The keyword frequency panel shows the top 15 most-used meaningful words in your text (stop words like "the", "and", "is" are filtered out). You can see if your target keyword appears enough times and use the Find tool to count specific keyword occurrences for SEO optimisation.</div>
+    </details>
+  </div>
+
+</div>
+
+<footer style="text-align:center;padding:2rem;color:var(--text-muted);font-size:.85rem;border-top:1px solid var(--border)">
+  <p>© 2025 ToolKit Pro — <a href="../privacy-policy.html">Privacy Policy</a> · <a href="../terms.html">Terms</a> · <a href="../contact.html">Contact</a> · <a href="../index.html">All Tools</a></p>
+</footer>
+
+<script>
+  const SAMPLE = `The quick brown fox jumps over the lazy dog. This is a classic pangram used to display fonts.
+
+Word counters are useful tools for writers, students, and content creators. They help track the length of essays, articles, blog posts, and social media content.
+
+ToolKit Pro provides real-time word counting, character counting, sentence detection, and reading time estimates — all running directly in your browser without any server required.
+
+Did you know? The average person reads approximately 200–250 words per minute. A typical blog post is around 1,500 words, taking about 6–7 minutes to read.`;
+
+  const textInput = document.getElementById('textInput');
+  let debounceTimer;
+
+  function countWords(text) {
+    const trimmed = text.trim();
+    if (!trimmed) return [];
+    return trimmed.match(/\b[\w']+\b/g) || [];
+  }
+
+  function countSentences(text) {
+    const trimmed = text.trim();
+    if (!trimmed) return 0;
+    return (trimmed.match(/[.!?]+(\s|$)/g) || []).length || (trimmed.length > 0 ? 1 : 0);
+  }
+
+  function countParagraphs(text) {
+    const trimmed = text.trim();
+    if (!trimmed) return 0;
+    return trimmed.split(/\n\s*\n+/).filter(p => p.trim().length > 0).length;
+  }
+
+  function fmtTime(mins) {
+    if (mins < 1) return '< 1 min';
+    if (mins < 60) return Math.round(mins) + ' min';
+    return Math.floor(mins / 60) + 'h ' + (mins % 60) + 'm';
+  }
+
+  function analyze() {
+    const text = textInput.value;
+    const words = countWords(text);
+    const wordCount = words.length;
+    const charCount = text.length;
+    const charsNoSpace = text.replace(/\s/g, '').length;
+    const sentences = countSentences(text);
+    const paragraphs = countParagraphs(text);
+    const lines = text.split('\n').length;
+    const uniqueWords = new Set(words.map(w => w.toLowerCase())).size;
+    const readTime200 = wordCount / 200;
+
+    document.getElementById('cWords').textContent = wordCount.toLocaleString();
+    document.getElementById('cChars').textContent = charCount.toLocaleString();
+    document.getElementById('cCharsNoSpace').textContent = charsNoSpace.toLocaleString();
+    document.getElementById('cSentences').textContent = sentences.toLocaleString();
+    document.getElementById('cParagraphs').textContent = paragraphs.toLocaleString();
+    document.getElementById('cLines').textContent = lines.toLocaleString();
+    document.getElementById('cUnique').textContent = uniqueWords.toLocaleString();
+    document.getElementById('cReadTime').textContent = wordCount > 0 ? (readTime200 < 1 ? '<1' : Math.round(readTime200)) : '0';
+
+    // Detailed stats
+    const avgWordLen = wordCount > 0 ? (words.reduce((s, w) => s + w.length, 0) / wordCount).toFixed(1) : '—';
+    const avgSentLen = sentences > 0 ? (wordCount / sentences).toFixed(1) : '—';
+    const longest = wordCount > 0 ? words.reduce((a, b) => a.length >= b.length ? a : b) : '—';
+    const numbers = (text.match(/\b\d+\b/g) || []).length;
+
+    document.getElementById('avgWordLen').textContent = avgWordLen + (avgWordLen !== '—' ? ' chars' : '');
+    document.getElementById('avgSentLen').textContent = avgSentLen + (avgSentLen !== '—' ? ' words' : '');
+    document.getElementById('longestWord').textContent = longest;
+    document.getElementById('cNumbers').textContent = numbers;
+    document.getElementById('readTime200').textContent = fmtTime(readTime200);
+    document.getElementById('speakTime').textContent = fmtTime(wordCount / 130);
+
+    // Most frequent word
+    if (words.length > 0) {
+      const freq = {};
+      const stopWords = new Set(['the','a','an','and','or','but','in','on','at','to','for','of','with','is','are','was','were','be','been','this','that','it','as','by','from','have','has','had','not','do','does','did','will','would','can','could','should']);
+      words.forEach(w => { const lw = w.toLowerCase(); if (!stopWords.has(lw) && lw.length > 2) freq[lw] = (freq[lw] || 0) + 1; });
+      const sorted = Object.entries(freq).sort((a, b) => b[1] - a[1]);
+      document.getElementById('mostFreq').textContent = sorted.length ? `"${sorted[0][0]}" (×${sorted[0][1]})` : '—';
+
+      // Keywords (top 15)
+      const kwList = document.getElementById('keywordList');
+      kwList.innerHTML = '';
+      sorted.slice(0, 15).forEach(([word, count]) => {
+        const tag = document.createElement('span');
+        tag.className = 'keyword-tag';
+        tag.textContent = `${word} (${count})`;
+        kwList.appendChild(tag);
+      });
+      if (sorted.length === 0) kwList.innerHTML = '<span style="color:var(--text-muted);font-size:0.875rem">No significant words</span>';
+    } else {
+      document.getElementById('mostFreq').textContent = '—';
+      document.getElementById('keywordList').innerHTML = '<span style="color:var(--text-muted);font-size:0.875rem">No text yet</span>';
+    }
+  }
+
+  function scheduleAnalyze() {
+    if (!document.getElementById('liveCount').checked) return;
+    clearTimeout(debounceTimer);
+    debounceTimer = setTimeout(analyze, 150);
+  }
+
+  textInput.addEventListener('input', scheduleAnalyze);
+
+  document.getElementById('loadSampleBtn').addEventListener('click', () => {
+    textInput.value = SAMPLE;
+    analyze();
+  });
+
+  document.getElementById('clearBtn').addEventListener('click', () => {
+    textInput.value = '';
+    analyze();
+  });
+
+  document.getElementById('copyTextBtn').addEventListener('click', function () {
+    copyToClipboard(textInput.value, this);
+  });
+
+  document.getElementById('findBtn').addEventListener('click', () => {
+    const search = document.getElementById('searchWord').value.trim();
+    const resultEl = document.getElementById('findResult');
+    if (!search || !textInput.value) { resultEl.textContent = ''; return; }
+    try {
+      const regex = new RegExp(search.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'gi');
+      const matches = textInput.value.match(regex);
+      const count = matches ? matches.length : 0;
+      resultEl.innerHTML = count > 0
+        ? `✅ Found <strong>${count}</strong> occurrence${count !== 1 ? 's' : ''} of "<strong>${search}</strong>"`
+        : `❌ "<strong>${search}</strong>" not found in the text.`;
+    } catch (e) {
+      resultEl.textContent = '⚠️ Invalid search pattern';
+    }
+  });
+
+  document.getElementById('searchWord').addEventListener('keydown', e => {
+    if (e.key === 'Enter') document.getElementById('findBtn').click();
+  });
+
+  // Initial
+  analyze();
+</script>
+</body>
+</html>

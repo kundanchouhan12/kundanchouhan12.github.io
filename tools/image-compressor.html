@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Image Compressor — Free Online Tool | ToolKit Pro</title>
+  <meta name="description" content="Compress images online to reduce file size while preserving quality. Free browser-based image compressor with before/after comparison — JPG, PNG, WebP." />
+  <link rel="stylesheet" href="../css/style.css" />
+  <script src="../js/common.js"></script>
+  <style>
+    .compare-wrap {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+    @media(max-width:600px) { .compare-wrap { grid-template-columns: 1fr; } }
+    .compare-box { border: 1px solid var(--border); border-radius: 8px; overflow: hidden; }
+    .compare-box img { width: 100%; height: 220px; object-fit: contain; background: #f0f0f0; display: block; }
+    .compare-info { padding: 0.75rem; font-size: 0.8rem; color: var(--text-muted); background: var(--surface); }
+    .compare-info strong { color: var(--text); }
+    .savings-badge {
+      display: inline-block;
+      padding: 0.2rem 0.6rem;
+      background: rgba(72,199,142,0.15);
+      color: #1a7a4a;
+      border-radius: 50px;
+      font-size: 0.75rem;
+      font-weight: 700;
+    }
+    [data-theme="dark"] .savings-badge { color: #48c78e; }
+    .nav-links { display:flex; gap:1.5rem; align-items:center; }
+    .nav-links a { color:var(--text); font-size:.9rem; font-weight:500; text-decoration:none; transition:color .2s; }
+    .nav-links a:hover { color:var(--primary); }
+    @media(max-width:768px){ .nav-links { display:none; } }
+  </style>
+</head>
+<body>
+
+<nav class="navbar">
+  <a href="../index.html" class="nav-brand">
+    <div class="logo-icon">🛠</div>
+    ToolKit Pro
+  </a>
+  <div class="nav-links">
+    <a href="../index.html">Home</a>
+    <a href="../index.html#tools">Tools</a>
+    <a href="../blog/index.html">Blog</a>
+    <a href="../about.html">About</a>
+    <a href="../contact.html">Contact</a>
+  </div>
+  <div class="nav-actions">
+    <button class="theme-toggle" id="themeToggle" title="Toggle dark mode">🌙</button>
+  </div>
+</nav>
+
+<div class="tool-page-hero">
+  <h1>🗜 Image Compressor</h1>
+  <p>Reduce image file size with quality control. Compare before &amp; after. Runs in your browser.</p>
+</div>
+
+<div class="tool-container">
+
+  <div class="panel">
+    <div class="panel-title">📂 Select Image</div>
+
+    <div class="drop-zone" id="dropZone">
+      <input type="file" id="fileInput" accept="image/*" />
+      <span class="drop-icon">🖼</span>
+      <h3>Drop image here</h3>
+      <p>or click to browse — JPG, PNG, WebP supported</p>
+    </div>
+
+    <div id="alertBox" class="alert hidden"></div>
+  </div>
+
+  <div class="panel hidden" id="settingsPanel">
+    <div class="panel-title">⚙️ Compression Settings</div>
+
+    <div class="form-group">
+      <label class="form-label">
+        Output Format
+      </label>
+      <select class="form-control" id="outputFormat">
+        <option value="jpeg">JPEG (best compression)</option>
+        <option value="png">PNG (lossless)</option>
+        <option value="webp">WebP (modern, efficient)</option>
+      </select>
+    </div>
+
+    <div class="form-group" id="qualityGroup">
+      <label class="form-label" style="display:flex;justify-content:space-between">
+        <span>Quality</span>
+        <strong id="qualityVal">80%</strong>
+      </label>
+      <input type="range" class="form-control-range" id="qualitySlider" min="1" max="100" value="80" />
+      <div style="display:flex;justify-content:space-between;font-size:0.75rem;color:var(--text-muted);margin-top:0.25rem">
+        <span>1% — Smallest</span>
+        <span>100% — Best Quality</span>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label class="form-label" style="display:flex;justify-content:space-between">
+        <span>Max Width (px, 0 = original)</span>
+        <strong id="widthVal">0</strong>
+      </label>
+      <input type="range" class="form-control-range" id="widthSlider" min="0" max="4000" value="0" step="100" />
+    </div>
+
+    <div class="btn-group">
+      <button class="btn btn-primary" id="compressBtn">🗜 Compress Image</button>
+    </div>
+  </div>
+
+  <div class="panel hidden" id="resultPanel">
+    <div class="panel-title" style="display:flex;align-items:center;justify-content:space-between">
+      <span>✅ Compression Result</span>
+      <button class="btn btn-success" id="downloadBtn" style="padding:0.4rem 1rem;font-size:0.875rem">⬇️ Download</button>
+    </div>
+
+    <div style="display:flex;align-items:center;gap:1rem;flex-wrap:wrap;margin-bottom:1rem;font-size:0.9rem">
+      <span id="origSize"></span>
+      <span style="color:var(--primary)">→</span>
+      <span id="newSize"></span>
+      <span class="savings-badge" id="savingsBadge"></span>
+    </div>
+
+    <div class="compare-wrap">
+      <div class="compare-box">
+        <img id="originalImg" alt="Original" />
+        <div class="compare-info"><strong>Original</strong><br><span id="origDims"></span></div>
+      </div>
+      <div class="compare-box">
+        <img id="compressedImg" alt="Compressed" />
+        <div class="compare-info"><strong>Compressed</strong><br><span id="newDims"></span></div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ===== CONTENT SECTIONS ===== -->
+<div style="max-width:860px;margin:0 auto;padding:0 1rem 2rem">
+
+  <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:2rem;margin-bottom:1.5rem;box-shadow:var(--shadow)">
+    <h2 style="font-size:1.4rem;margin-bottom:1rem;color:var(--primary)">What is the Image Compressor?</h2>
+    <p style="line-height:1.9;color:var(--text);margin-bottom:1rem">The Image Compressor is a free, browser-based tool that reduces image file sizes while preserving as much visual quality as possible. By adjusting JPEG or WebP compression levels and optionally resizing to a maximum width, you can dramatically reduce file sizes for web publishing, email attachments, or mobile sharing. A real-time side-by-side comparison shows the original and compressed images simultaneously, so you can judge quality before downloading.</p>
+    <p style="line-height:1.9;color:var(--text)">Web performance is closely tied to image size — large images are the single biggest cause of slow-loading websites. Google's PageSpeed Insights and Core Web Vitals scoring penalise pages with unoptimized images. By compressing images before uploading them to your website, blog, or e-commerce store, you improve load times, reduce bandwidth costs, and deliver a better experience to visitors on slow connections or mobile data.</p>
+  </div>
+
+  <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:2rem;margin-bottom:1.5rem;box-shadow:var(--shadow)">
+    <h2 style="font-size:1.4rem;margin-bottom:1rem;color:var(--primary)">How to Use — Step-by-Step</h2>
+    <ol style="padding-left:1.5rem;line-height:2;color:var(--text)">
+      <li>Click the drop zone or drag your image file onto the page (JPG, PNG, WebP supported).</li>
+      <li>The settings panel appears — choose your output format (JPEG, PNG, or WebP).</li>
+      <li>Adjust the quality slider (1–100%) — lower values create smaller files with reduced quality.</li>
+      <li>Optionally set a maximum width in pixels to resize the image while maintaining aspect ratio.</li>
+      <li>Click <strong>Compress Image</strong> to generate the output.</li>
+      <li>Review the before/after comparison and size savings badge, then click <strong>Download</strong> to save.</li>
+    </ol>
+  </div>
+
+  <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:2rem;margin-bottom:1.5rem;box-shadow:var(--shadow)">
+    <h2 style="font-size:1.4rem;margin-bottom:1rem;color:var(--primary)">Key Features &amp; Benefits</h2>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1rem">
+      <div style="padding:1rem;background:var(--bg-secondary);border-radius:8px">
+        <div style="font-size:1.5rem;margin-bottom:.5rem">🔍</div>
+        <strong>Before/After Comparison</strong>
+        <p style="font-size:.85rem;color:var(--text-muted);margin-top:.3rem">Side-by-side visual comparison of original and compressed images so you can instantly judge quality loss.</p>
+      </div>
+      <div style="padding:1rem;background:var(--bg-secondary);border-radius:8px">
+        <div style="font-size:1.5rem;margin-bottom:.5rem">🎛</div>
+        <strong>Quality Slider</strong>
+        <p style="font-size:.85rem;color:var(--text-muted);margin-top:.3rem">Fine-tune compression from 1% (maximum compression) to 100% (lossless) with a live quality control slider.</p>
+      </div>
+      <div style="padding:1rem;background:var(--bg-secondary);border-radius:8px">
+        <div style="font-size:1.5rem;margin-bottom:.5rem">📏</div>
+        <strong>Resize by Width</strong>
+        <p style="font-size:.85rem;color:var(--text-muted);margin-top:.3rem">Set a maximum pixel width to downscale large images while automatically maintaining the original aspect ratio.</p>
+      </div>
+      <div style="padding:1rem;background:var(--bg-secondary);border-radius:8px">
+        <div style="font-size:1.5rem;margin-bottom:.5rem">🖼</div>
+        <strong>Multiple Output Formats</strong>
+        <p style="font-size:.85rem;color:var(--text-muted);margin-top:.3rem">Export as JPEG (best compression), PNG (lossless), or WebP (modern efficient format with superior compression).</p>
+      </div>
+      <div style="padding:1rem;background:var(--bg-secondary);border-radius:8px">
+        <div style="font-size:1.5rem;margin-bottom:.5rem">🔒</div>
+        <strong>100% Private</strong>
+        <p style="font-size:.85rem;color:var(--text-muted);margin-top:.3rem">Images are processed in your browser using the Canvas API. Nothing is transmitted to any server.</p>
+      </div>
+      <div style="padding:1rem;background:var(--bg-secondary);border-radius:8px">
+        <div style="font-size:1.5rem;margin-bottom:.5rem">🆓</div>
+        <strong>Always Free</strong>
+        <p style="font-size:.85rem;color:var(--text-muted);margin-top:.3rem">No account, no watermarks, no file-size restrictions. Compress images as often as you need at no cost.</p>
+      </div>
+    </div>
+  </div>
+
+  <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:2rem;margin-bottom:1.5rem;box-shadow:var(--shadow)">
+    <h2 style="font-size:1.4rem;margin-bottom:1.25rem;color:var(--primary)">Frequently Asked Questions</h2>
+
+    <details style="border:1px solid var(--border);border-radius:8px;margin-bottom:.75rem;overflow:hidden">
+      <summary style="padding:1rem 1.25rem;cursor:pointer;font-weight:600;background:var(--bg-secondary);user-select:none">❓ Is the Image Compressor free to use?</summary>
+      <div style="padding:1rem 1.25rem;line-height:1.8;color:var(--text-muted)">Yes, completely free. There are no usage caps, watermarks, or sign-up requirements. Compress as many images as you need for websites, emails, or personal use.</div>
+    </details>
+
+    <details style="border:1px solid var(--border);border-radius:8px;margin-bottom:.75rem;overflow:hidden">
+      <summary style="padding:1rem 1.25rem;cursor:pointer;font-weight:600;background:var(--bg-secondary);user-select:none">❓ Is my data secure? Does it upload my images?</summary>
+      <div style="padding:1rem 1.25rem;line-height:1.8;color:var(--text-muted)">Your images are never uploaded. All compression uses the browser's built-in Canvas API to draw and re-encode the image locally on your device. Your photos remain completely private.</div>
+    </details>
+
+    <details style="border:1px solid var(--border);border-radius:8px;margin-bottom:.75rem;overflow:hidden">
+      <summary style="padding:1rem 1.25rem;cursor:pointer;font-weight:600;background:var(--bg-secondary);user-select:none">❓ What quality setting should I use for web images?</summary>
+      <div style="padding:1rem 1.25rem;line-height:1.8;color:var(--text-muted)">For most web images, a quality of 75–85% provides an excellent balance between visual quality and file size. Hero images and product photos can use 80%, while thumbnails and background images can often go as low as 60% without noticeable quality loss.</div>
+    </details>
+
+    <details style="border:1px solid var(--border);border-radius:8px;margin-bottom:.75rem;overflow:hidden">
+      <summary style="padding:1rem 1.25rem;cursor:pointer;font-weight:600;background:var(--bg-secondary);user-select:none">❓ Should I use JPEG, PNG, or WebP output?</summary>
+      <div style="padding:1rem 1.25rem;line-height:1.8;color:var(--text-muted)">Use JPEG for photographs and complex images where some quality loss is acceptable. Use PNG for images with sharp edges, text overlays, or transparency that must be preserved. Use WebP for the best compression-to-quality ratio on modern browsers that support it.</div>
+    </details>
+
+    <details style="border:1px solid var(--border);border-radius:8px;margin-bottom:.75rem;overflow:hidden">
+      <summary style="padding:1rem 1.25rem;cursor:pointer;font-weight:600;background:var(--bg-secondary);user-select:none">❓ What image formats are supported?</summary>
+      <div style="padding:1rem 1.25rem;line-height:1.8;color:var(--text-muted)">You can input JPG, PNG, WebP, GIF, and BMP images. Output formats are JPEG, PNG, and WebP, selectable from the settings panel. The tool automatically suggests the best output format based on your input image type.</div>
+    </details>
+  </div>
+
+</div>
+
+<footer style="text-align:center;padding:2rem;color:var(--text-muted);font-size:.85rem;border-top:1px solid var(--border)">
+  <p>© 2025 ToolKit Pro — <a href="../privacy-policy.html">Privacy Policy</a> · <a href="../terms.html">Terms</a> · <a href="../contact.html">Contact</a> · <a href="../index.html">All Tools</a></p>
+</footer>
+
+<script>
+  const dropZone = document.getElementById('dropZone');
+  const fileInput = document.getElementById('fileInput');
+  const alertBox = document.getElementById('alertBox');
+  const settingsPanel = document.getElementById('settingsPanel');
+  const resultPanel = document.getElementById('resultPanel');
+  const qualitySlider = document.getElementById('qualitySlider');
+  const qualityVal = document.getElementById('qualityVal');
+  const widthSlider = document.getElementById('widthSlider');
+  const widthVal = document.getElementById('widthVal');
+  const outputFormat = document.getElementById('outputFormat');
+  const compressBtn = document.getElementById('compressBtn');
+  const downloadBtn = document.getElementById('downloadBtn');
+  const qualityGroup = document.getElementById('qualityGroup');
+
+  let selectedFile = null;
+  let compressedBlob = null;
+  let originalImg = null;
+
+  function showAlert(msg, type) {
+    alertBox.className = 'alert alert-' + type;
+    alertBox.innerHTML = (type === 'error' ? '❌ ' : '✅ ') + msg;
+    alertBox.classList.remove('hidden');
+  }
+
+  qualitySlider.addEventListener('input', () => {
+    qualityVal.textContent = qualitySlider.value + '%';
+  });
+  widthSlider.addEventListener('input', () => {
+    widthVal.textContent = widthSlider.value == 0 ? 'Original' : widthSlider.value + 'px';
+  });
+  outputFormat.addEventListener('change', () => {
+    qualityGroup.style.display = outputFormat.value === 'png' ? 'none' : 'block';
+  });
+
+  function setFile(file) {
+    if (!file || !file.type.startsWith('image/')) {
+      showAlert('Please select a valid image file.', 'error');
+      return;
+    }
+    selectedFile = file;
+    alertBox.classList.add('hidden');
+    resultPanel.classList.add('hidden');
+    settingsPanel.classList.remove('hidden');
+
+    // Pre-set format based on file type
+    if (file.type === 'image/png') outputFormat.value = 'png';
+    else if (file.type === 'image/webp') outputFormat.value = 'webp';
+    else outputFormat.value = 'jpeg';
+    qualityGroup.style.display = outputFormat.value === 'png' ? 'none' : 'block';
+  }
+
+  dropZone.addEventListener('dragover', e => { e.preventDefault(); dropZone.classList.add('drag-over'); });
+  dropZone.addEventListener('dragleave', () => dropZone.classList.remove('drag-over'));
+  dropZone.addEventListener('drop', e => { e.preventDefault(); dropZone.classList.remove('drag-over'); setFile(e.dataTransfer.files[0]); });
+  fileInput.addEventListener('change', () => setFile(fileInput.files[0]));
+
+  compressBtn.addEventListener('click', async () => {
+    if (!selectedFile) return;
+
+    compressBtn.disabled = true;
+    compressBtn.textContent = '⏳ Compressing…';
+
+    try {
+      const quality = parseInt(qualitySlider.value) / 100;
+      const maxWidth = parseInt(widthSlider.value);
+      const format = outputFormat.value;
+      const mimeType = 'image/' + format;
+
+      // Load image
+      const img = new Image();
+      const objUrl = URL.createObjectURL(selectedFile);
+      await new Promise((res, rej) => { img.onload = res; img.onerror = rej; img.src = objUrl; });
+      URL.revokeObjectURL(objUrl);
+      originalImg = img;
+
+      // Calculate output dimensions
+      let outW = img.naturalWidth;
+      let outH = img.naturalHeight;
+      if (maxWidth > 0 && outW > maxWidth) {
+        outH = Math.round((outH * maxWidth) / outW);
+        outW = maxWidth;
+      }
+
+      // Draw on canvas
+      const canvas = document.createElement('canvas');
+      canvas.width = outW;
+      canvas.height = outH;
+      const ctx = canvas.getContext('2d');
+      if (format === 'jpeg') { ctx.fillStyle = '#fff'; ctx.fillRect(0, 0, outW, outH); }
+      ctx.drawImage(img, 0, 0, outW, outH);
+
+      // Get blob
+      const blob = await new Promise(res => canvas.toBlob(res, mimeType, format === 'png' ? undefined : quality));
+      compressedBlob = blob;
+
+      // Show results
+      const origUrl = URL.createObjectURL(selectedFile);
+      const newUrl = URL.createObjectURL(blob);
+
+      document.getElementById('originalImg').src = origUrl;
+      document.getElementById('compressedImg').src = newUrl;
+      document.getElementById('origDims').textContent = img.naturalWidth + ' × ' + img.naturalHeight + 'px — ' + formatSize(selectedFile.size);
+      document.getElementById('newDims').textContent = outW + ' × ' + outH + 'px — ' + formatSize(blob.size);
+      document.getElementById('origSize').textContent = 'Before: ' + formatSize(selectedFile.size);
+      document.getElementById('newSize').textContent = 'After: ' + formatSize(blob.size);
+
+      const savings = ((1 - blob.size / selectedFile.size) * 100);
+      const savingsText = savings > 0 ? `↓ ${savings.toFixed(1)}% saved` : `↑ ${Math.abs(savings).toFixed(1)}% larger`;
+      document.getElementById('savingsBadge').textContent = savingsText;
+
+      resultPanel.classList.remove('hidden');
+
+    } catch (err) {
+      showAlert('Compression failed: ' + err.message, 'error');
+      console.error(err);
+    } finally {
+      compressBtn.disabled = false;
+      compressBtn.textContent = '🗜 Compress Image';
+    }
+  });
+
+  downloadBtn.addEventListener('click', () => {
+    if (!compressedBlob || !selectedFile) return;
+    const format = outputFormat.value;
+    const ext = format === 'jpeg' ? 'jpg' : format;
+    const baseName = selectedFile.name.replace(/\.[^.]+$/, '');
+    downloadBlob(compressedBlob, baseName + '-compressed.' + ext);
+  });
+</script>
+</body>
+</html>

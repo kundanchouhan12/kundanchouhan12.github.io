@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PNG vs JPG vs WebP: Which Image Format to Use? | ToolKit Pro</title>
+  <meta name="description" content="A complete guide to image formats in 2025 — when to use PNG, JPG, WebP, BMP, or GIF. Learn compression types, browser support, and how to convert between formats.">
+  <link rel="stylesheet" href="../css/style.css">
+  <script src="../js/common.js"></script>
+  <style>
+    .blog-container { max-width: 780px; margin: 2rem auto; padding: 0 1.25rem 5rem; }
+    .blog-hero { background: linear-gradient(135deg, var(--primary), #9c91ff); color: #fff; padding: 3rem 2rem; border-radius: var(--radius); margin-bottom: 2rem; }
+    .blog-hero .category-tag { background: rgba(255,255,255,.2); padding: .3rem .8rem; border-radius: 20px; font-size: .8rem; display: inline-block; margin-bottom: 1rem; }
+    .blog-hero h1 { font-size: 1.9rem; line-height: 1.3; margin-bottom: 1rem; }
+    .blog-meta { display: flex; gap: 1.5rem; font-size: .85rem; opacity: .85; flex-wrap: wrap; }
+    .blog-body { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 2.5rem; box-shadow: var(--shadow); }
+    .blog-body h2 { font-size: 1.3rem; margin: 2rem 0 .75rem; color: var(--primary); border-left: 3px solid var(--primary); padding-left: .75rem; }
+    .blog-body h3 { font-size: 1.1rem; margin: 1.5rem 0 .5rem; font-weight: 600; }
+    .blog-body p { line-height: 1.9; margin-bottom: 1.1rem; color: var(--text); }
+    .blog-body ul, .blog-body ol { padding-left: 1.5rem; margin-bottom: 1.1rem; }
+    .blog-body li { margin-bottom: .5rem; line-height: 1.8; }
+    .blog-body strong { color: var(--text); }
+    .highlight-box { background: var(--bg-secondary); border-left: 4px solid var(--secondary); padding: 1rem 1.25rem; border-radius: 0 8px 8px 0; margin: 1.5rem 0; }
+    .format-table { width:100%; border-collapse:collapse; margin:1.5rem 0; font-size:.9rem; }
+    .format-table th { background:var(--bg-secondary); padding:.65rem 1rem; text-align:left; border:1px solid var(--border); font-weight:700; }
+    .format-table td { padding:.6rem 1rem; border:1px solid var(--border); line-height:1.5; }
+    .format-table tr:hover td { background:var(--bg-secondary); }
+    .related-tools { background: var(--bg-secondary); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.5rem; margin-top: 2rem; }
+    .related-tools h3 { margin-bottom: 1rem; font-size: 1rem; }
+    .related-links { display: flex; flex-wrap: wrap; gap: .75rem; }
+    .related-links a { background: var(--primary); color: #fff; padding: .4rem 1rem; border-radius: 20px; font-size: .85rem; text-decoration: none; transition: opacity .2s; }
+    .related-links a:hover { opacity: .85; }
+    .nav-links { display:flex; gap:1.5rem; align-items:center; }
+    .nav-links a { color:var(--text); font-size:.9rem; font-weight:500; text-decoration:none; transition:color .2s; }
+    .nav-links a:hover { color:var(--primary); }
+    @media(max-width:768px) { .nav-links { display:none; } .blog-hero h1 { font-size:1.5rem; } .blog-body { padding:1.5rem; } .format-table { font-size:.8rem; } }
+  </style>
+</head>
+<body>
+<nav class="navbar">
+  <a href="../index.html" class="nav-brand"><div class="logo-icon">🛠</div>ToolKit Pro</a>
+  <div class="nav-links">
+    <a href="../index.html">Home</a>
+    <a href="../index.html#tools">Tools</a>
+    <a href="index.html">Blog</a>
+    <a href="../about.html">About</a>
+    <a href="../contact.html">Contact</a>
+  </div>
+  <div class="nav-actions"><button class="theme-toggle" id="themeToggle">🌙</button></div>
+</nav>
+
+<div class="blog-container">
+  <a href="index.html" style="display:inline-flex;align-items:center;gap:.4rem;color:var(--text-muted);font-size:.9rem;margin-bottom:1.5rem;text-decoration:none;">← Back to Blog</a>
+
+  <div class="blog-hero">
+    <span class="category-tag">Images</span>
+    <h1>PNG vs JPG vs WebP: Which Image Format Should You Use?</h1>
+    <div class="blog-meta">
+      <span>✍️ ToolKit Pro Team</span>
+      <span>📅 April 2025</span>
+      <span>⏱️ 4 min read</span>
+    </div>
+  </div>
+
+  <article class="blog-body">
+    <p>Pick the wrong image format and you're either serving unnecessarily large files that slow down your website, or you're compressing photographs so aggressively that quality degrades visibly. The choice between PNG, JPG, WebP, and other formats isn't arbitrary — each was designed for a specific type of content and use case. Understanding the differences takes about ten minutes and pays dividends every time you export or share an image.</p>
+
+    <h2>The Core Distinction: Lossy vs. Lossless</h2>
+    <p>Before comparing specific formats, the most important distinction to understand is between lossy and lossless compression. <strong>Lossless</strong> compression reorganizes image data more efficiently without discarding any information — you can perfectly reconstruct the original pixel values from a lossless file. <strong>Lossy</strong> compression permanently discards pixel data that human vision is less sensitive to, achieving smaller files at the cost of some information. This decision shapes every format choice you'll make.</p>
+
+    <h2>PNG: The Lossless Workhorse</h2>
+    <p>PNG (Portable Network Graphics) was created in the mid-1990s as a patent-free replacement for GIF. Its defining feature is lossless compression — every pixel in the original image is preserved exactly in the compressed PNG. This makes it the correct choice for:</p>
+    <ul>
+      <li>Logos and icons with crisp edges and flat areas of color</li>
+      <li>Screenshots of interfaces, code, or text — where blurring would be obvious</li>
+      <li>Images with transparent backgrounds (PNG supports full alpha channel transparency)</li>
+      <li>Illustrations and digital art where exact color reproduction matters</li>
+    </ul>
+    <p>The trade-off is file size: lossless compression can't achieve the extreme reduction that lossy formats can. A photograph saved as PNG will be substantially larger than the same photograph saved as JPEG at high quality. Never use PNG for photographs intended for web use — the file sizes are unjustifiably large.</p>
+
+    <h2>JPEG: The Photograph Standard</h2>
+    <p>JPEG (Joint Photographic Experts Group) has been the dominant photographic format since the early 1990s. It uses lossy compression based on the discrete cosine transform — it breaks the image into 8×8 pixel blocks, converts them to frequency space, and discards high-frequency detail that human eyes are least sensitive to.</p>
+    <p>JPEG excels when compressing photographs and complex natural images with smooth color gradients. At quality settings of 75–85%, the compression is visually transparent — most people cannot tell the difference between the original and a well-compressed JPEG when viewing at normal screen sizes. File sizes are typically 60–80% smaller than equivalent PNG.</p>
+    <p>JPEG's weaknesses: it does not support transparency (images always have a white or colored background), it handles text and sharp geometric edges poorly (producing visible "ringing" artifacts around edges), and quality loss compounds if you re-save a JPEG that was already compressed. Always keep your original, uncompressed source file.</p>
+
+    <h2>WebP: The Modern All-Rounder</h2>
+    <p>WebP was developed by Google and released in 2010, with broad browser support arriving by 2020 (including Safari). It supports both lossy and lossless compression, as well as transparency — essentially combining the best features of JPEG and PNG into a single format with better compression than either.</p>
+    <p>WebP lossy typically achieves 25–35% smaller files than JPEG at equivalent visual quality. WebP lossless is typically 26% smaller than PNG for the same image. For web use, WebP should be your default for all new image work where browser compatibility allows it. Every major browser — Chrome, Firefox, Edge, Safari, Opera — supports WebP as of 2025.</p>
+
+    <div class="highlight-box">
+      <strong>Quick reference:</strong> Use WebP for everything on the web. Use PNG when you need transparency in environments that don't support WebP (older email clients, legacy software). Use JPEG when compatibility is paramount and transparency isn't needed.
+    </div>
+
+    <h2>BMP: The Uncompressed Legacy Format</h2>
+    <p>BMP (Bitmap) is the oldest major format and stores pixel data with no compression whatsoever. Every pixel is written as raw color values. A 1920×1080 BMP image at 24-bit color depth is approximately 6 MB. There is virtually no reason to use BMP for sharing or web use — it exists today primarily for compatibility with older Windows applications and certain embedded systems that can't handle compressed formats. If you receive a BMP, convert it to PNG or WebP before using it anywhere.</p>
+
+    <h2>GIF: Animation's Last Holdout</h2>
+    <p>GIF (Graphics Interchange Format) is limited to 256 colors per frame — making it terrible for photographs — but it was the only widely supported animation format for decades. Despite being an ancient format from 1987, GIF remains widely used because its animation is natively supported in every browser and email client without any additional code. For simple animated icons, loading spinners, and short meme-style clips, GIF still has a niche. For anything with more than 256 colors, use the APNG (animated PNG) or WebP animated formats instead.</p>
+
+    <h2>Quick Decision Table</h2>
+    <table class="format-table">
+      <thead>
+        <tr><th>Use Case</th><th>Best Format</th><th>Why</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Photograph for website</td><td>WebP (lossy)</td><td>Smallest file, excellent quality</td></tr>
+        <tr><td>Logo with transparency</td><td>WebP or PNG</td><td>Lossless, supports alpha</td></tr>
+        <tr><td>Screenshot with text</td><td>PNG or WebP (lossless)</td><td>Crisp edges, no JPEG artifacts</td></tr>
+        <tr><td>Email attachment photo</td><td>JPEG</td><td>Universal compatibility</td></tr>
+        <tr><td>Simple animation</td><td>GIF or WebP animated</td><td>Native browser support</td></tr>
+        <tr><td>Print-ready artwork</td><td>PNG or TIFF</td><td>Lossless, high fidelity</td></tr>
+      </tbody>
+    </table>
+
+    <h2>Converting Between Formats</h2>
+    <p>Converting images between formats is straightforward with a browser-based image converter. The important rules to remember: converting from a lossless format (PNG) to a lossy format (JPEG or WebP lossy) is a one-way quality reduction — you can convert back to PNG, but the quality loss from the JPEG compression is permanent. Always keep original lossless source files and generate lossy web-optimized versions from them, never the other way around.</p>
+
+    <h2>Conclusion</h2>
+    <p>Format choice comes down to content type and use case. WebP is the best all-around format for web use — combine it with PNG for situations requiring transparency in older environments, and JPEG when maximum compatibility matters more than optimal compression. Understanding this two-minute decision before every image export saves bandwidth, improves page speed, and keeps your source files pristine for future use.</p>
+
+    <div class="related-tools">
+      <h3>🛠 Try These Related Tools</h3>
+      <div class="related-links">
+        <a href="../tools/image-converter.html">Image Converter</a>
+        <a href="../tools/image-compressor.html">Image Compressor</a>
+        <a href="../tools/image-to-pdf.html">Image to PDF</a>
+      </div>
+    </div>
+  </article>
+</div>
+
+<footer style="text-align:center;padding:2rem;color:var(--text-muted);font-size:.85rem;border-top:1px solid var(--border)">
+  <p>© 2025 ToolKit Pro — <a href="../privacy-policy.html">Privacy Policy</a> · <a href="../terms.html">Terms</a> · <a href="../contact.html">Contact</a> · <a href="../index.html">All Tools</a></p>
+</footer>
+<script>
+(function(){const t=localStorage.getItem('theme')||(window.matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t);document.getElementById('themeToggle').textContent=t==='dark'?'☀️':'🌙';})();
+document.getElementById('themeToggle').addEventListener('click',function(){const d=document.documentElement;const t=d.getAttribute('data-theme')==='dark'?'light':'dark';d.setAttribute('data-theme',t);localStorage.setItem('theme',t);this.textContent=t==='dark'?'☀️':'🌙';});
+</script>
+</body>
+</html>

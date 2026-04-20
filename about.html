@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About ToolKit Pro — Free Browser-Based Online Tools</title>
+  <meta name="description" content="Learn about ToolKit Pro — our mission to provide free, private, browser-based tools for PDF conversion, image editing, and developer utilities." />
+  <link rel="stylesheet" href="css/style.css" />
+  <style>
+    .nav-links { display:flex; gap:1.5rem; align-items:center; }
+    .nav-links a { color:var(--text); font-size:.9rem; font-weight:500; text-decoration:none; transition:color .2s; }
+    .nav-links a:hover { color:var(--primary); }
+    @media(max-width:768px){ .nav-links { display:none; } }
+
+    .about-container { max-width: 900px; margin: 0 auto; padding: 0 1.25rem 4rem; }
+
+    .about-hero {
+      background: linear-gradient(135deg, #6C63FF 0%, #9B59B6 50%, #FF6584 100%);
+      color: white;
+      padding: 4rem 1.5rem 3rem;
+      text-align: center;
+    }
+    .about-hero h1 { font-size: clamp(1.8rem, 4vw, 2.8rem); font-weight: 800; margin-bottom: 1rem; }
+    .about-hero p { font-size: 1.1rem; opacity: .9; max-width: 600px; margin: 0 auto; }
+
+    .mission-card {
+      background: linear-gradient(135deg, rgba(108,99,255,.08), rgba(255,101,132,.08));
+      border: 2px solid var(--primary);
+      border-radius: var(--radius);
+      padding: 2rem;
+      margin: 2.5rem 0;
+      text-align: center;
+    }
+    .mission-card p {
+      font-size: 1.15rem;
+      font-weight: 600;
+      color: var(--text);
+      line-height: 1.7;
+    }
+
+    .about-section { margin-bottom: 2.5rem; }
+    .about-section h2 {
+      font-size: 1.4rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      color: var(--text);
+      padding-bottom: .5rem;
+      border-bottom: 2px solid var(--primary);
+      display: inline-block;
+    }
+    .about-section p { color: var(--text); line-height: 1.8; font-size: .97rem; margin-bottom: .85rem; }
+
+    .offer-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 1.25rem;
+      margin-top: 1.5rem;
+    }
+    .offer-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.5rem;
+      text-align: center;
+      transition: all .25s ease;
+    }
+    .offer-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); border-color: var(--primary); }
+    .offer-card .offer-icon { font-size: 2.2rem; margin-bottom: .75rem; display: block; }
+    .offer-card h3 { font-size: 1rem; font-weight: 700; margin-bottom: .4rem; }
+    .offer-card p { font-size: .85rem; color: var(--text-muted); line-height: 1.5; }
+
+    .why-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.25rem;
+      margin-top: 1.5rem;
+    }
+    .why-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.5rem;
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+    }
+    .why-card .why-icon { font-size: 2rem; flex-shrink: 0; }
+    .why-card h3 { font-size: .95rem; font-weight: 700; margin-bottom: .35rem; }
+    .why-card p { font-size: .85rem; color: var(--text-muted); line-height: 1.5; }
+
+    .team-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 2rem;
+      text-align: center;
+      margin-bottom: 2.5rem;
+    }
+    .team-card p { color: var(--text-muted); font-size: .97rem; line-height: 1.7; }
+
+    .cta-section { text-align: center; margin: 2rem 0; }
+    .cta-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: .5rem;
+      background: linear-gradient(135deg, var(--primary), #9B59B6);
+      color: #fff;
+      padding: .9rem 2.5rem;
+      border-radius: var(--radius-sm);
+      font-weight: 700;
+      font-size: 1rem;
+      text-decoration: none;
+      transition: all .25s ease;
+      box-shadow: 0 4px 14px rgba(108,99,255,.35);
+    }
+    .cta-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(108,99,255,.45); text-decoration: none; color: #fff; }
+
+    @media(max-width:600px){
+      .why-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<nav class="navbar">
+  <a href="index.html" class="nav-brand"><div class="logo-icon">🛠</div>ToolKit Pro</a>
+  <div class="nav-links">
+    <a href="index.html">Home</a>
+    <a href="index.html#tools">Tools</a>
+    <a href="blog/index.html">Blog</a>
+    <a href="about.html">About</a>
+    <a href="contact.html">Contact</a>
+  </div>
+  <div class="nav-actions"><button class="theme-toggle" id="themeToggle" title="Toggle dark mode">🌙</button></div>
+</nav>
+
+<!-- Hero -->
+<div class="about-hero">
+  <h1>About ToolKit Pro</h1>
+  <p>We build fast, free, privacy-first tools that work entirely in your browser — because your files belong to you.</p>
+</div>
+
+<div class="about-container">
+
+  <!-- Mission Statement -->
+  <div class="mission-card">
+    <p>"Our mission is to provide fast, free, and privacy-first tools that work entirely in your browser — no uploads, no accounts, no limits."</p>
+  </div>
+
+  <!-- Story -->
+  <div class="about-section">
+    <h2>Our Story</h2>
+    <p>ToolKit Pro was founded in 2025 to solve a frustrating problem: most free online tools require you to upload your files to a remote server. That means your private PDFs, personal images, and sensitive documents travel across the internet to machines you know nothing about — and you have no guarantee they're deleted afterward.</p>
+    <p>We believed there was a better way. Modern browsers are extraordinarily powerful. APIs like the File API, Canvas API, Web Workers, and WebAssembly allow full document processing, image manipulation, and code execution to happen entirely on the user's device — with zero server contact.</p>
+    <p>So we built ToolKit Pro: a growing suite of tools that harness these capabilities to give you professional-grade functionality without ever asking for a file upload. From PDF merging to image compression, from JSON formatting to QR code generation — everything runs locally, instantly, and privately.</p>
+  </div>
+
+  <!-- What We Offer -->
+  <div class="about-section">
+    <h2>What We Offer</h2>
+    <div class="offer-grid">
+      <div class="offer-card">
+        <span class="offer-icon">📄</span>
+        <h3>PDF Tools</h3>
+        <p>Merge, compress, convert, and extract text from PDFs — all without uploading a single file.</p>
+      </div>
+      <div class="offer-card">
+        <span class="offer-icon">🖼️</span>
+        <h3>Image Tools</h3>
+        <p>Compress images, convert between formats, and resize photos right in your browser.</p>
+      </div>
+      <div class="offer-card">
+        <span class="offer-icon">📝</span>
+        <h3>Text Tools</h3>
+        <p>Count words, convert letter cases, and transform text with instant real-time results.</p>
+      </div>
+      <div class="offer-card">
+        <span class="offer-icon">💻</span>
+        <h3>Developer Tools</h3>
+        <p>Format JSON, encode Base64, pick colors, and generate QR codes — essential utilities for developers.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Why Choose Us -->
+  <div class="about-section">
+    <h2>Why Choose Us</h2>
+    <div class="why-grid">
+      <div class="why-card">
+        <span class="why-icon">🔒</span>
+        <div>
+          <h3>100% Private</h3>
+          <p>Your files never leave your device. All processing happens locally in your browser using modern Web APIs. We literally cannot see your data.</p>
+        </div>
+      </div>
+      <div class="why-card">
+        <span class="why-icon">⚡</span>
+        <div>
+          <h3>Instant Results</h3>
+          <p>No waiting for server processing, upload queues, or email delivery. Results appear in seconds directly on your screen.</p>
+        </div>
+      </div>
+      <div class="why-card">
+        <span class="why-icon">🆓</span>
+        <div>
+          <h3>Always Free</h3>
+          <p>No hidden costs, no watermarks on outputs, no premium tiers. Every tool on ToolKit Pro is completely free to use with no usage limits.</p>
+        </div>
+      </div>
+      <div class="why-card">
+        <span class="why-icon">📱</span>
+        <div>
+          <h3>Works Everywhere</h3>
+          <p>Fully responsive design works seamlessly on desktop, tablet, and mobile. No app download required — just open your browser.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Team -->
+  <div class="team-card">
+    <h2 style="font-size:1.3rem;font-weight:700;margin-bottom:.75rem;color:var(--text)">Our Team</h2>
+    <p>ToolKit Pro is built by a small team passionate about privacy and productivity. We believe that powerful software doesn't need to come at the cost of your personal data. We're developers and designers who got tired of recommending tools that mishandled user files — so we built something we'd actually use ourselves.</p>
+    <p style="margin-top:.75rem">We're constantly adding new tools, refining existing ones, and listening to user feedback. If you have a suggestion or found a bug, we'd love to hear from you.</p>
+  </div>
+
+  <!-- CTA -->
+  <div class="cta-section">
+    <a href="index.html" class="cta-btn">Explore All Tools →</a>
+  </div>
+
+</div>
+
+<footer style="text-align:center;padding:2rem;color:var(--text-muted);font-size:.85rem;border-top:1px solid var(--border)">
+  <p>© 2025 ToolKit Pro — <a href="privacy-policy.html">Privacy Policy</a> · <a href="terms.html">Terms &amp; Conditions</a> · <a href="disclaimer.html">Disclaimer</a> · <a href="contact.html">Contact</a> · <a href="index.html">All Tools</a></p>
+</footer>
+
+<script>
+(function(){const t=localStorage.getItem('theme')||(window.matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t);document.getElementById('themeToggle').textContent=t==='dark'?'☀️':'🌙';})();
+document.getElementById('themeToggle').addEventListener('click',function(){const d=document.documentElement;const t=d.getAttribute('data-theme')==='dark'?'light':'dark';d.setAttribute('data-theme',t);localStorage.setItem('theme',t);this.textContent=t==='dark'?'☀️':'🌙';});
+</script>
+</body>
+</html>
