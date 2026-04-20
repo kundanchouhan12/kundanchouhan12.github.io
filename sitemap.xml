@@ -3,181 +3,181 @@
 
   <!-- ===== Main Pages ===== -->
   <url>
-    <loc>https://yourusername.github.io/</loc>
+    <loc>https://kundanchouhan12.github.io/</loc>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://yourusername.github.io/about.html</loc>
+    <loc>https://kundanchouhan12.github.io/about.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://yourusername.github.io/contact.html</loc>
+    <loc>https://kundanchouhan12.github.io/contact.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://yourusername.github.io/privacy-policy.html</loc>
+    <loc>https://kundanchouhan12.github.io/privacy-policy.html</loc>
     <changefreq>yearly</changefreq>
     <priority>0.4</priority>
   </url>
   <url>
-    <loc>https://yourusername.github.io/terms.html</loc>
+    <loc>https://kundanchouhan12.github.io/terms.html</loc>
     <changefreq>yearly</changefreq>
     <priority>0.4</priority>
   </url>
   <url>
-    <loc>https://yourusername.github.io/disclaimer.html</loc>
+    <loc>https://kundanchouhan12.github.io/disclaimer.html</loc>
     <changefreq>yearly</changefreq>
     <priority>0.4</priority>
   </url>
 
   <!-- ===== Tool Pages ===== -->
   <url>
-    <loc>https://yourusername.github.io/tools/pdf-merger.html</loc>
+    <loc>https://kundanchouhan12.github.io/tools/pdf-merger.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://yourusername.github.io/tools/pdf-to-text.html</loc>
+    <loc>https://kundanchouhan12.github.io/tools/pdf-to-text.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://yourusername.github.io/tools/pdf-to-word.html</loc>
+    <loc>https://kundanchouhan12.github.io/tools/pdf-to-word.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://yourusername.github.io/tools/word-to-pdf.html</loc>
+    <loc>https://kundanchouhan12.github.io/tools/word-to-pdf.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://yourusername.github.io/tools/image-to-pdf.html</loc>
+    <loc>https://kundanchouhan12.github.io/tools/image-to-pdf.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://yourusername.github.io/tools/pdf-compressor.html</loc>
+    <loc>https://kundanchouhan12.github.io/tools/pdf-compressor.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://yourusername.github.io/tools/image-compressor.html</loc>
+    <loc>https://kundanchouhan12.github.io/tools/image-compressor.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://yourusername.github.io/tools/image-converter.html</loc>
+    <loc>https://kundanchouhan12.github.io/tools/image-converter.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://yourusername.github.io/tools/text-to-pdf.html</loc>
+    <loc>https://kundanchouhan12.github.io/tools/text-to-pdf.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://yourusername.github.io/tools/password-generator.html</loc>
+    <loc>https://kundanchouhan12.github.io/tools/password-generator.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://yourusername.github.io/tools/qr-generator.html</loc>
+    <loc>https://kundanchouhan12.github.io/tools/qr-generator.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://yourusername.github.io/tools/base64.html</loc>
+    <loc>https://kundanchouhan12.github.io/tools/base64.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://yourusername.github.io/tools/json-formatter.html</loc>
+    <loc>https://kundanchouhan12.github.io/tools/json-formatter.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://yourusername.github.io/tools/word-counter.html</loc>
+    <loc>https://kundanchouhan12.github.io/tools/word-counter.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://yourusername.github.io/tools/case-converter.html</loc>
+    <loc>https://kundanchouhan12.github.io/tools/case-converter.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://yourusername.github.io/tools/color-picker.html</loc>
+    <loc>https://kundanchouhan12.github.io/tools/color-picker.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
 
   <!-- ===== Blog Pages ===== -->
   <url>
-    <loc>https://yourusername.github.io/blog/index.html</loc>
+    <loc>https://kundanchouhan12.github.io/blog/index.html</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://yourusername.github.io/blog/best-free-pdf-tools-2026.html</loc>
+    <loc>https://kundanchouhan12.github.io/blog/best-free-pdf-tools-2026.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://yourusername.github.io/blog/how-to-compress-images-without-losing-quality.html</loc>
+    <loc>https://kundanchouhan12.github.io/blog/how-to-compress-images-without-losing-quality.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://yourusername.github.io/blog/merge-pdf-files-online-free.html</loc>
+    <loc>https://kundanchouhan12.github.io/blog/merge-pdf-files-online-free.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://yourusername.github.io/blog/top-tools-for-students-developers.html</loc>
+    <loc>https://kundanchouhan12.github.io/blog/top-tools-for-students-developers.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://yourusername.github.io/blog/strong-password-guide.html</loc>
+    <loc>https://kundanchouhan12.github.io/blog/strong-password-guide.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://yourusername.github.io/blog/convert-pdf-to-word-guide.html</loc>
+    <loc>https://kundanchouhan12.github.io/blog/convert-pdf-to-word-guide.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://yourusername.github.io/blog/image-formats-explained.html</loc>
+    <loc>https://kundanchouhan12.github.io/blog/image-formats-explained.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://yourusername.github.io/blog/qr-code-guide.html</loc>
+    <loc>https://kundanchouhan12.github.io/blog/qr-code-guide.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://yourusername.github.io/blog/json-for-beginners.html</loc>
+    <loc>https://kundanchouhan12.github.io/blog/json-for-beginners.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://yourusername.github.io/blog/pdf-compression-guide.html</loc>
+    <loc>https://kundanchouhan12.github.io/blog/pdf-compression-guide.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://yourusername.github.io/blog/web-design-color-guide.html</loc>
+    <loc>https://kundanchouhan12.github.io/blog/web-design-color-guide.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://yourusername.github.io/blog/base64-encoding-explained.html</loc>
+    <loc>https://kundanchouhan12.github.io/blog/base64-encoding-explained.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>

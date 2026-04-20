@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Page Not Found — ToolKit Pro</title>
+  <meta name="robots" content="noindex, follow" />
+  <link rel="stylesheet" href="css/style.css" />
+  <style>
+    .nav-links{display:flex;gap:1.5rem;align-items:center;}
+    .nav-links a{color:var(--text);font-size:.9rem;font-weight:500;text-decoration:none;transition:color .2s;}
+    .nav-links a:hover{color:var(--primary);}
+    @media(max-width:768px){.nav-links{display:none;}}
+    .error-container{max-width:600px;margin:5rem auto;padding:2rem;text-align:center;}
+    .error-code{font-size:8rem;font-weight:900;color:var(--primary);line-height:1;margin-bottom:1rem;}
+    .error-title{font-size:1.8rem;font-weight:700;margin-bottom:1rem;}
+    .error-msg{color:var(--text-muted);margin-bottom:2rem;line-height:1.7;}
+    .btn-home{display:inline-flex;align-items:center;gap:.5rem;background:var(--primary);color:#fff;padding:.75rem 1.75rem;border-radius:8px;text-decoration:none;font-weight:600;transition:opacity .2s;}
+    .btn-home:hover{opacity:.85;text-decoration:none;}
+    .popular-tools{margin-top:3rem;text-align:left;}
+    .popular-tools h3{font-size:1rem;color:var(--text-muted);margin-bottom:1rem;text-align:center;}
+    .tool-links{display:flex;flex-wrap:wrap;gap:.6rem;justify-content:center;}
+    .tool-links a{background:var(--bg-secondary);border:1px solid var(--border);padding:.4rem .9rem;border-radius:20px;font-size:.85rem;color:var(--text);text-decoration:none;transition:all .2s;}
+    .tool-links a:hover{border-color:var(--primary);color:var(--primary);text-decoration:none;}
+  </style>
+</head>
+<body>
+<nav class="navbar">
+  <a href="index.html" class="nav-brand"><div class="logo-icon">🛠</div>ToolKit Pro</a>
+  <div class="nav-links">
+    <a href="index.html">Home</a>
+    <a href="index.html#tools">Tools</a>
+    <a href="blog/index.html">Blog</a>
+    <a href="about.html">About</a>
+    <a href="contact.html">Contact</a>
+  </div>
+  <div class="nav-actions"><button class="theme-toggle" id="themeToggle">🌙</button></div>
+</nav>
+
+<div class="error-container">
+  <div class="error-code">404</div>
+  <h1 class="error-title">Page Not Found</h1>
+  <p class="error-msg">Oops! The page you're looking for doesn't exist or may have been moved. Let's get you back on track.</p>
+  <a href="index.html" class="btn-home">🏠 Back to Home</a>
+
+  <div class="popular-tools">
+    <h3>Popular Tools</h3>
+    <div class="tool-links">
+      <a href="tools/pdf-merger.html">📄 PDF Merger</a>
+      <a href="tools/pdf-to-word.html">📝 PDF to Word</a>
+      <a href="tools/image-compressor.html">🗜 Image Compressor</a>
+      <a href="tools/password-generator.html">🔑 Password Generator</a>
+      <a href="tools/qr-generator.html">📱 QR Code Generator</a>
+      <a href="tools/json-formatter.html">{ } JSON Formatter</a>
+      <a href="tools/color-picker.html">🎨 Color Picker</a>
+      <a href="tools/word-counter.html">📊 Word Counter</a>
+    </div>
+  </div>
+</div>
+
+<footer style="text-align:center;padding:2rem;color:var(--text-muted);font-size:.85rem;border-top:1px solid var(--border);margin-top:4rem">
+  <p>© 2025 ToolKit Pro — <a href="privacy-policy.html">Privacy Policy</a> · <a href="contact.html">Contact</a> · <a href="index.html">All Tools</a></p>
+</footer>
+
+<script src="js/common.js"></script>
+<script>
+(function(){const t=localStorage.getItem('theme')||(window.matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t);document.getElementById('themeToggle').textContent=t==='dark'?'☀️':'🌙';})();
+document.getElementById('themeToggle').addEventListener('click',function(){const d=document.documentElement;const t=d.getAttribute('data-theme')==='dark'?'light':'dark';d.setAttribute('data-theme',t);localStorage.setItem('theme',t);this.textContent=t==='dark'?'☀️':'🌙';});
+</script>
+</body>
+</html>
