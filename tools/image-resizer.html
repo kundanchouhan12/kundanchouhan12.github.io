@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Image Resizer Online Free — Resize Image to Any Size | ToolKit Pro</title>
+  <meta name="description" content="Resize images online free. Set exact dimensions in pixels or percentage. Resize JPG, PNG, WebP images without losing quality — no upload, instant download." />
+
+  <link rel="canonical" href="https://kundanchouhan12.github.io/tools/image-resizer.html" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Image Resizer Online Free — Resize Image to Any Size | ToolKit Pro" />
+  <meta property="og:description" content="Resize images online free. Set exact dimensions in pixels or percentage. Resize JPG, PNG, WebP images without losing quality — no upload, instant download." />
+  <meta property="og:url" content="https://kundanchouhan12.github.io/tools/image-resizer.html" />
+  <meta property="og:site_name" content="ToolKit Pro" />
+  <meta property="og:image" content="https://kundanchouhan12.github.io/og-image.png" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Image Resizer Online Free — Resize Image to Any Size | ToolKit Pro" />
+  <meta name="twitter:description" content="Resize images online free. Set exact dimensions in pixels or percentage. Resize JPG, PNG, WebP images without losing quality — no upload, instant download." />
+
+  <meta name="keywords" content="image resizer online, resize image online free, resize image to specific size, reduce image size kb, resize jpg online, resize png free, image resize tool, photo resizer online, resize image pixels, toolkit pro" />
+  <meta name="robots" content="index, follow" />
+  <meta name="author" content="ToolKit Pro" />
+
+  <link rel="stylesheet" href="../css/style.css" />
+  <script src="../js/common.js"></script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Image Resizer",
+    "description": "Resize images online free. Set exact dimensions in pixels or percentage. Resize JPG, PNG, WebP images without losing quality — no upload, instant download.",
+    "url": "https://kundanchouhan12.github.io/tools/image-resizer.html",
+    "applicationCategory": "MultimediaApplication",
+    "operatingSystem": "Any (Web Browser)",
+    "browserRequirements": "Requires JavaScript",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+    "publisher": { "@type": "Organization", "name": "ToolKit Pro", "url": "https://kundanchouhan12.github.io/" },
+    "featureList": "Drag and drop upload, Pixel and percentage resize, Aspect ratio lock, Preset dimensions, JPEG/PNG/WebP output, Quality slider, Side-by-side preview, Instant download, No data transmitted"
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://kundanchouhan12.github.io/" },
+      { "@type": "ListItem", "position": 2, "name": "Tools", "item": "https://kundanchouhan12.github.io/#tools" },
+      { "@type": "ListItem", "position": 3, "name": "Image Resizer", "item": "https://kundanchouhan12.github.io/tools/image-resizer.html" }
+    ]
+  }
+  </script>
+
+  <style>
+    .nav-links{display:flex;gap:1.5rem;align-items:center;}
+    .nav-links a{color:var(--text);font-size:.9rem;font-weight:500;text-decoration:none;transition:color .2s;}
+    .nav-links a:hover{color:var(--primary);}
+    @media(max-width:768px){.nav-links{display:none;}}
+
+    .drop-zone{border:2px dashed var(--border);border-radius:var(--radius);padding:3rem 2rem;text-align:center;cursor:pointer;transition:all .2s;background:var(--bg-secondary);}
+    .drop-zone:hover,.drop-zone.dragover{border-color:var(--primary);background:color-mix(in srgb,var(--primary) 8%,transparent);}
+    .drop-zone .drop-icon{font-size:3rem;margin-bottom:.75rem;}
+    .drop-zone p{color:var(--text-muted);margin:.25rem 0;}
+
+    .presets{display:flex;flex-wrap:wrap;gap:.5rem;margin:.75rem 0;}
+    .preset-btn{padding:.35rem .8rem;border-radius:6px;border:1px solid var(--border);background:var(--bg-secondary);color:var(--text);font-size:.8rem;cursor:pointer;transition:all .2s;}
+    .preset-btn:hover{border-color:var(--primary);color:var(--primary);}
+
+    .preview-wrap{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-top:1rem;}
+    @media(max-width:600px){.preview-wrap{grid-template-columns:1fr;}}
+    .preview-box{text-align:center;}
+    .preview-box canvas,.preview-box img{max-width:100%;max-height:280px;border-radius:8px;border:1px solid var(--border);object-fit:contain;}
+    .preview-label{font-size:.8rem;color:var(--text-muted);margin-bottom:.4rem;font-weight:600;}
+
+    .stats-row{display:flex;gap:1rem;flex-wrap:wrap;margin-top:.75rem;}
+    .stat-chip{padding:.4rem .85rem;background:var(--bg-secondary);border-radius:6px;font-size:.82rem;border:1px solid var(--border);}
+    .stat-chip strong{color:var(--primary);}
+
+    .resize-mode-tabs{display:flex;gap:0;border:1px solid var(--border);border-radius:8px;overflow:hidden;margin-bottom:1rem;width:fit-content;}
+    .resize-mode-tabs button{padding:.5rem 1.2rem;border:none;background:var(--bg-secondary);color:var(--text-muted);font-size:.88rem;font-weight:600;cursor:pointer;transition:all .2s;}
+    .resize-mode-tabs button.active{background:var(--primary);color:#fff;}
+
+    .hidden{display:none!important;}
+  </style>
+</head>
+<body>
+
+<nav class="navbar">
+  <a href="../index.html" class="nav-brand"><div class="logo-icon">🛠</div>ToolKit Pro</a>
+  <div class="nav-links">
+    <a href="../index.html">Home</a>
+    <a href="../index.html#tools">Tools</a>
+    <a href="../blog/index.html">Blog</a>
+    <a href="../about.html">About</a>
+    <a href="../contact.html">Contact</a>
+  </div>
+  <div class="nav-actions"><button class="theme-toggle" id="themeToggle">🌙</button></div>
+</nav>
+
+<div class="tool-page-hero">
+  <h1>🖼️ Image Resizer</h1>
+  <p>Resize JPG, PNG, WebP images to any size. Set pixels or percentage, lock aspect ratio, preview instantly, download immediately.</p>
+</div>
+
+<div class="tool-container">
+
+  <!-- Upload Panel -->
+  <div class="panel">
+    <div class="panel-title">📁 Upload Image</div>
+    <div class="drop-zone" id="dropZone" onclick="document.getElementById('fileInput').click()">
+      <div class="drop-icon">📂</div>
+      <p><strong>Click to choose</strong> or drag &amp; drop an image here</p>
+      <p style="font-size:.8rem">Supports JPG, PNG, WebP, BMP, GIF</p>
+    </div>
+    <input type="file" id="fileInput" accept="image/jpeg,image/png,image/webp,image/bmp,image/gif" style="display:none" onchange="handleFile(this.files[0])" />
+  </div>
+
+  <!-- Options Panel (hidden until image loaded) -->
+  <div class="panel hidden" id="optionsPanel">
+    <div class="panel-title">⚙️ Resize Options</div>
+
+    <div class="resize-mode-tabs">
+      <button class="active" id="modePixelBtn" onclick="setMode('pixel')">By Pixels</button>
+      <button id="modePctBtn" onclick="setMode('percent')">By Percentage</button>
+    </div>
+
+    <!-- Pixel mode -->
+    <div id="pixelMode">
+      <div style="display:flex;gap:1rem;align-items:flex-end;flex-wrap:wrap;margin-bottom:.75rem">
+        <div class="form-group" style="margin:0;flex:1;min-width:120px">
+          <label class="form-label">Width (px)</label>
+          <input type="number" class="form-control" id="targetW" min="1" oninput="onWidthChange()" />
+        </div>
+        <div style="padding-bottom:.75rem;color:var(--text-muted);font-size:1.2rem">×</div>
+        <div class="form-group" style="margin:0;flex:1;min-width:120px">
+          <label class="form-label">Height (px)</label>
+          <input type="number" class="form-control" id="targetH" min="1" oninput="onHeightChange()" />
+        </div>
+        <div class="checkbox-group" style="padding-bottom:.5rem">
+          <input type="checkbox" id="lockAspect" checked onchange="updatePreviewStats()" />
+          <label for="lockAspect">Lock aspect ratio</label>
+        </div>
+      </div>
+      <div class="presets">
+        <span style="font-size:.82rem;color:var(--text-muted);align-self:center;margin-right:.25rem">Presets:</span>
+        <button class="preset-btn" onclick="applyPreset(1920,1080)">1920×1080</button>
+        <button class="preset-btn" onclick="applyPreset(1280,720)">1280×720</button>
+        <button class="preset-btn" onclick="applyPreset(800,600)">800×600</button>
+        <button class="preset-btn" onclick="applyPreset(640,480)">640×480</button>
+        <button class="preset-btn" onclick="applyPreset(400,400)">400×400</button>
+        <button class="preset-btn" onclick="applyPreset(200,200)">200×200</button>
+      </div>
+    </div>
+
+    <!-- Percent mode -->
+    <div id="percentMode" class="hidden">
+      <div class="form-group">
+        <label class="form-label" style="display:flex;justify-content:space-between">
+          <span>Scale Percentage</span>
+          <strong id="pctVal">100%</strong>
+        </label>
+        <input type="range" class="form-control-range" id="pctSlider" min="10" max="200" value="100" oninput="onPctChange()" />
+        <div style="display:flex;justify-content:space-between;font-size:.75rem;color:var(--text-muted);margin-top:.25rem"><span>10%</span><span>200%</span></div>
+      </div>
+      <div id="pctResultDims" style="font-size:.85rem;color:var(--text-muted);margin-top:.25rem"></div>
+    </div>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-top:1rem">
+      <div class="form-group" style="margin:0">
+        <label class="form-label">Output Format</label>
+        <select class="form-control" id="outputFormat" onchange="toggleQualitySlider()">
+          <option value="same">Same as input</option>
+          <option value="image/jpeg">JPEG</option>
+          <option value="image/png">PNG</option>
+          <option value="image/webp">WebP</option>
+        </select>
+      </div>
+      <div class="form-group" style="margin:0" id="qualityGroup">
+        <label class="form-label" style="display:flex;justify-content:space-between"><span>Quality</span><strong id="qualityVal">90%</strong></label>
+        <input type="range" class="form-control-range" id="qualitySlider" min="60" max="100" value="90" oninput="document.getElementById('qualityVal').textContent=this.value+'%'" />
+      </div>
+    </div>
+
+    <div class="btn-group" style="margin-top:1.25rem">
+      <button class="btn btn-primary" onclick="applyResize()">🔄 Resize &amp; Preview</button>
+      <button class="btn btn-secondary" onclick="resetTool()">🗑 Reset</button>
+    </div>
+  </div>
+
+  <!-- Stats Panel -->
+  <div class="panel hidden" id="statsPanel">
+    <div class="panel-title">📊 Image Info</div>
+    <div class="stats-row" id="statsRow"></div>
+  </div>
+
+  <!-- Preview Panel -->
+  <div class="panel hidden" id="previewPanel">
+    <div class="panel-title" style="display:flex;justify-content:space-between;align-items:center">
+      <span>🖼️ Preview</span>
+      <button class="btn btn-primary" id="downloadBtn" onclick="downloadImage()" style="padding:.4rem 1rem;font-size:.85rem">⬇️ Download</button>
+    </div>
+    <div class="preview-wrap">
+      <div class="preview-box">
+        <div class="preview-label">Original</div>
+        <img id="origPreview" src="" alt="Original" />
+      </div>
+      <div class="preview-box">
+        <div class="preview-label">Resized</div>
+        <canvas id="resizedCanvas"></canvas>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- CONTENT SECTIONS -->
+<div style="max-width:860px;margin:0 auto;padding:0 1rem 2rem">
+
+  <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:2rem;margin-bottom:1.5rem;box-shadow:var(--shadow)">
+    <h2 style="font-size:1.4rem;margin-bottom:1rem;color:var(--primary)">What is the Image Resizer?</h2>
+    <p style="line-height:1.9;color:var(--text);margin-bottom:1rem">The Image Resizer is a free, browser-based tool that lets you change the dimensions of any image — JPG, PNG, WebP, BMP, or GIF — without installing software or uploading files to a server. Everything is processed entirely in your browser using the HTML5 Canvas API, which means your images stay completely private. The tool supports both exact pixel dimensions and percentage-based scaling, includes an aspect ratio lock to prevent distortion, and lets you choose the output format and quality.</p>
+    <p style="line-height:1.9;color:var(--text)">Resizing images is a common need for web developers, designers, social media managers, and photographers. Whether you're optimising images for page speed, fitting a photo to specific platform dimensions, or reducing file size for email attachments, this tool gives you full control with instant visual feedback.</p>
+  </div>
+
+  <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:2rem;margin-bottom:1.5rem;box-shadow:var(--shadow)">
+    <h2 style="font-size:1.4rem;margin-bottom:1rem;color:var(--primary)">How to Use — Step-by-Step</h2>
+    <ol style="padding-left:1.5rem;line-height:2;color:var(--text)">
+      <li>Click the upload area or drag and drop your image file (JPG, PNG, WebP, BMP, or GIF).</li>
+      <li>The original dimensions and file size are displayed immediately after the image loads.</li>
+      <li>Choose <strong>By Pixels</strong> to set exact width and height in pixels, or <strong>By Percentage</strong> to scale relative to the original size.</li>
+      <li>Enable <strong>Lock aspect ratio</strong> to automatically adjust height when you change width (and vice versa), preventing stretching or squashing.</li>
+      <li>Optionally choose an output format (JPEG, PNG, WebP) and adjust quality for JPEG/WebP outputs.</li>
+      <li>Click <strong>Resize &amp; Preview</strong> to see the result side by side, then click <strong>Download</strong> to save the resized image.</li>
+    </ol>
+  </div>
+
+  <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:2rem;margin-bottom:1.5rem;box-shadow:var(--shadow)">
+    <h2 style="font-size:1.4rem;margin-bottom:1rem;color:var(--primary)">Key Features</h2>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1rem">
+      <div style="padding:1rem;background:var(--bg-secondary);border-radius:8px"><div style="font-size:1.5rem;margin-bottom:.5rem">📐</div><strong>Pixel &amp; Percentage</strong><p style="font-size:.85rem;color:var(--text-muted);margin-top:.3rem">Set exact pixel dimensions or scale by percentage from 10% to 200% with a live preview of the resulting dimensions.</p></div>
+      <div style="padding:1rem;background:var(--bg-secondary);border-radius:8px"><div style="font-size:1.5rem;margin-bottom:.5rem">🔒</div><strong>Aspect Ratio Lock</strong><p style="font-size:.85rem;color:var(--text-muted);margin-top:.3rem">Keep your image proportions intact automatically. Changing width adjusts height and vice versa when the lock is enabled.</p></div>
+      <div style="padding:1rem;background:var(--bg-secondary);border-radius:8px"><div style="font-size:1.5rem;margin-bottom:.5rem">📦</div><strong>Format &amp; Quality</strong><p style="font-size:.85rem;color:var(--text-muted);margin-top:.3rem">Output as JPEG, PNG, or WebP. Adjust JPEG/WebP quality from 60–100% to balance file size and visual quality.</p></div>
+      <div style="padding:1rem;background:var(--bg-secondary);border-radius:8px"><div style="font-size:1.5rem;margin-bottom:.5rem">🖼️</div><strong>Side-by-side Preview</strong><p style="font-size:.85rem;color:var(--text-muted);margin-top:.3rem">See the original and resized images next to each other before downloading, with estimated file size shown.</p></div>
+      <div style="padding:1rem;background:var(--bg-secondary);border-radius:8px"><div style="font-size:1.5rem;margin-bottom:.5rem">⚡</div><strong>Quick Presets</strong><p style="font-size:.85rem;color:var(--text-muted);margin-top:.3rem">One-click presets for common resolutions: 1920×1080, 1280×720, 800×600, 640×480, 400×400, and 200×200.</p></div>
+      <div style="padding:1rem;background:var(--bg-secondary);border-radius:8px"><div style="font-size:1.5rem;margin-bottom:.5rem">🔒</div><strong>100% Private</strong><p style="font-size:.85rem;color:var(--text-muted);margin-top:.3rem">Your images are never uploaded to any server. All resizing happens locally in your browser using the Canvas API.</p></div>
+    </div>
+  </div>
+
+  <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:2rem;margin-bottom:1.5rem;box-shadow:var(--shadow)">
+    <h2 style="font-size:1.4rem;margin-bottom:1.25rem;color:var(--primary)">Frequently Asked Questions</h2>
+
+    <details style="border:1px solid var(--border);border-radius:8px;margin-bottom:.75rem;overflow:hidden">
+      <summary style="padding:1rem 1.25rem;cursor:pointer;font-weight:600;background:var(--bg-secondary);user-select:none">❓ Will resizing an image reduce its quality?</summary>
+      <div style="padding:1rem 1.25rem;line-height:1.8;color:var(--text-muted)">Reducing image dimensions always results in some data loss because you're discarding pixels. However, this tool uses <code>imageSmoothingQuality: 'high'</code> on the Canvas API which applies bilinear interpolation for better results. For lossless output, choose PNG format. For JPEG or WebP, use a quality setting of 85–95% to get small file sizes with minimal visible quality loss.</div>
+    </details>
+
+    <details style="border:1px solid var(--border);border-radius:8px;margin-bottom:.75rem;overflow:hidden">
+      <summary style="padding:1rem 1.25rem;cursor:pointer;font-weight:600;background:var(--bg-secondary);user-select:none">❓ What image formats can I upload?</summary>
+      <div style="padding:1rem 1.25rem;line-height:1.8;color:var(--text-muted)">This tool accepts JPG/JPEG, PNG, WebP, BMP, and GIF images. Note that for animated GIFs, only the first frame will be used. The browser's native image decoding handles all supported formats.</div>
+    </details>
+
+    <details style="border:1px solid var(--border);border-radius:8px;margin-bottom:.75rem;overflow:hidden">
+      <summary style="padding:1rem 1.25rem;cursor:pointer;font-weight:600;background:var(--bg-secondary);user-select:none">❓ Is there a maximum file size limit?</summary>
+      <div style="padding:1rem 1.25rem;line-height:1.8;color:var(--text-muted)">Since processing happens entirely in your browser, the limit depends on your device's available memory. In practice, images up to 20–30 MB work fine on modern devices. Very large images (50+ MP) may be slow or cause browser warnings on lower-end hardware.</div>
+    </details>
+
+    <details style="border:1px solid var(--border);border-radius:8px;margin-bottom:.75rem;overflow:hidden">
+      <summary style="padding:1rem 1.25rem;cursor:pointer;font-weight:600;background:var(--bg-secondary);user-select:none">❓ Can I make an image larger (upscale)?</summary>
+      <div style="padding:1rem 1.25rem;line-height:1.8;color:var(--text-muted)">Yes. You can set any target dimensions, including larger than the original. However, upscaling a raster image will reduce its sharpness because the browser must interpolate new pixels from existing ones. For best upscaling results, start with the highest resolution original you have.</div>
+    </details>
+
+    <details style="border:1px solid var(--border);border-radius:8px;margin-bottom:.75rem;overflow:hidden">
+      <summary style="padding:1rem 1.25rem;cursor:pointer;font-weight:600;background:var(--bg-secondary);user-select:none">❓ Why is the PNG output larger than the JPEG output?</summary>
+      <div style="padding:1rem 1.25rem;line-height:1.8;color:var(--text-muted)">PNG is a lossless format that preserves every pixel exactly, which results in larger file sizes. JPEG and WebP use lossy compression that discards some image data to achieve much smaller files. For photos and complex images, JPEG or WebP at 85–90% quality gives an excellent balance. For screenshots, logos, or images with sharp edges and text, PNG is usually better.</div>
+    </details>
+  </div>
+
+</div>
+
+<footer style="text-align:center;padding:2rem;color:var(--text-muted);font-size:.85rem;border-top:1px solid var(--border)">
+  <p>© 2025 ToolKit Pro — <a href="../privacy-policy.html">Privacy Policy</a> · <a href="../terms.html">Terms</a> · <a href="../contact.html">Contact</a> · <a href="../index.html">All Tools</a></p>
+</footer>
+
+<script>
+(function(){const t=localStorage.getItem('theme')||(window.matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t);document.getElementById('themeToggle').textContent=t==='dark'?'☀️':'🌙';})();
+document.getElementById('themeToggle').addEventListener('click',function(){const d=document.documentElement;const t=d.getAttribute('data-theme')==='dark'?'light':'dark';d.setAttribute('data-theme',t);localStorage.setItem('theme',t);this.textContent=t==='dark'?'☀️':'🌙';});
+</script>
+
+<script>
+  let loadedImg = null;
+  let origW = 0, origH = 0, origSize = 0, origMime = 'image/jpeg', origName = 'image';
+  let currentMode = 'pixel';
+
+  // Drag and drop
+  const dropZone = document.getElementById('dropZone');
+  dropZone.addEventListener('dragover', e => { e.preventDefault(); dropZone.classList.add('dragover'); });
+  dropZone.addEventListener('dragleave', () => dropZone.classList.remove('dragover'));
+  dropZone.addEventListener('drop', e => { e.preventDefault(); dropZone.classList.remove('dragover'); if (e.dataTransfer.files[0]) handleFile(e.dataTransfer.files[0]); });
+
+  function handleFile(file) {
+    if (!file || !file.type.startsWith('image/')) return;
+    origSize = file.size;
+    origMime = file.type;
+    origName = file.name.replace(/\.[^.]+$/, '');
+    const reader = new FileReader();
+    reader.onload = function(e) {
+      const img = new Image();
+      img.onload = function() {
+        loadedImg = img;
+        origW = img.naturalWidth;
+        origH = img.naturalHeight;
+        document.getElementById('targetW').value = origW;
+        document.getElementById('targetH').value = origH;
+        document.getElementById('origPreview').src = e.target.result;
+        document.getElementById('optionsPanel').classList.remove('hidden');
+        document.getElementById('statsPanel').classList.remove('hidden');
+        updateStats();
+        toggleQualitySlider();
+      };
+      img.src = e.target.result;
+    };
+    reader.readAsDataURL(file);
+  }
+
+  function setMode(mode) {
+    currentMode = mode;
+    document.getElementById('modePixelBtn').classList.toggle('active', mode === 'pixel');
+    document.getElementById('modePctBtn').classList.toggle('active', mode === 'percent');
+    document.getElementById('pixelMode').classList.toggle('hidden', mode !== 'pixel');
+    document.getElementById('percentMode').classList.toggle('hidden', mode !== 'percent');
+    if (mode === 'percent') onPctChange();
+  }
+
+  function onWidthChange() {
+    if (document.getElementById('lockAspect').checked && origW) {
+      const w = parseInt(document.getElementById('targetW').value) || 1;
+      document.getElementById('targetH').value = Math.round(w * origH / origW);
+    }
+    updatePreviewStats();
+  }
+
+  function onHeightChange() {
+    if (document.getElementById('lockAspect').checked && origH) {
+      const h = parseInt(document.getElementById('targetH').value) || 1;
+      document.getElementById('targetW').value = Math.round(h * origW / origH);
+    }
+    updatePreviewStats();
+  }
+
+  function onPctChange() {
+    const pct = parseInt(document.getElementById('pctSlider').value);
+    document.getElementById('pctVal').textContent = pct + '%';
+    if (origW) {
+      const nw = Math.round(origW * pct / 100);
+      const nh = Math.round(origH * pct / 100);
+      document.getElementById('pctResultDims').textContent = `Result: ${nw} × ${nh} px`;
+      document.getElementById('targetW').value = nw;
+      document.getElementById('targetH').value = nh;
+    }
+  }
+
+  function applyPreset(w, h) {
+    setMode('pixel');
+    document.getElementById('lockAspect').checked = false;
+    document.getElementById('targetW').value = w;
+    document.getElementById('targetH').value = h;
+  }
+
+  function toggleQualitySlider() {
+    const fmt = document.getElementById('outputFormat').value;
+    const show = fmt === 'image/jpeg' || fmt === 'image/webp' || (fmt === 'same' && (origMime === 'image/jpeg' || origMime === 'image/webp'));
+    document.getElementById('qualityGroup').style.opacity = show ? '1' : '0.4';
+    document.getElementById('qualitySlider').disabled = !show;
+  }
+
+  function getTargetDims() {
+    return {
+      w: Math.max(1, parseInt(document.getElementById('targetW').value) || origW),
+      h: Math.max(1, parseInt(document.getElementById('targetH').value) || origH)
+    };
+  }
+
+  function resizeImage(img, targetW, targetH) {
+    const canvas = document.createElement('canvas');
+    canvas.width = targetW;
+    canvas.height = targetH;
+    const ctx = canvas.getContext('2d');
+    ctx.imageSmoothingEnabled = true;
+    ctx.imageSmoothingQuality = 'high';
+    ctx.drawImage(img, 0, 0, targetW, targetH);
+    return canvas;
+  }
+
+  function applyResize() {
+    if (!loadedImg) return;
+    const { w, h } = getTargetDims();
+    const canvas = resizeImage(loadedImg, w, h);
+    const displayCanvas = document.getElementById('resizedCanvas');
+    displayCanvas.width = w;
+    displayCanvas.height = h;
+    const ctx = displayCanvas.getContext('2d');
+    ctx.imageSmoothingEnabled = true;
+    ctx.imageSmoothingQuality = 'high';
+    ctx.drawImage(loadedImg, 0, 0, w, h);
+    document.getElementById('previewPanel').classList.remove('hidden');
+    updateStats(w, h, canvas);
+  }
+
+  function updateStats(w, h, canvas) {
+    const tw = w || origW;
+    const th = h || origH;
+    let estKB = '—';
+    if (canvas) {
+      const fmt = getOutputFormat();
+      const q = parseInt(document.getElementById('qualitySlider').value) / 100;
+      canvas.toBlob(blob => {
+        estKB = Math.round(blob.size / 1024) + ' KB';
+        renderStats(tw, th, estKB);
+      }, fmt, q);
+    } else {
+      renderStats(tw, th, estKB);
+    }
+  }
+
+  function renderStats(tw, th, estKB) {
+    const origKB = Math.round(origSize / 1024) + ' KB';
+    document.getElementById('statsRow').innerHTML = `
+      <div class="stat-chip">Original: <strong>${origW} × ${origH} px</strong></div>
+      <div class="stat-chip">Original size: <strong>${origKB}</strong></div>
+      <div class="stat-chip">Target: <strong>${tw} × ${th} px</strong></div>
+      <div class="stat-chip">Est. output: <strong>${estKB}</strong></div>
+    `;
+  }
+
+  function updatePreviewStats() { /* called on dimension change, no canvas needed */ }
+
+  function getOutputFormat() {
+    const fmt = document.getElementById('outputFormat').value;
+    return fmt === 'same' ? origMime : fmt;
+  }
+
+  function downloadImage() {
+    if (!loadedImg) return;
+    const { w, h } = getTargetDims();
+    const canvas = resizeImage(loadedImg, w, h);
+    const fmt = getOutputFormat();
+    const q = parseInt(document.getElementById('qualitySlider').value) / 100;
+    const ext = fmt === 'image/png' ? 'png' : fmt === 'image/webp' ? 'webp' : 'jpg';
+    canvas.toBlob(blob => {
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `${origName}_${w}x${h}.${ext}`;
+      a.click();
+      setTimeout(() => URL.revokeObjectURL(url), 1000);
+    }, fmt, q);
+  }
+
+  function resetTool() {
+    loadedImg = null;
+    origW = origH = origSize = 0;
+    document.getElementById('fileInput').value = '';
+    document.getElementById('origPreview').src = '';
+    document.getElementById('optionsPanel').classList.add('hidden');
+    document.getElementById('statsPanel').classList.add('hidden');
+    document.getElementById('previewPanel').classList.add('hidden');
+    const ctx = document.getElementById('resizedCanvas').getContext('2d');
+    ctx.clearRect(0, 0, 9999, 9999);
+  }
+</script>
+</body>
+</html>

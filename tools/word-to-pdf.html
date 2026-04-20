@@ -3,136 +3,197 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Word to PDF Converter — Free Online Tool | ToolKit Pro</title>
-  <meta name="description" content="Convert Word DOCX documents to PDF free online. Browser-based Word to PDF converter — no upload, no software needed, instant download." />
+  <title>Word to PDF Converter Free — DOCX to PDF Online | ToolKit Pro</title>
+  <meta name="description" content="Convert Word documents (.docx) to PDF free online. Preserves formatting, headings, tables and images. No upload, no software — instant DOCX to PDF download." />
 
-  <!-- Canonical URL -->
   <link rel="canonical" href="https://kundanchouhan12.github.io/tools/word-to-pdf.html" />
-
-  <!-- Open Graph -->
   <meta property="og:type" content="website" />
   <meta property="og:title" content="Word to PDF Converter Free Online — DOCX to PDF | ToolKit Pro" />
-  <meta property="og:description" content="Convert Word documents (.docx) to PDF online free. No installation required. Fast, secure Word to PDF conversion directly in your browser — no upload needed." />
+  <meta property="og:description" content="Convert Word documents (.docx) to PDF online free. Preserves formatting, tables, images, headings. No upload needed." />
   <meta property="og:url" content="https://kundanchouhan12.github.io/tools/word-to-pdf.html" />
   <meta property="og:site_name" content="ToolKit Pro" />
   <meta property="og:image" content="https://kundanchouhan12.github.io/og-image.png" />
-
-  <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Word to PDF Converter Free Online — DOCX to PDF | ToolKit Pro" />
-  <meta name="twitter:description" content="Convert Word documents (.docx) to PDF online free. No installation required. Fast, secure Word to PDF conversion directly in your browser — no upload needed." />
-
-  <!-- Keywords -->
-  <meta name="keywords" content="word to pdf, docx to pdf, convert word to pdf, word to pdf free online, word to pdf converter, doc to pdf, microsoft word to pdf, free word converter, online word to pdf, toolkit pro" />
-
-  <!-- Robots -->
+  <meta name="twitter:description" content="Convert DOCX to PDF free online. Preserves headings, tables, images and formatting. No upload required." />
+  <meta name="keywords" content="word to pdf converter, docx to pdf online, convert word to pdf free, word to pdf free online, doc to pdf converter, microsoft word to pdf, free word to pdf, toolkit pro" />
   <meta name="robots" content="index, follow" />
   <meta name="author" content="ToolKit Pro" />
 
   <link rel="stylesheet" href="../css/style.css" />
   <script src="../js/common.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+
+  <!-- mammoth.js — best DOCX parser, handles full formatting -->
+  <script src="https://unpkg.com/mammoth@1.6.0/mammoth.browser.min.js"></script>
+  <!-- html2pdf for PDF generation -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
-  <style>
-    .nav-links { display:flex; gap:1.5rem; align-items:center; }
-    .nav-links a { color:var(--text); font-size:.9rem; font-weight:500; text-decoration:none; transition:color .2s; }
-    .nav-links a:hover { color:var(--primary); }
-    @media(max-width:768px){ .nav-links { display:none; } }
-  </style>
 
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@type": "SoftwareApplication",
     "name": "Word to PDF Converter",
-    "description": "Convert Word documents (.docx) to PDF online free. No installation required. Fast, secure Word to PDF conversion directly in your browser.",
+    "description": "Convert Word DOCX documents to PDF online free with full formatting preservation.",
     "url": "https://kundanchouhan12.github.io/tools/word-to-pdf.html",
     "applicationCategory": "UtilitiesApplication",
     "operatingSystem": "Any (Web Browser)",
-    "browserRequirements": "Requires JavaScript",
-    "offers": {
-      "@type": "Offer",
-      "price": "0",
-      "priceCurrency": "USD"
-    },
-    "publisher": {
-      "@type": "Organization",
-      "name": "ToolKit Pro",
-      "url": "https://kundanchouhan12.github.io/"
-    },
-    "featureList": "Convert DOCX to PDF, Document preview, Heading and formatting support, Print-ready A4 output, Browser-based processing, No upload required, Free to use",
-    "screenshot": "https://kundanchouhan12.github.io/og-image.png"
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+    "publisher": { "@type": "Organization", "name": "ToolKit Pro", "url": "https://kundanchouhan12.github.io/" },
+    "featureList": "Convert DOCX to PDF, Preserve headings and formatting, Tables support, Images support, Bold and italic, Lists, No upload required, Free to use"
   }
   </script>
-
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
     "itemListElement": [
-      {
-        "@type": "ListItem",
-        "position": 1,
-        "name": "Home",
-        "item": "https://kundanchouhan12.github.io/"
-      },
-      {
-        "@type": "ListItem",
-        "position": 2,
-        "name": "Tools",
-        "item": "https://kundanchouhan12.github.io/#tools"
-      },
-      {
-        "@type": "ListItem",
-        "position": 3,
-        "name": "Word to PDF Converter",
-        "item": "https://kundanchouhan12.github.io/tools/word-to-pdf.html"
-      }
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://kundanchouhan12.github.io/" },
+      { "@type": "ListItem", "position": 2, "name": "Tools", "item": "https://kundanchouhan12.github.io/#tools" },
+      { "@type": "ListItem", "position": 3, "name": "Word to PDF", "item": "https://kundanchouhan12.github.io/tools/word-to-pdf.html" }
     ]
   }
   </script>
-
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@type": "FAQPage",
     "mainEntity": [
-      {
-        "@type": "Question",
-        "name": "Is this Word to PDF tool free to use?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Yes, completely free with no usage limits, no watermarks, and no account required. Convert as many Word documents to PDF as you need without any cost."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "Is my data secure? Does it upload my files?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Your Word files are never uploaded to any server. Conversion happens entirely within your browser. Sensitive documents such as contracts and legal papers are completely safe to use with this tool."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "Does the PDF include all formatting from my Word document?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Bold, italic, headings, and paragraph formatting are preserved in the output. However, complex elements such as tracked changes, comments, embedded images, and complex tables may not render perfectly due to browser-side limitations. For best results, use documents with standard text formatting."
-        }
-      }
+      { "@type": "Question", "name": "Is this Word to PDF converter free?", "acceptedAnswer": { "@type": "Answer", "text": "Yes, completely free with no limits, no watermarks, and no account required." } },
+      { "@type": "Question", "name": "Does it upload my file to a server?", "acceptedAnswer": { "@type": "Answer", "text": "No. Your file is processed entirely in your browser. Nothing is uploaded to any server." } },
+      { "@type": "Question", "name": "Does it preserve formatting like tables and images?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. We use mammoth.js which properly converts headings, bold, italic, tables, bullet lists, numbered lists, and images from your DOCX file." } }
     ]
   }
   </script>
 
+  <style>
+    /* Nav */
+    .nav-links { display:flex; gap:1.5rem; align-items:center; }
+    .nav-links a { color:var(--text); font-size:.9rem; font-weight:500; text-decoration:none; transition:color .2s; }
+    .nav-links a:hover { color:var(--primary); }
+    @media(max-width:768px){ .nav-links { display:none; } }
+
+    /* Layout */
+    .page-wrap { max-width:1100px; margin:2rem auto; padding:0 1rem 4rem; }
+    .back-link { display:inline-flex; align-items:center; gap:.4rem; color:var(--text-muted); font-size:.9rem; margin-bottom:1.5rem; }
+    .back-link:hover { color:var(--primary); text-decoration:none; }
+    .tool-header { text-align:center; margin-bottom:2rem; }
+    .tool-header h1 { font-size:2rem; font-weight:800; margin-bottom:.5rem; }
+    .tool-header p { color:var(--text-muted); }
+
+    /* Main grid */
+    .main-grid { display:grid; grid-template-columns:340px 1fr; gap:1.5rem; align-items:start; }
+    @media(max-width:900px){ .main-grid { grid-template-columns:1fr; } }
+
+    /* Left panel */
+    .left-panel { display:flex; flex-direction:column; gap:1rem; }
+    .card { background:var(--surface); border:1px solid var(--border); border-radius:var(--radius); padding:1.5rem; box-shadow:var(--shadow); }
+    .card h3 { font-size:1rem; font-weight:700; margin-bottom:1rem; }
+
+    /* Drop zone */
+    .drop-zone { border:2px dashed var(--border); border-radius:var(--radius-sm); padding:2rem 1rem; text-align:center; cursor:pointer; transition:all .25s; background:var(--bg-secondary); }
+    .drop-zone:hover, .drop-zone.drag-over { border-color:var(--primary); background:var(--surface-hover); }
+    .drop-zone .dz-icon { font-size:2.5rem; margin-bottom:.75rem; }
+    .drop-zone h4 { font-size:1rem; margin-bottom:.3rem; }
+    .drop-zone p { color:var(--text-muted); font-size:.85rem; }
+    .file-input { display:none; }
+
+    /* File info */
+    .file-info { display:flex; align-items:center; gap:.75rem; padding:.75rem; background:var(--bg-secondary); border:1px solid var(--border); border-radius:var(--radius-sm); margin-top:.75rem; }
+    .file-info .fi-icon { font-size:1.5rem; }
+    .file-info .fi-name { flex:1; font-size:.85rem; font-weight:600; word-break:break-all; }
+    .file-info .fi-size { font-size:.75rem; color:var(--text-muted); }
+
+    /* Options */
+    .option-row { display:flex; align-items:center; justify-content:space-between; padding:.5rem 0; border-bottom:1px solid var(--border); }
+    .option-row:last-child { border-bottom:none; }
+    .option-row label { font-size:.9rem; color:var(--text-muted); }
+    select.opt-select { padding:.3rem .6rem; border:1px solid var(--border); border-radius:6px; background:var(--bg); color:var(--text); font-size:.85rem; cursor:pointer; }
+
+    /* Buttons */
+    .btn { display:inline-flex; align-items:center; gap:.5rem; padding:.75rem 1.25rem; border-radius:var(--radius-sm); border:none; font-size:.95rem; font-weight:700; cursor:pointer; transition:all .25s; width:100%; justify-content:center; }
+    .btn-primary { background:linear-gradient(135deg,var(--primary),#9c59ff); color:#fff; box-shadow:0 4px 14px rgba(108,99,255,.3); }
+    .btn-primary:hover { transform:translateY(-2px); box-shadow:0 6px 20px rgba(108,99,255,.4); }
+    .btn-primary:disabled { opacity:.5; cursor:not-allowed; transform:none; box-shadow:none; }
+    .btn-secondary { background:var(--bg-secondary); color:var(--text); border:1px solid var(--border); }
+    .btn-secondary:hover { background:var(--surface-hover); }
+    .btn-secondary:disabled { opacity:.4; cursor:not-allowed; }
+
+    /* Progress */
+    .progress-wrap { margin-top:.75rem; display:none; }
+    .progress-wrap.show { display:block; }
+    .progress-track { height:6px; background:var(--border); border-radius:3px; overflow:hidden; margin-bottom:.4rem; }
+    .progress-fill { height:100%; background:linear-gradient(90deg,var(--primary),var(--secondary)); border-radius:3px; width:0; transition:width .3s ease; }
+    .progress-label { font-size:.8rem; color:var(--text-muted); text-align:center; }
+
+    /* Right panel — preview */
+    .preview-panel { background:var(--surface); border:1px solid var(--border); border-radius:var(--radius); box-shadow:var(--shadow); overflow:hidden; min-height:600px; display:flex; flex-direction:column; }
+    .preview-header { padding:1rem 1.5rem; border-bottom:1px solid var(--border); display:flex; align-items:center; justify-content:space-between; background:var(--bg-secondary); }
+    .preview-header h3 { font-size:.95rem; font-weight:700; }
+    .preview-badge { font-size:.75rem; padding:.2rem .6rem; border-radius:20px; background:var(--primary); color:#fff; font-weight:600; }
+    .preview-body { padding:1.5rem; flex:1; overflow-y:auto; max-height:700px; }
+
+    /* Empty state */
+    .empty-state { display:flex; flex-direction:column; align-items:center; justify-content:center; height:400px; color:var(--text-muted); text-align:center; }
+    .empty-state .es-icon { font-size:4rem; margin-bottom:1rem; opacity:.4; }
+    .empty-state p { font-size:.95rem; }
+
+    /* ===== DOCUMENT STYLES (Word-like rendering) ===== */
+    .doc-content {
+      font-family: 'Times New Roman', Times, serif;
+      font-size: 12pt;
+      line-height: 1.6;
+      color: #000;
+      max-width: 100%;
+    }
+    .doc-content h1 { font-size: 2em; font-weight: bold; margin: .67em 0; color: #1a1a1a; border-bottom: 2px solid #6C63FF; padding-bottom: .3em; }
+    .doc-content h2 { font-size: 1.5em; font-weight: bold; margin: .75em 0; color: #2c2c2c; }
+    .doc-content h3 { font-size: 1.17em; font-weight: bold; margin: .83em 0; color: #3c3c3c; }
+    .doc-content h4 { font-size: 1em; font-weight: bold; margin: 1em 0; }
+    .doc-content h5 { font-size: .83em; font-weight: bold; margin: 1em 0; }
+    .doc-content h6 { font-size: .67em; font-weight: bold; margin: 1em 0; }
+    .doc-content p { margin: 0 0 .8em; }
+    .doc-content strong, .doc-content b { font-weight: bold; }
+    .doc-content em, .doc-content i { font-style: italic; }
+    .doc-content u { text-decoration: underline; }
+    .doc-content s, .doc-content del { text-decoration: line-through; }
+    .doc-content ul { list-style: disc; padding-left: 2em; margin: .5em 0 .8em; }
+    .doc-content ol { list-style: decimal; padding-left: 2em; margin: .5em 0 .8em; }
+    .doc-content li { margin-bottom: .3em; line-height: 1.6; }
+    .doc-content table { width: 100%; border-collapse: collapse; margin: 1em 0; }
+    .doc-content table td, .doc-content table th { border: 1px solid #999; padding: 6px 10px; vertical-align: top; }
+    .doc-content table th { background: #f0f0f0; font-weight: bold; }
+    .doc-content img { max-width: 100%; height: auto; display: block; margin: 1em auto; }
+    .doc-content blockquote { border-left: 4px solid #6C63FF; margin: 1em 0; padding: .5em 1em; color: #555; background: #f8f7ff; }
+    .doc-content a { color: #6C63FF; }
+    .doc-content hr { border: none; border-top: 1px solid #ddd; margin: 1.5em 0; }
+    .doc-content .footnote { font-size: .85em; color: #666; border-top: 1px solid #ddd; margin-top: 2em; padding-top: .5em; }
+
+    /* Warnings box for mammoth messages */
+    .warn-box { background:#fff8e0; border:1px solid #f0d96a; border-radius:8px; padding:.75rem 1rem; font-size:.82rem; color:#7a5e00; margin-top:.75rem; display:none; }
+    .warn-box.show { display:block; }
+    [data-theme="dark"] .warn-box { background:#3d3200; color:#f0c040; border-color:#6a5600; }
+
+    /* Content section */
+    .content-section { max-width:860px; margin:0 auto; padding:0 1rem 2rem; }
+    .cs-card { background:var(--surface); border:1px solid var(--border); border-radius:var(--radius); padding:2rem; margin-bottom:1.5rem; box-shadow:var(--shadow); }
+    .cs-card h2 { font-size:1.3rem; color:var(--primary); margin-bottom:1rem; border-left:3px solid var(--primary); padding-left:.75rem; }
+    .cs-card p { line-height:1.9; color:var(--text); margin-bottom:.9rem; font-size:.95rem; }
+    .cs-card ol, .cs-card ul { padding-left:1.5rem; }
+    .cs-card li { margin-bottom:.5rem; line-height:1.8; font-size:.95rem; }
+    .feature-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:1rem; }
+    .feature-item { display:flex; gap:.75rem; align-items:flex-start; }
+    .feature-item .fi { font-size:1.4rem; flex-shrink:0; }
+    .feature-item strong { display:block; margin-bottom:.2rem; font-size:.95rem; }
+    .feature-item span { font-size:.85rem; color:var(--text-muted); }
+    details { border:1px solid var(--border); border-radius:8px; margin-bottom:.75rem; overflow:hidden; }
+    summary { padding:1rem 1.25rem; cursor:pointer; font-weight:600; background:var(--bg-secondary); user-select:none; font-size:.95rem; }
+    details div { padding:1rem 1.25rem; line-height:1.8; color:var(--text-muted); font-size:.9rem; }
+  </style>
 </head>
 <body>
 
 <nav class="navbar">
-  <a href="../index.html" class="nav-brand">
-    <div class="logo-icon">🛠</div>
-    ToolKit Pro
-  </a>
+  <a href="../index.html" class="nav-brand"><div class="logo-icon">🛠</div>ToolKit Pro</a>
   <div class="nav-links">
     <a href="../index.html">Home</a>
     <a href="../index.html#tools">Tools</a>
@@ -140,152 +201,144 @@
     <a href="../about.html">About</a>
     <a href="../contact.html">Contact</a>
   </div>
-  <div class="nav-actions">
-    <button class="theme-toggle" id="themeToggle" title="Toggle dark mode">🌙</button>
-  </div>
+  <div class="nav-actions"><button class="theme-toggle" id="themeToggle" title="Toggle dark mode">🌙</button></div>
 </nav>
 
-<div class="tool-page-hero">
-  <h1>📋 Word / DOCX to PDF</h1>
-  <p>Convert your Word documents to PDF format. Works entirely in your browser.</p>
-</div>
+<div class="page-wrap">
+  <a href="../index.html" class="back-link">← Back to All Tools</a>
 
-<div class="tool-container">
-
-  <div class="panel">
-    <div class="alert alert-info" style="margin-bottom:1rem">
-      ℹ️ <strong>How it works:</strong> Your DOCX file is parsed and rendered as HTML, then converted to PDF using html2pdf.js. Complex formatting (tables, images, charts) may vary. For best results use simple documents.
-    </div>
-
-    <div class="panel-title">📂 Select DOCX File</div>
-
-    <div class="drop-zone" id="dropZone">
-      <input type="file" id="fileInput" accept=".docx,.doc" />
-      <span class="drop-icon">📋</span>
-      <h3>Drop DOCX file here</h3>
-      <p>or click to browse — supports .docx files</p>
-    </div>
-
-    <div id="fileInfo" class="hidden" style="margin-top:0.75rem;padding:0.65rem 1rem;background:var(--bg-secondary);border:1px solid var(--border);border-radius:8px;font-size:0.875rem;display:flex;align-items:center;gap:0.5rem">
-      <span>📋</span>
-      <span id="fileName"></span>
-      <span id="fileSize" style="color:var(--text-muted)"></span>
-    </div>
-
-    <div id="alertBox" class="alert hidden"></div>
-
-    <div class="progress-bar" id="progressWrap" style="display:none">
-      <div class="progress-fill" id="progressFill"></div>
-    </div>
-
-    <div class="btn-group">
-      <button class="btn btn-primary" id="convertBtn" disabled>⚙️ Convert to PDF</button>
-    </div>
+  <div class="tool-header">
+    <h1>📋 Word to PDF Converter — Free Online</h1>
+    <p>Convert DOCX to PDF with preserved formatting — headings, tables, images, lists and more. 100% free, no upload.</p>
   </div>
 
-  <!-- Preview panel -->
-  <div class="panel hidden" id="previewPanel">
-    <div class="panel-title" style="display:flex;align-items:center;justify-content:space-between">
-      <span>👁 Document Preview</span>
-      <button class="btn btn-success" id="downloadBtn" style="padding:0.4rem 1rem;font-size:0.875rem">⬇️ Download PDF</button>
+  <div class="main-grid">
+
+    <!-- LEFT: Controls -->
+    <div class="left-panel">
+
+      <!-- Upload -->
+      <div class="card">
+        <h3>📂 Upload Word File</h3>
+        <div class="drop-zone" id="dropZone">
+          <div class="dz-icon">📋</div>
+          <h4>Drop DOCX file here</h4>
+          <p>or click to browse</p>
+          <input type="file" class="file-input" id="fileInput" accept=".docx,application/vnd.openxmlformats-officedocument.wordprocessingml.document" />
+        </div>
+        <div class="file-info" id="fileInfo" style="display:none">
+          <span class="fi-icon">📋</span>
+          <span class="fi-name" id="fileName">—</span>
+          <span class="fi-size" id="fileSize">—</span>
+        </div>
+        <div class="warn-box" id="warnBox"></div>
+      </div>
+
+      <!-- Options -->
+      <div class="card">
+        <h3>⚙️ PDF Settings</h3>
+        <div class="option-row">
+          <label>Page Size</label>
+          <select class="opt-select" id="pageSize">
+            <option value="a4">A4 (Standard)</option>
+            <option value="letter">Letter (US)</option>
+            <option value="a3">A3 (Large)</option>
+          </select>
+        </div>
+        <div class="option-row">
+          <label>Orientation</label>
+          <select class="opt-select" id="orientation">
+            <option value="portrait">Portrait</option>
+            <option value="landscape">Landscape</option>
+          </select>
+        </div>
+        <div class="option-row">
+          <label>Margins</label>
+          <select class="opt-select" id="margins">
+            <option value="15">Normal (15mm)</option>
+            <option value="25">Wide (25mm)</option>
+            <option value="8">Narrow (8mm)</option>
+            <option value="0">None (0mm)</option>
+          </select>
+        </div>
+        <div class="option-row">
+          <label>Image Quality</label>
+          <select class="opt-select" id="imgQuality">
+            <option value="0.98">High (Best)</option>
+            <option value="0.85">Medium</option>
+            <option value="0.7">Low (Smaller file)</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Actions -->
+      <div class="card" style="display:flex;flex-direction:column;gap:.75rem">
+        <button class="btn btn-primary" id="convertBtn" disabled>⚡ Convert to PDF</button>
+        <button class="btn btn-secondary" id="clearBtn" disabled>✕ Clear</button>
+        <div class="progress-wrap" id="progressWrap">
+          <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+          <div class="progress-label" id="progressLabel">Processing…</div>
+        </div>
+      </div>
+
     </div>
-    <div id="docPreview" style="background:white;color:#000;padding:2rem;border:1px solid var(--border);border-radius:8px;min-height:300px;line-height:1.8;font-size:0.95rem;max-height:500px;overflow-y:auto"></div>
+
+    <!-- RIGHT: Preview -->
+    <div class="preview-panel">
+      <div class="preview-header">
+        <h3>📄 Document Preview</h3>
+        <span class="preview-badge" id="previewBadge">No file loaded</span>
+      </div>
+      <div class="preview-body" id="previewBody">
+        <div class="empty-state">
+          <div class="es-icon">📋</div>
+          <p>Upload a DOCX file to see a live preview here before converting to PDF.</p>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- .main-grid -->
+</div><!-- .page-wrap -->
+
+<!-- Content sections -->
+<div class="content-section">
+
+  <div class="cs-card">
+    <h2>What is the Word to PDF Converter?</h2>
+    <p>The ToolKit Pro Word to PDF Converter transforms Microsoft Word (.docx) documents into high-quality PDF files directly inside your web browser. Unlike other online converters that upload your files to remote servers, our tool processes everything locally on your device — your documents never leave your computer.</p>
+    <p>We use <strong>mammoth.js</strong>, the industry-standard open-source library for DOCX conversion, to accurately parse your Word document and preserve its structure. This means headings, bold and italic text, bullet lists, numbered lists, tables, embedded images, and paragraph formatting are all faithfully reproduced in the output PDF. Whether you need to share a resume, submit a report, or archive a contract, the result looks professional and print-ready.</p>
   </div>
 
-  <div class="panel" style="margin-top:1.5rem">
-    <div class="panel-title">ℹ️ How it works</div>
-    <ol style="padding-left:1.2rem;color:var(--text-muted);font-size:0.9rem;line-height:2">
-      <li>Upload your <strong>.docx</strong> file above.</li>
-      <li>The document text is extracted and formatted as HTML.</li>
-      <li>Click <strong>Convert to PDF</strong> — html2pdf renders it as a PDF.</li>
-      <li>Download your converted PDF file.</li>
+  <div class="cs-card">
+    <h2>How to Use — Step-by-Step</h2>
+    <ol>
+      <li>Click the upload area or drag and drop your <strong>.docx</strong> file onto the drop zone.</li>
+      <li>Watch the live preview appear on the right — you'll see your document exactly as it will be converted.</li>
+      <li>Adjust PDF settings: choose page size (A4, Letter, A3), orientation, margins, and image quality.</li>
+      <li>Click <strong>"Convert to PDF"</strong> and wait a few seconds while the PDF is generated.</li>
+      <li>Your browser will automatically download the finished PDF file.</li>
     </ol>
   </div>
-</div>
 
-<!-- ===== CONTENT SECTIONS ===== -->
-<div style="max-width:860px;margin:0 auto;padding:0 1rem 2rem">
-
-  <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:2rem;margin-bottom:1.5rem;box-shadow:var(--shadow)">
-    <h2 style="font-size:1.4rem;margin-bottom:1rem;color:var(--primary)">What is the Word to PDF Converter?</h2>
-    <p style="line-height:1.9;color:var(--text);margin-bottom:1rem">The Word to PDF Converter is a free browser-based tool that transforms Microsoft Word .docx files into universally compatible PDF documents. PDF is the gold standard for sharing professional documents because it locks formatting in place — fonts, spacing, and layout remain identical regardless of the recipient's operating system, Word version, or device. Converting your Word document to PDF ensures that contracts, resumes, proposals, and reports always look exactly as intended.</p>
-    <p style="line-height:1.9;color:var(--text)">The tool works by parsing your DOCX file using JSZip, extracting the structured content, rendering it as styled HTML, and then converting that HTML to a print-ready PDF using html2pdf.js. Bold and italic formatting, headings, and paragraph structure are all respected. The result is a clean A4-format PDF that is ready to email, submit, or archive.</p>
-  </div>
-
-  <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:2rem;margin-bottom:1.5rem;box-shadow:var(--shadow)">
-    <h2 style="font-size:1.4rem;margin-bottom:1rem;color:var(--primary)">How to Use — Step-by-Step</h2>
-    <ol style="padding-left:1.5rem;line-height:2;color:var(--text)">
-      <li>Click the upload zone or drag and drop your .docx file onto the page.</li>
-      <li>Confirm the file name and size shown in the file info panel.</li>
-      <li>Click <strong>Convert to PDF</strong> to begin — the document is parsed and rendered immediately.</li>
-      <li>Review the document preview to check that text and headings look correct.</li>
-      <li>Click <strong>Download PDF</strong> to save the finished PDF file to your device.</li>
-    </ol>
-  </div>
-
-  <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:2rem;margin-bottom:1.5rem;box-shadow:var(--shadow)">
-    <h2 style="font-size:1.4rem;margin-bottom:1rem;color:var(--primary)">Key Features &amp; Benefits</h2>
-    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1rem">
-      <div style="padding:1rem;background:var(--bg-secondary);border-radius:8px">
-        <div style="font-size:1.5rem;margin-bottom:.5rem">🔒</div>
-        <strong>Locked Formatting</strong>
-        <p style="font-size:.85rem;color:var(--text-muted);margin-top:.3rem">PDF output preserves your layout precisely, preventing unwanted reflow when opened on different devices or software.</p>
-      </div>
-      <div style="padding:1rem;background:var(--bg-secondary);border-radius:8px">
-        <div style="font-size:1.5rem;margin-bottom:.5rem">🌐</div>
-        <strong>Universal Compatibility</strong>
-        <p style="font-size:.85rem;color:var(--text-muted);margin-top:.3rem">PDFs open on every platform — Windows, macOS, iOS, Android — without needing Microsoft Word or any specific software.</p>
-      </div>
-      <div style="padding:1rem;background:var(--bg-secondary);border-radius:8px">
-        <div style="font-size:1.5rem;margin-bottom:.5rem">🛡</div>
-        <strong>100% Private</strong>
-        <p style="font-size:.85rem;color:var(--text-muted);margin-top:.3rem">Your Word file never leaves your browser. All processing is done client-side with no server communication required.</p>
-      </div>
-      <div style="padding:1rem;background:var(--bg-secondary);border-radius:8px">
-        <div style="font-size:1.5rem;margin-bottom:.5rem">👁</div>
-        <strong>Document Preview</strong>
-        <p style="font-size:.85rem;color:var(--text-muted);margin-top:.3rem">Preview the rendered output before downloading so you can verify the content looks correct before sharing.</p>
-      </div>
-      <div style="padding:1rem;background:var(--bg-secondary);border-radius:8px">
-        <div style="font-size:1.5rem;margin-bottom:.5rem">🖨</div>
-        <strong>Print-Ready Output</strong>
-        <p style="font-size:.85rem;color:var(--text-muted);margin-top:.3rem">Generated PDFs use A4 format with proper margins, making them ready for professional printing without adjustments.</p>
-      </div>
-      <div style="padding:1rem;background:var(--bg-secondary);border-radius:8px">
-        <div style="font-size:1.5rem;margin-bottom:.5rem">🆓</div>
-        <strong>Always Free</strong>
-        <p style="font-size:.85rem;color:var(--text-muted);margin-top:.3rem">No watermarks, no sign-up, no fee. Convert Word documents to PDF as often as you need at zero cost.</p>
-      </div>
+  <div class="cs-card">
+    <h2>Key Features &amp; Benefits</h2>
+    <div class="feature-grid">
+      <div class="feature-item"><span class="fi">🎨</span><div><strong>Full Formatting</strong><span>Headings, bold, italic, underline, lists and tables all preserved</span></div></div>
+      <div class="feature-item"><span class="fi">🖼️</span><div><strong>Images Included</strong><span>Embedded images are extracted and placed correctly in PDF</span></div></div>
+      <div class="feature-item"><span class="fi">🔒</span><div><strong>100% Private</strong><span>File never uploaded — processed entirely in your browser</span></div></div>
+      <div class="feature-item"><span class="fi">👁️</span><div><strong>Live Preview</strong><span>See your document before converting so you know exactly what you'll get</span></div></div>
+      <div class="feature-item"><span class="fi">📐</span><div><strong>Custom Settings</strong><span>A4, Letter or A3 page size, portrait or landscape, adjustable margins</span></div></div>
+      <div class="feature-item"><span class="fi">🆓</span><div><strong>Free &amp; Unlimited</strong><span>No watermarks, no registration, no file limits</span></div></div>
     </div>
   </div>
 
-  <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:2rem;margin-bottom:1.5rem;box-shadow:var(--shadow)">
-    <h2 style="font-size:1.4rem;margin-bottom:1.25rem;color:var(--primary)">Frequently Asked Questions</h2>
-
-    <details style="border:1px solid var(--border);border-radius:8px;margin-bottom:.75rem;overflow:hidden">
-      <summary style="padding:1rem 1.25rem;cursor:pointer;font-weight:600;background:var(--bg-secondary);user-select:none">❓ Is this Word to PDF tool free to use?</summary>
-      <div style="padding:1rem 1.25rem;line-height:1.8;color:var(--text-muted)">Yes, completely free with no usage limits, no watermarks, and no account required. Convert as many Word documents to PDF as you need without any cost.</div>
-    </details>
-
-    <details style="border:1px solid var(--border);border-radius:8px;margin-bottom:.75rem;overflow:hidden">
-      <summary style="padding:1rem 1.25rem;cursor:pointer;font-weight:600;background:var(--bg-secondary);user-select:none">❓ Is my data secure? Does it upload my files?</summary>
-      <div style="padding:1rem 1.25rem;line-height:1.8;color:var(--text-muted)">Your Word files are never uploaded to any server. Conversion happens entirely within your browser. Sensitive documents such as contracts and legal papers are completely safe to use with this tool.</div>
-    </details>
-
-    <details style="border:1px solid var(--border);border-radius:8px;margin-bottom:.75rem;overflow:hidden">
-      <summary style="padding:1rem 1.25rem;cursor:pointer;font-weight:600;background:var(--bg-secondary);user-select:none">❓ Does the PDF include all formatting from my Word document?</summary>
-      <div style="padding:1rem 1.25rem;line-height:1.8;color:var(--text-muted)">Bold, italic, headings, and paragraph formatting are preserved in the output. However, complex elements such as tracked changes, comments, embedded images, and complex tables may not render perfectly due to browser-side limitations. For best results, use documents with standard text formatting.</div>
-    </details>
-
-    <details style="border:1px solid var(--border);border-radius:8px;margin-bottom:.75rem;overflow:hidden">
-      <summary style="padding:1rem 1.25rem;cursor:pointer;font-weight:600;background:var(--bg-secondary);user-select:none">❓ Why should I convert Word to PDF instead of sharing the .docx file?</summary>
-      <div style="padding:1rem 1.25rem;line-height:1.8;color:var(--text-muted)">PDFs are universally readable without Microsoft Word and retain formatting on any device. They also prevent unintended editing of your document content, making them preferable for final submissions, invoices, resumes, and official correspondence.</div>
-    </details>
-
-    <details style="border:1px solid var(--border);border-radius:8px;margin-bottom:.75rem;overflow:hidden">
-      <summary style="padding:1rem 1.25rem;cursor:pointer;font-weight:600;background:var(--bg-secondary);user-select:none">❓ What file formats are supported?</summary>
-      <div style="padding:1rem 1.25rem;line-height:1.8;color:var(--text-muted)">This tool supports .docx and .doc input files. The output is always a PDF document in A4 format, compatible with Adobe Acrobat, browser PDF viewers, and any standard PDF reader on all platforms.</div>
-    </details>
+  <div class="cs-card">
+    <h2>Frequently Asked Questions</h2>
+    <details><summary>❓ Is this tool free to use?</summary><div>Yes, completely free with no limits, no watermarks, and no account required. Convert as many Word documents as you need.</div></details>
+    <details><summary>❓ Does it upload my file to a server?</summary><div>No. Everything happens in your browser using JavaScript. Your document is never sent to any server — it's completely private and secure.</div></details>
+    <details><summary>❓ Does it keep my formatting (tables, headings, images)?</summary><div>Yes. We use mammoth.js which is specifically built for DOCX conversion and properly handles headings (H1–H6), bold, italic, bullet lists, numbered lists, tables, and embedded images.</div></details>
+    <details><summary>❓ Why does my complex document look different?</summary><div>Very complex formatting like multi-column layouts, SmartArt graphics, custom fonts, text boxes, and Word macros cannot be perfectly replicated in a browser environment. For standard documents like reports, resumes, and articles, results are excellent.</div></details>
+    <details><summary>❓ What file formats are supported?</summary><div>Currently supports .docx (Microsoft Word 2007 and later). Older .doc format is not supported. Save your file as .docx in Word first if needed.</div></details>
   </div>
 
 </div>
@@ -295,172 +348,234 @@
 </footer>
 
 <script>
-  const dropZone = document.getElementById('dropZone');
-  const fileInput = document.getElementById('fileInput');
-  const fileInfo = document.getElementById('fileInfo');
-  const fileNameEl = document.getElementById('fileName');
-  const fileSizeEl = document.getElementById('fileSize');
+  // Theme
+  (function(){
+    const t=localStorage.getItem('theme')||(window.matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light');
+    document.documentElement.setAttribute('data-theme',t);
+    document.getElementById('themeToggle').textContent=t==='dark'?'☀️':'🌙';
+  })();
+  document.getElementById('themeToggle').addEventListener('click',function(){
+    const d=document.documentElement;
+    const t=d.getAttribute('data-theme')==='dark'?'light':'dark';
+    d.setAttribute('data-theme',t);
+    localStorage.setItem('theme',t);
+    this.textContent=t==='dark'?'☀️':'🌙';
+  });
+
+  let currentFile = null;
+  let convertedHtml = '';
+
+  const dropZone   = document.getElementById('dropZone');
+  const fileInput  = document.getElementById('fileInput');
+  const fileInfo   = document.getElementById('fileInfo');
+  const fileName   = document.getElementById('fileName');
+  const fileSize   = document.getElementById('fileSize');
   const convertBtn = document.getElementById('convertBtn');
-  const alertBox = document.getElementById('alertBox');
-  const previewPanel = document.getElementById('previewPanel');
-  const docPreview = document.getElementById('docPreview');
-  const downloadBtn = document.getElementById('downloadBtn');
-  const progressWrap = document.getElementById('progressWrap');
+  const clearBtn   = document.getElementById('clearBtn');
+  const progressWrap  = document.getElementById('progressWrap');
+  const progressFill  = document.getElementById('progressFill');
+  const progressLabel = document.getElementById('progressLabel');
+  const previewBody   = document.getElementById('previewBody');
+  const previewBadge  = document.getElementById('previewBadge');
+  const warnBox       = document.getElementById('warnBox');
 
-  let selectedFile = null;
-  let htmlContent = '';
-
-  function showAlert(msg, type) {
-    alertBox.className = 'alert alert-' + type;
-    alertBox.innerHTML = (type === 'error' ? '❌ ' : '✅ ') + msg;
-    alertBox.classList.remove('hidden');
-  }
-
-  function setFile(file) {
-    if (!file) return;
-    if (!file.name.match(/\.(docx|doc)$/i)) {
-      showAlert('Please select a .docx file.', 'error');
-      return;
-    }
-    selectedFile = file;
-    fileNameEl.textContent = file.name;
-    fileSizeEl.textContent = '(' + formatSize(file.size) + ')';
-    fileInfo.classList.remove('hidden');
-    convertBtn.disabled = false;
-    alertBox.classList.add('hidden');
-    previewPanel.classList.add('hidden');
-  }
-
+  // Drag & drop
+  dropZone.addEventListener('click', () => fileInput.click());
   dropZone.addEventListener('dragover', e => { e.preventDefault(); dropZone.classList.add('drag-over'); });
   dropZone.addEventListener('dragleave', () => dropZone.classList.remove('drag-over'));
-  dropZone.addEventListener('drop', e => { e.preventDefault(); dropZone.classList.remove('drag-over'); setFile(e.dataTransfer.files[0]); });
-  fileInput.addEventListener('change', () => setFile(fileInput.files[0]));
+  dropZone.addEventListener('drop', e => {
+    e.preventDefault();
+    dropZone.classList.remove('drag-over');
+    const f = e.dataTransfer.files[0];
+    if (f) handleFile(f);
+  });
+  fileInput.addEventListener('change', () => { if (fileInput.files[0]) handleFile(fileInput.files[0]); });
 
-  // Parse DOCX using JSZip — extract text from word/document.xml
-  async function parseDocx(arrayBuffer) {
-    const zip = await JSZip.loadAsync(arrayBuffer);
-    const xmlFile = zip.file('word/document.xml');
-    if (!xmlFile) throw new Error('Invalid DOCX file');
-    const xmlText = await xmlFile.async('text');
-
-    const parser = new DOMParser();
-    const xmlDoc = parser.parseFromString(xmlText, 'text/xml');
-
-    let html = '';
-    const body = xmlDoc.querySelector('body');
-    if (!body) throw new Error('Could not parse document body');
-
-    const paragraphs = body.querySelectorAll('p');
-    paragraphs.forEach(para => {
-      // Check paragraph style
-      const styleEl = para.getElementsByTagNameNS('*', 'pStyle')[0] || para.querySelector('pStyle');
-      const styleName = styleEl ? (styleEl.getAttribute('w:val') || styleEl.getAttribute('val') || '') : '';
-
-      // Get text runs
-      const runs = para.querySelectorAll('r');
-      let paraText = '';
-      runs.forEach(run => {
-        const t = run.querySelector('t');
-        const bold = run.querySelector('b');
-        const italic = run.querySelector('i');
-        if (t) {
-          let text = t.textContent;
-          if (bold) text = `<strong>${text}</strong>`;
-          if (italic) text = `<em>${text}</em>`;
-          paraText += text;
-        }
-      });
-
-      if (!paraText.trim()) {
-        html += '<br>';
-        return;
-      }
-
-      // Map heading styles
-      if (styleName && /^Heading\s*1$/i.test(styleName)) {
-        html += `<h1>${paraText}</h1>`;
-      } else if (styleName && /^Heading\s*2$/i.test(styleName)) {
-        html += `<h2>${paraText}</h2>`;
-      } else if (styleName && /^Heading\s*3$/i.test(styleName)) {
-        html += `<h3>${paraText}</h3>`;
-      } else {
-        html += `<p>${paraText}</p>`;
-      }
-    });
-
-    return html;
+  function fmt(bytes) {
+    if (bytes < 1024) return bytes + ' B';
+    if (bytes < 1048576) return (bytes/1024).toFixed(1) + ' KB';
+    return (bytes/1048576).toFixed(1) + ' MB';
   }
 
+  function handleFile(file) {
+    if (!file.name.match(/\.docx$/i)) {
+      alert('Please upload a .docx file. Older .doc format is not supported — please save as .docx in Word first.');
+      return;
+    }
+    currentFile = file;
+    fileName.textContent = file.name;
+    fileSize.textContent = fmt(file.size);
+    fileInfo.style.display = 'flex';
+    convertBtn.disabled = false;
+    clearBtn.disabled = false;
+    warnBox.classList.remove('show');
+    parseDocx(file);
+  }
+
+  async function parseDocx(file) {
+    setProgress(10, 'Reading DOCX file…');
+    progressWrap.classList.add('show');
+    previewBadge.textContent = 'Loading…';
+
+    try {
+      const arrayBuffer = await file.arrayBuffer();
+      setProgress(40, 'Parsing document structure…');
+
+      const result = await mammoth.convertToHtml(
+        { arrayBuffer },
+        {
+          styleMap: [
+            "p[style-name='Heading 1'] => h1:fresh",
+            "p[style-name='Heading 2'] => h2:fresh",
+            "p[style-name='Heading 3'] => h3:fresh",
+            "p[style-name='Heading 4'] => h4:fresh",
+            "p[style-name='Heading 5'] => h5:fresh",
+            "p[style-name='Heading 6'] => h6:fresh",
+            "p[style-name='Title'] => h1.doc-title:fresh",
+            "p[style-name='Subtitle'] => p.doc-subtitle:fresh",
+            "p[style-name='Quote'] => blockquote:fresh",
+            "p[style-name='Intense Quote'] => blockquote.intense:fresh",
+            "r[style-name='Strong'] => strong",
+            "r[style-name='Emphasis'] => em",
+            "u => u",
+            "strike => s",
+            "p[style-name='List Paragraph'] => li:fresh"
+          ],
+          convertImage: mammoth.images.imgElement(function(image) {
+            return image.read('base64').then(function(imageBuffer) {
+              return { src: 'data:' + image.contentType + ';base64,' + imageBuffer };
+            });
+          })
+        }
+      );
+
+      setProgress(80, 'Rendering preview…');
+      convertedHtml = result.value;
+
+      // Show preview
+      previewBody.innerHTML = '<div class="doc-content">' + convertedHtml + '</div>';
+      previewBadge.textContent = '✅ Ready to convert';
+
+      // Show mammoth warnings if any (e.g. unsupported elements)
+      if (result.messages && result.messages.length > 0) {
+        const warns = result.messages.filter(m => m.type === 'warning').slice(0, 3);
+        if (warns.length > 0) {
+          warnBox.textContent = '⚠️ Note: ' + warns.map(w => w.message).join(' | ');
+          warnBox.classList.add('show');
+        }
+      }
+
+      setProgress(100, 'Preview ready!');
+      setTimeout(() => progressWrap.classList.remove('show'), 1000);
+
+    } catch (err) {
+      console.error(err);
+      previewBody.innerHTML = '<div class="empty-state"><div class="es-icon">❌</div><p>Could not parse this DOCX file. Make sure it is a valid .docx format and not password-protected.</p></div>';
+      previewBadge.textContent = 'Error';
+      progressWrap.classList.remove('show');
+    }
+  }
+
+  // Convert to PDF
   convertBtn.addEventListener('click', async () => {
-    if (!selectedFile) return;
+    if (!convertedHtml) { alert('Please upload a DOCX file first.'); return; }
 
     convertBtn.disabled = true;
-    convertBtn.textContent = '⏳ Processing…';
-    progressWrap.style.display = 'block';
-    setProgress('progressFill', 10);
-    alertBox.classList.add('hidden');
+    convertBtn.textContent = '⏳ Generating PDF…';
+    progressWrap.classList.add('show');
+    setProgress(10, 'Preparing document…');
 
     try {
-      const arrayBuffer = await selectedFile.arrayBuffer();
-      setProgress('progressFill', 30);
+      const pageSize    = document.getElementById('pageSize').value;
+      const orientation = document.getElementById('orientation').value;
+      const margins     = parseInt(document.getElementById('margins').value);
+      const quality     = parseFloat(document.getElementById('imgQuality').value);
 
-      htmlContent = await parseDocx(arrayBuffer);
-      setProgress('progressFill', 60);
+      // Build a clean render element
+      const wrapper = document.createElement('div');
+      wrapper.innerHTML = convertedHtml;
+      wrapper.style.cssText = `
+        font-family: 'Times New Roman', Times, serif;
+        font-size: 12pt;
+        line-height: 1.6;
+        color: #000000;
+        background: #ffffff;
+        padding: 0;
+        margin: 0;
+      `;
 
-      // Wrap with styling
-      const styledHtml = `
-        <div style="font-family:Arial,sans-serif;font-size:12pt;line-height:1.8;color:#000;padding:0.5rem">
-          ${htmlContent}
-        </div>`;
+      // Apply inline styles to elements for PDF fidelity
+      wrapper.querySelectorAll('h1').forEach(el => { el.style.cssText='font-size:2em;font-weight:bold;margin:.67em 0;color:#1a1a1a;border-bottom:2px solid #6C63FF;padding-bottom:.3em;'; });
+      wrapper.querySelectorAll('h2').forEach(el => { el.style.cssText='font-size:1.5em;font-weight:bold;margin:.75em 0;color:#2c2c2c;'; });
+      wrapper.querySelectorAll('h3').forEach(el => { el.style.cssText='font-size:1.17em;font-weight:bold;margin:.83em 0;color:#3c3c3c;'; });
+      wrapper.querySelectorAll('h4,h5,h6').forEach(el => { el.style.cssText='font-weight:bold;margin:1em 0;'; });
+      wrapper.querySelectorAll('p').forEach(el => { el.style.cssText='margin:0 0 .8em;'; });
+      wrapper.querySelectorAll('table').forEach(el => { el.style.cssText='width:100%;border-collapse:collapse;margin:1em 0;'; });
+      wrapper.querySelectorAll('td,th').forEach(el => { el.style.cssText='border:1px solid #999;padding:6px 10px;vertical-align:top;'; });
+      wrapper.querySelectorAll('th').forEach(el => { el.style.backgroundColor='#f0f0f0'; el.style.fontWeight='bold'; });
+      wrapper.querySelectorAll('ul').forEach(el => { el.style.cssText='list-style:disc;padding-left:2em;margin:.5em 0 .8em;'; });
+      wrapper.querySelectorAll('ol').forEach(el => { el.style.cssText='list-style:decimal;padding-left:2em;margin:.5em 0 .8em;'; });
+      wrapper.querySelectorAll('li').forEach(el => { el.style.cssText='margin-bottom:.3em;line-height:1.6;'; });
+      wrapper.querySelectorAll('img').forEach(el => { el.style.cssText='max-width:100%;height:auto;display:block;margin:1em auto;'; });
+      wrapper.querySelectorAll('blockquote').forEach(el => { el.style.cssText='border-left:4px solid #6C63FF;margin:1em 0;padding:.5em 1em;color:#555;background:#f8f7ff;'; });
+      wrapper.querySelectorAll('strong,b').forEach(el => { el.style.fontWeight='bold'; });
+      wrapper.querySelectorAll('em,i').forEach(el => { el.style.fontStyle='italic'; });
 
-      docPreview.innerHTML = styledHtml;
-      previewPanel.classList.remove('hidden');
-      setProgress('progressFill', 90);
-      showAlert('Document parsed! Preview shown below. Click Download PDF to save.', 'success');
-      setProgress('progressFill', 100);
+      setProgress(30, 'Rendering pages…');
+
+      const pdfName = (currentFile ? currentFile.name.replace(/\.docx$/i,'') : 'document') + '.pdf';
+
+      await html2pdf().set({
+        margin:      [margins, margins, margins, margins],
+        filename:    pdfName,
+        image:       { type: 'jpeg', quality: quality },
+        html2canvas: {
+          scale: 2,
+          useCORS: true,
+          letterRendering: true,
+          scrollY: 0,
+          backgroundColor: '#ffffff'
+        },
+        jsPDF: {
+          unit: 'mm',
+          format: pageSize,
+          orientation: orientation,
+          compress: true
+        },
+        pagebreak: { mode: ['avoid-all', 'css', 'legacy'] }
+      }).from(wrapper).save();
+
+      setProgress(100, 'Download started!');
+      setTimeout(() => progressWrap.classList.remove('show'), 1500);
 
     } catch (err) {
-      showAlert('Failed to process file: ' + err.message, 'error');
       console.error(err);
+      alert('PDF generation failed: ' + err.message);
+      progressWrap.classList.remove('show');
     } finally {
       convertBtn.disabled = false;
-      convertBtn.textContent = '⚙️ Convert to PDF';
-      setTimeout(() => progressWrap.style.display = 'none', 800);
+      convertBtn.textContent = '⚡ Convert to PDF';
     }
   });
 
-  downloadBtn.addEventListener('click', async () => {
-    if (!htmlContent) return;
-
-    downloadBtn.disabled = true;
-    downloadBtn.textContent = '⏳ Generating PDF…';
-
-    try {
-      const styledHtml = `
-        <div style="font-family:Arial,sans-serif;font-size:12pt;line-height:1.8;color:#000;padding:1rem;max-width:750px;margin:0 auto">
-          ${htmlContent}
-        </div>`;
-
-      const element = document.createElement('div');
-      element.innerHTML = styledHtml;
-      document.body.appendChild(element);
-
-      const baseName = selectedFile.name.replace(/\.(docx|doc)$/i, '');
-      await html2pdf().set({
-        margin: [10, 10],
-        filename: baseName + '.pdf',
-        html2canvas: { scale: 2 },
-        jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
-      }).from(element).save();
-
-      document.body.removeChild(element);
-    } catch (err) {
-      showAlert('PDF generation failed: ' + err.message, 'error');
-    } finally {
-      downloadBtn.disabled = false;
-      downloadBtn.textContent = '⬇️ Download PDF';
-    }
+  // Clear
+  clearBtn.addEventListener('click', () => {
+    currentFile = null;
+    convertedHtml = '';
+    fileInput.value = '';
+    fileInfo.style.display = 'none';
+    convertBtn.disabled = true;
+    clearBtn.disabled = true;
+    warnBox.classList.remove('show');
+    progressWrap.classList.remove('show');
+    previewBadge.textContent = 'No file loaded';
+    previewBody.innerHTML = '<div class="empty-state"><div class="es-icon">📋</div><p>Upload a DOCX file to see a live preview here before converting to PDF.</p></div>';
   });
+
+  function setProgress(pct, label) {
+    progressFill.style.width = pct + '%';
+    progressLabel.textContent = label;
+  }
 </script>
 </body>
 </html>

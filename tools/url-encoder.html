@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>URL Encoder Decoder Free — Encode Decode URL Online | ToolKit Pro</title>
+  <meta name="description" content="Encode and decode URLs online free. URL encoder decoder for query strings, special characters and unicode. Essential developer tool — no upload, instant results." />
+
+  <link rel="canonical" href="https://kundanchouhan12.github.io/tools/url-encoder.html" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="URL Encoder Decoder Free — Encode Decode URL Online | ToolKit Pro" />
+  <meta property="og:description" content="Encode and decode URLs online free. URL encoder decoder for query strings, special characters and unicode. Essential developer tool — no upload, instant results." />
+  <meta property="og:url" content="https://kundanchouhan12.github.io/tools/url-encoder.html" />
+  <meta property="og:site_name" content="ToolKit Pro" />
+  <meta property="og:image" content="https://kundanchouhan12.github.io/og-image.png" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="URL Encoder Decoder Free — Encode Decode URL Online | ToolKit Pro" />
+  <meta name="twitter:description" content="Encode and decode URLs online free. URL encoder decoder for query strings, special characters and unicode. Essential developer tool — no upload, instant results." />
+
+  <meta name="keywords" content="url encoder decoder, encode url online, decode url online, url encoding tool, url percent encoding, url decode free, encode special characters url, developer tools online, toolkit pro" />
+  <meta name="robots" content="index, follow" />
+  <meta name="author" content="ToolKit Pro" />
+
+  <link rel="stylesheet" href="../css/style.css" />
+  <script src="../js/common.js"></script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "URL Encoder Decoder",
+    "description": "Encode and decode URLs online free. URL encoder decoder for query strings, special characters and unicode.",
+    "url": "https://kundanchouhan12.github.io/tools/url-encoder.html",
+    "applicationCategory": "DeveloperApplication",
+    "operatingSystem": "Any (Web Browser)",
+    "browserRequirements": "Requires JavaScript",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "ToolKit Pro",
+      "url": "https://kundanchouhan12.github.io/"
+    },
+    "featureList": "Encode URI Component, Encode URI, Decode URL, Real-time encoding, Character reference table, Error handling, No data transmitted, Free to use"
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://kundanchouhan12.github.io/" },
+      { "@type": "ListItem", "position": 2, "name": "Tools", "item": "https://kundanchouhan12.github.io/#tools" },
+      { "@type": "ListItem", "position": 3, "name": "URL Encoder Decoder", "item": "https://kundanchouhan12.github.io/tools/url-encoder.html" }
+    ]
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What is URL encoding?",
+        "acceptedAnswer": { "@type": "Answer", "text": "URL encoding (percent-encoding) converts special characters into a format that can be safely transmitted in a URL. Characters like spaces, &, =, and # are replaced with a % sign followed by their hexadecimal ASCII code (e.g. space becomes %20)." }
+      },
+      {
+        "@type": "Question",
+        "name": "What is the difference between encodeURI and encodeURIComponent?",
+        "acceptedAnswer": { "@type": "Answer", "text": "encodeURI encodes a full URL and preserves characters like /, ?, #, &, = that have special meaning in URLs. encodeURIComponent encodes a single value (like a query string parameter) and encodes those structural characters too, making it safer for embedding values inside a URL." }
+      },
+      {
+        "@type": "Question",
+        "name": "Is my data safe when using this tool?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Yes. All encoding and decoding happens entirely in your browser using built-in JavaScript functions. No data is sent to any server." }
+      }
+    ]
+  }
+  </script>
+
+  <style>
+    .nav-links{display:flex;gap:1.5rem;align-items:center;}
+    .nav-links a{color:var(--text);font-size:.9rem;font-weight:500;text-decoration:none;transition:color .2s;}
+    .nav-links a:hover{color:var(--primary);}
+    @media(max-width:768px){.nav-links{display:none;}}
+
+    .tab-bar{display:flex;gap:0;border-bottom:2px solid var(--border);margin-bottom:1.5rem;}
+    .tab-btn{padding:.65rem 1.5rem;border:none;background:none;color:var(--text-muted);font-size:.95rem;font-weight:600;cursor:pointer;border-bottom:3px solid transparent;margin-bottom:-2px;transition:all .2s;}
+    .tab-btn.active{color:var(--primary);border-bottom-color:var(--primary);}
+    .tab-pane{display:none;}
+    .tab-pane.active{display:block;}
+
+    .char-table{width:100%;border-collapse:collapse;font-size:.85rem;margin-top:.75rem;}
+    .char-table th{background:var(--primary);color:#fff;padding:.5rem .75rem;text-align:left;}
+    .char-table td{padding:.45rem .75rem;border-bottom:1px solid var(--border);font-family:monospace;}
+    .char-table tr:nth-child(even) td{background:var(--bg-secondary);}
+
+    .error-msg{color:#ff6b6b;font-size:.85rem;margin-top:.4rem;display:none;}
+    .error-msg.visible{display:block;}
+
+    .sample-btn{font-size:.8rem;padding:.3rem .75rem;border-radius:6px;border:1px solid var(--primary);background:none;color:var(--primary);cursor:pointer;transition:all .2s;}
+    .sample-btn:hover{background:var(--primary);color:#fff;}
+  </style>
+</head>
+<body>
+
+<nav class="navbar">
+  <a href="../index.html" class="nav-brand"><div class="logo-icon">🛠</div>ToolKit Pro</a>
+  <div class="nav-links">
+    <a href="../index.html">Home</a>
+    <a href="../index.html#tools">Tools</a>
+    <a href="../blog/index.html">Blog</a>
+    <a href="../about.html">About</a>
+    <a href="../contact.html">Contact</a>
+  </div>
+  <div class="nav-actions"><button class="theme-toggle" id="themeToggle">🌙</button></div>
+</nav>
+
+<div class="tool-page-hero">
+  <h1>🔗 URL Encoder / Decoder</h1>
+  <p>Encode and decode URLs instantly. Supports encodeURIComponent, encodeURI, and safe decode with error handling.</p>
+</div>
+
+<div class="tool-container">
+
+  <div class="panel">
+    <div class="tab-bar">
+      <button class="tab-btn active" id="tabEncode" onclick="switchTab('encode')">Encode</button>
+      <button class="tab-btn" id="tabDecode" onclick="switchTab('decode')">Decode</button>
+    </div>
+
+    <!-- ENCODE TAB -->
+    <div class="tab-pane active" id="paneEncode">
+      <div class="form-group">
+        <label class="form-label" style="display:flex;justify-content:space-between;align-items:center">
+          <span>Raw Text / URL to Encode</span>
+          <button class="sample-btn" onclick="loadSampleEncode()">Load Sample</button>
+        </label>
+        <textarea class="form-control" id="encodeInput" rows="5" placeholder="Paste raw text or URL here…" oninput="scheduleEncode()"></textarea>
+      </div>
+      <div class="btn-group" style="margin-bottom:1rem">
+        <button class="btn btn-primary" id="btnEncodeComponent" onclick="doEncode('component')">Encode URI Component</button>
+        <button class="btn btn-secondary" id="btnEncodeURI" onclick="doEncode('uri')">Encode URI</button>
+        <button class="btn btn-secondary" onclick="clearEncode()">Clear</button>
+      </div>
+      <div style="font-size:.8rem;color:var(--text-muted);margin-bottom:.75rem;padding:.6rem .85rem;background:var(--bg-secondary);border-radius:8px;border-left:3px solid var(--primary)">
+        <strong>encodeURIComponent</strong> — encodes everything including &amp;, =, +, /. Best for query parameter values.<br>
+        <strong>encodeURI</strong> — preserves URL structure characters (/, ?, #, &amp;, =). Best for full URLs.
+      </div>
+      <div class="form-group">
+        <label class="form-label" style="display:flex;justify-content:space-between;align-items:center">
+          <span>Encoded Output</span>
+          <button class="copy-btn" onclick="copyOutput('encodeOutput', this)">📋 Copy</button>
+        </label>
+        <textarea class="form-control" id="encodeOutput" rows="5" readonly placeholder="Encoded result will appear here…"></textarea>
+      </div>
+    </div>
+
+    <!-- DECODE TAB -->
+    <div class="tab-pane" id="paneDecode">
+      <div class="form-group">
+        <label class="form-label" style="display:flex;justify-content:space-between;align-items:center">
+          <span>Encoded URL to Decode</span>
+          <button class="sample-btn" onclick="loadSampleDecode()">Load Sample</button>
+        </label>
+        <textarea class="form-control" id="decodeInput" rows="5" placeholder="Paste encoded URL here… e.g. hello%20world%21" oninput="scheduleDecode()"></textarea>
+        <div class="error-msg" id="decodeError">⚠️ Invalid encoded string — could not decode. Check for malformed percent sequences.</div>
+      </div>
+      <div class="btn-group" style="margin-bottom:1rem">
+        <button class="btn btn-primary" onclick="doDecode()">Decode URL</button>
+        <button class="btn btn-secondary" onclick="clearDecode()">Clear</button>
+      </div>
+      <div class="form-group">
+        <label class="form-label" style="display:flex;justify-content:space-between;align-items:center">
+          <span>Decoded Output</span>
+          <button class="copy-btn" onclick="copyOutput('decodeOutput', this)">📋 Copy</button>
+        </label>
+        <textarea class="form-control" id="decodeOutput" rows="5" readonly placeholder="Decoded result will appear here…"></textarea>
+      </div>
+    </div>
+  </div>
+
+  <!-- Character Reference Table -->
+  <div class="panel">
+    <div class="panel-title">📖 Common URL Encoding Reference</div>
+    <table class="char-table">
+      <thead>
+        <tr><th>Character</th><th>Encoded</th><th>Description</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Space</td><td>%20</td><td>Whitespace character</td></tr>
+        <tr><td>&amp;</td><td>%26</td><td>Ampersand — query parameter separator</td></tr>
+        <tr><td>=</td><td>%3D</td><td>Equals — key/value separator</td></tr>
+        <tr><td>+</td><td>%2B</td><td>Plus sign (also used for space in forms)</td></tr>
+        <tr><td>#</td><td>%23</td><td>Hash — fragment identifier</td></tr>
+        <tr><td>?</td><td>%3F</td><td>Question mark — query string start</td></tr>
+        <tr><td>/</td><td>%2F</td><td>Forward slash — path separator</td></tr>
+        <tr><td>@</td><td>%40</td><td>At sign — used in emails and auth</td></tr>
+        <tr><td>%</td><td>%25</td><td>Percent sign itself</td></tr>
+        <tr><td>:</td><td>%3A</td><td>Colon — protocol/port separator</td></tr>
+        <tr><td>,</td><td>%2C</td><td>Comma</td></tr>
+        <tr><td>[</td><td>%5B</td><td>Left square bracket</td></tr>
+        <tr><td>]</td><td>%5D</td><td>Right square bracket</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+</div>
+
+<!-- CONTENT SECTIONS -->
+<div style="max-width:860px;margin:0 auto;padding:0 1rem 2rem">
+
+  <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:2rem;margin-bottom:1.5rem;box-shadow:var(--shadow)">
+    <h2 style="font-size:1.4rem;margin-bottom:1rem;color:var(--primary)">What is URL Encoding?</h2>
+    <p style="line-height:1.9;color:var(--text);margin-bottom:1rem">URL encoding, also known as percent-encoding, is a mechanism used to convert characters that are not allowed or that have special meaning in a URL into a safe format. The HTTP specification (RFC 3986) defines which characters can appear literally in a URL — only a small set of "unreserved characters" (A–Z, a–z, 0–9, -, _, ., ~) are allowed as-is. Every other character must be encoded as a percent sign (%) followed by two hexadecimal digits representing the character's ASCII or UTF-8 code point.</p>
+    <p style="line-height:1.9;color:var(--text)">For example, a space becomes %20, an ampersand (&amp;) becomes %26, and an equals sign (=) becomes %3D. This is critical when passing data through query strings, building API requests, or embedding links in HTML. Without proper encoding, browsers and servers may misinterpret characters like &amp; as parameter separators or # as a fragment identifier, breaking your URLs and causing data loss or security issues.</p>
+  </div>
+
+  <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:2rem;margin-bottom:1.5rem;box-shadow:var(--shadow)">
+    <h2 style="font-size:1.4rem;margin-bottom:1rem;color:var(--primary)">How to Use — Step-by-Step</h2>
+    <ol style="padding-left:1.5rem;line-height:2;color:var(--text)">
+      <li>Select the <strong>Encode</strong> tab to encode text, or the <strong>Decode</strong> tab to decode an encoded URL.</li>
+      <li>Paste your raw text or encoded URL into the input textarea, or click <strong>Load Sample</strong> to try an example.</li>
+      <li>For encoding: choose <strong>Encode URI Component</strong> for query parameter values, or <strong>Encode URI</strong> for a complete URL that needs safe characters only.</li>
+      <li>The result appears instantly in the output box. The tool also auto-encodes/decodes as you type (with a 300 ms debounce).</li>
+    </ol>
+  </div>
+
+  <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:2rem;margin-bottom:1.5rem;box-shadow:var(--shadow)">
+    <h2 style="font-size:1.4rem;margin-bottom:1rem;color:var(--primary)">Key Features</h2>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1rem">
+      <div style="padding:1rem;background:var(--bg-secondary);border-radius:8px"><div style="font-size:1.5rem;margin-bottom:.5rem">⚡</div><strong>Real-time Encoding</strong><p style="font-size:.85rem;color:var(--text-muted);margin-top:.3rem">Results update automatically as you type with a 300 ms debounce so you never have to click encode manually.</p></div>
+      <div style="padding:1rem;background:var(--bg-secondary);border-radius:8px"><div style="font-size:1.5rem;margin-bottom:.5rem">🔀</div><strong>Two Encode Modes</strong><p style="font-size:.85rem;color:var(--text-muted);margin-top:.3rem">Choose between encodeURIComponent (full encoding) and encodeURI (structure-preserving) to match your exact use case.</p></div>
+      <div style="padding:1rem;background:var(--bg-secondary);border-radius:8px"><div style="font-size:1.5rem;margin-bottom:.5rem">🛡️</div><strong>Safe Decode</strong><p style="font-size:.85rem;color:var(--text-muted);margin-top:.3rem">Invalid encoded strings are caught gracefully with a clear error message instead of crashing the page.</p></div>
+      <div style="padding:1rem;background:var(--bg-secondary);border-radius:8px"><div style="font-size:1.5rem;margin-bottom:.5rem">📋</div><strong>One-click Copy</strong><p style="font-size:.85rem;color:var(--text-muted);margin-top:.3rem">Copy any output directly to your clipboard with a single button click — no manual selection needed.</p></div>
+      <div style="padding:1rem;background:var(--bg-secondary);border-radius:8px"><div style="font-size:1.5rem;margin-bottom:.5rem">📖</div><strong>Reference Table</strong><p style="font-size:.85rem;color:var(--text-muted);margin-top:.3rem">Built-in character reference shows the most common URL encodings so you can look up values at a glance.</p></div>
+      <div style="padding:1rem;background:var(--bg-secondary);border-radius:8px"><div style="font-size:1.5rem;margin-bottom:.5rem">🔒</div><strong>100% Private</strong><p style="font-size:.85rem;color:var(--text-muted);margin-top:.3rem">All processing happens in your browser using native JavaScript. Nothing is ever sent to a server.</p></div>
+    </div>
+  </div>
+
+  <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:2rem;margin-bottom:1.5rem;box-shadow:var(--shadow)">
+    <h2 style="font-size:1.4rem;margin-bottom:1.25rem;color:var(--primary)">Frequently Asked Questions</h2>
+
+    <details style="border:1px solid var(--border);border-radius:8px;margin-bottom:.75rem;overflow:hidden">
+      <summary style="padding:1rem 1.25rem;cursor:pointer;font-weight:600;background:var(--bg-secondary);user-select:none">❓ What is URL encoding?</summary>
+      <div style="padding:1rem 1.25rem;line-height:1.8;color:var(--text-muted)">URL encoding (percent-encoding) converts characters that are not safe for use in a URL into a % followed by two hex digits representing the character's byte value. For example, a space becomes %20 and an ampersand becomes %26. This is required by the HTTP standard (RFC 3986) to ensure URLs are transmitted correctly.</div>
+    </details>
+
+    <details style="border:1px solid var(--border);border-radius:8px;margin-bottom:.75rem;overflow:hidden">
+      <summary style="padding:1rem 1.25rem;cursor:pointer;font-weight:600;background:var(--bg-secondary);user-select:none">❓ When should I use encodeURIComponent vs encodeURI?</summary>
+      <div style="padding:1rem 1.25rem;line-height:1.8;color:var(--text-muted)">Use <strong>encodeURIComponent</strong> when encoding a single query parameter value — it encodes characters like &amp;, =, /, ?, and # that would otherwise be interpreted as URL structure. Use <strong>encodeURI</strong> when encoding a complete URL where you want to preserve those structural characters and only escape characters that are truly unsafe (spaces, non-ASCII, etc.).</div>
+    </details>
+
+    <details style="border:1px solid var(--border);border-radius:8px;margin-bottom:.75rem;overflow:hidden">
+      <summary style="padding:1rem 1.25rem;cursor:pointer;font-weight:600;background:var(--bg-secondary);user-select:none">❓ Why does a space encode to %20 sometimes and + other times?</summary>
+      <div style="padding:1rem 1.25rem;line-height:1.8;color:var(--text-muted)">In RFC 3986 (the URL standard), spaces must be encoded as %20. However, in HTML form data (application/x-www-form-urlencoded), spaces are encoded as + for historical reasons. This tool always uses %20, which is the correct encoding for URLs. If you're submitting HTML forms, browsers handle the + encoding automatically.</div>
+    </details>
+
+    <details style="border:1px solid var(--border);border-radius:8px;margin-bottom:.75rem;overflow:hidden">
+      <summary style="padding:1rem 1.25rem;cursor:pointer;font-weight:600;background:var(--bg-secondary);user-select:none">❓ Can this tool handle Unicode characters?</summary>
+      <div style="padding:1rem 1.25rem;line-height:1.8;color:var(--text-muted)">Yes. JavaScript's encodeURIComponent converts Unicode characters to their UTF-8 byte sequences and then percent-encodes each byte. For example, the Japanese character 日 encodes to %E6%97%A5. This is the correct and widely supported way to include non-ASCII characters in URLs.</div>
+    </details>
+
+    <details style="border:1px solid var(--border);border-radius:8px;margin-bottom:.75rem;overflow:hidden">
+      <summary style="padding:1rem 1.25rem;cursor:pointer;font-weight:600;background:var(--bg-secondary);user-select:none">❓ What happens if I try to decode an invalid encoded string?</summary>
+      <div style="padding:1rem 1.25rem;line-height:1.8;color:var(--text-muted)">If the encoded string contains malformed percent sequences (e.g. %GG or a lone % at the end), decodeURIComponent will throw a URIError. This tool catches that error and displays a friendly warning message, then attempts a fallback decode using decodeURI which is more lenient.</div>
+    </details>
+  </div>
+
+</div>
+
+<footer style="text-align:center;padding:2rem;color:var(--text-muted);font-size:.85rem;border-top:1px solid var(--border)">
+  <p>© 2025 ToolKit Pro — <a href="../privacy-policy.html">Privacy Policy</a> · <a href="../terms.html">Terms</a> · <a href="../contact.html">Contact</a> · <a href="../index.html">All Tools</a></p>
+</footer>
+
+<script>
+(function(){const t=localStorage.getItem('theme')||(window.matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t);document.getElementById('themeToggle').textContent=t==='dark'?'☀️':'🌙';})();
+document.getElementById('themeToggle').addEventListener('click',function(){const d=document.documentElement;const t=d.getAttribute('data-theme')==='dark'?'light':'dark';d.setAttribute('data-theme',t);localStorage.setItem('theme',t);this.textContent=t==='dark'?'☀️':'🌙';});
+</script>
+
+<script>
+  let encodeTimer = null;
+  let decodeTimer = null;
+  let lastEncodeMode = 'component';
+
+  function switchTab(tab) {
+    document.getElementById('paneEncode').classList.toggle('active', tab === 'encode');
+    document.getElementById('paneDecode').classList.toggle('active', tab === 'decode');
+    document.getElementById('tabEncode').classList.toggle('active', tab === 'encode');
+    document.getElementById('tabDecode').classList.toggle('active', tab === 'decode');
+  }
+
+  function doEncode(mode) {
+    lastEncodeMode = mode;
+    const input = document.getElementById('encodeInput').value;
+    let result = '';
+    try {
+      result = mode === 'component' ? encodeURIComponent(input) : encodeURI(input);
+    } catch(e) {
+      result = '⚠️ Error encoding: ' + e.message;
+    }
+    document.getElementById('encodeOutput').value = result;
+  }
+
+  function scheduleEncode() {
+    clearTimeout(encodeTimer);
+    encodeTimer = setTimeout(() => doEncode(lastEncodeMode), 300);
+  }
+
+  function doDecode() {
+    const input = document.getElementById('decodeInput').value;
+    const errEl = document.getElementById('decodeError');
+    errEl.classList.remove('visible');
+    let result = '';
+    try {
+      result = decodeURIComponent(input);
+    } catch(e) {
+      try {
+        result = decodeURI(input);
+      } catch(e2) {
+        errEl.classList.add('visible');
+        result = '';
+      }
+    }
+    document.getElementById('decodeOutput').value = result;
+  }
+
+  function scheduleDecode() {
+    clearTimeout(decodeTimer);
+    decodeTimer = setTimeout(doDecode, 300);
+  }
+
+  function clearEncode() {
+    document.getElementById('encodeInput').value = '';
+    document.getElementById('encodeOutput').value = '';
+  }
+
+  function clearDecode() {
+    document.getElementById('decodeInput').value = '';
+    document.getElementById('decodeOutput').value = '';
+    document.getElementById('decodeError').classList.remove('visible');
+  }
+
+  function loadSampleEncode() {
+    document.getElementById('encodeInput').value = 'https://example.com/search?q=hello world&lang=en&filter=a+b=c';
+    doEncode(lastEncodeMode);
+  }
+
+  function loadSampleDecode() {
+    document.getElementById('decodeInput').value = 'https%3A%2F%2Fexample.com%2Fsearch%3Fq%3Dhello%20world%26lang%3Den%26filter%3Da%2Bb%3Dc';
+    doDecode();
+  }
+
+  function copyOutput(id, btn) {
+    const val = document.getElementById(id).value;
+    if (!val) return;
+    navigator.clipboard.writeText(val).then(() => {
+      const orig = btn.textContent;
+      btn.textContent = '✅ Copied!';
+      setTimeout(() => { btn.textContent = orig; }, 1500);
+    });
+  }
+</script>
+</body>
+</html>
