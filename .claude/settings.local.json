@@ -4,7 +4,9 @@
       "Bash(npm --version)",
       "Bash(npm install *)",
       "Bash(npm init *)",
-      "Bash(node -e ' *)"
+      "Bash(node -e ' *)",
+      "Bash(python3 -c ' *)",
+      "Bash(python -c ' *)"
     ]
   }
 }
