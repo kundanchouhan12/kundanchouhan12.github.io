@@ -6,7 +6,11 @@
       "Bash(npm init *)",
       "Bash(node -e ' *)",
       "Bash(python3 -c ' *)",
-      "Bash(python -c ' *)"
+      "Bash(python -c ' *)",
+      "Bash(git log *)",
+      "PowerShell($bytes = [System.IO.File]::ReadAllBytes\\(\"D:\\\\Tools Website\\\\sitemap.xml\"\\); $hasBOM = \\($bytes[0] -eq 0xEF -and $bytes[1] -eq 0xBB -and $bytes[2] -eq 0xBF\\); \"Has UTF-8 BOM: $hasBOM\"; \"First 5 bytes: $\\($bytes[0..4] -join ', '\\)\"; [xml]$xml = Get-Content \"D:\\\\Tools Website\\\\sitemap.xml\" -Raw; \"XML is valid: True\"; \"URL count: $\\(\\($xml.urlset.url | Measure-Object\\).Count\\)\")",
+      "WebFetch(domain:kundanchouhan12.github.io)",
+      "Bash(git add *)"
     ]
   }
 }
