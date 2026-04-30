@@ -33,7 +33,7 @@
 
   <link rel="stylesheet" href="../css/style.css" />
   <script src="../js/common.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.4.120/pdf.min.js"></script>
+  <script src="../js/vendor/pdf.min.js"></script>
 
   <script type="application/ld+json">
   {
@@ -290,7 +290,7 @@
 
 <script>
   // Configure PDF.js worker
-  pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.4.120/pdf.worker.min.js';
+  pdfjsLib.GlobalWorkerOptions.workerSrc = '../js/vendor/pdf.worker.min.js';
 
   const dropZone = document.getElementById('dropZone');
   const fileInput = document.getElementById('fileInput');

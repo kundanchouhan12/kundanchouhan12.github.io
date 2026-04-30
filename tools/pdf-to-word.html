@@ -33,8 +33,8 @@
 
   <link rel="stylesheet" href="../css/style.css" />
   <script src="../js/common.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.4.120/pdf.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+  <script src="../js/vendor/pdf.min.js"></script>
+  <script src="../js/vendor/jszip.min.js"></script>
   <style>
     .tool-container { max-width: 860px; margin: 2rem auto; padding: 0 1rem 4rem; }
     .back-link { display:inline-flex; align-items:center; gap:.4rem; color:var(--text-muted); font-size:.9rem; margin-bottom:1.5rem; }
@@ -440,7 +440,7 @@
   });
 
   // PDF.js worker
-  pdfjsLib.GlobalWorkerOptions.workerSrc='https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.4.120/pdf.worker.min.js';
+  pdfjsLib.GlobalWorkerOptions.workerSrc='../js/vendor/pdf.worker.min.js';
 
   let extractedText='';
   let pdfFileName='document';
