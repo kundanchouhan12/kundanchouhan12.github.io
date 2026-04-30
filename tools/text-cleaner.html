@@ -5,7 +5,7 @@
   <meta charset="UTF-8" />
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Text Cleaner Online Free — Remove Extra Spaces &amp; Format Text | ToolKit Pro</title>
+  <title>Free Text Cleaner — Remove Extra Spaces &amp; Format Text Instantly Online | ToolKit Pro</title>
   <meta name="description" content="Clean and format text online free. Remove extra spaces, blank lines, special characters. Text cleaner with 15+ cleaning options — no upload, instant results." />
 
   <link rel="canonical" href="https://kundanchouhan12.github.io/tools/text-cleaner.html" />
@@ -21,7 +21,7 @@
   <meta name="twitter:title" content="Text Cleaner Online Free — Remove Extra Spaces &amp; Format Text | ToolKit Pro" />
   <meta name="twitter:description" content="Clean and format text online free. Remove extra spaces, blank lines, special characters. Text cleaner with 15+ cleaning options — no upload, instant results." />
 
-  <meta name="keywords" content="text cleaner online, remove extra spaces from text, text formatter online, text cleaner tool, remove blank lines, clean text free, remove special characters, strip html tags, text cleanup tool, toolkit pro" />
+  <meta name="keywords" content="text cleaner online free, remove extra spaces from text online, how to remove blank lines from text, how to remove duplicate lines, sort lines alphabetically, strip html tags from text, remove special characters from text, clean text copied from pdf, text formatter online free, text cleanup tool, toolkit pro" />
   <meta name="robots" content="index, follow" />
   <meta name="author" content="ToolKit Pro" />
 
@@ -52,6 +52,60 @@
       { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://kundanchouhan12.github.io/" },
       { "@type": "ListItem", "position": 2, "name": "Tools", "item": "https://kundanchouhan12.github.io/#tools" },
       { "@type": "ListItem", "position": 3, "name": "Text Cleaner", "item": "https://kundanchouhan12.github.io/tools/text-cleaner.html" }
+    ]
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "How do I remove extra spaces from text online?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Paste your text into the input area, then check 'Remove extra spaces (multi → single)' to collapse multiple consecutive spaces into one, and 'Trim leading/trailing spaces' to remove spaces at the start and end of each line. The output updates instantly. Click Copy to save the cleaned text to your clipboard." }
+      },
+      {
+        "@type": "Question",
+        "name": "How do I remove blank lines from text?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Check 'Remove all blank lines' to delete every empty line from your text. Alternatively, check 'Reduce multiple blank lines to one' if you want to keep single blank lines as paragraph breaks but remove consecutive empty lines. Both options work instantly as you type." }
+      },
+      {
+        "@type": "Question",
+        "name": "How do I remove duplicate lines from a list?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Check 'Remove duplicate lines' — this removes any line that has appeared before it in the text. For best results, also enable 'Sort lines A → Z' first, which groups identical lines together so all duplicates are removed (not just consecutive ones). The combined Sort + Deduplicate is the most reliable way to produce a unique sorted list." }
+      },
+      {
+        "@type": "Question",
+        "name": "How do I sort lines alphabetically online?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Check 'Sort lines A → Z' to sort all lines alphabetically in ascending order, or 'Sort lines Z → A' for descending. Sorting uses the browser's localeCompare which handles accented characters and unicode correctly. Use with 'Remove duplicate lines' to produce a clean unique sorted list." }
+      },
+      {
+        "@type": "Question",
+        "name": "How do I clean text copied from a PDF?",
+        "acceptedAnswer": { "@type": "Answer", "text": "PDF-copied text often has unwanted line breaks, extra spaces, and formatting artifacts. Try these options: 'Trim leading/trailing spaces', 'Remove extra spaces', and 'Remove line breaks (join all lines)' to join broken paragraphs. If there are HTML artifacts, also enable 'Strip HTML tags'. Use Swap to feed the result back for further cleaning." }
+      },
+      {
+        "@type": "Question",
+        "name": "In what order are the cleaning operations applied?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Operations are applied in logical sequence: trim → extra spaces → blank lines → join lines → strip HTML → special characters → numbers → punctuation → sort → deduplicate → number lines → reverse text → reverse lines. This ensures operations complement each other — for example, sorting before deduplication groups identical lines so duplicates are efficiently removed." }
+      },
+      {
+        "@type": "Question",
+        "name": "What does 'Strip HTML tags' do exactly?",
+        "acceptedAnswer": { "@type": "Answer", "text": "The strip HTML option removes all content between < and > angle brackets (any HTML or XML tag). It does not decode HTML entities like &amp; or &nbsp;. If you also need entities decoded, enable 'Remove special characters' which removes remaining ampersand-based sequences." }
+      },
+      {
+        "@type": "Question",
+        "name": "What does 'Remove special characters' keep?",
+        "acceptedAnswer": { "@type": "Answer", "text": "This option keeps only letters (A–Z, a–z), digits (0–9), spaces, and basic punctuation (. , ! ? ' \" - _). All other characters — including symbols, emoji, mathematical operators, currency signs, and non-ASCII characters — are removed." }
+      },
+      {
+        "@type": "Question",
+        "name": "Is there a character limit for the input text?",
+        "acceptedAnswer": { "@type": "Answer", "text": "No hard limit — processing is constrained only by your browser's available memory. Texts up to several million characters work fine. For very large texts (logs, datasets), the tool remains fast because all operations use native JavaScript string methods rather than DOM manipulation." }
+      }
     ]
   }
   </script>
@@ -234,6 +288,162 @@
       <summary style="padding:1rem 1.25rem;cursor:pointer;font-weight:600;background:var(--bg-secondary);user-select:none">❓ Is there a character limit for the input text?</summary>
       <div style="padding:1rem 1.25rem;line-height:1.8;color:var(--text-muted)">There is no hard character limit — the tool is constrained only by your browser's available memory. In practice, texts up to several million characters work fine. For very large texts (logs, datasets), the tool remains fast because all operations use native JavaScript string methods and array operations rather than DOM manipulation.</div>
     </details>
+
+    <details style="border:1px solid var(--border);border-radius:8px;margin-bottom:.75rem;overflow:hidden">
+      <summary style="padding:1rem 1.25rem;cursor:pointer;font-weight:600;background:var(--bg-secondary);user-select:none">❓ How do I remove extra spaces from text online?</summary>
+      <div style="padding:1rem 1.25rem;line-height:1.8;color:var(--text-muted)">Paste your text into the input area, then check <strong>Remove extra spaces (multi → single)</strong> to collapse multiple consecutive spaces into one, and <strong>Trim leading/trailing spaces</strong> to remove spaces at the start and end of each line. The output updates instantly. Click Copy to save the cleaned text to your clipboard.</div>
+    </details>
+
+    <details style="border:1px solid var(--border);border-radius:8px;margin-bottom:.75rem;overflow:hidden">
+      <summary style="padding:1rem 1.25rem;cursor:pointer;font-weight:600;background:var(--bg-secondary);user-select:none">❓ How do I remove blank lines from text?</summary>
+      <div style="padding:1rem 1.25rem;line-height:1.8;color:var(--text-muted)">Check <strong>Remove all blank lines</strong> to delete every empty line from your text. Alternatively, check <strong>Reduce multiple blank lines to one</strong> if you want to keep single blank lines as paragraph breaks but remove consecutive empty lines. Both options work instantly as you type.</div>
+    </details>
+
+    <details style="border:1px solid var(--border);border-radius:8px;margin-bottom:.75rem;overflow:hidden">
+      <summary style="padding:1rem 1.25rem;cursor:pointer;font-weight:600;background:var(--bg-secondary);user-select:none">❓ How do I remove duplicate lines from a list?</summary>
+      <div style="padding:1rem 1.25rem;line-height:1.8;color:var(--text-muted)">Check <strong>Remove duplicate lines</strong> — this removes any line that has appeared before it in the text. For best results, also enable <strong>Sort lines A → Z</strong> first, which groups identical lines together so all duplicates are removed (not just consecutive ones). The combined Sort + Deduplicate is the most reliable way to produce a unique sorted list.</div>
+    </details>
+
+    <details style="border:1px solid var(--border);border-radius:8px;margin-bottom:.75rem;overflow:hidden">
+      <summary style="padding:1rem 1.25rem;cursor:pointer;font-weight:600;background:var(--bg-secondary);user-select:none">❓ How do I clean text copied from a PDF?</summary>
+      <div style="padding:1rem 1.25rem;line-height:1.8;color:var(--text-muted)">PDF-copied text often has unwanted line breaks, extra spaces, and formatting artifacts. Try these options: <strong>Trim leading/trailing spaces</strong>, <strong>Remove extra spaces</strong>, and <strong>Remove line breaks (join all lines)</strong> to join broken paragraphs back together. If there are HTML artifacts, also enable <strong>Strip HTML tags</strong>. Use the Swap button to feed the result back for further cleaning.</div>
+    </details>
+  </div>
+
+  <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:2rem;margin-bottom:1.5rem;box-shadow:var(--shadow)">
+    <h2 style="font-size:1.4rem;margin-bottom:1rem;color:var(--primary)">Text Cleaning Quick Reference Guide</h2>
+    <p style="line-height:1.9;color:var(--text);margin-bottom:1.5rem">Use this guide to quickly find the right cleaning option for your text problem.</p>
+
+    <h3 style="font-size:1.1rem;margin-bottom:.75rem;color:var(--text)">Common Text Problems & Solutions</h3>
+    <div style="overflow-x:auto;margin-bottom:1.5rem">
+      <table style="width:100%;border-collapse:collapse;font-size:.875rem">
+        <thead>
+          <tr style="background:var(--bg-secondary)">
+            <th style="padding:.75rem 1rem;text-align:left;border:1px solid var(--border)">Problem</th>
+            <th style="padding:.75rem 1rem;text-align:left;border:1px solid var(--border)">Cause</th>
+            <th style="padding:.75rem 1rem;text-align:left;border:1px solid var(--border)">Option to Use</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td style="padding:.65rem 1rem;border:1px solid var(--border)">Multiple spaces between words</td>
+            <td style="padding:.65rem 1rem;border:1px solid var(--border)">Copied from table cells or code</td>
+            <td style="padding:.65rem 1rem;border:1px solid var(--border)">Remove extra spaces (multi → single)</td>
+          </tr>
+          <tr style="background:var(--bg-secondary)">
+            <td style="padding:.65rem 1rem;border:1px solid var(--border)">Indented lines with leading spaces</td>
+            <td style="padding:.65rem 1rem;border:1px solid var(--border)">Copied from formatted documents</td>
+            <td style="padding:.65rem 1rem;border:1px solid var(--border)">Trim leading/trailing spaces</td>
+          </tr>
+          <tr>
+            <td style="padding:.65rem 1rem;border:1px solid var(--border)">Paragraph breaks broken into many lines</td>
+            <td style="padding:.65rem 1rem;border:1px solid var(--border)">PDF or narrow column copy</td>
+            <td style="padding:.65rem 1rem;border:1px solid var(--border)">Remove line breaks (join all lines)</td>
+          </tr>
+          <tr style="background:var(--bg-secondary)">
+            <td style="padding:.65rem 1rem;border:1px solid var(--border)">Lots of empty lines between paragraphs</td>
+            <td style="padding:.65rem 1rem;border:1px solid var(--border)">Word processor export or email copy</td>
+            <td style="padding:.65rem 1rem;border:1px solid var(--border)">Reduce multiple blank lines to one</td>
+          </tr>
+          <tr>
+            <td style="padding:.65rem 1rem;border:1px solid var(--border)">HTML tags like &lt;p&gt;, &lt;br&gt; visible in text</td>
+            <td style="padding:.65rem 1rem;border:1px solid var(--border)">Copied from website source or CMS</td>
+            <td style="padding:.65rem 1rem;border:1px solid var(--border)">Strip HTML tags</td>
+          </tr>
+          <tr style="background:var(--bg-secondary)">
+            <td style="padding:.65rem 1rem;border:1px solid var(--border)">Repeated items in a list</td>
+            <td style="padding:.65rem 1rem;border:1px solid var(--border)">Merged spreadsheets or data exports</td>
+            <td style="padding:.65rem 1rem;border:1px solid var(--border)">Sort A→Z + Remove duplicate lines</td>
+          </tr>
+          <tr>
+            <td style="padding:.65rem 1rem;border:1px solid var(--border)">Symbols, emoji, or currency signs</td>
+            <td style="padding:.65rem 1rem;border:1px solid var(--border)">Social media copy or rich text paste</td>
+            <td style="padding:.65rem 1rem;border:1px solid var(--border)">Remove special characters</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3 style="font-size:1.1rem;margin-bottom:.75rem;color:var(--text)">All Cleaning Options at a Glance</h3>
+    <div style="overflow-x:auto">
+      <table style="width:100%;border-collapse:collapse;font-size:.875rem">
+        <thead>
+          <tr style="background:var(--bg-secondary)">
+            <th style="padding:.75rem 1rem;text-align:left;border:1px solid var(--border)">Option</th>
+            <th style="padding:.75rem 1rem;text-align:left;border:1px solid var(--border)">What It Does</th>
+            <th style="padding:.75rem 1rem;text-align:left;border:1px solid var(--border)">Best For</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td style="padding:.65rem 1rem;border:1px solid var(--border)">Trim leading/trailing spaces</td>
+            <td style="padding:.65rem 1rem;border:1px solid var(--border)">Removes spaces at the start/end of each line</td>
+            <td style="padding:.65rem 1rem;border:1px solid var(--border)">Cleaning indented or padded lists</td>
+          </tr>
+          <tr style="background:var(--bg-secondary)">
+            <td style="padding:.65rem 1rem;border:1px solid var(--border)">Remove extra spaces</td>
+            <td style="padding:.65rem 1rem;border:1px solid var(--border)">Collapses 2+ spaces into one space</td>
+            <td style="padding:.65rem 1rem;border:1px solid var(--border)">Fixing copy from tables or code</td>
+          </tr>
+          <tr>
+            <td style="padding:.65rem 1rem;border:1px solid var(--border)">Remove all blank lines</td>
+            <td style="padding:.65rem 1rem;border:1px solid var(--border)">Deletes every empty line entirely</td>
+            <td style="padding:.65rem 1rem;border:1px solid var(--border)">Compact data or list formatting</td>
+          </tr>
+          <tr style="background:var(--bg-secondary)">
+            <td style="padding:.65rem 1rem;border:1px solid var(--border)">Reduce multiple blank lines to one</td>
+            <td style="padding:.65rem 1rem;border:1px solid var(--border)">Keeps one blank line between paragraphs</td>
+            <td style="padding:.65rem 1rem;border:1px solid var(--border)">Cleaning up over-spaced documents</td>
+          </tr>
+          <tr>
+            <td style="padding:.65rem 1rem;border:1px solid var(--border)">Remove line breaks</td>
+            <td style="padding:.65rem 1rem;border:1px solid var(--border)">Joins all lines into a single line</td>
+            <td style="padding:.65rem 1rem;border:1px solid var(--border)">Rejoining PDF-broken paragraphs</td>
+          </tr>
+          <tr style="background:var(--bg-secondary)">
+            <td style="padding:.65rem 1rem;border:1px solid var(--border)">Strip HTML tags</td>
+            <td style="padding:.65rem 1rem;border:1px solid var(--border)">Removes all &lt;tag&gt; elements</td>
+            <td style="padding:.65rem 1rem;border:1px solid var(--border)">Extracting plain text from HTML/CMS</td>
+          </tr>
+          <tr>
+            <td style="padding:.65rem 1rem;border:1px solid var(--border)">Remove special characters</td>
+            <td style="padding:.65rem 1rem;border:1px solid var(--border)">Keeps only letters, numbers, basic punctuation</td>
+            <td style="padding:.65rem 1rem;border:1px solid var(--border)">Sanitising input for databases or APIs</td>
+          </tr>
+          <tr style="background:var(--bg-secondary)">
+            <td style="padding:.65rem 1rem;border:1px solid var(--border)">Remove duplicate lines</td>
+            <td style="padding:.65rem 1rem;border:1px solid var(--border)">Removes lines seen previously in the text</td>
+            <td style="padding:.65rem 1rem;border:1px solid var(--border)">Deduplicating merged lists or CSV rows</td>
+          </tr>
+          <tr>
+            <td style="padding:.65rem 1rem;border:1px solid var(--border)">Sort lines A → Z / Z → A</td>
+            <td style="padding:.65rem 1rem;border:1px solid var(--border)">Alphabetically sorts all lines</td>
+            <td style="padding:.65rem 1rem;border:1px solid var(--border)">Organising lists, keywords, or names</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:2rem;margin-bottom:1.5rem;box-shadow:var(--shadow)">
+    <h2 style="font-size:1.4rem;margin-bottom:1rem;color:var(--primary)">Related Tools & Guides</h2>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1rem">
+      <a href="word-counter.html" style="display:block;padding:1rem;background:var(--bg-secondary);border-radius:8px;border:1px solid var(--border);text-decoration:none;transition:border-color .2s" onmouseover="this.style.borderColor='var(--primary)'" onmouseout="this.style.borderColor='var(--border)'">
+        <div style="font-size:1.4rem;margin-bottom:.4rem">📝</div>
+        <div style="font-weight:600;color:var(--text);margin-bottom:.25rem">Word Counter</div>
+        <div style="font-size:.83rem;color:var(--text-muted)">Count words, characters, sentences, and reading time in any text.</div>
+      </a>
+      <a href="case-converter.html" style="display:block;padding:1rem;background:var(--bg-secondary);border-radius:8px;border:1px solid var(--border);text-decoration:none;transition:border-color .2s" onmouseover="this.style.borderColor='var(--primary)'" onmouseout="this.style.borderColor='var(--border)'">
+        <div style="font-size:1.4rem;margin-bottom:.4rem">🔡</div>
+        <div style="font-weight:600;color:var(--text);margin-bottom:.25rem">Case Converter</div>
+        <div style="font-size:.83rem;color:var(--text-muted)">Convert text to UPPERCASE, lowercase, Title Case, camelCase and more.</div>
+      </a>
+      <a href="../blog/top-tools-for-students-developers.html" style="display:block;padding:1rem;background:var(--bg-secondary);border-radius:8px;border:1px solid var(--border);text-decoration:none;transition:border-color .2s" onmouseover="this.style.borderColor='var(--primary)'" onmouseout="this.style.borderColor='var(--border)'">
+        <div style="font-size:1.4rem;margin-bottom:.4rem">📖</div>
+        <div style="font-weight:600;color:var(--text);margin-bottom:.25rem">Top Tools for Students & Developers</div>
+        <div style="font-size:.83rem;color:var(--text-muted)">A guide to the most useful free online tools for everyday text and data tasks.</div>
+      </a>
+    </div>
   </div>
 
 </div>

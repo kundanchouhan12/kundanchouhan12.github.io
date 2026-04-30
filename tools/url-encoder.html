@@ -5,7 +5,7 @@
   <meta charset="UTF-8" />
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>URL Encoder Decoder Free — Encode Decode URL Online | ToolKit Pro</title>
+  <title>Free URL Encoder Decoder — Encode &amp; Decode URLs Instantly Online | ToolKit Pro</title>
   <meta name="description" content="Encode and decode URLs online free. URL encoder decoder for query strings, special characters and unicode. Essential developer tool — no upload, instant results." />
 
   <link rel="canonical" href="https://kundanchouhan12.github.io/tools/url-encoder.html" />
@@ -21,7 +21,7 @@
   <meta name="twitter:title" content="URL Encoder Decoder Free — Encode Decode URL Online | ToolKit Pro" />
   <meta name="twitter:description" content="Encode and decode URLs online free. URL encoder decoder for query strings, special characters and unicode. Essential developer tool — no upload, instant results." />
 
-  <meta name="keywords" content="url encoder decoder, encode url online, decode url online, url encoding tool, url percent encoding, url decode free, encode special characters url, developer tools online, toolkit pro" />
+  <meta name="keywords" content="url encoder decoder online free, encode url online, decode url online, what characters need url encoding, url encoding vs base64, encodeURIComponent vs encodeURI, percent encoding, url decode free, encode special characters url, url encoding in javascript, developer tools online, toolkit pro" />
   <meta name="robots" content="index, follow" />
   <meta name="author" content="ToolKit Pro" />
 
@@ -72,17 +72,47 @@
       {
         "@type": "Question",
         "name": "What is URL encoding?",
-        "acceptedAnswer": { "@type": "Answer", "text": "URL encoding (percent-encoding) converts special characters into a format that can be safely transmitted in a URL. Characters like spaces, &, =, and # are replaced with a % sign followed by their hexadecimal ASCII code (e.g. space becomes %20)." }
+        "acceptedAnswer": { "@type": "Answer", "text": "URL encoding (percent-encoding) converts characters that are not safe in a URL into a % sign followed by two hexadecimal digits. For example, a space becomes %20, an ampersand becomes %26, and an equals sign becomes %3D. This is required by RFC 3986 to ensure URLs are transmitted correctly across the internet." }
+      },
+      {
+        "@type": "Question",
+        "name": "What characters need to be URL encoded?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Reserved characters that have special URL meanings must be encoded when used as data: space (%20), & (%26), = (%3D), + (%2B), # (%23), ? (%3F), / (%2F), @ (%40), % (%25), : (%3A). Non-ASCII characters (Unicode, accented letters, CJK characters) must also be encoded as their UTF-8 byte sequences." }
       },
       {
         "@type": "Question",
         "name": "What is the difference between encodeURI and encodeURIComponent?",
-        "acceptedAnswer": { "@type": "Answer", "text": "encodeURI encodes a full URL and preserves characters like /, ?, #, &, = that have special meaning in URLs. encodeURIComponent encodes a single value (like a query string parameter) and encodes those structural characters too, making it safer for embedding values inside a URL." }
+        "acceptedAnswer": { "@type": "Answer", "text": "encodeURIComponent encodes a single value (like a query parameter) — it encodes all special characters including /, ?, #, &, and =. Use it for individual parameter values. encodeURI encodes a complete URL and preserves those structural characters. Use it when you need to encode a full URL without breaking its structure." }
+      },
+      {
+        "@type": "Question",
+        "name": "Why does a space encode to %20 sometimes and + other times?",
+        "acceptedAnswer": { "@type": "Answer", "text": "RFC 3986 (the URL standard) requires spaces to be encoded as %20. However, HTML form data (application/x-www-form-urlencoded) uses + for spaces for historical reasons. This tool always uses %20 which is correct for URLs. Browsers handle + encoding automatically in form submissions." }
+      },
+      {
+        "@type": "Question",
+        "name": "What is the difference between URL encoding and Base64 encoding?",
+        "acceptedAnswer": { "@type": "Answer", "text": "URL encoding converts unsafe characters to percent-encoded sequences (%XX) so text can be safely included in a URL. Base64 encoding converts binary data into a text string using 64 safe ASCII characters, making it 33% larger. URL encoding is for URLs; Base64 is for encoding binary data (images, files) as text for storage or transmission." }
+      },
+      {
+        "@type": "Question",
+        "name": "Can this tool handle Unicode characters?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Yes. JavaScript's encodeURIComponent converts Unicode characters to their UTF-8 byte sequences and percent-encodes each byte. For example, the Japanese character 日 encodes to %E6%97%A5. This is the correct and widely-supported method for including non-ASCII characters in URLs." }
+      },
+      {
+        "@type": "Question",
+        "name": "When do I need to URL encode a string in JavaScript?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Use encodeURIComponent() whenever you embed a variable value into a URL query string, such as: const url = 'https://api.example.com/search?q=' + encodeURIComponent(searchTerm). Without encoding, characters like &, =, and spaces in searchTerm will break the URL structure and corrupt the query parameters." }
       },
       {
         "@type": "Question",
         "name": "Is my data safe when using this tool?",
-        "acceptedAnswer": { "@type": "Answer", "text": "Yes. All encoding and decoding happens entirely in your browser using built-in JavaScript functions. No data is sent to any server." }
+        "acceptedAnswer": { "@type": "Answer", "text": "Yes. All encoding and decoding happens entirely in your browser using built-in JavaScript functions (encodeURIComponent, encodeURI, decodeURIComponent). No data is sent to any server." }
+      },
+      {
+        "@type": "Question",
+        "name": "What happens if I try to decode an invalid encoded string?",
+        "acceptedAnswer": { "@type": "Answer", "text": "If the string contains malformed percent sequences (e.g. %GG or a lone % at the end), decodeURIComponent throws a URIError. This tool catches that error and displays a friendly warning, then attempts a fallback decode using the more lenient decodeURI function." }
       }
     ]
   }
@@ -278,6 +308,99 @@
       <summary style="padding:1rem 1.25rem;cursor:pointer;font-weight:600;background:var(--bg-secondary);user-select:none">❓ What happens if I try to decode an invalid encoded string?</summary>
       <div style="padding:1rem 1.25rem;line-height:1.8;color:var(--text-muted)">If the encoded string contains malformed percent sequences (e.g. %GG or a lone % at the end), decodeURIComponent will throw a URIError. This tool catches that error and displays a friendly warning message, then attempts a fallback decode using decodeURI which is more lenient.</div>
     </details>
+
+    <details style="border:1px solid var(--border);border-radius:8px;margin-bottom:.75rem;overflow:hidden">
+      <summary style="padding:1rem 1.25rem;cursor:pointer;font-weight:600;background:var(--bg-secondary);user-select:none">❓ What characters need to be URL encoded?</summary>
+      <div style="padding:1rem 1.25rem;line-height:1.8;color:var(--text-muted)">Characters that must be encoded when used as data values: space (%20), &amp; (%26), = (%3D), + (%2B), # (%23), ? (%3F), / (%2F), @ (%40), % (%25), : (%3A). Non-ASCII characters (accented letters, CJK, emoji) must also be encoded as their UTF-8 byte sequences. Unreserved characters (A–Z, a–z, 0–9, -, _, ., ~) never need encoding.</div>
+    </details>
+
+    <details style="border:1px solid var(--border);border-radius:8px;margin-bottom:.75rem;overflow:hidden">
+      <summary style="padding:1rem 1.25rem;cursor:pointer;font-weight:600;background:var(--bg-secondary);user-select:none">❓ What is the difference between URL encoding and Base64 encoding?</summary>
+      <div style="padding:1rem 1.25rem;line-height:1.8;color:var(--text-muted)">URL encoding converts unsafe characters to percent-encoded sequences (%XX) so text can be safely included in a URL. Base64 encoding converts binary data into a 64-character safe ASCII string, making it ~33% larger. URL encoding is for embedding text in URLs; Base64 is for encoding binary data (images, files) as text for transmission or storage in JSON/HTML.</div>
+    </details>
+
+    <details style="border:1px solid var(--border);border-radius:8px;margin-bottom:.75rem;overflow:hidden">
+      <summary style="padding:1rem 1.25rem;cursor:pointer;font-weight:600;background:var(--bg-secondary);user-select:none">❓ When do I need to URL encode in JavaScript?</summary>
+      <div style="padding:1rem 1.25rem;line-height:1.8;color:var(--text-muted)">Use encodeURIComponent() whenever embedding a variable value in a URL query string: <code>const url = 'https://api.example.com/search?q=' + encodeURIComponent(searchTerm);</code> Without it, characters like &amp;, =, and spaces in searchTerm will break the URL structure and corrupt the query parameters.</div>
+    </details>
+
+  </div>
+
+  <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:2rem;margin-bottom:1.5rem;box-shadow:var(--shadow)">
+    <h2 style="font-size:1.4rem;margin-bottom:1.25rem;color:var(--primary)">URL Encoding Reference Guide</h2>
+    <p style="line-height:1.9;color:var(--text);margin-bottom:1.25rem">The tables below provide a comprehensive reference for percent-encoded characters and comparisons between encoding methods.</p>
+
+    <h3 style="font-size:1.05rem;margin-bottom:.75rem;color:var(--text)">Common URL Percent-Encoded Characters</h3>
+    <div style="overflow-x:auto;margin-bottom:1.25rem">
+      <table style="width:100%;border-collapse:collapse;font-size:.875rem">
+        <thead>
+          <tr style="background:var(--primary);color:#fff">
+            <th style="padding:.65rem 1rem;text-align:left">Character</th>
+            <th style="padding:.65rem 1rem;text-align:left">Encoded</th>
+            <th style="padding:.65rem 1rem;text-align:left">Encoded by encodeURIComponent</th>
+            <th style="padding:.65rem 1rem;text-align:left">Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr style="border-bottom:1px solid var(--border)"><td style="padding:.6rem 1rem">Space</td><td style="padding:.6rem 1rem;font-family:monospace">%20</td><td style="padding:.6rem 1rem">✅ Yes</td><td style="padding:.6rem 1rem">Whitespace</td></tr>
+          <tr style="border-bottom:1px solid var(--border);background:var(--bg-secondary)"><td style="padding:.6rem 1rem">&amp;</td><td style="padding:.6rem 1rem;font-family:monospace">%26</td><td style="padding:.6rem 1rem">✅ Yes</td><td style="padding:.6rem 1rem">Query parameter separator</td></tr>
+          <tr style="border-bottom:1px solid var(--border)"><td style="padding:.6rem 1rem">=</td><td style="padding:.6rem 1rem;font-family:monospace">%3D</td><td style="padding:.6rem 1rem">✅ Yes</td><td style="padding:.6rem 1rem">Key/value separator</td></tr>
+          <tr style="border-bottom:1px solid var(--border);background:var(--bg-secondary)"><td style="padding:.6rem 1rem">+</td><td style="padding:.6rem 1rem;font-family:monospace">%2B</td><td style="padding:.6rem 1rem">✅ Yes</td><td style="padding:.6rem 1rem">Plus (also means space in forms)</td></tr>
+          <tr style="border-bottom:1px solid var(--border)"><td style="padding:.6rem 1rem">#</td><td style="padding:.6rem 1rem;font-family:monospace">%23</td><td style="padding:.6rem 1rem">✅ Yes</td><td style="padding:.6rem 1rem">Fragment identifier</td></tr>
+          <tr style="border-bottom:1px solid var(--border);background:var(--bg-secondary)"><td style="padding:.6rem 1rem">?</td><td style="padding:.6rem 1rem;font-family:monospace">%3F</td><td style="padding:.6rem 1rem">✅ Yes</td><td style="padding:.6rem 1rem">Query string start</td></tr>
+          <tr style="border-bottom:1px solid var(--border)"><td style="padding:.6rem 1rem">/</td><td style="padding:.6rem 1rem;font-family:monospace">%2F</td><td style="padding:.6rem 1rem">✅ Yes</td><td style="padding:.6rem 1rem">Path separator</td></tr>
+          <tr style="border-bottom:1px solid var(--border);background:var(--bg-secondary)"><td style="padding:.6rem 1rem">@</td><td style="padding:.6rem 1rem;font-family:monospace">%40</td><td style="padding:.6rem 1rem">✅ Yes</td><td style="padding:.6rem 1rem">Used in email/auth URLs</td></tr>
+          <tr style="border-bottom:1px solid var(--border)"><td style="padding:.6rem 1rem">%</td><td style="padding:.6rem 1rem;font-family:monospace">%25</td><td style="padding:.6rem 1rem">✅ Yes</td><td style="padding:.6rem 1rem">Percent sign itself</td></tr>
+          <tr style="background:var(--bg-secondary)"><td style="padding:.6rem 1rem">:</td><td style="padding:.6rem 1rem;font-family:monospace">%3A</td><td style="padding:.6rem 1rem">✅ Yes</td><td style="padding:.6rem 1rem">Protocol/port separator</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3 style="font-size:1.05rem;margin-bottom:.75rem;color:var(--text)">encodeURI vs encodeURIComponent vs Base64</h3>
+    <div style="overflow-x:auto">
+      <table style="width:100%;border-collapse:collapse;font-size:.875rem">
+        <thead>
+          <tr style="background:var(--primary);color:#fff">
+            <th style="padding:.65rem 1rem;text-align:left">Method</th>
+            <th style="padding:.65rem 1rem;text-align:left">Encodes</th>
+            <th style="padding:.65rem 1rem;text-align:left">Preserves</th>
+            <th style="padding:.65rem 1rem;text-align:left">Use When</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr style="border-bottom:1px solid var(--border)">
+            <td style="padding:.6rem 1rem;font-weight:600;font-family:monospace">encodeURIComponent</td><td style="padding:.6rem 1rem">All special chars</td><td style="padding:.6rem 1rem">A–Z, a–z, 0–9, - _ . ! ~ * ' ( )</td><td style="padding:.6rem 1rem">Encoding a parameter value</td>
+          </tr>
+          <tr style="border-bottom:1px solid var(--border);background:var(--bg-secondary)">
+            <td style="padding:.6rem 1rem;font-weight:600;font-family:monospace">encodeURI</td><td style="padding:.6rem 1rem">Non-URL characters</td><td style="padding:.6rem 1rem">All URL structure chars (/, ?, #, &amp;, =)</td><td style="padding:.6rem 1rem">Encoding a full URL</td>
+          </tr>
+          <tr>
+            <td style="padding:.6rem 1rem;font-weight:600;font-family:monospace">btoa / Base64</td><td style="padding:.6rem 1rem">Binary data as text</td><td style="padding:.6rem 1rem">Nothing (fully transforms input)</td><td style="padding:.6rem 1rem">Encoding binary/file data</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:2rem;margin-bottom:1.5rem;box-shadow:var(--shadow)">
+    <h2 style="font-size:1.4rem;margin-bottom:1rem;color:var(--primary)">Related Tools &amp; Guides</h2>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1rem">
+      <a href="base64.html" style="display:block;padding:1rem;background:var(--bg-secondary);border:1px solid var(--border);border-radius:8px;text-decoration:none;color:var(--text);transition:border-color .2s" onmouseover="this.style.borderColor='var(--primary)'" onmouseout="this.style.borderColor='var(--border)'">
+        <div style="font-size:1.4rem;margin-bottom:.4rem">🔡</div>
+        <div style="font-weight:600;margin-bottom:.3rem">Base64 Encoder / Decoder</div>
+        <div style="font-size:.82rem;color:var(--text-muted)">Encode and decode Base64 — related binary-to-text encoding method</div>
+      </a>
+      <a href="json-formatter.html" style="display:block;padding:1rem;background:var(--bg-secondary);border:1px solid var(--border);border-radius:8px;text-decoration:none;color:var(--text);transition:border-color .2s" onmouseover="this.style.borderColor='var(--primary)'" onmouseout="this.style.borderColor='var(--border)'">
+        <div style="font-size:1.4rem;margin-bottom:.4rem">📋</div>
+        <div style="font-weight:600;margin-bottom:.3rem">JSON Formatter</div>
+        <div style="font-size:.82rem;color:var(--text-muted)">Format, validate and minify JSON — often used alongside URL encoding</div>
+      </a>
+      <a href="../blog/json-for-beginners.html" style="display:block;padding:1rem;background:var(--bg-secondary);border:1px solid var(--border);border-radius:8px;text-decoration:none;color:var(--text);transition:border-color .2s" onmouseover="this.style.borderColor='var(--primary)'" onmouseout="this.style.borderColor='var(--border)'">
+        <div style="font-size:1.4rem;margin-bottom:.4rem">📖</div>
+        <div style="font-weight:600;margin-bottom:.3rem">JSON for Beginners</div>
+        <div style="font-size:.82rem;color:var(--text-muted)">Learn JSON syntax and how URL encoding applies to API query strings</div>
+      </a>
+    </div>
   </div>
 
 </div>

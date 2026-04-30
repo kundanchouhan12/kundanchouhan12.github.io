@@ -5,7 +5,7 @@
   <meta charset="UTF-8" />
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Image Resizer Online Free — Resize Image to Any Size | ToolKit Pro</title>
+  <title>Free Image Resizer — Resize Images to Any Size Instantly Online | ToolKit Pro</title>
   <meta name="description" content="Resize images online free. Set exact dimensions in pixels or percentage. Resize JPG, PNG, WebP images without losing quality — no upload, instant download." />
 
   <link rel="canonical" href="https://kundanchouhan12.github.io/tools/image-resizer.html" />
@@ -21,7 +21,7 @@
   <meta name="twitter:title" content="Image Resizer Online Free — Resize Image to Any Size | ToolKit Pro" />
   <meta name="twitter:description" content="Resize images online free. Set exact dimensions in pixels or percentage. Resize JPG, PNG, WebP images without losing quality — no upload, instant download." />
 
-  <meta name="keywords" content="image resizer online, resize image online free, resize image to specific size, reduce image size kb, resize jpg online, resize png free, image resize tool, photo resizer online, resize image pixels, toolkit pro" />
+  <meta name="keywords" content="image resizer online free, resize image online free, resize image to specific size, reduce image size kb, ideal image size for website, social media image dimensions, resize without losing quality, what is aspect ratio, resize jpg online, resize png free, photo resizer online, resize image pixels, toolkit pro" />
   <meta name="robots" content="index, follow" />
   <meta name="author" content="ToolKit Pro" />
 
@@ -52,6 +52,87 @@
       { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://kundanchouhan12.github.io/" },
       { "@type": "ListItem", "position": 2, "name": "Tools", "item": "https://kundanchouhan12.github.io/#tools" },
       { "@type": "ListItem", "position": 3, "name": "Image Resizer", "item": "https://kundanchouhan12.github.io/tools/image-resizer.html" }
+    ]
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What is the ideal image size for a website?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "For website images, aim for a maximum width of 1920px for full-width hero banners, 1200px for blog post images, 800px for product photos, and 400px for thumbnails. File size should be under 200 KB for most images. Oversized images are one of the top causes of slow page load times and poor Core Web Vitals scores."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What are standard social media image dimensions?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Recommended social media image sizes: Facebook profile photo 170×170px, cover photo 820×312px; Instagram square 1080×1080px, story 1080×1920px; Twitter/X profile 400×400px, header 1500×500px; LinkedIn profile 400×400px, banner 1584×396px; YouTube thumbnail 1280×720px. Always check the latest guidelines from each platform as they update these dimensions periodically."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How do I resize an image without losing quality?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "To minimize quality loss when resizing: (1) Scale down rather than up — reducing dimensions loses less quality than upscaling. (2) Use high-quality interpolation (this tool uses 'high' setting). (3) For output, use PNG for lossless results or JPEG/WebP at 85–95% quality for small file sizes with minimal visible loss. (4) Start from the highest resolution original available."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What is aspect ratio and why does locking it matter?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Aspect ratio is the proportional relationship between an image's width and height, expressed as width:height (e.g., 16:9 or 4:3). Locking the aspect ratio ensures that when you change one dimension, the other adjusts automatically to maintain the original proportions. Without the lock, resizing can stretch or squash your image, making subjects look distorted."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Will resizing an image reduce its quality?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Reducing image dimensions always results in some data loss because pixels are discarded. This tool uses high-quality bilinear interpolation which minimises visible degradation. For lossless output, choose PNG format. For JPEG or WebP, use a quality setting of 85–95% to get small file sizes with minimal visible quality loss."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I make an image larger (upscale)?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes, you can set any target dimensions including larger than the original. However, upscaling a raster image reduces sharpness because the browser must interpolate new pixels from existing ones. For best results, start with the highest resolution original you have. True AI upscaling requires dedicated tools — this tool uses standard browser interpolation."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How do I resize an image to reduce its file size in KB?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "File size is determined by both pixel dimensions and compression. Halving an image's width and height (to 50%) reduces pixel count by 75%, which typically reduces file size by 60–80%. To target a specific file size in KB, reduce dimensions by percentage steps and check the estimated output size shown after each resize. Converting from PNG to JPEG/WebP also reduces size significantly."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is there a maximum file size limit?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "No hard limit is enforced — processing is constrained only by your browser's available memory. Images up to 20–30 MB work fine on modern devices. Very large images (50+ megapixels) may be slow or cause warnings on lower-end hardware."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is my data secure? Does it upload my files?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Your images are never uploaded to any server. All resizing happens entirely in your browser using the HTML5 Canvas API. Your photos stay completely private on your device."
+        }
+      }
     ]
   }
   </script>
@@ -279,8 +360,112 @@
 
     <details style="border:1px solid var(--border);border-radius:8px;margin-bottom:.75rem;overflow:hidden">
       <summary style="padding:1rem 1.25rem;cursor:pointer;font-weight:600;background:var(--bg-secondary);user-select:none">❓ Why is the PNG output larger than the JPEG output?</summary>
-      <div style="padding:1rem 1.25rem;line-height:1.8;color:var(--text-muted)">PNG is a lossless format that preserves every pixel exactly, which results in larger file sizes. JPEG and WebP use lossy compression that discards some image data to achieve much smaller files. For photos and complex images, JPEG or WebP at 85–90% quality gives an excellent balance. For screenshots, logos, or images with sharp edges and text, PNG is usually better.</div>
+      <div style="padding:1rem 1.25rem;line-height:1.8;color:var(--text-muted)">PNG is a lossless format that preserves every pixel exactly, which results in larger file sizes. JPEG and WebP use lossy compression that discards some image data to achieve much smaller files. For photos, JPEG or WebP at 85–90% quality gives an excellent balance. For screenshots, logos, or images with sharp edges and text, PNG is usually better.</div>
     </details>
+
+    <details style="border:1px solid var(--border);border-radius:8px;margin-bottom:.75rem;overflow:hidden">
+      <summary style="padding:1rem 1.25rem;cursor:pointer;font-weight:600;background:var(--bg-secondary);user-select:none">❓ What is the ideal image size for a website?</summary>
+      <div style="padding:1rem 1.25rem;line-height:1.8;color:var(--text-muted)">For websites: hero banners max 1920px wide, blog post images max 1200px wide, product photos max 800px wide, thumbnails max 400px wide. Target file sizes under 200 KB for most images. Oversized images are one of the top causes of slow page load times and poor Core Web Vitals scores on Google.</div>
+    </details>
+
+    <details style="border:1px solid var(--border);border-radius:8px;margin-bottom:.75rem;overflow:hidden">
+      <summary style="padding:1rem 1.25rem;cursor:pointer;font-weight:600;background:var(--bg-secondary);user-select:none">❓ What are the standard social media image dimensions?</summary>
+      <div style="padding:1rem 1.25rem;line-height:1.8;color:var(--text-muted)">Recommended sizes: Facebook profile 170×170px, cover 820×312px; Instagram post 1080×1080px, story 1080×1920px; Twitter/X profile 400×400px, header 1500×500px; LinkedIn profile 400×400px, banner 1584×396px; YouTube thumbnail 1280×720px. Always verify with current platform guidelines as these change periodically.</div>
+    </details>
+
+    <details style="border:1px solid var(--border);border-radius:8px;margin-bottom:.75rem;overflow:hidden">
+      <summary style="padding:1rem 1.25rem;cursor:pointer;font-weight:600;background:var(--bg-secondary);user-select:none">❓ What is aspect ratio and why does it matter?</summary>
+      <div style="padding:1rem 1.25rem;line-height:1.8;color:var(--text-muted)">Aspect ratio is the proportional relationship between an image's width and height (e.g., 16:9 for widescreen, 4:3 for standard, 1:1 for square). Locking the aspect ratio ensures that when you change one dimension, the other adjusts automatically to maintain original proportions. Without the lock, resizing can stretch or squash subjects and distort the image.</div>
+    </details>
+
+  </div>
+
+  <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:2rem;margin-bottom:1.5rem;box-shadow:var(--shadow)">
+    <h2 style="font-size:1.4rem;margin-bottom:1.25rem;color:var(--primary)">Image Resize Reference Guide</h2>
+    <p style="line-height:1.9;color:var(--text);margin-bottom:1.25rem">Use the tables below to quickly determine the right dimensions for your platform or use case.</p>
+
+    <h3 style="font-size:1.05rem;margin-bottom:.75rem;color:var(--text)">Social Media Image Dimensions (2025)</h3>
+    <div style="overflow-x:auto;margin-bottom:1.25rem">
+      <table style="width:100%;border-collapse:collapse;font-size:.875rem">
+        <thead>
+          <tr style="background:var(--primary);color:#fff">
+            <th style="padding:.65rem 1rem;text-align:left">Platform</th>
+            <th style="padding:.65rem 1rem;text-align:left">Profile Photo</th>
+            <th style="padding:.65rem 1rem;text-align:left">Cover / Header</th>
+            <th style="padding:.65rem 1rem;text-align:left">Post Image</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr style="border-bottom:1px solid var(--border)">
+            <td style="padding:.6rem 1rem;font-weight:600">Facebook</td><td style="padding:.6rem 1rem">170×170 px</td><td style="padding:.6rem 1rem">820×312 px</td><td style="padding:.6rem 1rem">1200×630 px</td>
+          </tr>
+          <tr style="border-bottom:1px solid var(--border);background:var(--bg-secondary)">
+            <td style="padding:.6rem 1rem;font-weight:600">Instagram</td><td style="padding:.6rem 1rem">110×110 px</td><td style="padding:.6rem 1rem">Story: 1080×1920</td><td style="padding:.6rem 1rem">1080×1080 px</td>
+          </tr>
+          <tr style="border-bottom:1px solid var(--border)">
+            <td style="padding:.6rem 1rem;font-weight:600">Twitter / X</td><td style="padding:.6rem 1rem">400×400 px</td><td style="padding:.6rem 1rem">1500×500 px</td><td style="padding:.6rem 1rem">1600×900 px</td>
+          </tr>
+          <tr style="border-bottom:1px solid var(--border);background:var(--bg-secondary)">
+            <td style="padding:.6rem 1rem;font-weight:600">LinkedIn</td><td style="padding:.6rem 1rem">400×400 px</td><td style="padding:.6rem 1rem">1584×396 px</td><td style="padding:.6rem 1rem">1200×627 px</td>
+          </tr>
+          <tr>
+            <td style="padding:.6rem 1rem;font-weight:600">YouTube</td><td style="padding:.6rem 1rem">800×800 px</td><td style="padding:.6rem 1rem">2560×1440 px</td><td style="padding:.6rem 1rem">Thumbnail: 1280×720</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3 style="font-size:1.05rem;margin-bottom:.75rem;color:var(--text)">Recommended Website Image Dimensions</h3>
+    <div style="overflow-x:auto">
+      <table style="width:100%;border-collapse:collapse;font-size:.875rem">
+        <thead>
+          <tr style="background:var(--primary);color:#fff">
+            <th style="padding:.65rem 1rem;text-align:left">Image Type</th>
+            <th style="padding:.65rem 1rem;text-align:left">Max Width</th>
+            <th style="padding:.65rem 1rem;text-align:left">Target File Size</th>
+            <th style="padding:.65rem 1rem;text-align:left">Recommended Format</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr style="border-bottom:1px solid var(--border)">
+            <td style="padding:.6rem 1rem">Hero / Banner</td><td style="padding:.6rem 1rem">1920 px</td><td style="padding:.6rem 1rem">&lt; 300 KB</td><td style="padding:.6rem 1rem">WebP or JPG</td>
+          </tr>
+          <tr style="border-bottom:1px solid var(--border);background:var(--bg-secondary)">
+            <td style="padding:.6rem 1rem">Blog post image</td><td style="padding:.6rem 1rem">1200 px</td><td style="padding:.6rem 1rem">&lt; 150 KB</td><td style="padding:.6rem 1rem">WebP or JPG</td>
+          </tr>
+          <tr style="border-bottom:1px solid var(--border)">
+            <td style="padding:.6rem 1rem">Product photo</td><td style="padding:.6rem 1rem">800 px</td><td style="padding:.6rem 1rem">&lt; 100 KB</td><td style="padding:.6rem 1rem">WebP or JPG</td>
+          </tr>
+          <tr style="border-bottom:1px solid var(--border);background:var(--bg-secondary)">
+            <td style="padding:.6rem 1rem">Logo / icon</td><td style="padding:.6rem 1rem">200 px</td><td style="padding:.6rem 1rem">&lt; 20 KB</td><td style="padding:.6rem 1rem">PNG or SVG</td>
+          </tr>
+          <tr>
+            <td style="padding:.6rem 1rem">Thumbnail</td><td style="padding:.6rem 1rem">400 px</td><td style="padding:.6rem 1rem">&lt; 50 KB</td><td style="padding:.6rem 1rem">WebP or JPG</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:2rem;margin-bottom:1.5rem;box-shadow:var(--shadow)">
+    <h2 style="font-size:1.4rem;margin-bottom:1rem;color:var(--primary)">Related Tools &amp; Guides</h2>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1rem">
+      <a href="image-compressor.html" style="display:block;padding:1rem;background:var(--bg-secondary);border:1px solid var(--border);border-radius:8px;text-decoration:none;color:var(--text);transition:border-color .2s" onmouseover="this.style.borderColor='var(--primary)'" onmouseout="this.style.borderColor='var(--border)'">
+        <div style="font-size:1.4rem;margin-bottom:.4rem">🗜️</div>
+        <div style="font-weight:600;margin-bottom:.3rem">Image Compressor</div>
+        <div style="font-size:.82rem;color:var(--text-muted)">Reduce file size without changing dimensions — compress without quality loss</div>
+      </a>
+      <a href="image-converter.html" style="display:block;padding:1rem;background:var(--bg-secondary);border:1px solid var(--border);border-radius:8px;text-decoration:none;color:var(--text);transition:border-color .2s" onmouseover="this.style.borderColor='var(--primary)'" onmouseout="this.style.borderColor='var(--border)'">
+        <div style="font-size:1.4rem;margin-bottom:.4rem">🔄</div>
+        <div style="font-weight:600;margin-bottom:.3rem">Image Converter</div>
+        <div style="font-size:.82rem;color:var(--text-muted)">Convert images between PNG, JPG, WebP, and BMP formats instantly</div>
+      </a>
+      <a href="../blog/how-to-compress-images-without-losing-quality.html" style="display:block;padding:1rem;background:var(--bg-secondary);border:1px solid var(--border);border-radius:8px;text-decoration:none;color:var(--text);transition:border-color .2s" onmouseover="this.style.borderColor='var(--primary)'" onmouseout="this.style.borderColor='var(--border)'">
+        <div style="font-size:1.4rem;margin-bottom:.4rem">📖</div>
+        <div style="font-weight:600;margin-bottom:.3rem">Image Compression Guide</div>
+        <div style="font-size:.82rem;color:var(--text-muted)">How to compress images without losing quality — complete guide</div>
+      </a>
+    </div>
   </div>
 
 </div>
