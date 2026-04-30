@@ -5,8 +5,8 @@
   <meta charset="UTF-8" />
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>JSON Formatter Online Free — JSON Beautifier & Validator | ToolKit Pro</title>
-  <meta name="description" content="Format and validate JSON online free. JSON beautifier, pretty print, minify JSON online. JSON validator with error highlighting — free developer tool, no upload." />
+  <title>Free JSON Formatter & Validator — Beautify, Minify & Validate JSON Instantly | ToolKit Pro</title>
+  <meta name="description" content="Free JSON formatter and validator online. Beautify, minify, validate and fix JSON instantly — with syntax highlighting, tree view, and error detection. No sign-up, no upload." />
   <link rel="canonical" href="https://kundanchouhan12.github.io/tools/json-formatter.html" />
   <meta property="og:type" content="website" />
   <meta property="og:title" content="JSON Formatter &amp; Validator Online Free — Pretty Print JSON | ToolKit Pro" />
@@ -17,7 +17,7 @@
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="JSON Formatter &amp; Validator Online Free — Pretty Print JSON | ToolKit Pro" />
   <meta name="twitter:description" content="Format, validate, and minify JSON data with syntax highlighting and tree view. Free browser-based JSON formatter — debug APIs, pretty-print, sort keys." />
-  <meta name="keywords" content="json formatter online, json beautifier and validator, minify json online, format json pretty print, json validator free, json pretty printer, json minifier tool, code formatter online, toolkit pro" />
+  <meta name="keywords" content="json formatter online free, json validator, json beautifier, how to format json, what is json, json syntax rules, json vs xml, fix json error, minify json online, json pretty print, json array vs object, how to validate json" />
   <meta name="robots" content="index, follow" />
   <meta name="author" content="ToolKit Pro" />
   <link rel="stylesheet" href="../css/style.css" />
@@ -53,18 +53,48 @@
     "mainEntity": [
       {
         "@type": "Question",
-        "name": "Is the JSON Formatter free to use?",
-        "acceptedAnswer": { "@type": "Answer", "text": "Yes, completely free. There are no usage limits, no API keys required, and no registration. Format, validate, and minify JSON as often as you need at no cost." }
+        "name": "What is JSON?",
+        "acceptedAnswer": { "@type": "Answer", "text": "JSON (JavaScript Object Notation) is a lightweight, text-based data format used to store and exchange structured data between a server and a web application. It uses key-value pairs and supports six data types: strings, numbers, booleans (true/false), null, objects ({}), and arrays ([]). JSON is language-independent and is the most widely used format for REST APIs and web services." }
       },
       {
         "@type": "Question",
-        "name": "Is my data secure? Does it upload my JSON?",
-        "acceptedAnswer": { "@type": "Answer", "text": "Your JSON data is never sent to any server. All formatting, validation, and querying happens in your browser using JavaScript's built-in JSON.parse and JSON.stringify functions. API keys, credentials, or sensitive data in your JSON stay completely private." }
+        "name": "What is JSON used for?",
+        "acceptedAnswer": { "@type": "Answer", "text": "JSON is primarily used for: (1) API responses — REST APIs return data as JSON; (2) Configuration files — tools like ESLint, Prettier, and npm use .json config files; (3) Data storage — NoSQL databases like MongoDB store data in a JSON-like format; (4) Web communication — browsers and servers exchange JSON via fetch/AJAX requests; (5) Serialization — converting objects to a string format for storage or transmission." }
+      },
+      {
+        "@type": "Question",
+        "name": "What are the JSON syntax rules?",
+        "acceptedAnswer": { "@type": "Answer", "text": "JSON syntax rules: (1) Data is in key/value pairs — keys must be strings in double quotes; (2) Data is separated by commas; (3) Curly braces {} hold objects; (4) Square brackets [] hold arrays; (5) Strings must use double quotes, not single quotes; (6) No trailing commas are allowed; (7) No comments are allowed in JSON; (8) Numbers cannot have leading zeros; (9) true, false, and null are lowercase keywords." }
+      },
+      {
+        "@type": "Question",
+        "name": "How do I fix a JSON error?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Common JSON errors and fixes: (1) 'Unexpected token' — usually a missing quote, comma, or bracket. Check for single quotes instead of double quotes. (2) 'Trailing comma' — remove the last comma before a closing } or ]. (3) 'Unexpected end of JSON input' — a bracket or brace is not closed. (4) Comments in JSON — JSON does not support // or /* */ comments; remove them. Paste your JSON into this formatter and the error message will show the exact line and position of the problem." }
+      },
+      {
+        "@type": "Question",
+        "name": "What is the difference between JSON and XML?",
+        "acceptedAnswer": { "@type": "Answer", "text": "JSON vs XML: JSON uses key-value pairs with less syntax overhead, making files smaller and faster to parse. XML uses opening and closing tags, making it more verbose. JSON natively maps to JavaScript objects; XML requires an XML parser. JSON is preferred for REST APIs and web apps. XML is still common in SOAP services, Office documents (docx, xlsx), and SVG. JSON has no built-in support for attributes or comments; XML supports both." }
+      },
+      {
+        "@type": "Question",
+        "name": "What is the difference between a JSON object and a JSON array?",
+        "acceptedAnswer": { "@type": "Answer", "text": "A JSON object is an unordered collection of key-value pairs enclosed in curly braces: {\"name\": \"Alice\", \"age\": 30}. Keys must be strings. A JSON array is an ordered list of values enclosed in square brackets: [\"apple\", \"banana\", \"cherry\"]. Arrays can contain any JSON data type — including objects and other arrays. Use objects when you have named properties; use arrays when you have a list of items." }
+      },
+      {
+        "@type": "Question",
+        "name": "How do I validate JSON online?",
+        "acceptedAnswer": { "@type": "Answer", "text": "To validate JSON: paste your JSON into the input box above and click Validate. The tool uses JavaScript's JSON.parse() to check the syntax. If valid, you will see a green success message. If invalid, the exact error message and position are highlighted so you can find and fix the problem instantly. No upload to any server — validation runs entirely in your browser." }
       },
       {
         "@type": "Question",
         "name": "Why should I minify JSON?",
-        "acceptedAnswer": { "@type": "Answer", "text": "Minified JSON removes all whitespace characters (spaces, tabs, newlines) and reduces file size significantly. For API payloads sent over the network, smaller JSON reduces bandwidth usage and latency. For config files embedded in code, minified JSON is more compact. Use minification for production and formatted JSON for development and debugging." }
+        "acceptedAnswer": { "@type": "Answer", "text": "Minifying JSON removes all whitespace (spaces, tabs, newlines) to reduce file size. A formatted 10 KB JSON file can shrink to 6–7 KB when minified — a 30–40% reduction. This matters for: API payloads (faster network transfer), configuration files embedded in code (smaller bundle size), and localStorage data (browser storage has a 5–10 MB limit). Use formatted JSON for development and minified JSON in production." }
+      },
+      {
+        "@type": "Question",
+        "name": "Is my JSON data safe? Does it get uploaded?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Your JSON is never uploaded to any server. All formatting, validation, minification, and querying runs entirely in your browser using JavaScript's built-in JSON.parse and JSON.stringify. API keys, passwords, tokens, or any sensitive data in your JSON stays completely private on your device." }
       }
     ]
   }
@@ -284,33 +314,143 @@
     </div>
   </div>
 
+  <!-- JSON QUICK REFERENCE (Hybrid Informational Section) -->
+  <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:2rem;margin-bottom:1.5rem;box-shadow:var(--shadow)">
+    <h2 style="font-size:1.4rem;margin-bottom:0.25rem;color:var(--primary)">JSON Quick Reference Guide</h2>
+    <p style="color:var(--text-muted);font-size:.9rem;margin-bottom:1.5rem">Everything you need to know about JSON syntax, data types, and common errors</p>
+
+    <h3 style="font-size:1.05rem;font-weight:700;margin-bottom:.75rem;color:var(--text)">JSON Data Types</h3>
+    <div style="overflow-x:auto;margin-bottom:1.5rem">
+      <table style="width:100%;border-collapse:collapse;font-size:.875rem">
+        <thead>
+          <tr style="background:var(--bg-secondary)">
+            <th style="padding:.6rem 1rem;text-align:left;border:1px solid var(--border);font-weight:700">Type</th>
+            <th style="padding:.6rem 1rem;text-align:left;border:1px solid var(--border);font-weight:700">Example</th>
+            <th style="padding:.6rem 1rem;text-align:left;border:1px solid var(--border);font-weight:700">Notes</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td style="padding:.55rem 1rem;border:1px solid var(--border);font-weight:600;color:var(--primary)">String</td><td style="padding:.55rem 1rem;border:1px solid var(--border);font-family:monospace">"Hello World"</td><td style="padding:.55rem 1rem;border:1px solid var(--border);color:var(--text-muted)">Must use double quotes — single quotes are invalid</td></tr>
+          <tr style="background:var(--bg-secondary)"><td style="padding:.55rem 1rem;border:1px solid var(--border);font-weight:600;color:#27ae60">Number</td><td style="padding:.55rem 1rem;border:1px solid var(--border);font-family:monospace">42 or 3.14</td><td style="padding:.55rem 1rem;border:1px solid var(--border);color:var(--text-muted)">Integer or float — no leading zeros</td></tr>
+          <tr><td style="padding:.55rem 1rem;border:1px solid var(--border);font-weight:600;color:#e74c3c">Boolean</td><td style="padding:.55rem 1rem;border:1px solid var(--border);font-family:monospace">true / false</td><td style="padding:.55rem 1rem;border:1px solid var(--border);color:var(--text-muted)">Always lowercase — True/False are invalid</td></tr>
+          <tr style="background:var(--bg-secondary)"><td style="padding:.55rem 1rem;border:1px solid var(--border);font-weight:600;color:#95a5a6">Null</td><td style="padding:.55rem 1rem;border:1px solid var(--border);font-family:monospace">null</td><td style="padding:.55rem 1rem;border:1px solid var(--border);color:var(--text-muted)">Represents an empty value — always lowercase</td></tr>
+          <tr><td style="padding:.55rem 1rem;border:1px solid var(--border);font-weight:600;color:var(--primary)">Object</td><td style="padding:.55rem 1rem;border:1px solid var(--border);font-family:monospace">{"key": "value"}</td><td style="padding:.55rem 1rem;border:1px solid var(--border);color:var(--text-muted)">Key-value pairs — keys must be strings</td></tr>
+          <tr style="background:var(--bg-secondary)"><td style="padding:.55rem 1rem;border:1px solid var(--border);font-weight:600;color:var(--primary)">Array</td><td style="padding:.55rem 1rem;border:1px solid var(--border);font-family:monospace">[1, "two", true]</td><td style="padding:.55rem 1rem;border:1px solid var(--border);color:var(--text-muted)">Ordered list — can mix data types</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3 style="font-size:1.05rem;font-weight:700;margin-bottom:.75rem;color:var(--text)">Common JSON Errors & How to Fix Them</h3>
+    <div style="overflow-x:auto;margin-bottom:1.5rem">
+      <table style="width:100%;border-collapse:collapse;font-size:.875rem">
+        <thead>
+          <tr style="background:var(--bg-secondary)">
+            <th style="padding:.6rem 1rem;text-align:left;border:1px solid var(--border);font-weight:700">Error Message</th>
+            <th style="padding:.6rem 1rem;text-align:left;border:1px solid var(--border);font-weight:700">Cause</th>
+            <th style="padding:.6rem 1rem;text-align:left;border:1px solid var(--border);font-weight:700">Fix</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td style="padding:.55rem 1rem;border:1px solid var(--border);font-family:monospace;color:#e74c3c">Unexpected token</td><td style="padding:.55rem 1rem;border:1px solid var(--border);color:var(--text-muted)">Missing quote, comma, or wrong quote type</td><td style="padding:.55rem 1rem;border:1px solid var(--border)">Replace single quotes ' with double quotes "</td></tr>
+          <tr style="background:var(--bg-secondary)"><td style="padding:.55rem 1rem;border:1px solid var(--border);font-family:monospace;color:#e74c3c">Trailing comma</td><td style="padding:.55rem 1rem;border:1px solid var(--border);color:var(--text-muted)">Comma after last item in object/array</td><td style="padding:.55rem 1rem;border:1px solid var(--border)">Remove the comma before } or ]</td></tr>
+          <tr><td style="padding:.55rem 1rem;border:1px solid var(--border);font-family:monospace;color:#e74c3c">Unexpected end of input</td><td style="padding:.55rem 1rem;border:1px solid var(--border);color:var(--text-muted)">Missing closing bracket or brace</td><td style="padding:.55rem 1rem;border:1px solid var(--border)">Count { vs } and [ vs ] — they must match</td></tr>
+          <tr style="background:var(--bg-secondary)"><td style="padding:.55rem 1rem;border:1px solid var(--border);font-family:monospace;color:#e74c3c">Property names must be strings</td><td style="padding:.55rem 1rem;border:1px solid var(--border);color:var(--text-muted)">Unquoted key names</td><td style="padding:.55rem 1rem;border:1px solid var(--border)">Wrap all keys in double quotes: "name": "value"</td></tr>
+          <tr><td style="padding:.55rem 1rem;border:1px solid var(--border);font-family:monospace;color:#e74c3c">Unexpected token / in JSON</td><td style="padding:.55rem 1rem;border:1px solid var(--border);color:var(--text-muted)">Comments in JSON (// or /* */)</td><td style="padding:.55rem 1rem;border:1px solid var(--border)">Remove all comments — JSON does not support them</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3 style="font-size:1.05rem;font-weight:700;margin-bottom:.75rem;color:var(--text)">JSON vs XML — Key Differences</h3>
+    <div style="overflow-x:auto">
+      <table style="width:100%;border-collapse:collapse;font-size:.875rem">
+        <thead>
+          <tr style="background:var(--bg-secondary)">
+            <th style="padding:.6rem 1rem;text-align:left;border:1px solid var(--border);font-weight:700">Feature</th>
+            <th style="padding:.6rem 1rem;text-align:left;border:1px solid var(--border);font-weight:700">JSON</th>
+            <th style="padding:.6rem 1rem;text-align:left;border:1px solid var(--border);font-weight:700">XML</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td style="padding:.55rem 1rem;border:1px solid var(--border);color:var(--text-muted)">File size</td><td style="padding:.55rem 1rem;border:1px solid var(--border)">Smaller (less syntax)</td><td style="padding:.55rem 1rem;border:1px solid var(--border)">Larger (closing tags)</td></tr>
+          <tr style="background:var(--bg-secondary)"><td style="padding:.55rem 1rem;border:1px solid var(--border);color:var(--text-muted)">Readability</td><td style="padding:.55rem 1rem;border:1px solid var(--border)">Easy to read</td><td style="padding:.55rem 1rem;border:1px solid var(--border)">More verbose</td></tr>
+          <tr><td style="padding:.55rem 1rem;border:1px solid var(--border);color:var(--text-muted)">Data types</td><td style="padding:.55rem 1rem;border:1px solid var(--border)">6 native types</td><td style="padding:.55rem 1rem;border:1px solid var(--border)">All text (requires schema)</td></tr>
+          <tr style="background:var(--bg-secondary)"><td style="padding:.55rem 1rem;border:1px solid var(--border);color:var(--text-muted)">Comments</td><td style="padding:.55rem 1rem;border:1px solid var(--border)">Not supported</td><td style="padding:.55rem 1rem;border:1px solid var(--border)">Supported</td></tr>
+          <tr><td style="padding:.55rem 1rem;border:1px solid var(--border);color:var(--text-muted)">Best for</td><td style="padding:.55rem 1rem;border:1px solid var(--border)">REST APIs, web apps</td><td style="padding:.55rem 1rem;border:1px solid var(--border)">SOAP, documents, config</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- FAQ SECTION -->
   <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:2rem;margin-bottom:1.5rem;box-shadow:var(--shadow)">
     <h2 style="font-size:1.4rem;margin-bottom:1.25rem;color:var(--primary)">Frequently Asked Questions</h2>
 
     <details style="border:1px solid var(--border);border-radius:8px;margin-bottom:.75rem;overflow:hidden">
-      <summary style="padding:1rem 1.25rem;cursor:pointer;font-weight:600;background:var(--bg-secondary);user-select:none">❓ Is the JSON Formatter free to use?</summary>
-      <div style="padding:1rem 1.25rem;line-height:1.8;color:var(--text-muted)">Yes, completely free. There are no usage limits, no API keys required, and no registration. Format, validate, and minify JSON as often as you need at no cost.</div>
+      <summary style="padding:1rem 1.25rem;cursor:pointer;font-weight:600;background:var(--bg-secondary);user-select:none">What is JSON?</summary>
+      <div style="padding:1rem 1.25rem;line-height:1.8;color:var(--text-muted)">JSON (JavaScript Object Notation) is a lightweight, text-based data format used to exchange structured data between a server and web application. It uses key-value pairs and supports <strong>6 data types</strong>: strings, numbers, booleans, null, objects, and arrays. JSON is language-independent and is the most widely used format for REST APIs.</div>
     </details>
 
     <details style="border:1px solid var(--border);border-radius:8px;margin-bottom:.75rem;overflow:hidden">
-      <summary style="padding:1rem 1.25rem;cursor:pointer;font-weight:600;background:var(--bg-secondary);user-select:none">❓ Is my data secure? Does it upload my JSON?</summary>
-      <div style="padding:1rem 1.25rem;line-height:1.8;color:var(--text-muted)">Your JSON data is never sent to any server. All formatting, validation, and querying happens in your browser using JavaScript's built-in JSON.parse and JSON.stringify functions. API keys, credentials, or sensitive data in your JSON stay completely private.</div>
+      <summary style="padding:1rem 1.25rem;cursor:pointer;font-weight:600;background:var(--bg-secondary);user-select:none">What is JSON used for?</summary>
+      <div style="padding:1rem 1.25rem;line-height:1.8;color:var(--text-muted)">JSON is used for: <strong>API responses</strong> (REST APIs return data as JSON), <strong>config files</strong> (ESLint, Prettier, npm package.json), <strong>NoSQL databases</strong> (MongoDB stores JSON-like documents), <strong>web communication</strong> (fetch/AJAX requests), and <strong>serialization</strong> (converting objects to strings for storage or transfer).</div>
     </details>
 
     <details style="border:1px solid var(--border);border-radius:8px;margin-bottom:.75rem;overflow:hidden">
-      <summary style="padding:1rem 1.25rem;cursor:pointer;font-weight:600;background:var(--bg-secondary);user-select:none">❓ Why should I minify JSON?</summary>
-      <div style="padding:1rem 1.25rem;line-height:1.8;color:var(--text-muted)">Minified JSON removes all whitespace characters (spaces, tabs, newlines) and reduces file size significantly. For API payloads sent over the network, smaller JSON reduces bandwidth usage and latency. For config files embedded in code, minified JSON is more compact. Use minification for production and formatted JSON for development and debugging.</div>
+      <summary style="padding:1rem 1.25rem;cursor:pointer;font-weight:600;background:var(--bg-secondary);user-select:none">What are the JSON syntax rules?</summary>
+      <div style="padding:1rem 1.25rem;line-height:1.8;color:var(--text-muted)">Key JSON rules: (1) All keys must be in <strong>double quotes</strong> — single quotes are invalid; (2) No trailing commas before } or ]; (3) No comments (// or /* */ are not allowed); (4) Strings use double quotes; (5) Booleans and null are lowercase — <code>true</code>, <code>false</code>, <code>null</code>; (6) Numbers cannot have leading zeros.</div>
     </details>
 
     <details style="border:1px solid var(--border);border-radius:8px;margin-bottom:.75rem;overflow:hidden">
-      <summary style="padding:1rem 1.25rem;cursor:pointer;font-weight:600;background:var(--bg-secondary);user-select:none">❓ How does the JSON Path query feature work?</summary>
-      <div style="padding:1rem 1.25rem;line-height:1.8;color:var(--text-muted)">The JSON Path feature lets you navigate nested JSON using dot notation. Type a path like user.address.city to extract the city value, or items[0] to get the first element of an array. Array indices use bracket notation (e.g., results[2].name). The extracted value is displayed in the query result panel below the tool.</div>
+      <summary style="padding:1rem 1.25rem;cursor:pointer;font-weight:600;background:var(--bg-secondary);user-select:none">How do I fix a JSON error?</summary>
+      <div style="padding:1rem 1.25rem;line-height:1.8;color:var(--text-muted)">Paste your JSON above and the validator will show the exact error and line number. Most common fixes: replace <strong>single quotes with double quotes</strong>, remove <strong>trailing commas</strong> before closing braces/brackets, remove <strong>comments</strong> (JSON doesn't support them), and make sure all <strong>brackets are balanced</strong> ({ matches } and [ matches ]).</div>
     </details>
 
     <details style="border:1px solid var(--border);border-radius:8px;margin-bottom:.75rem;overflow:hidden">
-      <summary style="padding:1rem 1.25rem;cursor:pointer;font-weight:600;background:var(--bg-secondary);user-select:none">❓ What indentation options are available?</summary>
-      <div style="padding:1rem 1.25rem;line-height:1.8;color:var(--text-muted)">You can choose from 2 spaces (most common, used by JavaScript style guides), 4 spaces (Python PEP 8 style), or tab characters (used in some editors and configs). The choice affects only the visual formatting — the underlying JSON data is identical regardless of indentation style.</div>
+      <summary style="padding:1rem 1.25rem;cursor:pointer;font-weight:600;background:var(--bg-secondary);user-select:none">What is the difference between JSON and XML?</summary>
+      <div style="padding:1rem 1.25rem;line-height:1.8;color:var(--text-muted)">JSON is more compact (no closing tags), easier to read, and natively maps to JavaScript objects. XML is more verbose but supports attributes, comments, and document schemas. <strong>JSON is preferred for REST APIs and web apps</strong>; XML is still common in SOAP services, Microsoft Office files, and SVG graphics.</div>
     </details>
+
+    <details style="border:1px solid var(--border);border-radius:8px;margin-bottom:.75rem;overflow:hidden">
+      <summary style="padding:1rem 1.25rem;cursor:pointer;font-weight:600;background:var(--bg-secondary);user-select:none">What is the difference between a JSON object and a JSON array?</summary>
+      <div style="padding:1rem 1.25rem;line-height:1.8;color:var(--text-muted)">A <strong>JSON object</strong> <code>{}</code> is an unordered collection of named key-value pairs — like a dictionary. A <strong>JSON array</strong> <code>[]</code> is an ordered list of values — like a list. Use objects when items have named properties (<code>{"name":"Alice","age":30}</code>); use arrays for ordered collections (<code>["apple","banana"]</code>).</div>
+    </details>
+
+    <details style="border:1px solid var(--border);border-radius:8px;margin-bottom:.75rem;overflow:hidden">
+      <summary style="padding:1rem 1.25rem;cursor:pointer;font-weight:600;background:var(--bg-secondary);user-select:none">How do I validate JSON online?</summary>
+      <div style="padding:1rem 1.25rem;line-height:1.8;color:var(--text-muted)">Paste your JSON into the input box above and click <strong>Validate</strong>. The tool uses JavaScript's JSON.parse() — the same engine your browser and Node.js use. If valid, you see a green message. If invalid, the exact error and character position are shown. Everything runs in your browser — your data is never uploaded.</div>
+    </details>
+
+    <details style="border:1px solid var(--border);border-radius:8px;margin-bottom:.75rem;overflow:hidden">
+      <summary style="padding:1rem 1.25rem;cursor:pointer;font-weight:600;background:var(--bg-secondary);user-select:none">Why should I minify JSON?</summary>
+      <div style="padding:1rem 1.25rem;line-height:1.8;color:var(--text-muted)">Minifying strips all whitespace, shrinking JSON by <strong>30–40%</strong>. A 10 KB formatted JSON becomes ~6–7 KB minified. This reduces API payload size (faster requests), shrinks config files in code bundles, and saves browser localStorage space (limited to 5–10 MB). Use formatted JSON in development, minified in production.</div>
+    </details>
+
+    <details style="border:1px solid var(--border);border-radius:8px;margin-bottom:.75rem;overflow:hidden">
+      <summary style="padding:1rem 1.25rem;cursor:pointer;font-weight:600;background:var(--bg-secondary);user-select:none">Is my JSON data safe? Does it get uploaded?</summary>
+      <div style="padding:1rem 1.25rem;line-height:1.8;color:var(--text-muted)">Your JSON is <strong>never uploaded to any server</strong>. All formatting, validation, minification, and querying runs in your browser using built-in JavaScript. API keys, passwords, tokens, and any sensitive data in your JSON stays completely private on your device.</div>
+    </details>
+  </div>
+
+  <!-- RELATED CONTENT -->
+  <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:2rem;margin-bottom:1.5rem;box-shadow:var(--shadow)">
+    <h2 style="font-size:1.2rem;margin-bottom:1rem;color:var(--primary)">Related Tools & Guides</h2>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1rem">
+      <a href="../tools/base64.html" style="display:block;padding:1rem;background:var(--bg-secondary);border-radius:8px;text-decoration:none;border:1px solid var(--border);transition:var(--transition)" onmouseover="this.style.borderColor='var(--primary)'" onmouseout="this.style.borderColor='var(--border)'">
+        <div style="font-size:1.3rem;margin-bottom:.4rem">🔐</div>
+        <strong style="color:var(--text);font-size:.9rem">Base64 Encoder</strong>
+        <p style="font-size:.8rem;color:var(--text-muted);margin-top:.25rem">Encode/decode Base64 strings & files</p>
+      </a>
+      <a href="../tools/url-encoder.html" style="display:block;padding:1rem;background:var(--bg-secondary);border-radius:8px;text-decoration:none;border:1px solid var(--border);transition:var(--transition)" onmouseover="this.style.borderColor='var(--primary)'" onmouseout="this.style.borderColor='var(--border)'">
+        <div style="font-size:1.3rem;margin-bottom:.4rem">🔗</div>
+        <strong style="color:var(--text);font-size:.9rem">URL Encoder</strong>
+        <p style="font-size:.8rem;color:var(--text-muted);margin-top:.25rem">Encode & decode URL strings instantly</p>
+      </a>
+      <a href="../blog/json-for-beginners.html" style="display:block;padding:1rem;background:var(--bg-secondary);border-radius:8px;text-decoration:none;border:1px solid var(--border);transition:var(--transition)" onmouseover="this.style.borderColor='var(--primary)'" onmouseout="this.style.borderColor='var(--border)'">
+        <div style="font-size:1.3rem;margin-bottom:.4rem">📖</div>
+        <strong style="color:var(--text);font-size:.9rem">JSON for Beginners</strong>
+        <p style="font-size:.8rem;color:var(--text-muted);margin-top:.25rem">Complete guide to understanding JSON</p>
+      </a>
+    </div>
   </div>
 
 </div>
